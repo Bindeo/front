@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Hello
+{% endblock %}
+
+{% block body %}
+    <p>{% trans %}Hello world!{% endtrans %}</p>
+    <p><img style="width: 1024px" src="{{ asset('images/aquarium.jpg') }}" alt="{% trans %}My aquarium{% endtrans %}" /></p>
+{% endblock %}
