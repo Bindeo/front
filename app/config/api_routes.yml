@@ -1,0 +1,14 @@
+parameters:
+    api_routes:
+        users: /users
+        account: /account
+        account_password: /account/password
+        account_email: /account/email
+        account_type: /account/type
+        account_token: /account/token
+        file: /data/file
+        files: /data/files
+        blockchain: /data/blockchain
+        blockchain_coins: /data/blockchain/coins
+        blockchain_info: /data/blockchain/info
+        blockchain_test: /data/blockchain/test

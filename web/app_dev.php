@@ -18,6 +18,13 @@ if (isset($_SERVER['HTTP_CLIENT_IP'])
     exit('You are not allowed to access this file. Check '.basename(__FILE__).' for more information.');
 }
 
+// Define the developer
+if (getenv('DEVELOPER')) {
+    define("DEVELOPER", getenv('DEVELOPER'));
+} else {
+    define("DEVELOPER", current(explode('@', getenv('SERVER_ADMIN'))));
+}
+
 /**
  * @var Composer\Autoload\ClassLoader $loader
  */

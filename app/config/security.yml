@@ -4,8 +4,10 @@ security:
 
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
-        in_memory:
-            memory: ~
+        webservice:
+            id: app.user_provider
+    encoders:
+        AppBundle\Entity\User: bcrypt
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -16,9 +18,29 @@ security:
         main:
             anonymous: ~
             # activate different ways to authenticate
-
-            # http_basic: ~
-            # http://symfony.com/doc/current/book/security.html#a-configuring-how-your-users-will-authenticate
-
-            # form_login: ~
             # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
+            remember_me:
+                    secret:   '%secret%'
+                    lifetime: 604800 # 1 week in seconds
+                    path:     /
+                    always_remember_me: true
+
+            form_login:
+                login_path: login
+                check_path: login
+                csrf_token_generator: security.csrf.token_manager
+                success_handler: app.authenticacion_success
+                remember_me: true
+
+            logout:
+                path:   /logout
+                target: /
+
+    role_hierarchy:
+        ROLE_VIP:         ROLE_USER
+        ROLE_ADMIN:       ROLE_VIP
+
+    # Secured sections
+    access_control:
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/hello, roles: ROLE_USER }
