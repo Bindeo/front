@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {% trans %}Sign up{% endtrans %}
+{% endblock %}
+
+{% block body %}
+<section class="forms form-signup">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+                <h1>¡Empieza hoy mismo a proteger tu propiedad!</h1>
+            </div>
+
+            <div class="form-box col-xs-12 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
+
+                <form class="labels-no">
+                    <p class="form-intro">Instructions...</p>
+                    <div class="form-group">
+                        <label for="name" class="control-label">Nombre</label>
+                        <div>
+                            <input type="text" class="form-control" id="name" required="required" placeholder="Tu nombre">
+                        </div>
+                    </div>
+                    <div class="form-group has-error has-feedback">
+                        <label for="email" class="control-label">Correo electrónico</label>
+                        <div>
+                            <input type="email" class="form-control" id="email" required="required" placeholder="Tu e-mail"> <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                            <span id="" class="help-block">Introduce una dirección de correo válida</span>
+                        </div>
+                    </div>
+                    <div class="form-group has-success has-feedback">
+                        <label for="password" class="control-label">Contraseña</label>
+                        <div>
+                            <input type="password" class="form-control" id="password" required="required" placeholder="Nueva contraseña"><span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-default btn-full">Crear cuenta</button>
+                    </div>
+                    <div>
+                        <p class="form-notice">Al crear cuenta aceptas los <a href="#">terminos y condiciones</a> y la
+                            <a href="#">política de privacidad</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

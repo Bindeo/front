@@ -1,13 +1,90 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>{% block title %}{% trans %}Bindeo: Protect your intellectual property{% endtrans %}{% endblock %}</title>
+
+    {% block stylesheets %}
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="{{ asset('libs/bootstrap_3.3.6/css/bootstrap.min.css') }}">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="{{ asset('libs/bootstrap_3.3.6/css/bootstrap-theme.min.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    {% endblock %}
+
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"> <img src="{{ asset('images/bindeo_white.png') }}" width="120"> </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">{% trans %}Product{% endtrans %}</a></li>
+                <li><a href="#">{% trans %}Pricing{% endtrans %}</a></li>
+                <li><a href="#">{% trans %}Support{% endtrans %}</a></li>
+                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                    <li><a href="{{ path('logout') }}">{% trans %}Logout{% endtrans %}</a></li>
+                {% else %}
+                    <li><a href="{{ path('login') }}">{% trans %}Sign in{% endtrans %}</a></li>
+                    <li class="highlight"><a href="#">{% trans %}Sign up{% endtrans %}</a></li>
+                {% endif %}
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
+{% block body %}{% endblock %}
+
+<footer class="footer">
+    <div class="container-fluid container-links">
+        <div class="container">
+            <p class="text-muted ">Place footer content here... for example a list of links...</p>
+        </div>
+    </div>
+    <div class="container-fluid container-strip">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-8 col-sm-9 left">
+                    {% trans %}Some text here...!{% endtrans %}
+                </div>
+                <div class="col-xs-4 col-sm-3 right">
+                    <a href="#"> <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> </a> <a href="#">
+                        <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> </a> <a href="#"> <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+{% block javascripts %}
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="{{ asset('libs/jquery_2.2.0/jquery.min.js') }}"></script>
+
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="{{ asset('libs/bootstrap_3.3.6/js/bootstrap.min.js') }}"></script>
+{% endblock %}
+</body>
 </html>

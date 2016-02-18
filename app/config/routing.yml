@@ -12,11 +12,3 @@ login:
 
 logout:
     path: /logout
-
-hello:
-    path: /hello
-    defaults: { _controller: AppBundle:Default:test }
-
-user:
-    path: /user
-    defaults: { _controller: AppBundle:Default:user }

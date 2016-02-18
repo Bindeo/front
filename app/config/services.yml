@@ -11,14 +11,32 @@ services:
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+
+    # To connect against the API
     app.api_connection:
         class:        AppBundle\Model\ApiConnection
         arguments:    ['%api_url%', '%api_token%', '%api_routes%']
 
+    # Login with the API
     app.user_provider:
         class: AppBundle\Security\UserProvider
         arguments:    ['@app.api_connection']
 
+    # Validate the logged user against the API
     app.authenticacion_success:
         class: AppBundle\Security\AuthenticationSuccess
-        arguments:    ['@app.api_connection']
+        arguments:    ['@app.api_connection', '@monolog.logger']
+
+    # Set the session locale in request
+    app.locale_listener:
+        class: AppBundle\Listener\LocaleListener
+        arguments: ['%kernel.default_locale%']
+        tags:
+            - { name: kernel.event_subscriber }
+
+    # Set the user locale in session
+    app.user_locale_listener:
+        class: AppBundle\Listener\UserLocaleListener
+        arguments: ['@session']
+        tags:
+            - { name: kernel.event_listener, event: security.interactive_login, method: onInteractiveLogin }

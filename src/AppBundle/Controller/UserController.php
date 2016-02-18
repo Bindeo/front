@@ -35,4 +35,22 @@ class UserController extends Controller
             'error'         => $error,
         ));
     }
+
+    /**
+     * @Route("/signup", name="signup")
+     * @param Request $request
+     *
+     * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function signUpAction(Request $request)
+    {
+        // If we are already logged we redirect the user to the homepage
+        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            return new RedirectResponse('/');
+        }
+
+
+
+        return $this->render('user/signup.html.twig');
+    }
 }
