@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="es-ES" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="d8f34616d2924c538074e545ba70c343" resname="Bindeo: Protect your intellectual property">
+        <source>Bindeo: Protect your intellectual property</source>
+        <target state="translated">Bindeo: Protege tu propiedad intelectual</target>
+      </trans-unit>
+      <trans-unit id="44478ace6657af99ab8bf2501aacba44" resname="Bindeo is the application to protect your intellectual property">
+        <source>Bindeo is the application to protect your intellectual property</source>
+        <target state="translated">Bindeo es la aplicación para proteger tu propiedad intelectual</target>
+      </trans-unit>
+      <trans-unit id="6cc57b966fbc9e07978993d52d8c0a2c" resname="Some text here...!">
+        <source>Some text here...!</source>
+        <target state="translated">Algún texto aquí...!</target>
+      </trans-unit>
+      <trans-unit id="b18dea9c87964f584cc1d99d5b43438d" resname="Bindeo: Protect your most important intellectual property">
+        <source>Bindeo: Protect your most important intellectual property</source>
+        <target state="translated">Bindeo: Protege tu propiedad intelectual más importante</target>
+      </trans-unit>
+      <trans-unit id="b6d4223e60986fa4c9af77ee5f7149c5" resname="Sign in">
+        <source>Sign in</source>
+        <target state="translated">Iniciar sesión</target>
+      </trans-unit>
+      <trans-unit id="d9776f0775997b2e698c6975420b5c5d" resname="Sign up">
+        <source>Sign up</source>
+        <target state="translated">Crear cuenta</target>
+      </trans-unit>
+      <trans-unit id="deb10517653c255364175796ace3553f" resname="Product">
+        <source>Product</source>
+        <target state="translated">Producto</target>
+      </trans-unit>
+      <trans-unit id="e22ac25b066b201473de7aa700ef5d92" resname="Pricing">
+        <source>Pricing</source>
+        <target state="translated">Precios</target>
+      </trans-unit>
+      <trans-unit id="db5eb84117d06047c97c9a0191b5fffe" resname="Support">
+        <source>Support</source>
+        <target state="translated">Soporte</target>
+      </trans-unit>
+      <trans-unit id="0323de4f66a1700e2173e9bcdce02715" resname="Logout">
+        <source>Logout</source>
+        <target state="translated">Salir</target>
+      </trans-unit>
+      <trans-unit id="f6039d44b29456b20f8f373155ae4973" resname="Username">
+        <source>Username</source>
+        <target state="translated">Nombre de usuario</target>
+      </trans-unit>
+      <trans-unit id="dc647eb65e6711e155375218212b3964" resname="Password">
+        <source>Password</source>
+        <target state="translated">Contraseña</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
