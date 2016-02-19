@@ -11,16 +11,16 @@ use \Curl\Curl;
  */
 class ApiConnection
 {
-    private $_curl;
-    private $_baseUrl;
-    private $_routes;
+    private $curl;
+    private $baseUrl;
+    private $routes;
 
     public function __construct($baseUrl, $token, $routes)
     {
-        $this->_baseUrl = $baseUrl;
-        $this->_curl = new Curl();
-        $this->_curl->setHeader('Authorization', 'Bearer ' . $token);
-        $this->_routes = $routes;
+        $this->baseUrl = $baseUrl;
+        $this->curl = new Curl();
+        $this->curl->setHeader('Authorization', 'Bearer ' . $token);
+        $this->routes = $routes;
     }
 
     /**
@@ -33,7 +33,7 @@ class ApiConnection
      */
     public function getJson($url, $params = [])
     {
-        return new ResultSet($this->_curl->get($this->_baseUrl . $url, $params));
+        return new ResultSet($this->curl->get($this->baseUrl . $url, $params));
     }
 
     /**
@@ -46,7 +46,7 @@ class ApiConnection
      */
     public function postJson($url, $params = [])
     {
-        return new ResultSet($this->_curl->post($this->_baseUrl . $url, $params));
+        return new ResultSet($this->curl->post($this->baseUrl . $url, $params));
     }
 
     /**
@@ -59,7 +59,7 @@ class ApiConnection
      */
     public function putJson($url, $params = [])
     {
-        return new ResultSet($this->_curl->put($this->_baseUrl . $url, $params));
+        return new ResultSet($this->curl->put($this->baseUrl . $url, $params));
     }
 
     /**
@@ -72,7 +72,7 @@ class ApiConnection
      */
     public function patchJson($url, $params = [])
     {
-        return new ResultSet($this->_curl->patch($this->_baseUrl . $url, $params));
+        return new ResultSet($this->curl->patch($this->baseUrl . $url, $params));
     }
 
     /**
@@ -85,7 +85,7 @@ class ApiConnection
      */
     public function deleteJson($url, $params = [])
     {
-        return new ResultSet($this->_curl->delete($this->_baseUrl . $url, array(), $params));
+        return new ResultSet($this->curl->delete($this->baseUrl . $url, array(), $params));
     }
 
     /**
@@ -97,6 +97,6 @@ class ApiConnection
      */
     public function getRoute($route)
     {
-        return isset($this->_routes[$route]) ? $this->_routes[$route] : '';
+        return isset($this->routes[$route]) ? $this->routes[$route] : '';
     }
 }

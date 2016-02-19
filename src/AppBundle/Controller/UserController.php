@@ -2,6 +2,8 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\User;
+use AppBundle\Form\Type\RegisterType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -37,20 +39,30 @@ class UserController extends Controller
     }
 
     /**
-     * @Route("/signup", name="signup")
+     * @Route("/register", name="register")
      * @param Request $request
      *
      * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function signUpAction(Request $request)
+    public function registerAction(Request $request)
     {
         // If we are already logged we redirect the user to the homepage
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             return new RedirectResponse('/');
         }
 
+        $user = new User();
+        $form = $this->createForm(RegisterType::class, $user);
+        $form->handleRequest($request);
 
+        // Form submitted
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user->setType(User::ROLE_USER)->setIp($request->getClientIp())->setLang($request->getSession()
+                                                                                             ->get('_locale'));
 
-        return $this->render('user/signup.html.twig');
+            $user = $user;
+        }
+
+        return $this->render('user/register.html.twig', array('form' => $form->createView()));
     }
 }

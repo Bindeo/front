@@ -14,9 +14,6 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-
-        //$request->getSession()->set('_locale', 'es_ES');
-
         return $this->render('default/index.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..'),
         ]);

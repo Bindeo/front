@@ -13,13 +13,13 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationSuccessHandlerI
 
 class AuthenticationSuccess implements AuthenticationSuccessHandlerInterface
 {
-    private $_api;
-    private $_monolog;
+    private $api;
+    private $monolog;
 
     public function __construct(ApiConnection $api, LoggerInterface $monolog)
     {
-        $this->_api = $api;
-        $this->_monolog = $monolog;
+        $this->api = $api;
+        $this->monolog = $monolog;
     }
 
     /**
@@ -34,14 +34,14 @@ class AuthenticationSuccess implements AuthenticationSuccessHandlerInterface
     public function onAuthenticationSuccess(Request $request, TokenInterface $token)
     {
         // The user has logged into the system, we tell it to the API
-        $res = $this->_api->getJson($this->_api->getRoute('account'), [
+        $res = $this->api->getJson($this->api->getRoute('account'), [
             'email'    => $token->getUsername(),
             'password' => $request->get('_password'),
             'ip'       => $request->getClientIp()
         ]);
         if ($res->getError() or !($user = $res->getRows()[0])) {
             // There is a problem login in the api, we need to logout the user
-            $this->_monolog->critical('CRITICAL ERROR: Login into API', [
+            $this->monolog->critical('CRITICAL ERROR: Login into API', [
                 'email'    => $token->getUsername(),
                 'password' => $request->get('_password'),
                 'ip'       => $request->getClientIp()

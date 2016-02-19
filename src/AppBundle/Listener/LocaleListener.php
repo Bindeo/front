@@ -8,11 +8,11 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class LocaleListener implements EventSubscriberInterface
 {
-    private $_defaultLocale;
+    private $defaultLocale;
 
-    public function __construct($defaultLocale = 'en')
+    public function __construct($defaultLocale = 'en_US')
     {
-        $this->_defaultLocale = $defaultLocale;
+        $this->defaultLocale = $defaultLocale;
     }
 
     public function onKernelRequest(GetResponseEvent $event)
@@ -40,7 +40,7 @@ class LocaleListener implements EventSubscriberInterface
                 $locale = $request->cookies->get('LOCALE');
                 $request->getSession()->set('_locale', $locale);
             } else {
-                $locale = $this->_defaultLocale;
+                $locale = $this->defaultLocale;
             }
 
             // If no explicit locale has been set on this request, use one from the session or the cookie

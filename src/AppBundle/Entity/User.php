@@ -3,29 +3,48 @@
 namespace AppBundle\Entity;
 
 use Bindeo\DataModel\UserAbstract;
+use Symfony\Component\Security\Core\Role\Role;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class User extends UserAbstract implements UserInterface
 {
-    private $_roles = [1 => 'ROLE_ADMIN', 2 => 'ROLE_VIP', 3 => 'ROLE_USER'];
+    const ROLE_ADMIN = 1;
+    const ROLE_USER  = 2;
+    const ROLE_VIP   = 3;
+
+    private $roles = [1 => 'ROLE_ADMIN', 2 => 'ROLE_USER', 3 => 'ROLE_VIP'];
+
+    // Set mandatory fields for forms
+    /**
+     * @Assert\NotBlank(groups={"registration", "login"})
+     * @Assert\Email(
+     *     groups={"registration", "login"},
+     *     strict = true,
+     *     checkMX = true
+     * )
+     */
+    protected $email;
+    /**
+     * @Assert\NotBlank(groups={"registration"})
+     */
+    protected $name;
+
+    /**
+     * @Assert\NotBlank(groups={"registration", "login"})
+     * @Assert\Length(min=3, max=4096, groups={"registration", "login"})
+     */
+    protected $password;
 
     /**
      * Returns the roles granted to the user.
-     * <code>
-     * public function getRoles()
-     * {
-     *     return array('ROLE_USER');
-     * }
-     * </code>
-     * Alternatively, the roles might be stored on a ``roles`` property,
-     * and populated in any number of different ways when the user object
-     * is created.
+     *
      * @return (Role|string)[] The user roles
      */
     public function getRoles()
     {
-        if (isset($this->_roles[$this->_type])) {
-            return [$this->_roles[$this->_type]];
+        if (isset($this->roles[$this->type])) {
+            return [$this->roles[$this->type]];
         } else {
             return null;
         }
@@ -47,7 +66,7 @@ class User extends UserAbstract implements UserInterface
      */
     public function getUsername()
     {
-        return $this->_email;
+        return $this->email;
     }
 
     /**
@@ -57,6 +76,6 @@ class User extends UserAbstract implements UserInterface
      */
     public function eraseCredentials()
     {
-        $this->_oldPassword = null;
+        $this->oldPassword = null;
     }
 }

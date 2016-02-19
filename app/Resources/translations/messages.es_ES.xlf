@@ -1,14 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file source-language="en" target-language="es-ES" datatype="plaintext" original="file.ext">
+  <file source-language="en-US" target-language="es-ES" datatype="plaintext" original="file.ext">
     <header>
       <tool tool-id="symfony" tool-name="Symfony"/>
     </header>
     <body>
       <trans-unit id="d8f34616d2924c538074e545ba70c343" resname="Bindeo: Protect your intellectual property">
-        <source>Bindeo: Protect your intellectual property</source>
-        <target state="translated">Bindeo: Protege tu propiedad intelectual</target>
-      </trans-unit>
+        <source>Bindeo: Protect your intellectual property</source> <target state="translated">Bindeo: Protege tu propiedad intelectual</target> </trans-unit>
       <trans-unit id="44478ace6657af99ab8bf2501aacba44" resname="Bindeo is the application to protect your intellectual property">
         <source>Bindeo is the application to protect your intellectual property</source>
         <target state="translated">Bindeo es la aplicación para proteger tu propiedad intelectual</target>
@@ -53,6 +51,18 @@
         <source>Password</source>
         <target state="translated">Contraseña</target>
       </trans-unit>
+      <trans-unit id="b0f1b294c6cab8fbb7c12e3cc1129e05" resname="Start today to protect your property!">
+        <source>Start today to protect your property!</source>
+        <target state="translated">¡Empieza hoy mismo a proteger tu propiedad!</target>
+      </trans-unit>
+      <trans-unit id="49ee3087348e8d44e1feda1917443987" resname="Name" approved="yes">
+        <source>Name</source> <target state="translated">Name</target> </trans-unit>
+      <trans-unit id="221e705c06e231636fdbccfdd14f4d5c" resname="Your name">
+        <source>Your name</source>
+        <target>__Your name</target>
+      </trans-unit>
+      <trans-unit id="42369faa6a6b243aac58683f3874bf99" resname="Create account" approved="yes">
+        <source>Create account</source> <target state="translated">Crear cuenta</target> </trans-unit>
     </body>
   </file>
 </xliff>

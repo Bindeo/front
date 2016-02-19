@@ -11,11 +11,11 @@ use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 
 class UserProvider implements UserProviderInterface
 {
-    private $_api;
+    private $api;
 
     public function __construct(ApiConnection $api)
     {
-        $this->_api = $api;
+        $this->api = $api;
     }
 
     /**
@@ -31,7 +31,7 @@ class UserProvider implements UserProviderInterface
     public function loadUserByUsername($username)
     {
         // Get the user via API
-        $res = $this->_api->getJson($this->_api->getRoute('users'), ['email' => $username]);
+        $res = $this->api->getJson($this->api->getRoute('users'), ['email' => $username]);
         if ($res->getError() or !($user = $res->getRows()[0])) {
             throw new UsernameNotFoundException();
         } else {

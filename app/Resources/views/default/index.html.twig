@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% block bodyclass %}{% endblock %}
+
 {% block body %}
 <section class="section-home">
     <div class="container-fluid">
@@ -13,4 +15,27 @@
         </div>
     </div>
 </section>
+{% endblock %}
+
+{% block footer %}
+<footer class="footer">
+    <div class="container-fluid container-links">
+        <div class="container">
+            <p class="text-muted ">Place footer content here... for example a list of links...</p>
+        </div>
+    </div>
+    <div class="container-fluid container-strip">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-8 col-sm-9 left">
+                    {% trans %}Some text here...!{% endtrans %}
+                </div>
+                <div class="col-xs-4 col-sm-3 right">
+                    <a href="#"> <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> </a> <a href="#">
+                        <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> </a> <a href="#"> <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
 {% endblock %}

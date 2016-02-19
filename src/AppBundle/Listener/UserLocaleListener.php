@@ -14,11 +14,11 @@ class UserLocaleListener
     /**
      * @var Session
      */
-    private $_session;
+    private $session;
 
     public function __construct(Session $session)
     {
-        $this->_session = $session;
+        $this->session = $session;
     }
 
     /**
@@ -29,7 +29,7 @@ class UserLocaleListener
         $user = $event->getAuthenticationToken()->getUser();
 
         if (null !== $user->getLang()) {
-            $this->_session->set('_locale', $user->getLang());
+            $this->session->set('_locale', $user->getLang());
         }
     }
 }

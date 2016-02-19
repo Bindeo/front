@@ -10,12 +10,12 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
  */
 class ResultSet
 {
-    private $_entity;
-    private $_rows;
-    private $_numRows;
-    private $_curPage;
-    private $_numPages;
-    private $_error;
+    private $entity;
+    private $rows;
+    private $numRows;
+    private $curPage;
+    private $numPages;
+    private $error;
 
     /**
      * Get the object
@@ -24,14 +24,14 @@ class ResultSet
      *
      * @return array
      */
-    private function _getObject(\stdClass $data)
+    private function getObject(\stdClass $data)
     {
         switch ($data->type) {
             case 'users':
                 // Fill the entity class
-                if (!$this->_entity) {
-                    $this->_entity = 'AppBundle\Entity\User';
-                } elseif ($this->_entity != 'AppBundle\Entity\User') {
+                if (!$this->entity) {
+                    $this->entity = 'AppBundle\Entity\User';
+                } elseif ($this->entity != 'AppBundle\Entity\User') {
                     throw new HttpException(500);
                 }
 
@@ -49,25 +49,25 @@ class ResultSet
     {
         // Convert the answer into objects
         if (isset($data->data)) {
-            $this->_rows = [];
+            $this->rows = [];
             if (isset($data->data->total_pages)) {
                 // List of data
-                $this->_numPages = $data->data->total_pages;
-                $this->_curPage = isset($data->data->total_pages) ? $data->data->total_pages : 1;
-                $this->_numRows = count($data->data);
+                $this->numPages = $data->data->total_pages;
+                $this->curPage = isset($data->data->total_pages) ? $data->data->total_pages : 1;
+                $this->numRows = count($data->data);
 
                 foreach ($data->data as $row) {
-                    list($key, $row) = $this->_getObject($row);
-                    $this->_rows[$key] = $row;
+                    list($key, $row) = $this->getObject($row);
+                    $this->rows[$key] = $row;
                 }
             } else {
                 // Single registry
-                list($key, $row) = $this->_getObject($data->data);
-                $this->_rows[0] = $row;
-                $this->_numRows = 1;
+                list($key, $row) = $this->getObject($data->data);
+                $this->rows[0] = $row;
+                $this->numRows = 1;
             }
         } elseif (isset($data->error)) {
-            $this->_error = (array)$data->error;
+            $this->error = (array)$data->error;
         }
     }
 
@@ -76,7 +76,7 @@ class ResultSet
      */
     public function getEntity()
     {
-        return $this->_entity;
+        return $this->entity;
     }
 
     /**
@@ -84,7 +84,7 @@ class ResultSet
      */
     public function getRows()
     {
-        return $this->_rows;
+        return $this->rows;
     }
 
     /**
@@ -92,7 +92,7 @@ class ResultSet
      */
     public function getNumRows()
     {
-        return $this->_numRows;
+        return $this->numRows;
     }
 
     /**
@@ -100,7 +100,7 @@ class ResultSet
      */
     public function getCurPage()
     {
-        return $this->_curPage;
+        return $this->curPage;
     }
 
     /**
@@ -108,7 +108,7 @@ class ResultSet
      */
     public function getNumPages()
     {
-        return $this->_numPages;
+        return $this->numPages;
     }
 
     /**
@@ -116,6 +116,6 @@ class ResultSet
      */
     public function getError()
     {
-        return $this->_error;
+        return $this->error;
     }
 }

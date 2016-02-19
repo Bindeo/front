@@ -6,20 +6,18 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>{% block title %}{% trans %}Bindeo: Protect your intellectual property{% endtrans %}{% endblock %}</title>
 
-    {% block stylesheets %}
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="{{ asset('libs/bootstrap_3.3.6/css/bootstrap.min.css') }}">
-
-    <!-- Optional theme -->
     <link rel="stylesheet" href="{{ asset('libs/bootstrap_3.3.6/css/bootstrap-theme.min.css') }}">
 
+    {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
     {% endblock %}
 
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 </head>
-<body>
-
+<body{% block bodyclass %} class="body-single"{% endblock %}>
+{% block navbar %}
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -27,7 +25,7 @@
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#"> <img src="{{ asset('images/bindeo_white.png') }}" width="120"> </a>
+            <a class="navbar-brand" href="/"> <img src="{{ asset('images/bindeo_white.png') }}" width="120"> </a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -40,7 +38,7 @@
                     <li><a href="{{ path('logout') }}">{% trans %}Logout{% endtrans %}</a></li>
                 {% else %}
                     <li><a href="{{ path('login') }}">{% trans %}Sign in{% endtrans %}</a></li>
-                    <li class="highlight"><a href="#">{% trans %}Sign up{% endtrans %}</a></li>
+                    <li class="highlight"><a href="{{ path('register') }}">{% trans %}Sign up{% endtrans %}</a></li>
                 {% endif %}
             </ul>
         </div>
@@ -48,30 +46,9 @@
     </div>
     <!-- /.container-fluid -->
 </nav>
+{% endblock %}
 {% block body %}{% endblock %}
-
-<footer class="footer">
-    <div class="container-fluid container-links">
-        <div class="container">
-            <p class="text-muted ">Place footer content here... for example a list of links...</p>
-        </div>
-    </div>
-    <div class="container-fluid container-strip">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-8 col-sm-9 left">
-                    {% trans %}Some text here...!{% endtrans %}
-                </div>
-                <div class="col-xs-4 col-sm-3 right">
-                    <a href="#"> <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> </a> <a href="#">
-                        <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> </a> <a href="#"> <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
-
-{% block javascripts %}
+{% block footer %}{% endblock %}
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -79,12 +56,8 @@
     <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="{{ asset('libs/jquery_2.2.0/jquery.min.js') }}"></script>
-
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <!-- Latest compiled and minified JavaScript -->
     <script src="{{ asset('libs/bootstrap_3.3.6/js/bootstrap.min.js') }}"></script>
-{% endblock %}
+{% block javascripts %}{% endblock %}
 </body>
 </html>
