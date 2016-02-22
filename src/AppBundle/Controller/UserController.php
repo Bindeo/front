@@ -3,10 +3,16 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
+use AppBundle\Form\Type\EditProfileType;
 use AppBundle\Form\Type\RegisterType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\FormError;
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 class UserController extends Controller
 {
@@ -59,10 +65,108 @@ class UserController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setType(User::ROLE_USER)->setIp($request->getClientIp())->setLang($request->getSession()
                                                                                              ->get('_locale'));
+            // We can register the user against the API
+            $api = $this->get('app.api_connection');
+            $result = $api->postJson($api->getRoute('account'), $user->toArray());
 
-            $user = $user;
+            // Check errors in the registry process
+            if ($result->getError() or !isset($result->getRows()[0])) {
+                if ($result->getError()['code'] == 409) {
+                    $error = $this->get('translator')->trans('The email is already used');
+                } else {
+                    $error = $this->get('translator')
+                                  ->trans('We have a problem creating your account, please try again later');
+
+                    // There is a problem login in the api, we need to logout the user
+                    $this->get('logger')->critical('CRITICAL ERROR: Register into API', [
+                        'data'  => $user->toArray(),
+                        'error' => $result->getError()['message']
+                    ]);
+                }
+
+                $form->addError(new FormError($error));
+            } else {
+                // User registered so we need to login him
+                $res = $api->getJson($api->getRoute('account'), [
+                    'email'    => $user->getEmail(),
+                    'password' => $user->getPassword(),
+                    'ip'       => $user->getIp()
+                ]);
+
+                if ($res->getError() or !($user = $res->getRows()[0])) {
+                    // There is a problem login in the api, we need to logout the user
+                    $this->get('logger')->critical('CRITICAL ERROR: Login into API', [
+                        'email'    => $user->getEmail(),
+                        'password' => $user->getPassword(),
+                        'ip'       => $user->getIp()
+                    ]);
+
+                    return new RedirectResponse('/logout');
+                }
+
+                // Create the user token
+                $token = new UsernamePasswordToken($user, '', "public", $user->getRoles());
+                $this->get("security.token_storage")->setToken($token);
+
+                // Fire the login event
+                // Logging the user in above the way we do it doesn't do this automatically
+                $event = new InteractiveLoginEvent($request, $token);
+                $this->get("event_dispatcher")->dispatch("security.interactive_login", $event);
+
+                return new RedirectResponse('/');
+            }
         }
 
         return $this->render('user/register.html.twig', array('form' => $form->createView()));
+    }
+
+    /**
+     * @Route("/user/profile", name="edit_profile")
+     * @param Request $request
+     *
+     * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function editProfileAction(Request $request)
+    {
+        // Get the logged user
+        $user = $this->getUser();
+        $form = $this->createForm(EditProfileType::class, $user);
+        $form->handleRequest($request);
+        $response = new Response();
+        $success = false;
+
+        // Form submitted
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Save the changes against the api
+            $api = $this->get('app.api_connection');
+            $result = $api->putJson($api->getRoute('account'), $user->setIp($request->getClientIp())->toArray());
+
+            /** @var User $user */
+            if ($result->getError() or !(is_subclass_of($result->getRows()[0], '\Bindeo\DataModel\UserAbstract'))) {
+                $error = $this->get('translator')
+                              ->trans('We have a problem creating your account, please try again later');
+
+                $form->addError(new FormError($error));
+
+                // There is a problem login in the api, we need to logout the user
+                $this->get('logger')->error('ERROR: Edit profile', [
+                    'data'  => $user->toArray(),
+                    'error' => $result->getError()['message']
+                ]);
+            } else {
+                // If the language has changed, we need to transmit changes to session, cookie and translator
+                if ($request->getSession()->get('_locale') != $user->getLang()) {
+                    $request->getSession()->set('_locale', $user->getLang());
+                    $response->headers->setCookie(new Cookie('LOCALE', $user->getLang(), 31536000 + time()));
+                    $this->get('translator')->setLocale($user->getLang());
+                }
+
+                // Success
+                $success = true;
+            }
+        }
+
+        return $this->render('user/edit-profile.html.twig', array('form' => $form->createView(), 'success' => $success),
+            $response);
     }
 }

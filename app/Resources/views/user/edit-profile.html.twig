@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {% trans %}Modify your profile data{% endtrans %}
+{% endblock %}
+
+{% block body %}
+<section class="forms form-signup">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+                <h1>{% trans %}Start today to protect your property!{% endtrans %}</h1>
+            </div>
+
+            <div class="form-box col-xs-12 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
+                {% if success %}
+                    <div class="alert-success">{% trans %}Data successfully updated{% endtrans %}</div>
+                {% endif %}
+                {{ form_start(form, {'attr': {'class': 'labels-no'}}) }}
+                <p class="form-intro">{% trans %}Modify your profile data{% endtrans %}</p>
+                {{ form_errors(form) }}
+                {{ form_row(form.name, {'attr': {'placeholder': 'Your name'}}) }}
+                {{ form_row(form.surname, {'attr': {'placeholder': 'Your surname'}}) }}
+                {{ form_row(form.lang) }}
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-default btn-full">{% trans %}Modify profile data{% endtrans %}</button>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

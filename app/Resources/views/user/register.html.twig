@@ -13,47 +13,25 @@
             </div>
 
             <div class="form-box col-xs-12 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
-                {{ form_start(form) }}
-                {{ form_row(form.name) }}
-                {{ form_row(form.email) }}
-                {{ form_row(form.password.first) }}
-                {{ form_row(form.password.second) }}
+                {{ form_start(form, {'attr': {'class': 'labels-no'}}) }}
+                <p class="form-intro">Instructions...</p>
+                {{ form_errors(form) }}
+                {{ form_row(form.name, {'attr': {'placeholder': 'Your name'}}) }}
+                {{ form_row(form.email, {'attr': {'placeholder': 'Your email'}}) }}
+                {{ form_row(form.password.first, {'attr': {'placeholder': 'New password'}}) }}
+                {{ form_row(form.password.second, {'attr': {'placeholder': 'Repeat password'}}) }}
 
-                <button type="submit">Register!</button>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-default btn-full">{% trans %}Create account{% endtrans %}</button>
+                </div>
+                <div>
+                    <p class="form-notice">
+                        {% trans with {'%a_terms%': '<a href="'~path('index')~'">', '%a_privacy%': '<a href="'~path('index')~'">', '%a_end%': '</a>'} %}
+                        By creating account you accept the %a_terms%terms and conditions%a_end% and %a_privacy%privacy policy%a_end%
+                        {% endtrans %}
+                    </p>
+                </div>
                 {{ form_end(form) }}
-
-
-                <br><br><br><br><br><br>
-
-                <form class="labels-no">
-                    <p class="form-intro">Instructions...</p>
-                    <div class="form-group">
-                        <label for="name" class="control-label">{% trans %}Name{% endtrans %}</label>
-                        <div>
-                            <input type="text" class="form-control" id="name" required="required" placeholder="{% trans %}Your name{% endtrans %}">
-                        </div>
-                    </div>
-                    <div class="form-group has-error has-feedback">
-                        <label for="email" class="control-label">Correo electrónico</label>
-                        <div>
-                            <input type="email" class="form-control" id="email" required="required" placeholder="Tu e-mail"> <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
-                            <span id="" class="help-block">Introduce una dirección de correo válida</span>
-                        </div>
-                    </div>
-                    <div class="form-group has-success has-feedback">
-                        <label for="password" class="control-label">Contraseña</label>
-                        <div>
-                            <input type="password" class="form-control" id="password" required="required" placeholder="Nueva contraseña"><span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-default btn-full">{% trans %}Create account{% endtrans %}</button>
-                    </div>
-                    <div>
-                        <p class="form-notice">Al crear cuenta aceptas los <a href="#">terminos y condiciones</a> y la
-                            <a href="#">política de privacidad</a></p>
-                    </div>
-                </form>
             </div>
         </div>
     </div>

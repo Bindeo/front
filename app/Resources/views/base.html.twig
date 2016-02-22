@@ -35,6 +35,7 @@
                 <li><a href="#">{% trans %}Pricing{% endtrans %}</a></li>
                 <li><a href="#">{% trans %}Support{% endtrans %}</a></li>
                 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                    <li><a href="{{ path('edit_profile') }}">{% trans %}Profile{% endtrans %}</a></li>
                     <li><a href="{{ path('logout') }}">{% trans %}Logout{% endtrans %}</a></li>
                 {% else %}
                     <li><a href="{{ path('login') }}">{% trans %}Sign in{% endtrans %}</a></li>

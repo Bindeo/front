@@ -3,7 +3,6 @@
 namespace AppBundle\Entity;
 
 use Bindeo\DataModel\UserAbstract;
-use Symfony\Component\Security\Core\Role\Role;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -25,10 +24,17 @@ class User extends UserAbstract implements UserInterface
      * )
      */
     protected $email;
+
     /**
-     * @Assert\NotBlank(groups={"registration"})
+     * @Assert\NotBlank(groups={"registration", "edit-profile"})
+     * @Assert\Length(max=256)
      */
     protected $name;
+
+    /**
+     * @Assert\Length(max=256)
+     */
+    protected $surname;
 
     /**
      * @Assert\NotBlank(groups={"registration", "login"})
@@ -36,9 +42,9 @@ class User extends UserAbstract implements UserInterface
      */
     protected $password;
 
+    // METHODS
     /**
      * Returns the roles granted to the user.
-     *
      * @return (Role|string)[] The user roles
      */
     public function getRoles()
