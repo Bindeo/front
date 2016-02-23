@@ -18,9 +18,13 @@ class User extends UserAbstract implements UserInterface
     /**
      * @Assert\NotBlank(groups={"registration", "login"})
      * @Assert\Email(
-     *     groups={"registration", "login"},
+     *     groups={"registration"},
      *     strict = true,
      *     checkMX = true
+     * )
+     * @Assert\Email(
+     *     groups={"login"},
+     *     strict = true
      * )
      */
     protected $email;
@@ -38,7 +42,7 @@ class User extends UserAbstract implements UserInterface
 
     /**
      * @Assert\NotBlank(groups={"registration", "login"})
-     * @Assert\Length(min=3, max=4096, groups={"registration", "login"})
+     * @Assert\Length(min=6, max=4096, groups={"registration", "login"})
      */
     protected $password;
 
