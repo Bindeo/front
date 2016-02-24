@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
@@ -37,11 +38,11 @@ class UserController extends Controller
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('user/login.html.twig', array(
+        return $this->render('user/login.html.twig', [
             // last username entered by the user
             'last_username' => $lastUsername,
             'error'         => $error,
-        ));
+        ]);
     }
 
     /**
@@ -67,7 +68,7 @@ class UserController extends Controller
                                                                                              ->get('_locale'));
             // We can register the user against the API
             $api = $this->get('app.api_connection');
-            $result = $api->postJson($api->getRoute('account'), $user->toArray());
+            $result = $api->postJson('account', $user->toArray());
 
             // Check errors in the registry process
             if ($result->getError() or !isset($result->getRows()[0])) {
@@ -87,7 +88,7 @@ class UserController extends Controller
                 $form->addError(new FormError($error));
             } else {
                 // User registered so we need to login him
-                $res = $api->getJson($api->getRoute('account'), [
+                $res = $api->getJson('account', [
                     'email'    => $user->getEmail(),
                     'password' => $user->getPassword(),
                     'ip'       => $user->getIp()
@@ -117,7 +118,7 @@ class UserController extends Controller
             }
         }
 
-        return $this->render('user/register.html.twig', array('form' => $form->createView()));
+        return $this->render('user/register.html.twig', ['form' => $form->createView()]);
     }
 
     /**
@@ -138,8 +139,8 @@ class UserController extends Controller
         // Form submitted
         if ($form->isSubmitted() && $form->isValid()) {
             // Save the changes against the api
-            $api = $this->get('app.api_connection');
-            $result = $api->putJson($api->getRoute('account'), $user->setIp($request->getClientIp())->toArray());
+            $result = $this->get('app.api_connection')
+                           ->putJson('account', $user->setIp($request->getClientIp())->toArray());
 
             /** @var User $user */
             if ($result->getError() or !(is_subclass_of($result->getRows()[0], '\Bindeo\DataModel\UserAbstract'))) {
@@ -166,7 +167,26 @@ class UserController extends Controller
             }
         }
 
-        return $this->render('user/edit-profile.html.twig', array('form' => $form->createView(), 'success' => $success),
+        return $this->render('user/edit-profile.html.twig', ['form' => $form->createView(), 'success' => $success],
             $response);
+    }
+
+    /**
+     * @Route("/user/validate", name="validate_token")
+     * @param Request $request
+     *
+     * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function validateTokenAction(Request $request)
+    {
+        if (!($token = $request->get('t'))) {
+            throw new NotFoundHttpException();
+        }
+
+        // Try to validate the token against the API
+        $result = $this->get('app.api_connection')
+                       ->putJson('account_token', ['token' => $token, 'ip' => $request->getClientIp()]);
+
+        return $this->render('user/token.html.twig', ['success' => $result->getError() ? false : true]);
     }
 }

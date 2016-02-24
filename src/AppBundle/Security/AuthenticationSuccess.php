@@ -34,7 +34,7 @@ class AuthenticationSuccess implements AuthenticationSuccessHandlerInterface
     public function onAuthenticationSuccess(Request $request, TokenInterface $token)
     {
         // The user has logged into the system, we tell it to the API
-        $res = $this->api->getJson($this->api->getRoute('account'), [
+        $res = $this->api->getJson('account', [
             'email'    => $token->getUsername(),
             'password' => $request->get('_password'),
             'ip'       => $request->getClientIp()

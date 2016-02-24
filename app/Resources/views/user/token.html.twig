@@ -1,0 +1,20 @@
+{# app/Resources/views/security/login.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}{% trans %}Validate your change{% endtrans %}{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+            <h1>
+                {% if success == true %}
+                    {% trans %}Account confirmed!{% endtrans %}
+                {% else %}
+                    {% trans %}Sorry, your token is expired{% endtrans %}
+                {% endif %}
+            </h1>
+        </div>
+    </div>
+</div>
+{% endblock %}

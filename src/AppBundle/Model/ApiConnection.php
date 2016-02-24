@@ -15,6 +15,22 @@ class ApiConnection
     private $baseUrl;
     private $routes;
 
+    /**
+     * Check if the api response has results
+     *
+     * @param $res
+     *
+     * @return ResultSet
+     */
+    private function processResult($res)
+    {
+        if ($this->curl->httpStatusCode == 204) {
+            return new ResultSet();
+        } else {
+            return new ResultSet($res);
+        }
+    }
+
     public function __construct($baseUrl, $token, $routes)
     {
         $this->baseUrl = $baseUrl;
@@ -33,7 +49,7 @@ class ApiConnection
      */
     public function getJson($url, $params = [])
     {
-        return new ResultSet($this->curl->get($this->baseUrl . $url, $params));
+        return $this->processResult($this->curl->get($this->baseUrl . $this->getRoute($url), $params));
     }
 
     /**
@@ -46,7 +62,7 @@ class ApiConnection
      */
     public function postJson($url, $params = [])
     {
-        return new ResultSet($this->curl->post($this->baseUrl . $url, $params));
+        return $this->processResult($this->curl->post($this->baseUrl . $this->getRoute($url), $params));
     }
 
     /**
@@ -59,7 +75,7 @@ class ApiConnection
      */
     public function putJson($url, $params = [])
     {
-        return new ResultSet($this->curl->put($this->baseUrl . $url, $params));
+        return $this->processResult($this->curl->put($this->baseUrl . $this->getRoute($url), $params));
     }
 
     /**
@@ -72,7 +88,7 @@ class ApiConnection
      */
     public function patchJson($url, $params = [])
     {
-        return new ResultSet($this->curl->patch($this->baseUrl . $url, $params));
+        return $this->processResult($this->curl->patch($this->baseUrl . $this->getRoute($url), $params));
     }
 
     /**
@@ -85,7 +101,7 @@ class ApiConnection
      */
     public function deleteJson($url, $params = [])
     {
-        return new ResultSet($this->curl->delete($this->baseUrl . $url, array(), $params));
+        return $this->processResult($this->curl->delete($this->baseUrl . $this->getRoute($url), $params));
     }
 
     /**

@@ -20,3 +20,7 @@ register:
 edit_profile:
     path: /user/profile
     defaults: { _controller: AppBundle:User:editProfile }
+
+validate_token:
+    path: /user/validate
+    defaults: { _controller: AppBundle:User:validateToken }

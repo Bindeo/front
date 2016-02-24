@@ -45,10 +45,13 @@ class ResultSet
         return $res;
     }
 
-    public function __construct(\stdClass $data)
+    public function __construct(\stdClass $data = null)
     {
         // Convert the answer into objects
-        if (isset($data->data)) {
+        if ($data === null) {
+            $this->numRows = 0;
+            $this->numPages = 0;
+        } elseif (isset($data->data)) {
             $this->rows = [];
             if (isset($data->data->total_pages)) {
                 // List of data
