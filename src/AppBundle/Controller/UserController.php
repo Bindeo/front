@@ -187,6 +187,16 @@ class UserController extends Controller
         $result = $this->get('app.api_connection')
                        ->putJson('account_token', ['token' => $token, 'ip' => $request->getClientIp()]);
 
-        return $this->render('user/token.html.twig', ['success' => $result->getError() ? false : true]);
+        if ($result->getError()) {
+            $success = false;
+        } else {
+            $success = true;
+            // If the user is logged, update the entity
+            if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+                $this->getUser()->setConfirmed(1);
+            }
+        }
+
+        return $this->render('user/token.html.twig', ['success' => $success]);
     }
 }
