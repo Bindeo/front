@@ -21,6 +21,7 @@
     "require": {
         "php": ">=5.6.0",
         "ext-curl": "*",
+        "ext-apcu": "*",
         "symfony/symfony": "3.0.*",
         "symfony/monolog-bundle": "^2.8",
         "sensio/distribution-bundle": "^5.0",

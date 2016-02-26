@@ -24,3 +24,11 @@ edit_profile:
 validate_token:
     path: /user/validate
     defaults: { _controller: AppBundle:User:validateToken }
+
+file_library:
+    path: /data/library
+    defaults: { _controller: AppBundle:Data:uploadFile }
+
+file_upload:
+    path: /data/upload
+    defaults: { _controller: AppBundle:Data:uploadFile }

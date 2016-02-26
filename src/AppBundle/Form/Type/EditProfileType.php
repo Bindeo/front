@@ -13,7 +13,6 @@ class EditProfileType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('name', TextType::class)
-                ->add('surname', TextType::class, ['required' => false])
                 ->add('lang', ChoiceType::class, [
                     'choices' => [
                         'English' => 'en_US',

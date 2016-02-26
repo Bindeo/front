@@ -1,5 +1,8 @@
 parameters:
     api_routes:
+        general_account_types: /general/account-types
+        general_file_types: /general/file-types
+        general_media_types: /general/media-types
         users: /users
         account: /account
         account_password: /account/password

@@ -18,7 +18,7 @@ class ResultSet
     private $error;
 
     /**
-     * Get the object
+     * Get the appropriate object
      *
      * @param \stdClass $data
      *
@@ -38,6 +38,50 @@ class ResultSet
                 $object = new User((array)$data->attributes);
                 $res = [$object->getIdUser(), $object];
                 break;
+            case 'files':
+                // Fill the entity class
+                if (!$this->entity) {
+                    $this->entity = 'AppBundle\Entity\File';
+                } elseif ($this->entity != 'AppBundle\Entity\File') {
+                    throw new HttpException(500);
+                }
+
+                $object = new File((array)$data->attributes);
+                $res = [$object->getIdFile(), $object];
+                break;
+            case 'account_type':
+                // Fill the entity class
+                if (!$this->entity) {
+                    $this->entity = 'AppBundle\Entity\AccountType';
+                } elseif ($this->entity != 'AppBundle\Entity\AccountType') {
+                    throw new HttpException(500);
+                }
+
+                $object = new AccountType((array)$data->attributes);
+                $res = [$object->getIdType(), $object];
+                break;
+            case 'file_type':
+                // Fill the entity class
+                if (!$this->entity) {
+                    $this->entity = 'AppBundle\Entity\FileType';
+                } elseif ($this->entity != 'AppBundle\Entity\FileType') {
+                    throw new HttpException(500);
+                }
+
+                $object = new FileType((array)$data->attributes);
+                $res = [$object->getIdType(), $object];
+                break;
+            case 'media_type':
+                // Fill the entity class
+                if (!$this->entity) {
+                    $this->entity = 'AppBundle\Entity\MediaType';
+                } elseif ($this->entity != 'AppBundle\Entity\MediaType') {
+                    throw new HttpException(500);
+                }
+
+                $object = new MediaType((array)$data->attributes);
+                $res = [$object->getIdType(), $object];
+                break;
             default:
                 throw new HttpException(500);
         }
@@ -53,10 +97,10 @@ class ResultSet
             $this->numPages = 0;
         } elseif (isset($data->data)) {
             $this->rows = [];
-            if (isset($data->data->total_pages)) {
+            if (isset($data->total_pages)) {
                 // List of data
-                $this->numPages = $data->data->total_pages;
-                $this->curPage = isset($data->data->total_pages) ? $data->data->total_pages : 1;
+                $this->numPages = $data->total_pages;
+                $this->curPage = isset($data->current_page) ? $data->current_page : 1;
                 $this->numRows = count($data->data);
 
                 foreach ($data->data as $row) {

@@ -16,22 +16,32 @@
 
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 </head>
-<body{% block bodyclass %}{% endblock %}>
+<body{% block bodyclass %} class="body-user"{% endblock %}>
+{% block navbar %}
+<!-- Collect the nav links, forms, and other content for toggling -->
+<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav navbar-right">
 
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/"> <img src="{{ asset('images/bindeo_white_2.png') }}" width="120"> </a>
-        </div>
+        <li class="active"><a href="{{ path('file_library') }}">Library</a></li>
+        <li><a href="#">Emails</a></li>
+        <li><a href="{{ path('file_upload') }}">Upload</a></li>
 
-        {% block navbar %}{% endblock %}
-    </div>
-    <!-- /.container-fluid -->
-</nav>
+        <li class="dropdown hidden-xs">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ app.user.name }} <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="{{ path('edit_profile') }}">{% trans %}Profile{% endtrans %}</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="{{ path('logout') }}">{% trans %}Logout{% endtrans %}</a></li>
+            </ul>
+        </li>
+
+        <li class="visible-xs"><a href="{{ path('edit_profile') }}">{% trans %}Profile{% endtrans %}</a></li>
+        <li class="visible-xs"><a href="{{ path('logout') }}">{% trans %}Logout{% endtrans %}</a></li>
+
+    </ul>
+</div>
+<!-- /.navbar-collapse -->
+{% endblock %}
 {% block body %}{% endblock %}
 {% block footer %}{% endblock %}
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->

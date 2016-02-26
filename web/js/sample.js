@@ -3,30 +3,33 @@ $(function() {
     /**
      * Drag
      */
-    var dropArea = $(document);
+    var dropArea = $(window);
     var dropLayer = $('.drop');
-    var dropLastEvent = '';
+    var dragEvent = '';
+
+    dropArea.on(
+        'dragstart',
+        function(e) {
+            e.preventDefault();
+        }
+    );
 
     dropArea.on(
         'dragover',
         function(e) {
-            dropLastEvent = 'dragover';
             e.preventDefault();
             e.stopPropagation();
+            e.originalEvent.dataTransfer.dropEffect = 'copy';
+            dragEvent = 'dragover';
         }
     );
 
     dropArea.on(
         'dragenter',
         function(e) {
-            if($(e.target).attr('id') != 'drop-area') {
-                dropLastEvent = 'dragenter';
-                e.preventDefault();
-                e.stopPropagation();
-                if($(e.target).prop('tagName') == 'HTML') {
-                    dropLayer.show();
-                }
-            }
+            e.preventDefault();
+            e.stopPropagation();
+            dropLayer.show();
         }
     );
 
@@ -35,10 +38,10 @@ $(function() {
         function(e) {
             e.preventDefault();
             e.stopPropagation();
-            if(dropLastEvent == 'dragover') {
+            if(dragEvent == 'dragover') {
                 dropLayer.hide();
             }
-            dropLastEvent = 'dragleave';
+            dragEvent = 'dragleave';
         }
     );
 
@@ -58,6 +61,13 @@ $(function() {
                      * Upload files
                      */
                     console.log('Files dropped in: e.originalEvent.dataTransfer.files');
+                    /**
+                     * Actions
+                     *
+                     * Hide Library area
+                     * Show file upload form
+                     */
+
                 }
             }
         }

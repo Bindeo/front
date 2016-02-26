@@ -1,5 +1,7 @@
-{# app/Resources/views/security/login.html.twig #}
-{% extends 'base.html.twig' %}
+{% extends is_granted('IS_AUTHENTICATED_REMEMBERED')
+? 'base-log.html.twig'
+: 'base-nolog.html.twig'
+%}
 
 {% block title %}{% trans %}Validate your change{% endtrans %}{% endblock %}
 

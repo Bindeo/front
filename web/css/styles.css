@@ -1,7 +1,17 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,700);
+/* line 1, ../sass/includes/_0_helper.scss */
+.display-block {
+  display: block;
+}
+
+/* line 5, ../sass/includes/_0_helper.scss */
+.cursor-copy {
+  cursor: copy !important;
+}
+
 /* line 1, ../sass/includes/_0_basics.scss */
 a {
-  color: #049DBF;
+  color: #0089E7;
 }
 
 /* line 5, ../sass/includes/_0_basics.scss */
@@ -52,9 +62,34 @@ h3 {
   line-height: 14px;
 }
 
+/* line 45, ../sass/includes/_0_basics.scss */
+label {
+  font-weight: 300;
+}
+
+/* line 50, ../sass/includes/_0_basics.scss */
+.checkbox > label, .radio > label {
+  font-weight: 300;
+  padding-left: 25px;
+}
+/* line 54, ../sass/includes/_0_basics.scss */
+.checkbox > label > input[type="checkbox"], .radio > label > input[type="checkbox"] {
+  margin-left: -25px;
+}
+
+/* line 60, ../sass/includes/_0_basics.scss */
+.form-control, .dropdown-menu {
+  font-size: 14px;
+}
+
+/* line 64, ../sass/includes/_0_basics.scss */
+.btn-link {
+  color: #0089E7;
+}
+
 /* line 1, ../sass/includes/_0_basics.scss */
 a {
-  color: #049DBF;
+  color: #0089E7;
 }
 
 /* line 5, ../sass/includes/_0_basics.scss */
@@ -103,6 +138,31 @@ h3 {
 .text-mini, .forms form .has-error .help-block {
   font-size: 12px;
   line-height: 14px;
+}
+
+/* line 45, ../sass/includes/_0_basics.scss */
+label {
+  font-weight: 300;
+}
+
+/* line 50, ../sass/includes/_0_basics.scss */
+.checkbox > label, .radio > label {
+  font-weight: 300;
+  padding-left: 25px;
+}
+/* line 54, ../sass/includes/_0_basics.scss */
+.checkbox > label > input[type="checkbox"], .radio > label > input[type="checkbox"] {
+  margin-left: -25px;
+}
+
+/* line 60, ../sass/includes/_0_basics.scss */
+.form-control, .dropdown-menu {
+  font-size: 14px;
+}
+
+/* line 64, ../sass/includes/_0_basics.scss */
+.btn-link {
+  color: #0089E7;
 }
 
 /* line 2, ../sass/includes/_1_layout.scss */
@@ -153,29 +213,29 @@ h3 {
   min-width: 240px;
 }
 
-/* line 3, ../sass/includes/_1_forms.scss */
+/* line 2, ../sass/includes/_1_forms.scss */
 .forms h1 {
   font-size: 30px;
   font-weight: 300;
   text-align: center;
 }
-/* line 9, ../sass/includes/_1_forms.scss */
+/* line 8, ../sass/includes/_1_forms.scss */
 .forms h2 {
   font-size: 16px;
   font-weight: 300;
   text-align: center;
 }
-/* line 15, ../sass/includes/_1_forms.scss */
-.forms label {
-  font-weight: normal;
+/* line 14, ../sass/includes/_1_forms.scss */
+.forms .form-group > label, .forms .labeled {
+  font-weight: 300;
   font-size: 13px;
   margin-bottom: 2px;
 }
-/* line 21, ../sass/includes/_1_forms.scss */
-.forms input, .forms button {
+/* line 20, ../sass/includes/_1_forms.scss */
+.forms input[type="text"], .forms input[type="email"], .forms input[type="password"], .forms button, .forms select {
   height: 44px;
 }
-/* line 25, ../sass/includes/_1_forms.scss */
+/* line 24, ../sass/includes/_1_forms.scss */
 .forms .btn-full {
   width: 100%;
 }
@@ -183,67 +243,112 @@ h3 {
 .forms .form-notice {
   text-align: center;
 }
-/* line 40, ../sass/includes/_1_forms.scss */
-.forms form.labels-no label {
-  display: none;
-}
-/* line 46, ../sass/includes/_1_forms.scss */
+/* line 39, ../sass/includes/_1_forms.scss */
 .forms form .has-feedback .form-control-feedback {
+  margin-top: 20px;
   height: 44px;
   line-height: 44px;
 }
+/* line 47, ../sass/includes/_1_forms.scss */
+.forms form.labels-no .form-group > label {
+  display: none;
+}
 /* line 52, ../sass/includes/_1_forms.scss */
+.forms form.labels-no .has-feedback .form-control-feedback {
+  top: 0;
+  margin-top: 0;
+}
+/* line 60, ../sass/includes/_1_forms.scss */
 .forms form .has-success .form-control {
   border-color: #049DBF;
 }
-/* line 55, ../sass/includes/_1_forms.scss */
+/* line 63, ../sass/includes/_1_forms.scss */
 .forms form .has-success .form-control-feedback {
   color: #049DBF;
 }
-/* line 60, ../sass/includes/_1_forms.scss */
+/* line 69, ../sass/includes/_1_forms.scss */
 .forms form .has-error .form-control {
   border-color: #ff6469;
 }
-/* line 63, ../sass/includes/_1_forms.scss */
+/* line 72, ../sass/includes/_1_forms.scss */
 .forms form .has-error .form-control-feedback, .forms form .has-error .help-block {
   color: #ff6469;
 }
 
-/* line 74, ../sass/includes/_1_forms.scss */
+/* line 83, ../sass/includes/_1_forms.scss */
 .form-signup {
   margin-top: 2em;
 }
-/* line 77, ../sass/includes/_1_forms.scss */
+/* line 86, ../sass/includes/_1_forms.scss */
 .form-signup .form-box {
   margin-top: 2em;
 }
 
-/* line 2, ../sass/includes/_1_modals.scss */
-.modal .modal-content {
+/* line 92, ../sass/includes/_1_forms.scss */
+.list-actions {
+  margin-top: 25px;
+}
+/* line 95, ../sass/includes/_1_forms.scss */
+.list-actions > a {
+  margin-right: 10px;
+}
+/* line 98, ../sass/includes/_1_forms.scss */
+.list-actions > a:last-child {
+  margin-right: 0;
+}
+
+@media (max-width: 767px) {
+  /* line 2, ../sass/includes/_1_modals.scss */
+  .modal .modal-dialog {
+    margin-top: 60px;
+  }
+}
+/* line 8, ../sass/includes/_1_modals.scss */
+.modal .modal-dialog .modal-content {
   background: #eee;
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.25) 0 0 1px;
 }
-/* line 7, ../sass/includes/_1_modals.scss */
-.modal .modal-content button.close {
-  margin-top: 7px;
+/* line 13, ../sass/includes/_1_modals.scss */
+.modal .modal-dialog .modal-content button.close {
+  margin-top: 10px;
 }
-/* line 10, ../sass/includes/_1_modals.scss */
-.modal .modal-content button.close span {
-  padding: 4px 10px;
+/* line 16, ../sass/includes/_1_modals.scss */
+.modal .modal-dialog .modal-content button.close span {
+  padding: 6px 14px;
 }
-/* line 15, ../sass/includes/_1_modals.scss */
-.modal .modal-content .modal-header {
+/* line 21, ../sass/includes/_1_modals.scss */
+.modal .modal-dialog .modal-content .modal-header {
   border-bottom: 0;
 }
-/* line 18, ../sass/includes/_1_modals.scss */
-.modal .modal-content .modal-header h4 {
+/* line 24, ../sass/includes/_1_modals.scss */
+.modal .modal-dialog .modal-content .modal-header h4 {
   font-weight: bold;
   font-size: 14px;
 }
-/* line 27, ../sass/includes/_1_modals.scss */
-.modal .modal-content .modal-footer {
+/* line 31, ../sass/includes/_1_modals.scss */
+.modal .modal-dialog .modal-content .modal-body > div {
+  margin-bottom: 15px;
+}
+/* line 34, ../sass/includes/_1_modals.scss */
+.modal .modal-dialog .modal-content .modal-body > div:last-child {
+  margin-bottom: 0;
+}
+/* line 39, ../sass/includes/_1_modals.scss */
+.modal .modal-dialog .modal-content .modal-body .form-group {
+  margin-bottom: 5px;
+}
+/* line 42, ../sass/includes/_1_modals.scss */
+.modal .modal-dialog .modal-content .modal-body .form-group:last-child {
+  margin-bottom: 0;
+}
+/* line 48, ../sass/includes/_1_modals.scss */
+.modal .modal-dialog .modal-content .modal-footer {
   border-top: 0;
+}
+/* line 51, ../sass/includes/_1_modals.scss */
+.modal .modal-dialog .modal-content .modal-footer .btn {
+  padding: 6px 24px;
 }
 
 /* line 3, ../sass/includes/_1_single.scss */
@@ -253,54 +358,113 @@ h3 {
 }
 /* line 9, ../sass/includes/_1_single.scss */
 .body-single nav.navbar .navbar-header .navbar-brand img {
-  margin-top: -1px;
+  width: 100px;
+  margin-top: -3px;
 }
 
 /* line 1, ../sass/includes/_1_user.scss */
 .body-user {
   background: #eee;
+  margin-bottom: 15px;
 }
-/* line 4, ../sass/includes/_1_user.scss */
+/* line 5, ../sass/includes/_1_user.scss */
 .body-user nav.navbar {
-  background: purple;
+  background: #0070BD;
   margin-top: 0;
+  margin-bottom: 15px;
 }
-/* line 10, ../sass/includes/_1_user.scss */
+/* line 12, ../sass/includes/_1_user.scss */
 .body-user nav.navbar .navbar-header .navbar-brand img {
-  margin-top: -1px;
+  width: 100px;
+  margin-top: -3px;
 }
-/* line 17, ../sass/includes/_1_user.scss */
+@media (min-width: 768px) {
+  /* line 23, ../sass/includes/_1_user.scss */
+  .body-user nav.navbar .navbar-collapse ul.navbar-nav > li {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  /* line 27, ../sass/includes/_1_user.scss */
+  .body-user nav.navbar .navbar-collapse ul.navbar-nav > li > a {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+}
+/* line 37, ../sass/includes/_1_user.scss */
 .body-user .drag {
   position: relative;
-  margin: 15px 0;
+  margin: 0 0 15px;
   padding: 15px;
   border: 1px dotted #ccc;
   text-align: center;
+  min-height: 172px;
 }
-/* line 24, ../sass/includes/_1_user.scss */
-.body-user .drag h1 {
+/* line 46, ../sass/includes/_1_user.scss */
+.body-user .drag .file h1 {
   font-weight: 300;
   font-size: 24px;
 }
-/* line 30, ../sass/includes/_1_user.scss */
-.body-user .drag .sync a {
+/* line 51, ../sass/includes/_1_user.scss */
+.body-user .drag .file .sync {
+  margin-top: 20px;
+}
+/* line 54, ../sass/includes/_1_user.scss */
+.body-user .drag .file .sync p {
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+/* line 60, ../sass/includes/_1_user.scss */
+.body-user .drag .file .sync div a {
   box-shadow: rgba(0, 0, 0, 0.25) 0 0 1px;
   height: 50px;
   width: 50px;
   display: inline-block;
-  margin-top: 30px;
   margin-right: 5px;
 }
-/* line 38, ../sass/includes/_1_user.scss */
-.body-user .drag .sync a:last-child {
+/* line 67, ../sass/includes/_1_user.scss */
+.body-user .drag .file .sync div a:last-child {
   margin-right: 0;
 }
-/* line 44, ../sass/includes/_1_user.scss */
+/* line 75, ../sass/includes/_1_user.scss */
+.body-user .drag .load {
+  margin: 0 auto;
+  padding: 33px 0 0;
+}
+/* line 83, ../sass/includes/_1_user.scss */
+.body-user .drag .load .progress {
+  margin-bottom: 0;
+}
+/* line 86, ../sass/includes/_1_user.scss */
+.body-user .drag .load .progress .progress-bar {
+  font-size: 11px;
+}
+/* line 92, ../sass/includes/_1_user.scss */
+.body-user .drag .load .btn-link {
+  margin-top: 15px;
+}
+/* line 97, ../sass/includes/_1_user.scss */
+.body-user .drag .done {
+  padding: 10px 0 0;
+}
+/* line 100, ../sass/includes/_1_user.scss */
+.body-user .drag .done .glyphicon {
+  font-size: 36px;
+}
+/* line 105, ../sass/includes/_1_user.scss */
 .body-user .drag .btn-file {
   position: relative;
   overflow: hidden;
+  width: 100%;
+  padding: 10px 12px;
 }
-/* line 48, ../sass/includes/_1_user.scss */
+@media (min-width: 768px) {
+  /* line 105, ../sass/includes/_1_user.scss */
+  .body-user .drag .btn-file {
+    width: inherit;
+    padding: 6px 12px;
+  }
+}
+/* line 116, ../sass/includes/_1_user.scss */
 .body-user .drag .btn-file input[type=file] {
   position: absolute;
   top: 0;
@@ -316,57 +480,76 @@ h3 {
   cursor: inherit;
   display: block;
 }
-/* line 66, ../sass/includes/_1_user.scss */
+/* line 134, ../sass/includes/_1_user.scss */
 .body-user .col-tools {
   margin-bottom: 5px;
 }
-/* line 73, ../sass/includes/_1_user.scss */
+/* line 139, ../sass/includes/_1_user.scss */
+.body-user .col-tools .tools-path .dropdown-path > a {
+  font-weight: 300;
+  color: #333;
+}
+@media (min-width: 768px) {
+  /* line 148, ../sass/includes/_1_user.scss */
+  .body-user .col-tools .tools-path ul.dropdown-menu > li > a {
+    padding: 5px 10px;
+  }
+}
+@media (min-width: 768px) {
+  /* line 154, ../sass/includes/_1_user.scss */
+  .body-user .col-tools .tools-path ul.dropdown-menu > li.active > a {
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 2px;
+  }
+}
+/* line 165, ../sass/includes/_1_user.scss */
 .body-user .col-tools .tools-size {
   text-align: right;
 }
 @media (min-width: 768px) {
-  /* line 73, ../sass/includes/_1_user.scss */
+  /* line 165, ../sass/includes/_1_user.scss */
   .body-user .col-tools .tools-size {
+    margin-top: 15px;
     text-align: left;
   }
 }
 @media (min-width: 768px) {
-  /* line 66, ../sass/includes/_1_user.scss */
+  /* line 134, ../sass/includes/_1_user.scss */
   .body-user .col-tools {
     padding-right: 0;
   }
 }
-/* line 89, ../sass/includes/_1_user.scss */
+/* line 182, ../sass/includes/_1_user.scss */
 .body-user .list > ul > li {
   background: white;
   margin: 0 0 10px;
   box-shadow: rgba(0, 0, 0, 0.25) 0 0 1px;
   height: 50px;
 }
-/* line 96, ../sass/includes/_1_user.scss */
+/* line 189, ../sass/includes/_1_user.scss */
 .body-user .list > ul > li > div {
   height: 100%;
 }
-/* line 98, ../sass/includes/_1_user.scss */
+/* line 191, ../sass/includes/_1_user.scss */
 .body-user .list > ul > li > div > div {
   height: 100%;
 }
-/* line 103, ../sass/includes/_1_user.scss */
+/* line 196, ../sass/includes/_1_user.scss */
 .body-user .list > ul > li .item-icon {
   background: #eee;
   text-align: center;
   font-size: 18px;
 }
-/* line 108, ../sass/includes/_1_user.scss */
+/* line 201, ../sass/includes/_1_user.scss */
 .body-user .list > ul > li .item-icon span {
   line-height: 48px;
   opacity: 0.5;
 }
-/* line 114, ../sass/includes/_1_user.scss */
+/* line 207, ../sass/includes/_1_user.scss */
 .body-user .list > ul > li .item-name {
   padding: 0;
 }
-/* line 117, ../sass/includes/_1_user.scss */
+/* line 210, ../sass/includes/_1_user.scss */
 .body-user .list > ul > li .item-name > a {
   display: block;
   padding: 15px;
@@ -374,22 +557,22 @@ h3 {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-/* line 124, ../sass/includes/_1_user.scss */
+/* line 217, ../sass/includes/_1_user.scss */
 .body-user .list > ul > li .item-name > a span {
   float: right;
   margin-left: 10px;
   color: #ccc;
 }
-/* line 132, ../sass/includes/_1_user.scss */
+/* line 225, ../sass/includes/_1_user.scss */
 .body-user .list > ul > li .item-opts {
   padding: 0;
 }
-/* line 135, ../sass/includes/_1_user.scss */
+/* line 228, ../sass/includes/_1_user.scss */
 .body-user .list > ul > li .item-opts > .btn-group {
   width: 100%;
   height: 100%;
 }
-/* line 139, ../sass/includes/_1_user.scss */
+/* line 232, ../sass/includes/_1_user.scss */
 .body-user .list > ul > li .item-opts > .btn-group > a {
   background: #eee;
   display: block;
@@ -399,26 +582,26 @@ h3 {
   line-height: 52px;
   font-size: 18px;
 }
-/* line 153, ../sass/includes/_1_user.scss */
+/* line 246, ../sass/includes/_1_user.scss */
 .body-user .list > ul > li:hover span {
   opacity: 1.0;
 }
-/* line 160, ../sass/includes/_1_user.scss */
+/* line 253, ../sass/includes/_1_user.scss */
 .body-user .list > ul > li.item-load .item-name {
   background-image: url(./../images/assets/list-item-loading.gif);
   background-repeat: no-repeat;
   background-position-y: 19px;
   background-position-x: 15px;
 }
-/* line 166, ../sass/includes/_1_user.scss */
+/* line 259, ../sass/includes/_1_user.scss */
 .body-user .list > ul > li.item-load .item-name > a {
   padding-left: 40px;
 }
-/* line 174, ../sass/includes/_1_user.scss */
+/* line 267, ../sass/includes/_1_user.scss */
 .body-user .list > ul > li.item-search .col-button {
   border-left: 1px solid rgba(0, 0, 0, 0.14);
 }
-/* line 183, ../sass/includes/_1_user.scss */
+/* line 276, ../sass/includes/_1_user.scss */
 .body-user .list > ul > li.item-search .col-button .dropdown-menu .active > a:before {
   content: "\e013";
   font-family: "Glyphicons Halflings";
@@ -427,14 +610,14 @@ h3 {
   display: inline-block;
   font-size: 10px;
 }
-/* line 196, ../sass/includes/_1_user.scss */
+/* line 289, ../sass/includes/_1_user.scss */
 .body-user .list > ul > li.item-search .item-name > input {
   border: none;
   border-radius: 0;
   box-shadow: none;
   height: 48px;
 }
-/* line 206, ../sass/includes/_1_user.scss */
+/* line 299, ../sass/includes/_1_user.scss */
 .body-user .list > ul > li.item-empty {
   background: none;
   background-image: url(./../images/icons/states_what.png);
@@ -445,7 +628,7 @@ h3 {
   text-align: center;
   padding: 150px 15px 15px;
 }
-/* line 217, ../sass/includes/_1_user.scss */
+/* line 310, ../sass/includes/_1_user.scss */
 .body-user .list > ul > li.item-empty h3 {
   margin: 0;
 }
@@ -533,12 +716,55 @@ h3 {
   }
 }
 
-/* line 20, ../sass/styles.scss */
+/* line 1, ../sass/includes/_2_notifications.scss */
+.notifications {
+  display: none;
+  position: fixed;
+  bottom: 15px;
+  width: 100%;
+  z-index: 1040;
+}
+/* line 9, ../sass/includes/_2_notifications.scss */
+.notifications .alert {
+  margin: 0;
+}
+
+/* line 1, ../sass/includes/_2_shortcut.scss */
+.shortcut {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+}
+/* line 6, ../sass/includes/_2_shortcut.scss */
+.shortcut > div {
+  margin: 2px;
+}
+/* line 9, ../sass/includes/_2_shortcut.scss */
+.shortcut > div > a {
+  display: block;
+  background-color: #0070BD;
+  border-radius: 100%;
+  padding: 14px 16px 12px 18px;
+  font-size: 18px;
+  text-align: center;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 0 1px;
+}
+/* line 18, ../sass/includes/_2_shortcut.scss */
+.shortcut > div > a > span {
+  color: #fff;
+}
+
+/* line 22, ../sass/styles.scss */
 body {
   font-family: "Open Sans", sans-serif;
   text-shadow: rgba(0, 0, 0, 0.01) 0 0 1px;
   -webkit-font-smoothing: antialiased;
   font-weight: 300;
+  font-size: 14px;
+}
+/* line 29, ../sass/styles.scss */
+body > nav {
+  z-index: 1030;
 }
 /* line 1, ../sass/includes/_1_navbar.scss */
 body > nav.navbar {
@@ -549,29 +775,29 @@ body > nav.navbar {
   border-radius: 0;
   box-shadow: none;
 }
-/* line 10, ../sass/includes/_1_navbar.scss */
+/* line 9, ../sass/includes/_1_navbar.scss */
 body > nav.navbar .navbar-header {
   border: none;
 }
-/* line 14, ../sass/includes/_1_navbar.scss */
+/* line 13, ../sass/includes/_1_navbar.scss */
 body > nav.navbar .navbar-header .navbar-brand img {
   width: 120px;
   opacity: 0.75;
-  margin-top: -3px;
+  margin-top: -6px;
 }
-/* line 21, ../sass/includes/_1_navbar.scss */
+/* line 20, ../sass/includes/_1_navbar.scss */
 body > nav.navbar .navbar-header .navbar-toggle {
   border: none;
 }
-/* line 24, ../sass/includes/_1_navbar.scss */
+/* line 23, ../sass/includes/_1_navbar.scss */
 body > nav.navbar .navbar-header .navbar-toggle:hover {
   background: none;
 }
-/* line 28, ../sass/includes/_1_navbar.scss */
+/* line 27, ../sass/includes/_1_navbar.scss */
 body > nav.navbar .navbar-header .navbar-toggle .icon-bar {
   background: white;
 }
-/* line 35, ../sass/includes/_1_navbar.scss */
+/* line 34, ../sass/includes/_1_navbar.scss */
 body > nav.navbar .navbar-collapse {
   position: absolute;
   width: 100%;
@@ -581,25 +807,25 @@ body > nav.navbar .navbar-collapse {
   z-index: 1099;
 }
 @media (min-width: 768px) {
-  /* line 35, ../sass/includes/_1_navbar.scss */
+  /* line 34, ../sass/includes/_1_navbar.scss */
   body > nav.navbar .navbar-collapse {
     position: inherit;
     background: none;
   }
 }
 @media (min-width: 768px) {
-  /* line 49, ../sass/includes/_1_navbar.scss */
+  /* line 48, ../sass/includes/_1_navbar.scss */
   body > nav.navbar .navbar-collapse ul.navbar-nav > li {
     padding-top: 7px;
     padding-bottom: 7px;
   }
 }
-/* line 58, ../sass/includes/_1_navbar.scss */
+/* line 57, ../sass/includes/_1_navbar.scss */
 body > nav.navbar .navbar-collapse ul.navbar-nav > li > a:hover {
   background: rgba(0, 0, 0, 0.15);
 }
 @media (min-width: 768px) {
-  /* line 56, ../sass/includes/_1_navbar.scss */
+  /* line 55, ../sass/includes/_1_navbar.scss */
   body > nav.navbar .navbar-collapse ul.navbar-nav > li > a {
     padding-top: 8px;
     padding-bottom: 8px;
@@ -608,11 +834,19 @@ body > nav.navbar .navbar-collapse ul.navbar-nav > li > a:hover {
     text-shadow: rgba(0, 0, 0, 0.25) 0 0 1px;
   }
 }
-/* line 72, ../sass/includes/_1_navbar.scss */
+/* line 71, ../sass/includes/_1_navbar.scss */
+body > nav.navbar .navbar-collapse ul.navbar-nav > li.active > a {
+  background: rgba(255, 255, 255, 0.25);
+}
+/* line 74, ../sass/includes/_1_navbar.scss */
+body > nav.navbar .navbar-collapse ul.navbar-nav > li.active > a:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+/* line 81, ../sass/includes/_1_navbar.scss */
 body > nav.navbar .navbar-collapse ul.navbar-nav > li.highlight > a {
   background: rgba(255, 255, 255, 0.15);
 }
-/* line 75, ../sass/includes/_1_navbar.scss */
+/* line 84, ../sass/includes/_1_navbar.scss */
 body > nav.navbar .navbar-collapse ul.navbar-nav > li.highlight > a:hover {
   background: rgba(255, 255, 255, 0.5);
 }

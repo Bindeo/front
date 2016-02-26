@@ -1,4 +1,7 @@
-{% extends 'base.html.twig' %}
+{% extends is_granted('IS_AUTHENTICATED_REMEMBERED')
+    ? 'base-log.html.twig'
+    : 'base-nolog.html.twig'
+%}
 
 {% block bodyclass %}{% endblock %}
 
@@ -6,12 +9,13 @@
 <section class="section-home">
     <div class="container-fluid">
         <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3">
-            <h1>{% trans %}Bindeo is the application to protect your intellectual property{% endtrans %}.</h1>
+            <h1>{% trans %}Bindeo is the application to protect and manage your property{% endtrans %}.</h1>
             <h2>Aquí la segunda explicación... algo rápido de leer si la primera ha llamado la atención, máximo 2 líneas.</h2>
-
+            {% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
             <div class="action clearfix">
-                <a href="#" class="btn btn-primary btn-lg">Empieza aquí</a>
+                <a href="#" class="btn btn-primary btn-lg">{% trans %}Start here{% endtrans %}</a>
             </div>
+            {% endif %}
         </div>
     </div>
 </section>

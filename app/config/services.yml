@@ -17,6 +17,11 @@ services:
         class:        AppBundle\Model\ApiConnection
         arguments:    ['%api_url%', '%api_token%', '%api_routes%']
 
+    # Master data factory
+    app.master_data:
+        class:        AppBundle\Model\MasterDataFactory
+        arguments:    ['@app.api_connection']
+
     # Login with the API
     app.user_provider:
         class: AppBundle\Security\UserProvider

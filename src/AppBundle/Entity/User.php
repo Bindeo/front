@@ -36,11 +36,6 @@ class User extends UserAbstract implements UserInterface
     protected $name;
 
     /**
-     * @Assert\Length(max=256)
-     */
-    protected $surname;
-
-    /**
      * @Assert\NotBlank(groups={"registration", "login"})
      * @Assert\Length(min=6, max=4096, groups={"registration", "login"})
      */
