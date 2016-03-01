@@ -45,3 +45,12 @@ services:
         arguments: ['@session']
         tags:
             - { name: kernel.event_listener, event: security.interactive_login, method: onInteractiveLogin }
+
+    # Forms
+    app.form.type.uploadfile:
+        class: AppBundle\Form\Type\UploadFileType
+        arguments:
+            - '@session'
+            - '@app.master_data'
+        tags:
+            - { name: form.type }

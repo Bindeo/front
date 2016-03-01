@@ -9,6 +9,7 @@ parameters:
         account_email: /account/email
         account_type: /account/type
         account_token: /account/token
+        account_identities: /account/identities
         file: /data/file
         files: /data/files
         blockchain: /data/blockchain

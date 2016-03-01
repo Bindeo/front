@@ -1,0 +1,31 @@
+{{ form_start(form, {'attr': {'data-action': 'ajax-form', 'autocomplete': 'off'}}) }}
+{{ form_errors(form) }}
+<div data-type="error" class="alert alert-danger collapse">
+    <ul class="list-unstyled">
+        <li><span class="glyphicon glyphicon-exclamation-sign"></span> {% trans %}Ops!{% endtrans %} {% trans %}There was an error uploading the file{% endtrans %}.</li>
+    </ul>
+</div>
+{{ form_row(form.name) }}
+<div class="form-group">
+    <label for="upload_file_idType" class="control-label required display-block">{% trans %}Owner identity{% endtrans %}
+        <a href="#" class="pull-right">{% trans %}Manage identities{% endtrans %}</a>
+    </label>
+    {{ form_errors(form.idUser) }}
+    {{ form_widget(form.idUser) }}
+</div>
+{{ form_row(form.idType) }}
+{#
+<div class="form-group has-error has-feedback">
+    <label for="field-name">Name</label>
+    <div>
+        <input type="text" class="form-control" name="name" id="field-name" placeholder="(e.g. Shareholder's agreement)">
+
+        <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+
+        <span id="" class="help-block">Introduce una dirección de correo válida</span>
+    </div>
+</div>
+#}
+{{ form_widget(form.path) }}
+<button type="submit" class="btn btn-default">{% trans %}Register ownership{% endtrans %}</button>
+{{ form_end(form) }}

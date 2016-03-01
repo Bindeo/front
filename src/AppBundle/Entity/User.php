@@ -41,7 +41,33 @@ class User extends UserAbstract implements UserInterface
      */
     protected $password;
 
-    // METHODS
+
+    protected $identities;
+
+    /**
+     * @return mixed
+     */
+    public function getIdentities()
+    {
+        return $this->identities;
+    }
+
+    /**
+     * @param mixed $identities
+     *
+     * @return $this
+     */
+    public function setIdentities($identities)
+    {
+        $this->identities = $identities;
+
+        return $this;
+    }
+
+    // ENTITY METHODS
+
+
+    // SECURITY METHODS
     /**
      * Returns the roles granted to the user.
      * @return (Role|string)[] The user roles

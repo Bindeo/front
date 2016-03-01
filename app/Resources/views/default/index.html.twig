@@ -1,7 +1,4 @@
-{% extends is_granted('IS_AUTHENTICATED_REMEMBERED')
-    ? 'base-log.html.twig'
-    : 'base-nolog.html.twig'
-%}
+{% extends 'base-nolog.html.twig' %}
 
 {% block bodyclass %}{% endblock %}
 

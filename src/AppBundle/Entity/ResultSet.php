@@ -38,6 +38,17 @@ class ResultSet
                 $object = new User((array)$data->attributes);
                 $res = [$object->getIdUser(), $object];
                 break;
+            case 'user_identity':
+                // Fill the entity class
+                if (!$this->entity) {
+                    $this->entity = 'AppBundle\Entity\UserIdentity';
+                } elseif ($this->entity != 'AppBundle\Entity\UserIdentity') {
+                    throw new HttpException(500);
+                }
+
+                $object = new UserIdentity((array)$data->attributes);
+                $res = [$object->getIdIdentity(), $object];
+                break;
             case 'files':
                 // Fill the entity class
                 if (!$this->entity) {

@@ -1,31 +1,18 @@
-<!DOCTYPE html>
-<html lang="en"><head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>{% block title %}{% trans %}Bindeo: Protect your intellectual property{% endtrans %}{% endblock %}</title>
-
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="{{ asset('libs/bootstrap_3.3.6/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('libs/bootstrap_3.3.6/css/bootstrap-theme.min.css') }}">
-
-    {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-    {% endblock %}
-
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-</head>
-<body{% block bodyclass %} class="body-user"{% endblock %}>
+{% extends 'base.html.twig' %}
+{% block bodyclass %} class="body-user"{% endblock %}
 {% block navbar %}
 <!-- Collect the nav links, forms, and other content for toggling -->
 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav navbar-right">
-
-        <li class="active"><a href="{{ path('file_library') }}">Library</a></li>
-        <li><a href="#">Emails</a></li>
-        <li><a href="{{ path('file_upload') }}">Upload</a></li>
-
+        <li {% if app.request.get('_route') == 'file_library' %}class="active"{% endif %}>
+            <a href="{{ path('file_library') }}">Library</a>
+        </li>
+        <li {% if app.request.get('_route') == 'emails' %}class="active"{% endif %}>
+            <a href="#">Emails</a>
+        </li>
+        <li {% if app.request.get('_route') == 'file_upload' %}class="active"{% endif %}>
+            <a href="{{ path('file_upload') }}">Upload</a>
+        </li>
         <li class="dropdown hidden-xs">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ app.user.name }} <span class="caret"></span></a>
             <ul class="dropdown-menu">
@@ -34,25 +21,9 @@
                 <li><a href="{{ path('logout') }}">{% trans %}Logout{% endtrans %}</a></li>
             </ul>
         </li>
-
         <li class="visible-xs"><a href="{{ path('edit_profile') }}">{% trans %}Profile{% endtrans %}</a></li>
         <li class="visible-xs"><a href="{{ path('logout') }}">{% trans %}Logout{% endtrans %}</a></li>
-
     </ul>
 </div>
 <!-- /.navbar-collapse -->
 {% endblock %}
-{% block body %}{% endblock %}
-{% block footer %}{% endblock %}
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <script src="{{ asset('libs/jquery_2.2.0/jquery.min.js') }}"></script>
-    <script src="{{ asset('libs/bootstrap_3.3.6/js/bootstrap.min.js') }}"></script>
-{% block javascripts %}{% endblock %}
-</body>
-</html>

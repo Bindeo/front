@@ -43,6 +43,7 @@ security:
     # Secured sections
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/ajax/private, roles: ROLE_USER }
         - { path: ^/user/profile, roles: ROLE_USER }
         - { path: ^/data/upload, roles: ROLE_USER }
         - { path: ^/data/library, roles: ROLE_USER }

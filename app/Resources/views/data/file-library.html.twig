@@ -1,0 +1,406 @@
+{% extends 'base-log.html.twig' %}
+
+{% block title %}
+    {% trans %}Modify your profile data{% endtrans %}
+{% endblock %}
+
+{% block body %}
+<section class="hidden-xs">
+    <div class="container">
+        <!-- Object: Drag -->
+        <div class="drag">
+            <div class="file">
+                <h1 class="hidden-xs">Drag &amp; drop you file here</h1>
+                <div class="btn btn-default btn-file">
+                    <span class="visible-xs">Upload file or take a photo</span> <span class="hidden-xs">Upload any file</span> <input type="file">
+                </div>
+                <div class="sync">
+                    <p>Also, you can import from:</p>
+                    <div>
+                        <a href="#"><img src="{{ asset('images/icons/sync_dropbox.png') }}" class="img-responsive"></a>
+                        <a href="#"><img src="{{ asset('/images/icons/sync_goolge_drive.png') }}" class="img-responsive"></a>
+                        <a href="#"><img src="{{ asset('/images/icons/sync_onedrive.png') }}" class="img-responsive"></a>
+                        <a href="#"><img src="{{ asset('/images/icons/sync_ftp.png') }}" class="img-responsive"></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- //Drag -->
+    </div>
+</section>
+<section class="">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-3 col-tools">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-12 tools-path">
+                        <div class="dropdown dropdown-path">
+                            <a class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> Folder <span class="caret"></span> </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li class="active"><a href="#"><span class="glyphicon glyphicon-list"></span> All items</a>
+                                </li>
+                                <li><a href="#"><span class="glyphicon glyphicon-certificate"></span> Notarized</a></li>
+                                <li><a href="#"><span class="glyphicon glyphicon-pencil"></span> Getting certificate</a>
+                                </li>
+                                <li><a href="#"><span class="glyphicon glyphicon-time"></span> Recent</a></li>
+                                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Shared</a></li>
+                                <li><a href="#"><span class="glyphicon glyphicon-eye-open"></span> Public</a></li>
+                                <li><a href="#"><span class="glyphicon glyphicon-trash"></span> Trash</a></li>
+                                <li><a href="#"><span class="glyphicon glyphicon-remove"></span> Deleted</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-12 tools-size">
+                        <div class="visible-xs">
+                            0.80 GB free
+                        </div>
+                        <div class="hidden-xs">
+                            0.02 GB of 1 GB used
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="list col-xs-12 col-sm-9">
+                <ul class="list-unstyled">
+                    <li class="item-search">
+                        <div>
+                            <div class="item-icon hidden-xs col-sm-1">
+                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                            </div>
+                            <div class="item-name col-xs-8 col-sm-9">
+                                <input type="text" class="form-control" placeholder="Search by name or filename...">
+                            </div>
+                            <div class="item-opts col-xs-2 col-sm-1 col-button">
+                                <div class="btn-group">
+                                    <a href="#" class=" dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <span class="glyphicon glyphicon-filter"></span></a>
+                                    <ul class="dropdown-menu dropdown-menu-right">
+                                        <li class="dropdown-header">Filtrar</li>
+                                        <li><a href="#">All</a></li>
+                                        <li><a href="#">PDF</a></li>
+                                        <li><a href="#">Text documents</a></li>
+                                        <li><a href="#">Spreadsheets</a></li>
+                                        <li><a href="#">Photos &amp; images</a></li>
+                                        <li><a href="#">Presentations</a></li>
+                                        <li class="active"><a href="#">Music</a></li>
+                                        <li><a href="#">Video</a></li>
+                                        <li><a href="#">Source code</a></li>
+                                        <li><a href="#">Others</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="item-opts col-xs-2 col-sm-1 col-button">
+                                <div class="btn-group">
+                                    <a href="#" class=" dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <span class="glyphicon glyphicon-sort"></span></a>
+                                    <ul class="dropdown-menu dropdown-menu-right">
+                                        <li class="dropdown-header">Mostrar primero</li>
+                                        <li class="active"><a href="#">Más nuevos</a></li>
+                                        <li><a href="#">Más antiguos</a></li>
+                                        <li><a href="#">A-Z</a></li>
+                                        <li><a href="#">Z-A</a></li>
+                                        <li><a href="#">Menor tamaño</a></li>
+                                        <li><a href="#">Mayor tamaño</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="list-unstyled">
+
+                    <li class="item-load">
+                        <div>
+                            <div class="item-icon hidden-xs col-sm-1">
+                                <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+                            </div>
+                            <div class="item-name col-xs-10 col-sm-10">
+                                <a href="#">Filename without extension <span class="hidden-xs">1 min</span></a>
+                            </div>
+                            <div class="item-opts col-xs-2 col-sm-1">
+                                <div class="btn-group">
+                                    <a href="#" class=" dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <span class="glyphicon glyphicon-option-vertical"></span></a>
+                                    <ul class="dropdown-menu dropdown-menu-right">
+                                        <li><a href="#">Send by email</a></li>
+                                        <li><a href="#">Share link</a></li>
+                                        <li><a href="#">Public page</a></li>
+                                        <li><a href="#">Download certificate</a></li>
+                                        <li><a href="#">Download</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="#">Transfer ownership</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="#">Delete</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="">
+                        <div>
+                            <div class="item-icon hidden-xs col-sm-1">
+                                <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+                            </div>
+                            <div class="item-name col-xs-10 col-sm-10">
+                                <a href="#">Filename without extension <span class="hidden-xs">1 min</span></a>
+                            </div>
+                            <div class="item-opts col-xs-2 col-sm-1">
+                                <div class="btn-group">
+                                    <a href="#" class=" dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <span class="glyphicon glyphicon-option-vertical"></span></a>
+                                    <ul class="dropdown-menu dropdown-menu-right">
+                                        <li><a href="#">Editar</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="#">Compartir</a></li>
+                                        <li><a href="#">Obtener enlace</a></li>
+                                        <li><a href="#">Descargar certificado</a></li>
+                                        <li><a href="#">Descargar</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="#">Crear contrato</a></li>
+                                        <li><a href="#">Transferir propiedad</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="#">Eliminar</a></li>
+                                        <li><a href="#">Información</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="">
+                        <div>
+                            <div class="item-icon hidden-xs col-sm-1">
+                                <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+                            </div>
+                            <div class="item-name col-xs-10 col-sm-10">
+                                <a href="#">Filename without extension <span class="hidden-xs">1 min</span></a>
+                            </div>
+                            <div class="item-opts col-xs-2 col-sm-1">
+                                <div class="btn-group">
+                                    <a href="#" class=" dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <span class="glyphicon glyphicon-option-vertical"></span></a>
+                                    <ul class="dropdown-menu dropdown-menu-right">
+                                        <li><a href="#">Editar</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="#">Compartir</a></li>
+                                        <li><a href="#">Obtener enlace</a></li>
+                                        <li><a href="#">Descargar certificado</a></li>
+                                        <li><a href="#">Descargar</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="#">Crear contrato</a></li>
+                                        <li><a href="#">Transferir propiedad</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="#">Eliminar</a></li>
+                                        <li><a href="#">Información</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="">
+                            <div class="item-icon hidden-xs col-sm-1">
+                                <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                            </div>
+                            <div class="item-name col-xs-10 col-sm-10">
+                                <a href="#">Filename without extension</a>
+                            </div>
+                            <div class="item-opts col-xs-2 col-sm-1">
+
+                                <div class="btn-group">
+                                    <a href="#" class=" dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <span class="glyphicon glyphicon-option-vertical"></span></a>
+                                    <ul class="dropdown-menu dropdown-menu-right">
+                                        <li><a href="#">Action</a></li>
+                                        <li><a href="#">Another action</a></li>
+                                        <li><a href="#">Something else here</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="#">Separated link</a></li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="">
+                            <div class="item-icon hidden-xs col-sm-1">
+                                <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+                            </div>
+                            <div class="item-name col-xs-10 col-sm-10">
+                                <a href="#">Filename without extension</a>
+                            </div>
+                            <div class="item-opts col-xs-2 col-sm-1">
+
+                                <div class="btn-group">
+                                    <a href="#" class=" dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <span class="glyphicon glyphicon-option-vertical"></span></a>
+                                    <ul class="dropdown-menu dropdown-menu-right">
+                                        <li><a href="#">Action</a></li>
+                                        <li><a href="#">Another action</a></li>
+                                        <li><a href="#">Something else here</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="#">Separated link</a></li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+                    </li>
+                    <li class="">
+
+                        <div class="">
+                            Modals launcher:
+                            <ul>
+                                <li><a href="#" data-toggle="modal" data-target="#modal-delete">Delete</a></li>
+                                <li><a href="#" data-toggle="modal" data-target="#modal-send">Send by email</a></li>
+                                <li><a href="#" data-toggle="modal" data-target="#modal-share">Share</a></li>
+                                <li><a href="#" data-toggle="modal" data-target="#modal-public">Public page</a></li>
+                            </ul>
+                        </div>
+
+                    </li>
+                    <li class="item-empty">
+                        <h3>No files found</h3>
+                        <p>Nothing found with this criteria</p>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</section>
+<div class="shortcut visible-xs">
+    <div>
+        <a href="#"> <span class="glyphicon glyphicon-plus"></span> </a>
+    </div>
+</div>
+<div class="drop">
+    <div>
+        <div id="drop-area">
+            Drop your file...
+        </div>
+    </div>
+</div>
+<section class="">
+    <div class="modal fade" tabindex="-1" role="dialog" id="modal-delete">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <div class="modal-header">
+                    <h4 class="modal-title">Delete file</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Se dispone a enviar el fichero a la papelera.</p>
+                    <p>Recuerde que el certificado seguirá siendo válido y que para que le sea útil, debe conservar una
+                        copia del fichero original.</p>
+
+                    <div class="checkbox">
+                        <label> <input type="checkbox"> Eliminar permanentemente</label>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Yes, delete</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="modal-send">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <div class="modal-header">
+                    <h4 class="modal-title">Send by email</h4>
+                </div>
+                <div class="modal-body">
+                    <p>This file is notarized and it's safe to share by email.</p>
+                    <div class="share-send forms">
+                        <form class="labels-no">
+                            <div class="form-group has-error has-feedback">
+                                <label for="field-email" class="control-label">Email Address</label> <input class="form-control" id="field-email" type="email" placeholder="Email address"> <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                <span class="help-block">Introduce una dirección de correo válida</span>
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control" id="field-message" rows="3" placeholder="Message (optional)"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <div class="checkbox">
+                                    <label> <input type="checkbox"> Require this user to login</label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Send</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="modal-share">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <div class="modal-header">
+                    <h4 class="modal-title">Share</h4>
+                </div>
+                <div class="modal-body">
+                    <p>This file is notarized and it's safe to share, copy the following link and share it.</p>
+                    <div class="share-link forms">
+                        <form>
+                            <div class="form-group">
+                                <input class="form-control cursor-copy" id="" type="text" placeholder="" value="https://www.bindeo.com/asset/v38fj" disabled="">
+                            </div>
+                            <div class="form-group">
+                                <div class="checkbox">
+                                    <label> <input type="checkbox"> Always require viewers to login</label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-link">Open link</button>
+                    <button type="button" class="btn btn-primary">Done</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="modal-public">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <div class="modal-header">
+                    <h4 class="modal-title">Public page</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Allow any user to access your file.</p>
+
+                    <div class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-default active"> <input type="radio" name="options" id="option1" autocomplete="off" checked=""> Disabled </label>
+                        <label class="btn btn-default"> <input type="radio" name="options" id="option2" autocomplete="off"> Enabled </label>
+                    </div>
+                    <div class="forms">
+                        <form>
+                            <div class="form-group">
+                                <input class="form-control cursor-copy" id="field-url" type="text" placeholder="" value="https://www.bindeo.com/asset/v38fj" disabled="">
+                            </div>
+                            <!--
+                            <div class="form-group">
+                                <div class="checkbox">
+                                    <label> <input type="checkbox"> Always require viewers to login</label>
+                                </div>
+                            </div>
+                            -->
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-link">Open page</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+</section>
+{% endblock %}

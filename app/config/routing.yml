@@ -27,8 +27,13 @@ validate_token:
 
 file_library:
     path: /data/library
-    defaults: { _controller: AppBundle:Data:uploadFile }
+    defaults: { _controller: AppBundle:Data:fileLibrary }
 
 file_upload:
     path: /data/upload
     defaults: { _controller: AppBundle:Data:uploadFile }
+
+# Private ajax calls
+ajax_file_upload:
+    path: /ajax/private/upload-file
+    defaults: { _controller: AppBundle:Data:ajaxUploadFile }
