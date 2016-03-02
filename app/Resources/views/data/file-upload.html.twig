@@ -5,14 +5,14 @@
 {% endblock %}
 
 {% block body %}
-<section class="">
+<section data-type="main" class="">
     <div class="container">
 
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
                 <!-- Object: Drag -->
                 <div class="drag" data-action="fileupload" data-name="upload_file" data-url="{{ path('ajax_file_upload') }}"
-                     data-maxfilesize="{{ filesize * 1024 }}">
+                     data-maxfilesize="{{ filesize * 1024 }}" data-freespace="{{ freespace * 1024 }}">
                     <div class="file">
                         <h1 class="hidden-xs">{% trans %}Drag & drop you file here{% endtrans %}</h1>
                         <div class="btn btn-default btn-file">
@@ -49,7 +49,14 @@
                 </div>
                 <div data-type="error-size" class="alert alert-danger collapse">
                     <ul class="list-unstyled">
-                        <li><span class="glyphicon glyphicon-exclamation-sign"></span> {% trans %}Ops!{% endtrans %} {% trans with {'%size%': filesize} %}You exceeded your max file size of %size% KB{% endtrans %}.</li>
+                        <li class="collapse" data-name="filesize">
+                            <span class="glyphicon glyphicon-exclamation-sign"></span>
+                            {% trans %}Ops!{% endtrans %} {% trans with {'%size%': filesize} %}You exceeded your max file size of %size% KB{% endtrans %}.
+                        </li>
+                        <li class="collapse" data-name="freespace">
+                            <span class="glyphicon glyphicon-exclamation-sign"></span>
+                            {% trans %}Ops!{% endtrans %} {% trans with {'%size%': (freespace/1000)|round(2, 'floor')} %}You only have %size% MB or free space{% endtrans %}.
+                        </li>
                     </ul>
                 </div>
                 <div class="forms collapse" id="upload_file">

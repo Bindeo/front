@@ -49,8 +49,13 @@ services:
     # Forms
     app.form.type.uploadfile:
         class: AppBundle\Form\Type\UploadFileType
-        arguments:
-            - '@session'
-            - '@app.master_data'
+        arguments: ['@session', '@app.master_data']
         tags:
             - { name: form.type }
+
+    # Models
+    app.model.data:
+        class: AppBundle\Model\DataModel
+        arguments: ['@app.master_data', '@app.api_connection', '@security.token_storage', '%files%']
+        tags:
+            - { name: app.model }

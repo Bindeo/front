@@ -9,6 +9,7 @@ use AppBundle\Form\Type\UploadFileType;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -35,13 +36,11 @@ class DataController extends Controller
      */
     public function uploadFileAction(Request $request)
     {
-        // Initialize the file object
-        $file = new File();
-
         // Logged user
         /** @var User $user */
         $user = $this->getUser();
-        $file->setUser($user);
+        // Initialize the file object
+        $file = (new File())->setUser($user);
 
         // Create form
         $user->setIdentities($this->get('app.api_connection')
@@ -49,13 +48,41 @@ class DataController extends Controller
                                   ->getRows());
         $form = $this->createForm(UploadFileType::class, $file);
 
+        // Check the form
         $form->handleRequest($request);
-
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                return new JsonResponse(['result' => ['success' => true]]);
+                // Successful upload
+                $request->getSession()->set('fileupload', 'ok');
+                $res = $this->get('app.model.data')->uploadFile($file->setIdUser($user->getIdUser())
+                                                                     ->setIp($request->getClientIp()));
+
+                // Check if the file has been properly uploaded and signed
+                if ($res->getError()) {
+                    if($res->getError()['code'] == 409) {
+                        $error = $this->get('translator')->trans('You have already uploaded the same file');
+                    } else {
+                        $error = $this->get('translator')->trans('There was a problem processing the file');
+                    }
+                    $form->addError(new FormError($error));
+
+                    return new JsonResponse([
+                        'result' => [
+                            'success' => false,
+                            'form'    => $this->renderView('data/partials/file-upload-form.html.twig',
+                                ['form' => $form->createView()])
+                        ]
+                    ]);
+                } else {
+                    return new JsonResponse([
+                        'result' => [
+                            'success'  => true,
+                            'html'     => $this->renderView('data/partials/file-upload-ok.html.twig')
+                        ]
+                    ]);
+                }
             } else {
-                if ($form->getErrors() and !$file->getPath()) {
+                if ($form->getErrors() and (!$file->getPath() or !$file->getFileOrigName())) {
                     $form->addError(new FormError($this->get('translator')->trans('You have to upload a file')));
                 }
 
@@ -73,8 +100,11 @@ class DataController extends Controller
         /** @var AccountType $type */
         $type = $this->get('app.master_data')->createAccountType($request->getLocale())->getRows()[$user->getType()];
 
-        return $this->render('data/file-upload.html.twig',
-            ['form' => $form->createView(), 'filesize' => $type->getMaxFilesize()]);
+        return $this->render('data/file-upload.html.twig', [
+            'form'      => $form->createView(),
+            'filesize'  => $type->getMaxFilesize(),
+            'freespace' => $user->getStorageLeft()
+        ]);
     }
 
     /**
@@ -91,9 +121,14 @@ class DataController extends Controller
         if (!$file) {
             return new JsonResponse(['success' => false, 'name' => 'upload_file']);
         } else {
-            $newFile = $file->move($this->getParameter('files_tmp_folder'));
+            // Process data
+            /** @var File $newFile */
+            $newFile = $this->get('app.model.data')->ajaxUploadFile($file);
+            if (!($newFile instanceof File)) {
+                return new JsonResponse(['success' => false, 'name' => 'upload_file', 'error' => $newFile]);
+            }
 
-            $size = $file->getClientSize();
+            $size = $newFile->getSize();
             if ($size > 1000000) {
                 $size = round($size / 1000000, 2) . ' MB';
             } else {
@@ -103,10 +138,35 @@ class DataController extends Controller
             return new JsonResponse([
                 'success' => true,
                 'name'    => 'upload_file',
-                'path'    => $newFile->getRealPath(),
+                'path'    => $newFile->getPath(),
                 'html'    => $this->renderView('data/partials/file-uploaded.html.twig',
-                    ['name' => $file->getClientOriginalName(), 'size' => $size])
+                    ['name' => $newFile->getFileOrigName(), 'size' => $size])
             ]);
+        }
+    }
+
+    /**
+     * @Route("/data/upload/result", name="file_upload_res")
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function uploadFileResultAction(Request $request)
+    {
+        if (!$request->getSession()->has('fileupload')) {
+            // Invalid access
+            return new RedirectResponse('/');
+        } elseif ($request->getSession()->get('fileupload') == 'ok') {
+            // Correct upload
+            $request->getSession()->remove('fileupload');
+
+            return $this->render('data/file-upload-ok.html.twig');
+        } else {
+            // Validate email
+            $request->getSession()->remove('fileupload');
+
+            return $this->render('data/file-upload-preok.html.twig',
+                ['email' => $request->getSession()->get('fileupload')]);
         }
     }
 }

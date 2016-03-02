@@ -24,6 +24,11 @@ class File extends FileAbstract
     protected $path;
 
     /**
+     * @Assert\NotBlank(groups={"upload-file"})
+     */
+    protected $fileOrigName;
+
+    /**
      * @var User
      */
     protected $user;

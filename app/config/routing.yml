@@ -33,6 +33,10 @@ file_upload:
     path: /data/upload
     defaults: { _controller: AppBundle:Data:uploadFile }
 
+file_upload_res:
+    path: /data/upload/result
+    defaults: { _controller: AppBundle:Data:uploadFileResult }
+
 # Private ajax calls
 ajax_file_upload:
     path: /ajax/private/upload-file

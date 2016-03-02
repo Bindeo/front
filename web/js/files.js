@@ -15,6 +15,7 @@ var files = (function() {
         $.subscribe('add.files', function(event, name, data) {
             $('.alert').hide();
             $('#' + name + '_name').val(data.originalFiles[0].name);
+            $('#' + name + '_fileOrigName').val(data.originalFiles[0].name);
             $('#' + name).show();
             $('#' + name + '_done').html('');
         });
@@ -34,11 +35,34 @@ var files = (function() {
             $('.load:visible').hide();
 
             if(result.success == true) {
-                $('form[name="' + result.name + '"]').find('input[name="' + result.name + '[path]"]').val(result.path);
+                $('#' + result.name + '_path').val(result.path);
                 $('#' + result.name + '_done').replaceWith(result.html);
             } else {
-                $('form[name="' + result.name + '"]').find('[data-type="error"]').slideDown();
+                $('#' + result.name).hide();
+                $('#' + result.name + '_path').val('');
+                $('#' + result.name + '_fileOrigName').val('');
+                $('#' + result.name + '_done').html('');
+                $.publish('errors.files', [result.name, result.error]);
             }
+        });
+
+        /**
+         * Manage fileupload error layer
+         */
+        $.subscribe('errors.files', function(event, name, type) {
+            var errordiv = $('[data-action="fileupload"][data-name="' + name + '"]').parent().find('[data-type="error-size"]');
+            errordiv.find('li').hide();
+
+            if(type == 'freespace') {
+                errordiv.find('li[data-name="freespace"]').show();
+                errordiv.slideDown();
+            } else if(type == 'filesize') {
+                errordiv.find('li[data-name="filesize"]').show();
+                errordiv.slideDown();
+            } else {
+                errordiv.hide();
+            }
+
         });
     };
 
@@ -73,11 +97,23 @@ var files = (function() {
                     var filesize = obj.attr('data-maxfilesize');
                     if(filesize > 0 && data.files[0].size > filesize) {
                         data.abort();
-                        obj.parent().find('[data-type="error-size"]').slideDown();
-                    } else {
-                        $.publish('add.files', [obj.attr('data-name'), data]);
-                        data.submit();
+                        $.publish('errors.files', [obj.attr('data-name'), 'filesize']);
+                        return false;
                     }
+
+                    // Check free storage left
+                    var freespace = obj.attr('data-freespace');
+                    if(freespace > 0 && data.files[0].size > freespace) {
+                        data.abort();
+                        $.publish('errors.files', [obj.attr('data-name'), 'freespace']);
+                        return false;
+                    }
+
+                    // No errors
+                    $.publish('errors.files', [obj.attr('data-name')]);
+                    $.publish('add.files', [obj.attr('data-name'), data]);
+                    data.submit();
+
                     return false;
                 },
                 start            : function(e, data) {

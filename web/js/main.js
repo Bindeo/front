@@ -85,6 +85,15 @@ var main = (function() {
                 // Process the response
                 if(response.result.success) {
                     // Successful
+                    if(response.result.redirect) {
+                        // Redirect
+                        window.location.href = response.result.redirect;
+                    } else if(response.result.message) {
+                        // General notification message
+                        $.publish('main.notifications', [true, response.result.message]);
+                    } else if(response.result.html) {
+                        $('section[data-type="main"]').replaceWith(response.result.html);
+                    }
                 } else {
                     // Errors
                     form.replaceWith(response.result.form);

@@ -10,4 +10,5 @@ parameters:
     # A secret key that's used to generate certain security-related tokens
     secret:            174a2b95bb27a46f8bc1e09179b2734c54c2837e
 
-    files_tmp_folder: ~
+    files:
+        files_tmp_folder: ~
