@@ -60,6 +60,17 @@ class ResultSet
                 $object = new File((array)$data->attributes);
                 $res = [$object->getIdFile(), $object];
                 break;
+            case 'blockchain':
+                // Fill the entity class
+                if (!$this->entity) {
+                    $this->entity = 'AppBundle\Entity\BlockChain';
+                } elseif ($this->entity != 'AppBundle\Entity\BlockChain') {
+                    throw new HttpException(500);
+                }
+
+                $object = new BlockChain((array)$data->attributes);
+                $res = [$object->getTransaction(), $object];
+                break;
             case 'account_type':
                 // Fill the entity class
                 if (!$this->entity) {

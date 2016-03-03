@@ -87,15 +87,14 @@ class DataModel
      */
     public function uploadFile(File $file)
     {
-        $file->setUser(null);
-
         // Save the file against the API
         $res = $this->api->postJson('file', $file->toArray());
         if ($res->getError()) {
             return $res;
         }
 
-        //TODO Sign the file
+        // Sign the file
+        $res = $this->api->putJson('blockchain', $res->getRows()[0]->setIp($file->getIp())->toArray());
 
         return $res;
     }
