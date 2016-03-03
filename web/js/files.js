@@ -3,6 +3,7 @@ var files = (function() {
         // Setup the fileupload object
         fileUpload();
         $('body').on('click', '[data-action="remove-uploaded-file"]', removeUploadedFile);
+        $('body').on('change', '#pre_upload_email', showPassword);
     };
 
     /**
@@ -146,6 +147,10 @@ var files = (function() {
         $('form[name="' + name + '"]').find('input[name="' + name + '[path]"]').val('');
 
         return false;
+    };
+
+    var showPassword = function() {
+        $(this).parents('form').find('input[type="password"]:hidden')/*.attr('required', 'required')*/.parent().show();
     };
 
     // Public methods

@@ -16,9 +16,9 @@ class User extends UserAbstract implements UserInterface
 
     // Set mandatory fields for forms
     /**
-     * @Assert\NotBlank(groups={"registration", "login"})
+     * @Assert\NotBlank(groups={"registration", "login", "pre-upload"})
      * @Assert\Email(
-     *     groups={"registration"},
+     *     groups={"registration", "pre-upload"},
      *     strict = true,
      *     checkMX = true
      * )
@@ -29,20 +29,41 @@ class User extends UserAbstract implements UserInterface
      */
     protected $email;
 
+    protected $oldEmail;
+
     /**
-     * @Assert\NotBlank(groups={"registration", "edit-profile"})
+     * @Assert\NotBlank(groups={"registration", "edit-profile", "pre-upload"})
      * @Assert\Length(max=256)
      */
     protected $name;
 
     /**
-     * @Assert\NotBlank(groups={"registration", "login"})
-     * @Assert\Length(min=6, max=4096, groups={"registration", "login"})
+     * @Assert\NotBlank(groups={"registration", "login", "change-email"})
+     * @Assert\Length(min=6, max=4096, groups={"registration", "login", "change-email"})
      */
     protected $password;
 
-
     protected $identities;
+
+    /**
+     * @return mixed
+     */
+    public function getOldEmail()
+    {
+        return $this->oldEmail;
+    }
+
+    /**
+     * @param mixed $oldEmail
+     *
+     * @return $this
+     */
+    public function setOldEmail($oldEmail)
+    {
+        $this->oldEmail = $oldEmail;
+
+        return $this;
+    }
 
     /**
      * @return mixed
@@ -65,7 +86,6 @@ class User extends UserAbstract implements UserInterface
     }
 
     // ENTITY METHODS
-
 
     // SECURITY METHODS
     /**

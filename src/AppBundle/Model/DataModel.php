@@ -5,8 +5,10 @@ namespace AppBundle\Model;
 use AppBundle\Entity\AccountType;
 use AppBundle\Entity\File;
 use AppBundle\Entity\User;
+use Bindeo\DataModel\Exceptions;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Translation\DataCollectorTranslator;
 
 class DataModel
 {
@@ -14,25 +16,29 @@ class DataModel
     private $api;
     /** @var User $user */
     private $user;
+    private $translator;
     private $filesConf;
 
     /**
      * DataModel constructor.
      *
-     * @param MasterDataFactory     $masterData
-     * @param ApiConnection         $api
-     * @param TokenStorageInterface $tokenStorage
-     * @param string                $filesConf
+     * @param MasterDataFactory       $masterData
+     * @param ApiConnection           $api
+     * @param TokenStorageInterface   $tokenStorage
+     * @param DataCollectorTranslator $translator
+     * @param string                  $filesConf
      */
     public function __construct(
         MasterDataFactory $masterData,
         ApiConnection $api,
         TokenStorageInterface $tokenStorage,
+        DataCollectorTranslator $translator,
         $filesConf
     ) {
         $this->masterData = $masterData;
         $this->api = $api;
         $this->user = $tokenStorage->getToken()->getUser();
+        $this->translator = $translator;
         $this->filesConf = $filesConf;
     }
 
@@ -85,10 +91,58 @@ class DataModel
 
         // Save the file against the API
         $res = $this->api->postJson('file', $file->toArray());
-        if($res->getError()) {
+        if ($res->getError()) {
             return $res;
         }
 
+        //TODO Sign the file
+
         return $res;
+    }
+
+    /**
+     * Change the necessary user data
+     *
+     * @param User $user
+     * @param User $newUser
+     * @return array
+     */
+    public function unconfirmedUpload(User $user, User $newUser)
+    {
+        // User has changed his email
+        if ($newUser->getEmail() != $newUser->getOldEmail()) {
+            // Change the email against the api
+            $res = $this->api->putJson('account_email', $newUser->toArray());
+
+            // Check errors
+            if ($res->getError()) {
+                if ($res->getError()['message'] == Exceptions::INCORRECT_PASSWORD) {
+                    return ['error' => ['password', $this->translator->trans('Your password is not correct')]];
+                } elseif ($res->getError()['message'] == Exceptions::DUPLICATED_KEY) {
+                    return ['error' => ['email', $this->translator->trans('The email is already used')]];
+                } else {
+                    return ['error' => ['', $this->translator->trans('There was a problem with your request, please try it later')]];
+                }
+            }
+        } else {
+            // Resend the validation token
+            $this->api->getJson('account_token', $newUser->toArray());
+        }
+
+        // User has changed his name
+        if ($newUser->getName() != $user->getName()) {
+            // Change the name against the api
+            $res = $this->api->putJson('account', $newUser->toArray());
+
+            // Check errors
+            if ($res->getError()) {
+                return ['error' => ['', $this->translator->trans('There was a problem with your request, please try it later')]];
+            }
+
+            // Set the new name in the logged user
+            $user->setName($newUser->getName());
+        }
+
+        return ['success' => true];
     }
 }

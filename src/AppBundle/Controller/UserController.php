@@ -194,7 +194,7 @@ class UserController extends Controller
             $success = true;
             // If the user is logged, update the entity
             if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-                $this->getUser()->setConfirmed(1);
+                $this->getUser()->setConfirmed(1)->setEmail($result->getRows()[0]->getEmail());
             }
         }
 

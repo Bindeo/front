@@ -56,6 +56,6 @@ services:
     # Models
     app.model.data:
         class: AppBundle\Model\DataModel
-        arguments: ['@app.master_data', '@app.api_connection', '@security.token_storage', '%files%']
+        arguments: ['@app.master_data', '@app.api_connection', '@security.token_storage', '@translator', '%files%']
         tags:
             - { name: app.model }

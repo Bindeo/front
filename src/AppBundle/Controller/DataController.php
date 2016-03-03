@@ -5,7 +5,9 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\AccountType;
 use AppBundle\Entity\File;
 use AppBundle\Entity\User;
+use AppBundle\Form\Type\PreUploadType;
 use AppBundle\Form\Type\UploadFileType;
+use Symfony\Component\DomCrawler\Form;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -39,6 +41,23 @@ class DataController extends Controller
         // Logged user
         /** @var User $user */
         $user = $this->getUser();
+
+        $response = $user->getConfirmed() ? $this->confirmedUpload($request, $user)
+            : $this->unconfirmedUpload($request, $user);
+
+        return $response;
+    }
+
+    /**
+     * Upload page for a confirmed user
+     *
+     * @param Request $request
+     * @param User    $user
+     *
+     * @return Response
+     */
+    private function confirmedUpload(Request $request, $user)
+    {
         // Initialize the file object
         $file = (new File())->setUser($user);
 
@@ -59,7 +78,7 @@ class DataController extends Controller
 
                 // Check if the file has been properly uploaded and signed
                 if ($res->getError()) {
-                    if($res->getError()['code'] == 409) {
+                    if ($res->getError()['code'] == 409) {
                         $error = $this->get('translator')->trans('You have already uploaded the same file');
                     } else {
                         $error = $this->get('translator')->trans('There was a problem processing the file');
@@ -76,8 +95,8 @@ class DataController extends Controller
                 } else {
                     return new JsonResponse([
                         'result' => [
-                            'success'  => true,
-                            'html'     => $this->renderView('data/partials/file-upload-ok.html.twig')
+                            'success' => true,
+                            'html'    => $this->renderView('data/partials/file-upload-ok.html.twig')
                         ]
                     ]);
                 }
@@ -105,6 +124,63 @@ class DataController extends Controller
             'filesize'  => $type->getMaxFilesize(),
             'freespace' => $user->getStorageLeft()
         ]);
+    }
+
+    /**
+     * Upload page for an unconfirmed user
+     *
+     * @param Request $request
+     * @param User    $user
+     *
+     * @return Response
+     */
+    private function unconfirmedUpload(Request $request, $user)
+    {
+        $newUser = (new User())->setOldEmail($user->getEmail())
+                               ->setEmail($user->getEmail())
+                               ->setName($user->getName())
+                               ->setIdUser($user->getIdUser());
+        $form = $this->createForm(PreUploadType::class, $newUser);
+        $form->handleRequest($request);
+
+        // Form submitted
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                $newUser->setIp($request->getClientIp())->setLang($user->getLang());
+
+                // Data is valid, modify the user and send the confirm email
+                $res = $this->get('app.model.data')->unconfirmedUpload($user, $newUser);
+
+                if (isset($res['error'])) {
+                    if($res['error'][0] == '') {
+                        $form->addError(new FormError($res['error'][1]));
+                    } else {
+                        $form->get($res['error'][0])->addError(new FormError($res['error'][1]));
+                    }
+                }
+            }
+
+            // Check if the form is still valid
+            if ($form->isValid()) {
+                return new JsonResponse([
+                    'result' => [
+                        'success' => true,
+                        'html'    => $this->renderView('data/partials/file-preupload-ok.html.twig',
+                            ['email' => $newUser->getEmail()])
+                    ]
+                ]);
+            } else {
+                return new JsonResponse([
+                    'result' => [
+                        'success' => false,
+                        'form'    => $this->renderView('data/partials/file-preupload-form.html.twig',
+                            ['form' => $form->createView()])
+                    ]
+                ]);
+            }
+        }
+
+        return $this->render('data/file-preupload.html.twig', ['form' => $form->createView()]);
     }
 
     /**

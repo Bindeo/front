@@ -1,0 +1,13 @@
+{{ form_start(form, {'attr': {'data-action': 'ajax-form', 'autocomplete': 'off'}}) }}
+    {{ form_errors(form) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.email) }}
+
+<div class="form-group {% if form_errors(form.password) != '' %}has-error{% else %}collapse{% endif %}" data-id="pre_upload_password">
+    {{ form_label(form.password) }}
+    {{ form_widget(form.password) }}
+    {{ form_errors(form.password) }}
+</div>
+
+    <button type="submit" class="btn btn-default">{% trans %}Send me verification email{% endtrans %}</button>
+{{ form_end(form) }}
