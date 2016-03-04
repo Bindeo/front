@@ -104,6 +104,7 @@ class DataModel
      *
      * @param User $user
      * @param User $newUser
+     *
      * @return array
      */
     public function unconfirmedUpload(User $user, User $newUser)
@@ -120,7 +121,12 @@ class DataModel
                 } elseif ($res->getError()['message'] == Exceptions::DUPLICATED_KEY) {
                     return ['error' => ['email', $this->translator->trans('The email is already used')]];
                 } else {
-                    return ['error' => ['', $this->translator->trans('There was a problem with your request, please try it later')]];
+                    return [
+                        'error' => [
+                            '',
+                            $this->translator->trans('There was a problem with your request, please try it later')
+                        ]
+                    ];
                 }
             }
         } else {
@@ -135,7 +141,12 @@ class DataModel
 
             // Check errors
             if ($res->getError()) {
-                return ['error' => ['', $this->translator->trans('There was a problem with your request, please try it later')]];
+                return [
+                    'error' => [
+                        '',
+                        $this->translator->trans('There was a problem with your request, please try it later')
+                    ]
+                ];
             }
 
             // Set the new name in the logged user
