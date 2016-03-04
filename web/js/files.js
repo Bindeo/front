@@ -15,6 +15,7 @@ var files = (function() {
          */
         $.subscribe('add.files', function(event, name, data) {
             $('.alert').hide();
+            $('div[data-name="'+name+'"] .file').hide();
             $('#' + name + '_name').val(data.originalFiles[0].name);
             $('#' + name + '_fileOrigName').val(data.originalFiles[0].name);
             $('#' + name).show();
@@ -145,6 +146,7 @@ var files = (function() {
         $('#' + name + '_name').val('');
         $('#' + name + '_done').html('');
         $('form[name="' + name + '"]').find('input[name="' + name + '[path]"]').val('');
+        $('div[data-name="'+name+'"] .file').show();
 
         return false;
     };
