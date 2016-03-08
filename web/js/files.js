@@ -4,6 +4,15 @@ var files = (function() {
         fileUpload();
         $('body').on('click', '[data-action="remove-uploaded-file"]', removeUploadedFile);
         $('body').on('change', '#pre_upload_email', showPassword);
+        $('body').on('submit', 'form[name="upload_file"]', sendFormFile);
+        // Library
+        $('body').on('click', '[data-id="fileFilters"] ul li a', chooseFilter);
+        $('body').on('keyup', '[data-id="fileFilters"] input', function (e) {
+            if (e.keyCode == 13) {
+                chooseFilter();
+            }
+        });
+        pagination();
     };
 
     /**
@@ -15,7 +24,7 @@ var files = (function() {
          */
         $.subscribe('add.files', function(event, name, data) {
             $('.alert').hide();
-            $('div[data-name="'+name+'"] .file').hide();
+            $('div[data-name="' + name + '"] .file').hide();
             $('#' + name + '_name').val(data.originalFiles[0].name);
             $('#' + name + '_fileOrigName').val(data.originalFiles[0].name);
             $('#' + name).show();
@@ -64,7 +73,36 @@ var files = (function() {
             } else {
                 errordiv.hide();
             }
+        });
 
+        /**
+         * Manage files list filter
+         */
+        $.subscribe('listFilters.files', function(event) {
+            var params = '';
+            $('[data-id="fileFilters"] li.active').each(function() {
+                if($(this).attr('data-type') != undefined) {
+                    if(params != '') params += '&';
+                    params += $(this).attr('data-type') + '=' + $(this).attr('data-value');
+                }
+            });
+
+            // Text
+            var text = $('[data-id="fileFilters"] input[data-type="name"]');
+            if(text.val()) {
+                if(params != '') params += '&';
+                params += 'name=' + text.val();
+            }
+
+            // Ajax request to render new files list
+            $.when(main.sendRequest('/data/library', params)).done(function(response) {
+                if(response.result.success) {
+                    var fileList = $('#fileList');
+                    fileList.hide().html(response.result.html);
+                    fileList.slideDown('fast');
+                    paginator.setCurrentPage(1);
+                }
+            });
         });
     };
 
@@ -146,13 +184,69 @@ var files = (function() {
         $('#' + name + '_name').val('');
         $('#' + name + '_done').html('');
         $('form[name="' + name + '"]').find('input[name="' + name + '[path]"]').val('');
-        $('div[data-name="'+name+'"] .file').show();
+        $('div[data-name="' + name + '"] .file').show();
 
         return false;
     };
 
     var showPassword = function() {
-        $(this).parents('form').find('input[type="password"]:hidden')/*.attr('required', 'required')*/.parent().show();
+        $(this).parents('form').find('input[type="password"]:hidden').attr('required', 'required').parent().show();
+    };
+
+    /**
+     * Send fileupload form
+     * @param event
+     */
+    var sendFormFile = function(event) {
+        event.preventDefault();
+        main.sendForm($(this)).done(function(response) {
+            if (response.result.success) $.publish('listFilters.files');
+        });
+    };
+
+    /**
+     * Choose filters in library
+     */
+    var chooseFilter = function(event) {
+        var refresh = false;
+
+        if($(this)[0] == $(window)[0]) {
+            refresh = true;
+        } else {
+            event.preventDefault();
+            if(!$(this).parent().hasClass('active')) {
+                // Active the filter
+                $(this).parents('ul').find('.active').removeClass('active');
+                $(this).parent().addClass('active');
+                refresh = true;
+            }
+        }
+
+        // Publish the result
+        if(refresh) $.publish('listFilters.files');
+    };
+
+    /**
+     * Initialize paginator
+     */
+    var pagination = function() {
+        paginator.init($(window), '/data/library', function(page){
+            var params = 'page='+page;
+            $('[data-id="fileFilters"] li.active').each(function() {
+                if($(this).attr('data-type') != undefined) {
+                    params += '&'+$(this).attr('data-type') + '=' + $(this).attr('data-value');
+                }
+            });
+
+            // Text
+            var text = $('[data-id="fileFilters"] input[data-type="name"]');
+            if(text.val()) {
+                if(params != '') params += '&';
+                params += 'name=' + text.val();
+            }
+
+            return params;
+        });
     };
 
     // Public methods

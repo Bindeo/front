@@ -1,62 +1,40 @@
 {% extends 'base-log.html.twig' %}
 
 {% block title %}
-    {% trans %}Modify your profile data{% endtrans %}
+    {% trans %}File library{% endtrans %}
 {% endblock %}
 
 {% block body %}
-<section class="hidden-xs">
+<section data-type="main" class="hidden-xs">
     <div class="container">
-        <!-- Object: Drag -->
-        <div class="drag">
-            <div class="file">
-                <h1 class="hidden-xs">Drag &amp; drop you file here</h1>
-                <div class="btn btn-default btn-file">
-                    <span class="visible-xs">Upload file or take a photo</span> <span class="hidden-xs">Upload any file</span> <input type="file">
-                </div>
-                <div class="sync">
-                    <p>Also, you can import from:</p>
-                    <div>
-                        <a href="#"><img src="{{ asset('images/icons/sync_dropbox.png') }}" class="img-responsive"></a>
-                        <a href="#"><img src="{{ asset('/images/icons/sync_goolge_drive.png') }}" class="img-responsive"></a>
-                        <a href="#"><img src="{{ asset('/images/icons/sync_onedrive.png') }}" class="img-responsive"></a>
-                        <a href="#"><img src="{{ asset('/images/icons/sync_ftp.png') }}" class="img-responsive"></a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        <!-- //Drag -->
+        {{ drag|raw }}
     </div>
 </section>
+
 <section class="">
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-sm-3 col-tools">
-                <div class="row">
+                <div data-id="fileFilters" class="row">
                     <div class="col-xs-6 col-sm-12 tools-path">
                         <div class="dropdown dropdown-path">
                             <a class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> Folder <span class="caret"></span> </a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                <li class="active"><a href="#"><span class="glyphicon glyphicon-list"></span> All items</a>
-                                </li>
-                                <li><a href="#"><span class="glyphicon glyphicon-certificate"></span> Notarized</a></li>
-                                <li><a href="#"><span class="glyphicon glyphicon-pencil"></span> Getting certificate</a>
-                                </li>
-                                <li><a href="#"><span class="glyphicon glyphicon-time"></span> Recent</a></li>
-                                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Shared</a></li>
-                                <li><a href="#"><span class="glyphicon glyphicon-eye-open"></span> Public</a></li>
-                                <li><a href="#"><span class="glyphicon glyphicon-trash"></span> Trash</a></li>
-                                <li><a href="#"><span class="glyphicon glyphicon-remove"></span> Deleted</a></li>
+                                <li class="active"><a href="#"><span class="glyphicon glyphicon-list"></span> {% trans %}All items{% endtrans %}</a></li>
+                                <li data-type="special" data-value="1"><a href="#"><span class="glyphicon glyphicon-certificate"></span> {% trans %}Notarized{% endtrans %}</a></li>
+                                <li data-type="special" data-value="2"><a href="#"><span class="glyphicon glyphicon-pencil"></span> {% trans %}Getting certificate{% endtrans %}</a></li>
+                                {#<li><a href="#"><span class="glyphicon glyphicon-user"></span> {% trans %}Shared{% endtrans %}</a></li>#}
+                                <li data-type="status" data-value="T"><a href="#"><span class="glyphicon glyphicon-trash"></span> {% trans %}Trash{% endtrans %}</a></li>
+                                <li data-type="status" data-value="D"><a href="#"><span class="glyphicon glyphicon-remove"></span> {% trans %}Deleted{% endtrans %}</a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-xs-6 col-sm-12 tools-size">
                         <div class="visible-xs">
-                            0.80 GB free
+                            {% trans with {'%space%': '<span id="freespace">'~freespace~'</span>'} %}%space% GB free{% endtrans %}
                         </div>
                         <div class="hidden-xs">
-                            0.02 GB of 1 GB used
+                            {% trans with {'%space%': '<span id="usedspace">'~used~'</span>', '%total%': total} %}%space% GB of %total% GB used{% endtrans %}
                         </div>
                     </div>
                 </div>
@@ -64,29 +42,23 @@
 
             <div class="list col-xs-12 col-sm-9">
                 <ul class="list-unstyled">
-                    <li class="item-search">
+                    <li data-id="fileFilters" class="item item-search">
                         <div>
                             <div class="item-icon hidden-xs col-sm-1">
                                 <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                             </div>
                             <div class="item-name col-xs-8 col-sm-9">
-                                <input type="text" class="form-control" placeholder="Search by name or filename...">
+                                <input autocomplete="off" data-type="name" type="text" class="form-control" placeholder="{% trans %}Search by name or filename{% endtrans %}...">
                             </div>
                             <div class="item-opts col-xs-2 col-sm-1 col-button">
                                 <div class="btn-group">
                                     <a href="#" class=" dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <span class="glyphicon glyphicon-filter"></span></a>
                                     <ul class="dropdown-menu dropdown-menu-right">
-                                        <li class="dropdown-header">Filtrar</li>
-                                        <li><a href="#">All</a></li>
-                                        <li><a href="#">PDF</a></li>
-                                        <li><a href="#">Text documents</a></li>
-                                        <li><a href="#">Spreadsheets</a></li>
-                                        <li><a href="#">Photos &amp; images</a></li>
-                                        <li><a href="#">Presentations</a></li>
-                                        <li class="active"><a href="#">Music</a></li>
-                                        <li><a href="#">Video</a></li>
-                                        <li><a href="#">Source code</a></li>
-                                        <li><a href="#">Others</a></li>
+                                        <li class="dropdown-header">{% trans %}Filter{% endtrans %}</li>
+                                        <li class="active"><a href="#">{% trans %}All{% endtrans %}</a></li>
+                                        {% for mediaType in mediaTypes %}
+                                        <li data-type="media-type" data-value="{{ mediaType.idType }}"><a href="#">{{ mediaType.name }}</a></li>
+                                        {% endfor %}
                                     </ul>
                                 </div>
                             </div>
@@ -94,155 +66,22 @@
                                 <div class="btn-group">
                                     <a href="#" class=" dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <span class="glyphicon glyphicon-sort"></span></a>
                                     <ul class="dropdown-menu dropdown-menu-right">
-                                        <li class="dropdown-header">Mostrar primero</li>
-                                        <li class="active"><a href="#">Más nuevos</a></li>
-                                        <li><a href="#">Más antiguos</a></li>
-                                        <li><a href="#">A-Z</a></li>
-                                        <li><a href="#">Z-A</a></li>
-                                        <li><a href="#">Menor tamaño</a></li>
-                                        <li><a href="#">Mayor tamaño</a></li>
+                                        <li class="dropdown-header">{% trans %}Show first{% endtrans %}</li>
+                                        <li class="active" data-type="order" data-value="1"><a href="#">{% trans %}Newer{% endtrans %}</a></li>
+                                        <li data-type="order" data-value="2"><a href="#">{% trans %}Older{% endtrans %}</a></li>
+                                        <li data-type="order" data-value="3"><a href="#">A-Z</a></li>
+                                        <li data-type="order" data-value="4"><a href="#">Z-A</a></li>
+                                        <li data-type="order" data-value="5"><a href="#">{% trans %}Smaller{% endtrans %}</a></li>
+                                        <li data-type="order" data-value="6"><a href="#">{% trans %}Bigger{% endtrans %}</a></li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                     </li>
                 </ul>
-                <ul class="list-unstyled">
-
-                    <li class="item-load">
-                        <div>
-                            <div class="item-icon hidden-xs col-sm-1">
-                                <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
-                            </div>
-                            <div class="item-name col-xs-10 col-sm-10">
-                                <a href="#">Filename without extension <span class="hidden-xs">1 min</span></a>
-                            </div>
-                            <div class="item-opts col-xs-2 col-sm-1">
-                                <div class="btn-group">
-                                    <a href="#" class=" dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <span class="glyphicon glyphicon-option-vertical"></span></a>
-                                    <ul class="dropdown-menu dropdown-menu-right">
-                                        <li><a href="#">Send by email</a></li>
-                                        <li><a href="#">Share link</a></li>
-                                        <li><a href="#">Public page</a></li>
-                                        <li><a href="#">Download certificate</a></li>
-                                        <li><a href="#">Download</a></li>
-                                        <li role="separator" class="divider"></li>
-                                        <li><a href="#">Transfer ownership</a></li>
-                                        <li role="separator" class="divider"></li>
-                                        <li><a href="#">Delete</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
+                <ul id="fileList" class="list-unstyled">
+                    {{ include('data/partials/file-list.html.twig') }}
                     <li class="">
-                        <div>
-                            <div class="item-icon hidden-xs col-sm-1">
-                                <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
-                            </div>
-                            <div class="item-name col-xs-10 col-sm-10">
-                                <a href="#">Filename without extension <span class="hidden-xs">1 min</span></a>
-                            </div>
-                            <div class="item-opts col-xs-2 col-sm-1">
-                                <div class="btn-group">
-                                    <a href="#" class=" dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <span class="glyphicon glyphicon-option-vertical"></span></a>
-                                    <ul class="dropdown-menu dropdown-menu-right">
-                                        <li><a href="#">Editar</a></li>
-                                        <li role="separator" class="divider"></li>
-                                        <li><a href="#">Compartir</a></li>
-                                        <li><a href="#">Obtener enlace</a></li>
-                                        <li><a href="#">Descargar certificado</a></li>
-                                        <li><a href="#">Descargar</a></li>
-                                        <li role="separator" class="divider"></li>
-                                        <li><a href="#">Crear contrato</a></li>
-                                        <li><a href="#">Transferir propiedad</a></li>
-                                        <li role="separator" class="divider"></li>
-                                        <li><a href="#">Eliminar</a></li>
-                                        <li><a href="#">Información</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="">
-                        <div>
-                            <div class="item-icon hidden-xs col-sm-1">
-                                <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
-                            </div>
-                            <div class="item-name col-xs-10 col-sm-10">
-                                <a href="#">Filename without extension <span class="hidden-xs">1 min</span></a>
-                            </div>
-                            <div class="item-opts col-xs-2 col-sm-1">
-                                <div class="btn-group">
-                                    <a href="#" class=" dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <span class="glyphicon glyphicon-option-vertical"></span></a>
-                                    <ul class="dropdown-menu dropdown-menu-right">
-                                        <li><a href="#">Editar</a></li>
-                                        <li role="separator" class="divider"></li>
-                                        <li><a href="#">Compartir</a></li>
-                                        <li><a href="#">Obtener enlace</a></li>
-                                        <li><a href="#">Descargar certificado</a></li>
-                                        <li><a href="#">Descargar</a></li>
-                                        <li role="separator" class="divider"></li>
-                                        <li><a href="#">Crear contrato</a></li>
-                                        <li><a href="#">Transferir propiedad</a></li>
-                                        <li role="separator" class="divider"></li>
-                                        <li><a href="#">Eliminar</a></li>
-                                        <li><a href="#">Información</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="">
-                            <div class="item-icon hidden-xs col-sm-1">
-                                <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
-                            </div>
-                            <div class="item-name col-xs-10 col-sm-10">
-                                <a href="#">Filename without extension</a>
-                            </div>
-                            <div class="item-opts col-xs-2 col-sm-1">
-
-                                <div class="btn-group">
-                                    <a href="#" class=" dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <span class="glyphicon glyphicon-option-vertical"></span></a>
-                                    <ul class="dropdown-menu dropdown-menu-right">
-                                        <li><a href="#">Action</a></li>
-                                        <li><a href="#">Another action</a></li>
-                                        <li><a href="#">Something else here</a></li>
-                                        <li role="separator" class="divider"></li>
-                                        <li><a href="#">Separated link</a></li>
-                                    </ul>
-                                </div>
-
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="">
-                            <div class="item-icon hidden-xs col-sm-1">
-                                <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
-                            </div>
-                            <div class="item-name col-xs-10 col-sm-10">
-                                <a href="#">Filename without extension</a>
-                            </div>
-                            <div class="item-opts col-xs-2 col-sm-1">
-
-                                <div class="btn-group">
-                                    <a href="#" class=" dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <span class="glyphicon glyphicon-option-vertical"></span></a>
-                                    <ul class="dropdown-menu dropdown-menu-right">
-                                        <li><a href="#">Action</a></li>
-                                        <li><a href="#">Another action</a></li>
-                                        <li><a href="#">Something else here</a></li>
-                                        <li role="separator" class="divider"></li>
-                                        <li><a href="#">Separated link</a></li>
-                                    </ul>
-                                </div>
-
-                            </div>
-                        </div>
-                    </li>
-                    <li class="">
-
                         <div class="">
                             Modals launcher:
                             <ul>
@@ -253,10 +92,6 @@
                             </ul>
                         </div>
 
-                    </li>
-                    <li class="item-empty">
-                        <h3>No files found</h3>
-                        <p>Nothing found with this criteria</p>
                     </li>
                 </ul>
             </div>
@@ -401,6 +236,23 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
-
 </section>
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('libs/jQuery-File-Upload-9.12.1/css/jquery.fileupload.css') }}">
+    <link rel="stylesheet" href="{{ asset('libs/jQuery-File-Upload-9.12.1/css/jquery.fileupload-ui.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+    {# Libraries #}
+    <script src="{{ asset('libs/jQuery-File-Upload-9.12.1/js/cors/jquery.postmessage-transport.js') }}"></script>
+    <script src="{{ asset('libs/jQuery-File-Upload-9.12.1/js//vendor/jquery.ui.widget.js') }}"></script>
+    <script src="{{ asset('libs/jQuery-File-Upload-9.12.1/js/jquery.iframe-transport.js') }}"></script>
+    <script src="{{ asset('libs/jQuery-File-Upload-9.12.1/js/jquery.fileupload.js') }}"></script>
+    <!--[if (gte IE 8)&(lt IE 10)]>
+    <script src="{{ asset('libs/jQuery-File-Upload-9.12.1/js/cors/jquery.xdr-transport.js') }}"></script>
+    <![endif]-->
+    {# Own js #}
+    <script src="{{ asset('js/files.js') }}"></script>
 {% endblock %}

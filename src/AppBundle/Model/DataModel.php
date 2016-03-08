@@ -4,9 +4,12 @@ namespace AppBundle\Model;
 
 use AppBundle\Entity\AccountType;
 use AppBundle\Entity\File;
+use AppBundle\Entity\ResultSet;
 use AppBundle\Entity\User;
 use Bindeo\DataModel\Exceptions;
+use Bindeo\Filter\FilesFilter;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Translation\DataCollectorTranslator;
 
@@ -83,7 +86,7 @@ class DataModel
      *
      * @param File $file
      *
-     * @return \AppBundle\Entity\ResultSet
+     * @return ResultSet
      */
     public function uploadFile(File $file)
     {
@@ -154,5 +157,30 @@ class DataModel
         }
 
         return ['success' => true];
+    }
+
+    /**
+     * Get a list of files from the user
+     *
+     * @param User    $user
+     * @param Request $request
+     *
+     * @return ResultSet
+     */
+    public function library($user, Request $request)
+    {
+        // Instantiate files filter
+        $filter = (new FilesFilter())->setIdUser($user->getIdUser())
+                                     ->setStatus($request->get('status'))
+                                     ->setSpecialFilter($request->get('special'))
+                                     ->setMediaType($request->get('media-type'))
+                                     ->setFileType($request->get('file-type'))
+                                     ->setName($request->get('name'))
+                                     ->setOrder($request->get('order'))
+                                     ->setPage($request->get('page'));
+
+        $res = $this->api->getJson('files', $filter->toArray());
+
+        return $res;
     }
 }

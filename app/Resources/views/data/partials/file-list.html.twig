@@ -1,0 +1,38 @@
+{% if files.getNumRows() == 0 %}
+<li class="item-empty">
+    <h3>{% trans %}No files found{% endtrans %}</h3>
+    <p>{% trans with {'%a_start%': '<a href="'~path('file_upload')~'">', '%a_end%': '</a>'} %}Do you want %a_start%upload%a_end% a file?{% endtrans %}</p>
+</li>
+{% else %}
+{% for file in files.getRows() %}
+<li class="item{% if file.confirmed == 0 %} item-load{% endif %}">
+    <div>
+        <div class="item-icon hidden-xs col-sm-1">
+            <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+        </div>
+        <div class="item-name col-xs-10 col-sm-10">
+            <a href="#">{{ file.name }}</a>
+        </div>
+        <div class="item-opts col-xs-2 col-sm-1">
+            <div class="btn-group">
+                <a href="#" class=" dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <span class="glyphicon glyphicon-option-vertical"></span></a>
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li><a href="#">Send by email</a></li>
+                    <li><a href="#">Share link</a></li>
+                    <li><a href="#">Public page</a></li>
+                    <li><a href="#">Download certificate</a></li>
+                    <li><a href="#">Download</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">Transfer ownership</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">Delete</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</li>
+{% endfor %}
+    {% if files.getNumPages() > files.getCurPage() %}
+        <li data-id="paginator" class="item-loading collapse">{% trans %}Loading more files{% endtrans %}...</li>
+    {% endif %}
+{% endif %}

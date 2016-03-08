@@ -20,7 +20,7 @@
 var main = (function() {
     var init = function() {
         subscriptors();
-        $('body').on('submit', 'form[data-action="ajax-form"]', sendForm);
+        $('body').on('submit', 'form[data-action="ajax-form"]', sendStandardForm);
     };
 
     var subscriptors = function() {
@@ -39,6 +39,20 @@ var main = (function() {
          */
         $.subscribe('sending.forms', function(event, form, status) {
             form.find('[type="submit"]').prop("disabled", status);
+        });
+
+        /**
+         * Storage and stamps data
+         */
+        $.subscribe('freespace.user', function(event, data) {
+            $('#freespace').html(data / 1024);
+            $('[data-freespace]').attr('data-freespace', data * 1024 * 1024);
+        });
+        $.subscribe('usedspace.user', function(event, data) {
+            $('#usedspace').html(data);
+        });
+        $.subscribe('freestamps.user', function(event, data) {
+            $('#freestamps').html(data);
         });
     };
 
@@ -59,15 +73,24 @@ var main = (function() {
     };
 
     /**
+     * Send a standard form
+     * @param event
+     */
+    var sendStandardForm = function(event) {
+        event.preventDefault();
+        sendForm($(this));
+    };
+
+    /**
      * Send a standard form via ajax
      * @returns Promise
      */
-    var sendForm = function(event) {
-        event.preventDefault();
+    var sendForm = function(form) {
+        //event.preventDefault();
         // Publish the start sending status
-        var form = $(this);
 
         var promise = $.when($.ajax({
+            url       : form.attr('data-url'),
             type      : "post",
             dataType  : "json",
             data      : form.serialize(),
@@ -77,7 +100,7 @@ var main = (function() {
             }
         }));
 
-        return promise.then(
+        promise.then(
             // Done
             function(response) {
                 $.publish('sending.forms', [form, false]);
@@ -104,12 +127,119 @@ var main = (function() {
                 $.publish('sending.forms', [form, false]);
             }
         );
+
+        return promise;
     };
 
     // Public methods
     return {
         init       : init,
+        sendForm   : sendForm,
         sendRequest: sendRequest
+    };
+})();
+
+/**
+ * Scroll paginator class
+ */
+var paginator = (function() {
+    var promise;
+    /**
+     * Current page of the paginator
+     */
+    var currentPage;
+
+    var dataFunc;
+    var dataUrl;
+    var paginatorContainer;
+    var loading;
+
+    var init = function(container, url, func) {
+        paginatorContainer = container[0] == $(window)[0] ? $('body') : container;
+        currentPage = 1;
+        dataFunc = func;
+        dataUrl = url;
+
+        loading = paginatorContainer.find('[data-id="paginator"]');
+
+        subscriptors();
+        container.scroll(function() {
+            pagination();
+        });
+    };
+
+    var setCurrentPage = function(val) {
+        currentPage = val;
+    };
+
+    var subscriptors = function() {
+        /**
+         * Paginator loading
+         */
+        $.subscribe('loading.paginator', function(event, status) {
+            if(status) {
+                paginatorContainer.find('[data-id="paginator"]').show();
+            } else {
+                paginatorContainer.find('[data-id="paginator"]').hide();
+            }
+        });
+    };
+
+    /**
+     * @return Promise
+     */
+    var pagination = function() {
+        if(!paginatorContainer.find('[data-id="paginator"]').length) return null;
+
+        var paginator = paginatorContainer.find('[data-id="paginator"]').prev();
+
+        // Detect when we need to paginate
+        if(paginator.offset().top <= $(window).scrollTop() + window.innerHeight + 200) {
+            if(promise) return promise;
+            else {
+                // Initialize the deferred and the promise
+                var deferred = $.Deferred();
+                promise = deferred.promise();
+                promise.done(function() {
+                    currentPage += 1;
+                    promise = null;
+                    console.log(currentPage);
+                }).fail(function() {
+                    currentPage -= 1;
+                });
+
+                // Paginate
+                $.publish('loading.paginator', true);
+                data = dataFunc(currentPage+1);
+
+                // Ajax call
+                $.when(main.sendRequest(dataUrl, data)).then(
+                    // done
+                    function(response){
+                        if(response.result.success) {
+                            // Añadimos el html devuelto
+                            paginatorContainer.find('[data-id="paginator"]').replaceWith(response.result.html);
+                            deferred.resolve();
+                        } else {
+                            deferred.reject();
+                        }
+
+                    },
+                    // fail
+                    function(response){
+                        deferred.reject();
+                    }
+                );
+
+                return promise;
+            }
+        }
+    };
+
+    // Public methods
+    return {
+        init: init,
+        setCurrentPage: setCurrentPage
     };
 })();
 

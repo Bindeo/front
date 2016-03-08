@@ -27,7 +27,43 @@ class DataController extends Controller
      */
     public function fileLibraryAction(Request $request)
     {
-        return $this->render('data/file-library.html.twig');
+        // Logged user
+        /** @var User $user */
+        $user = $this->getUser();
+
+        // List of files
+        $files = $this->get('app.model.data')->library($user, $request);
+
+        // If is an Ajax request
+        if ($request->isXmlHttpRequest()) {
+            return new JsonResponse([
+                'result' => [
+                    'success' => true,
+                    'html'    => $this->renderView('data/partials/file-list.html.twig', ['files' => $files])
+                ]
+            ]);
+        } else {
+            $accounts = $this->get('app.master_data')->createAccountType($request->getLocale());
+            $mediaTypes = $this->get('app.master_data')->createMediaType($request->getLocale());
+
+            // Fileupload layer
+            $drag = $this->confirmedUpload($request, $user, false);
+
+            // To format numbers
+            $formatter = $this->get('app.locale_format');
+
+            return $this->render('data/file-library.html.twig', [
+                'drag'       => $drag,
+                'mediaTypes' => $mediaTypes->getRows(),
+                'files'      => $files,
+                'freespace'  => $formatter->format(round($user->getStorageLeft() / 1024 / 1024, 2,
+                    PHP_ROUND_HALF_DOWN)),
+                'used'       => $formatter->format(round(($accounts->getRows()[$user->getType()]->getMaxStorage() - $user->getStorageLeft()) / 1024 / 1024,
+                    2, PHP_ROUND_HALF_DOWN)),
+                'total'      => $formatter->format(round($accounts->getRows()[$user->getType()]->getMaxStorage() / 1024 / 1024,
+                    2, PHP_ROUND_HALF_DOWN))
+            ]);
+        }
     }
 
     /**
@@ -42,7 +78,7 @@ class DataController extends Controller
         /** @var User $user */
         $user = $this->getUser();
 
-        $response = $user->getConfirmed() ? $this->confirmedUpload($request, $user)
+        $response = $user->getConfirmed() ? $this->confirmedUpload($request, $user, true)
             : $this->unconfirmedUpload($request, $user);
 
         return $response;
@@ -53,10 +89,11 @@ class DataController extends Controller
      *
      * @param Request $request
      * @param User    $user
+     * @param bool    $fullPage True: render the full page, false: render only the section
      *
      * @return Response
      */
-    private function confirmedUpload(Request $request, $user)
+    private function confirmedUpload(Request $request, $user, $fullPage)
     {
         // Initialize the file object
         $file = (new File())->setUser($user);
@@ -119,11 +156,17 @@ class DataController extends Controller
         /** @var AccountType $type */
         $type = $this->get('app.master_data')->createAccountType($request->getLocale())->getRows()[$user->getType()];
 
-        return $this->render('data/file-upload.html.twig', [
-            'form'      => $form->createView(),
-            'filesize'  => $type->getMaxFilesize(),
-            'freespace' => $user->getStorageLeft()
-        ]);
+        return $fullPage
+            ? $this->render('data/file-upload.html.twig', [
+                'form'      => $form->createView(),
+                'filesize'  => $type->getMaxFilesize(),
+                'freespace' => $user->getStorageLeft()
+            ])
+            : $this->renderView('data/partials/file-upload-drag.html.twig', [
+                'form'      => $form->createView(),
+                'filesize'  => $type->getMaxFilesize(),
+                'freespace' => $user->getStorageLeft()
+            ]);
     }
 
     /**
@@ -152,7 +195,7 @@ class DataController extends Controller
                 $res = $this->get('app.model.data')->unconfirmedUpload($user, $newUser);
 
                 if (isset($res['error'])) {
-                    if($res['error'][0] == '') {
+                    if ($res['error'][0] == '') {
                         $form->addError(new FormError($res['error'][1]));
                     } else {
                         $form->get($res['error'][0])->addError(new FormError($res['error'][1]));

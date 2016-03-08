@@ -1,0 +1,59 @@
+<!-- Object: Drag -->
+<div class="drag" data-action="fileupload" data-name="upload_file" data-url="{{ path('ajax_file_upload') }}"
+     data-maxfilesize="{{ filesize * 1024 }}" data-freespace="{{ freespace * 1024 }}">
+    <div class="file">
+        <h1 class="hidden-xs">{% trans %}Drag & drop you file here{% endtrans %}</h1>
+        <div class="btn btn-default btn-file">
+            <span class="visible-xs">{% trans %}Upload file or take a photo{% endtrans %}</span>
+            <span class="hidden-xs">{% trans %}Upload any file{% endtrans %}</span>
+            <input type="file" name="file">
+        </div>
+
+        <div class="sync">
+            <p>{% trans %}Also, you can import from{% endtrans %}:</p>
+            <div>
+                <a href="#"><img src="{{ asset('images/icons/sync_dropbox.png') }}" class="img-responsive"></a>
+                <a href="#"><img src="{{ asset('/images/icons/sync_goolge_drive.png') }}" class="img-responsive"></a>
+                <a href="#"><img src="{{ asset('/images/icons/sync_onedrive.png') }}" class="img-responsive"></a>
+                <a href="#"><img src="{{ asset('/images/icons/sync_ftp.png') }}" class="img-responsive"></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="load collapse">
+        <p>{% trans %}Loading file, please wait{% endtrans %}...</p>
+        <div class="row">
+            <div class="col-xs-8 col-xs-offset-2">
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                        0%
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="reset" class="btn btn-link">{% trans %}Cancel{% endtrans %}</button>
+    </div>
+    <div id="upload_file_done"></div>
+</div>
+<div data-type="error-size" class="alert alert-danger collapse">
+    <ul class="list-unstyled">
+        <li class="collapse" data-name="filesize">
+            <span class="glyphicon glyphicon-exclamation-sign"></span>
+            {% trans %}Ops!{% endtrans %} {% trans with {'%size%': filesize} %}You exceeded your max file size of %size% KB{% endtrans %}.
+        </li>
+        <li class="collapse" data-name="freespace">
+            <span class="glyphicon glyphicon-exclamation-sign"></span>
+            {% trans %}Ops!{% endtrans %} {% trans with {'%size%': (freespace/1000000)|round(2, 'floor')} %}You only have %size% GB or free space{% endtrans %}.
+        </li>
+    </ul>
+</div>
+<div class="forms collapse" id="upload_file">
+    {{ include('data/partials/file-upload-form.html.twig') }}
+</div>
+<div class="drop">
+    <div>
+        <div id="drop-area">
+            {% trans %}Drop your file{% endtrans %}...
+        </div>
+    </div>
+</div>
