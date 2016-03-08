@@ -7,8 +7,8 @@ var files = (function() {
         $('body').on('submit', 'form[name="upload_file"]', sendFormFile);
         // Library
         $('body').on('click', '[data-id="fileFilters"] ul li a', chooseFilter);
-        $('body').on('keyup', '[data-id="fileFilters"] input', function (e) {
-            if (e.keyCode == 13) {
+        $('body').on('keyup', '[data-id="fileFilters"] input', function(e) {
+            if(e.keyCode == 13) {
                 chooseFilter();
             }
         });
@@ -127,11 +127,14 @@ var files = (function() {
                 dragover         : function(e, data) {
                     $.publish('drop_zone.files', [true]);
                 },
-                dragleave        : function(e, data) {
-                    $.publish('drop_zone.files', [false]);
-                },
                 add              : function(e, data) {
                     $.publish('drop_zone.files', [false]);
+
+                    // Check if the user is confirmed
+                    if(obj.attr('data-confirmed') != 1) {
+                        data.abort();
+                        window.location.href = '/data/upload';
+                    }
 
                     // Check the max size
                     var filesize = obj.attr('data-maxfilesize');
@@ -170,6 +173,11 @@ var files = (function() {
                 }
             });
         });
+
+        // Catch dragleave event
+        $('body').on('dragleave', '.drop', function(e, data) {
+            $.publish('drop_zone.files', [false]);
+        });
     };
 
     /**
@@ -200,7 +208,7 @@ var files = (function() {
     var sendFormFile = function(event) {
         event.preventDefault();
         main.sendForm($(this)).done(function(response) {
-            if (response.result.success) $.publish('listFilters.files');
+            if(response.result.success) $.publish('listFilters.files');
         });
     };
 
@@ -230,11 +238,11 @@ var files = (function() {
      * Initialize paginator
      */
     var pagination = function() {
-        paginator.init($(window), '/data/library', function(page){
-            var params = 'page='+page;
+        paginator.init($(window), '/data/library', function(page) {
+            var params = 'page=' + page;
             $('[data-id="fileFilters"] li.active').each(function() {
                 if($(this).attr('data-type') != undefined) {
-                    params += '&'+$(this).attr('data-type') + '=' + $(this).attr('data-value');
+                    params += '&' + $(this).attr('data-type') + '=' + $(this).attr('data-value');
                 }
             });
 

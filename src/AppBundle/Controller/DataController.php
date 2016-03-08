@@ -159,11 +159,13 @@ class DataController extends Controller
         return $fullPage
             ? $this->render('data/file-upload.html.twig', [
                 'form'      => $form->createView(),
+                'confirmed' => $user->getConfirmed(),
                 'filesize'  => $type->getMaxFilesize(),
                 'freespace' => $user->getStorageLeft()
             ])
             : $this->renderView('data/partials/file-upload-drag.html.twig', [
                 'form'      => $form->createView(),
+                'confirmed' => $user->getConfirmed(),
                 'filesize'  => $type->getMaxFilesize(),
                 'freespace' => $user->getStorageLeft()
             ]);

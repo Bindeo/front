@@ -1,6 +1,6 @@
 <!-- Object: Drag -->
 <div class="drag" data-action="fileupload" data-name="upload_file" data-url="{{ path('ajax_file_upload') }}"
-     data-maxfilesize="{{ filesize * 1024 }}" data-freespace="{{ freespace * 1024 }}">
+     data-maxfilesize="{{ filesize * 1024 }}" data-freespace="{{ freespace * 1024 }}" data-confirmed="{{ confirmed }}">
     <div class="file">
         <h1 class="hidden-xs">{% trans %}Drag & drop you file here{% endtrans %}</h1>
         <div class="btn btn-default btn-file">
