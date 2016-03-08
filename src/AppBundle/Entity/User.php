@@ -13,17 +13,21 @@ class User extends UserAbstract implements UserInterface
     const ROLE_VIP   = 3;
 
     private $roles = [1 => 'ROLE_ADMIN', 2 => 'ROLE_USER', 3 => 'ROLE_VIP'];
+    /**
+     * Auxiliar attribute
+     */
+    private $totalStorage;
 
     // Set mandatory fields for forms
     /**
-     * @Assert\NotBlank(groups={"registration", "login", "pre-upload"})
+     * @Assert\NotBlank(groups={"registration", "login", "pre-upload", "password-reset"})
      * @Assert\Email(
      *     groups={"registration", "pre-upload"},
      *     strict = true,
      *     checkMX = true
      * )
      * @Assert\Email(
-     *     groups={"login"},
+     *     groups={"login", "password-reset"},
      *     strict = true
      * )
      */
@@ -32,16 +36,22 @@ class User extends UserAbstract implements UserInterface
     protected $oldEmail;
 
     /**
-     * @Assert\NotBlank(groups={"registration", "edit-profile", "pre-upload"})
-     * @Assert\Length(max=256)
+     * @Assert\NotBlank(groups={"registration", "pre-upload"})
+     * @Assert\Length(max=256, groups={"registration", "pre-upload"})
      */
     protected $name;
 
     /**
-     * @Assert\NotBlank(groups={"registration", "login", "change-email"})
-     * @Assert\Length(min=6, max=4096, groups={"registration", "login", "change-email"})
+     * @Assert\NotBlank(groups={"registration", "login", "change-email", "change-password"})
+     * @Assert\Length(min=6, max=4096, groups={"registration", "login", "change-email", "change-password"})
      */
     protected $password;
+
+    /**
+     * @Assert\NotBlank(groups={"change-password-private"})
+     * @Assert\Length(min=6, max=4096, groups={"change-password-private"})
+     */
+    protected $oldPassword;
 
     protected $identities;
 
@@ -128,5 +138,25 @@ class User extends UserAbstract implements UserInterface
     public function eraseCredentials()
     {
         $this->oldPassword = null;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTotalStorage()
+    {
+        return $this->totalStorage;
+    }
+
+    /**
+     * @param mixed $totalStorage
+     *
+     * @return $this
+     */
+    public function setTotalStorage($totalStorage)
+    {
+        $this->totalStorage = $totalStorage;
+
+        return $this;
     }
 }

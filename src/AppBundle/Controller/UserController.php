@@ -3,8 +3,10 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
-use AppBundle\Form\Type\EditProfileType;
+use AppBundle\Form\Type\EditPreferencesType;
+use AppBundle\Form\Type\ChangePasswordType;
 use AppBundle\Form\Type\RegisterType;
+use AppBundle\Form\Type\PasswordResetType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Cookie;
@@ -123,32 +125,55 @@ class UserController extends Controller
     }
 
     /**
-     * @Route("/user/profile", name="edit_profile")
+     * @Route("/user/configuration", name="user_configuration")
      * @param Request $request
      *
      * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function editProfileAction(Request $request)
+    public function configurationAction(Request $request)
     {
         // Get the logged user
-        $user = $this->getUser();
-        $form = $this->createForm(EditProfileType::class, $user);
-        $form->handleRequest($request);
+        $user = $this->getUser()->setIp($request->getClientIp());
         $response = new Response();
-        $success = false;
+
+        // Preferences form
+        list($formPreferences, $successPreferences) = $this->preferences($request, $user, $response);
+        list($formPassword, $successPassword) = $this->password($request, $user);
+
+        return $this->render('user/configuration.html.twig', [
+            'formPreferences'    => $formPreferences->createView(),
+            'successPreferences' => $successPreferences,
+            'formPassword'       => $formPassword->createView(),
+            'successPassword'    => $successPassword
+        ], $response);
+    }
+
+    /**
+     * Manage preferences form
+     *
+     * @param Request  $request
+     * @param User     $user
+     * @param Response $response
+     *
+     * @return array
+     */
+    private function preferences(Request $request, User $user, Response $response)
+    {
+        $successPreferences = false;
+        $formPreferences = $this->createForm(EditPreferencesType::class, $user);
+        $formPreferences->handleRequest($request);
 
         // Form submitted
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($formPreferences->isSubmitted() && $formPreferences->isValid()) {
             // Save the changes against the api
-            $result = $this->get('app.api_connection')
-                           ->putJson('account', $user->setIp($request->getClientIp())->toArray());
+            $result = $this->get('app.api_connection')->putJson('account', $user->toArray());
 
-            /** @var User $user */
+            // Check for errors
             if ($result->getError() or !(is_subclass_of($result->getRows()[0], '\Bindeo\DataModel\UserAbstract'))) {
                 $error = $this->get('translator')
-                              ->trans('We have a problem creating your account, please try again later');
+                              ->trans('We have a problem updating your preferences, please try again later');
 
-                $form->addError(new FormError($error));
+                $formPreferences->addError(new FormError($error));
 
                 // There is a problem login in the api, we need to logout the user
                 $this->get('logger')->error('ERROR: Edit profile', [
@@ -164,12 +189,61 @@ class UserController extends Controller
                 }
 
                 // Success
-                $success = true;
+                $successPreferences = true;
             }
         }
 
-        return $this->render('user/edit-profile.html.twig', ['form' => $form->createView(), 'success' => $success],
-            $response);
+        return [$formPreferences, $successPreferences];
+    }
+
+    /**
+     * Manage change password form
+     *
+     * @param Request $request
+     * @param User    $user
+     *
+     * @return array
+     */
+    private function password(Request $request, User $user)
+    {
+        $successPassword = false;
+        $newUser = new User(['idUser' => $user->getIdUser(), 'ip' => $user->getIp()]);
+        $formPassword = $this->createForm(ChangePasswordType::class, $newUser);
+        $formPassword->handleRequest($request);
+
+        // Form submitted
+        if ($formPassword->isSubmitted() && $formPassword->isValid()) {
+            // Save the changes against the api
+            $result = $this->get('app.api_connection')->putJson('account_password', $newUser->toArray());
+
+            // Check for errors
+            if ($result->getError() or !(is_subclass_of($result->getRows()[0], '\Bindeo\DataModel\UserAbstract'))) {
+                if ($result->getError()['code'] == 403) {
+                    $error = $this->get('translator')->trans('Your password is not correct');
+
+                    $formPassword->get('oldPassword')->addError(new FormError($error));
+                } else {
+                    $error = $this->get('translator')
+                                  ->trans('We have a problem updating your password, please try again later');
+
+                    $formPassword->addError(new FormError($error));
+
+                    // There is a problem login in the api, we need to logout the user
+                    $this->get('logger')->error('ERROR: Edit password', [
+                        'data'  => $newUser->toArray(),
+                        'error' => $result->getError()['message']
+                    ]);
+                }
+            } else {
+                // Change the password in the session
+                $user->setPassword($result->getRows()[0]->getPassword());
+
+                // Success
+                $successPassword = true;
+            }
+        }
+
+        return [$formPassword, $successPassword];
     }
 
     /**
@@ -180,24 +254,85 @@ class UserController extends Controller
      */
     public function validateTokenAction(Request $request)
     {
-        if (!($token = $request->get('t'))) {
+        if (!($token = $request->get('t')) or !($type = $request->get('m'))) {
             throw new NotFoundHttpException();
         }
 
-        // Try to validate the token against the API
-        $result = $this->get('app.api_connection')
-                       ->putJson('account_token', ['token' => $token, 'ip' => $request->getClientIp()]);
-
-        if ($result->getError()) {
-            $success = false;
-        } else {
-            $success = true;
-            // If the user is logged, update the entity
+        // If we are changing password, we ask for the new one
+        if ($type == 'P') {
             if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-                $this->getUser()->setConfirmed(1)->setEmail($result->getRows()[0]->getEmail());
+                return new RedirectResponse('/');
+            }
+            $user = new User();
+            $form = $this->createForm(ChangePasswordType::class, $user);
+            $form->handleRequest($request);
+
+            // Form submitted
+            if ($form->isSubmitted() && $form->isValid()) {
+                // Reset password
+                // Try to validate the token against the API
+                $result = $this->get('app.api_connection')->putJson('account_token', [
+                    'token'    => $token,
+                    'ip'       => $request->getClientIp(),
+                    'password' => $user->getPassword()
+                ]);
+
+                if ($result->getError()) {
+                    $success = false;
+                } else {
+                    $success = true;
+                }
+            } else {
+                return $this->render('user/password-reset-second.html.twig', ['form' => $form->createView()]);
+            }
+        } else {
+            // Try to validate the token against the API
+            $result = $this->get('app.api_connection')
+                           ->putJson('account_token', ['token' => $token, 'ip' => $request->getClientIp()]);
+
+            if ($result->getError()) {
+                $success = false;
+            } else {
+                $success = true;
+                // If the user is logged, update the entity
+                if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+                    $this->getUser()->setConfirmed(1)->setEmail($result->getRows()[0]->getEmail());
+                }
             }
         }
 
-        return $this->render('user/token.html.twig', ['success' => $success]);
+        // Render confirmation
+        return $this->render('user/token.html.twig', ['success' => $success, 'type' => $type]);
+    }
+
+    /**
+     * @Route("/user/password-reset", name="password_reset")
+     * @param Request $request
+     *
+     * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function passwordResetAction(Request $request)
+    {
+        // If we are already logged we redirect the user to the homepage
+        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            return new RedirectResponse('/');
+        }
+
+        $user = new User();
+        $form = $this->createForm(PasswordResetType::class, $user);
+        $form->handleRequest($request);
+
+        // Form submitted
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Reset password
+            $this->get('app.api_connection')
+                 ->getJson('account_password',
+                     $user->setIp($request->getClientIp())->setLang($request->getLocale())->toArray());
+
+            return $this->render('user/password-reset-ok.html.twig',
+                ['email' => $user->getEmail(), 'contact' => $this->getParameter('emails')['contact']]);
+        }
+
+        return $this->render('user/password-reset.html.twig', ['form' => $form->createView()]);
     }
 }

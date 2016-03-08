@@ -12,3 +12,8 @@ parameters:
 
     files:
         files_tmp_folder: ~
+
+    locale: en_US
+
+    emails:
+        contact: contact@bindeo.com

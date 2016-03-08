@@ -31,10 +31,10 @@
                     </div>
                     <div class="col-xs-6 col-sm-12 tools-size">
                         <div class="visible-xs">
-                            {% trans with {'%space%': '<span id="freespace">'~freespace~'</span>'} %}%space% GB free{% endtrans %}
+                            {% trans with {'%space%': '<span data-id="freespace">'~freespace~'</span>'} %}%space% GB free{% endtrans %}
                         </div>
                         <div class="hidden-xs">
-                            {% trans with {'%space%': '<span id="usedspace">'~used~'</span>', '%total%': total} %}%space% GB of %total% GB used{% endtrans %}
+                            {% trans with {'%space%': '<span data-id="usedspace">'~used~'</span>', '%total%': total} %}%space% GB of %total% GB used{% endtrans %}
                         </div>
                     </div>
                 </div>
@@ -99,6 +99,7 @@
         </div>
     </div>
 </section>
+{# MODALS #}
 <section class="">
     <div class="modal fade" tabindex="-1" role="dialog" id="modal-delete">
         <div class="modal-dialog">

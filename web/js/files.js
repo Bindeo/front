@@ -104,6 +104,14 @@ var files = (function() {
                 }
             });
         });
+
+        /**
+         * Manage space formatted numbers of the user
+         */
+        $.subscribe('space.files', function(event, result) {
+            $('[data-id="freespace"]').html(result.freespace);
+            $('[data-id="usedspace"]').html(result.usedspace);
+        });
     };
 
     /**
@@ -208,7 +216,10 @@ var files = (function() {
     var sendFormFile = function(event) {
         event.preventDefault();
         main.sendForm($(this)).done(function(response) {
-            if(response.result.success) $.publish('listFilters.files');
+            if(response.result.success) {
+                $.publish('listFilters.files');
+                $.publish('space.files', response.result);
+            }
         });
     };
 

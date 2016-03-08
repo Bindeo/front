@@ -16,12 +16,12 @@
         <li class="dropdown hidden-xs">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ app.user.name }} <span class="caret"></span></a>
             <ul class="dropdown-menu">
-                <li><a href="{{ path('edit_profile') }}">{% trans %}Profile{% endtrans %}</a></li>
+                <li><a href="{{ path('user_configuration') }}">{% trans %}Configuration{% endtrans %}</a></li>
                 <li role="separator" class="divider"></li>
                 <li><a href="{{ path('logout') }}">{% trans %}Logout{% endtrans %}</a></li>
             </ul>
         </li>
-        <li class="visible-xs"><a href="{{ path('edit_profile') }}">{% trans %}Profile{% endtrans %}</a></li>
+        <li class="visible-xs"><a href="{{ path('user_configuration') }}">{% trans %}Configuration{% endtrans %}</a></li>
         <li class="visible-xs"><a href="{{ path('logout') }}">{% trans %}Logout{% endtrans %}</a></li>
     </ul>
 </div>

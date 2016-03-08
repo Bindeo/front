@@ -17,9 +17,13 @@ register:
     path: /register
     defaults: { _controller: AppBundle:User:register }
 
-edit_profile:
-    path: /user/profile
-    defaults: { _controller: AppBundle:User:editProfile }
+password_reset:
+    path: /user/password-reset
+    defaults: { _controller: AppBundle:User:passwordReset }
+
+user_configuration:
+    path: /user/configuration
+    defaults: { _controller: AppBundle:User:configuration }
 
 validate_token:
     path: /user/validate

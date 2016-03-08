@@ -22,7 +22,7 @@ class PreUploadType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class'        => 'AppBundle\Entity\User',
             'validation_groups' => function(FormInterface $form) {
                 /** @var User $data */
@@ -36,6 +36,6 @@ class PreUploadType extends AbstractType
 
                 return $groups;
             }
-        ));
+        ]);
     }
 }

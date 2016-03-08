@@ -20,7 +20,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class DataController extends Controller
 {
     /**
+     * User file library
      * @Route("/data/library", name="file_library")
+     *
      * @param Request $request
      *
      * @return Response
@@ -45,6 +47,7 @@ class DataController extends Controller
         } else {
             $accounts = $this->get('app.master_data')->createAccountType($request->getLocale());
             $mediaTypes = $this->get('app.master_data')->createMediaType($request->getLocale());
+            $user->setTotalStorage($accounts->getRows()[$user->getType()]->getMaxStorage());
 
             // Fileupload layer
             $drag = $this->confirmedUpload($request, $user, false);
@@ -58,16 +61,18 @@ class DataController extends Controller
                 'files'      => $files,
                 'freespace'  => $formatter->format(round($user->getStorageLeft() / 1024 / 1024, 2,
                     PHP_ROUND_HALF_DOWN)),
-                'used'       => $formatter->format(round(($accounts->getRows()[$user->getType()]->getMaxStorage() - $user->getStorageLeft()) / 1024 / 1024,
+                'used'       => $formatter->format(round(($user->getTotalStorage() - $user->getStorageLeft()) / 1024 / 1024,
                     2, PHP_ROUND_HALF_DOWN)),
-                'total'      => $formatter->format(round($accounts->getRows()[$user->getType()]->getMaxStorage() / 1024 / 1024,
-                    2, PHP_ROUND_HALF_DOWN))
+                'total'      => $formatter->format(round($user->getTotalStorage() / 1024 / 1024, 2,
+                    PHP_ROUND_HALF_DOWN))
             ]);
         }
     }
 
     /**
+     * Upload page for all users
      * @Route("/data/upload", name="file_upload")
+     *
      * @param Request $request
      *
      * @return Response
@@ -110,8 +115,8 @@ class DataController extends Controller
             if ($form->isValid()) {
                 // Successful upload
                 $request->getSession()->set('fileupload', 'ok');
-                $res = $this->get('app.model.data')->uploadFile($file->setIdUser($user->getIdUser())
-                                                                     ->setIp($request->getClientIp()));
+                $res = $this->get('app.model.data')
+                            ->uploadFile($user, $file->setIdUser($user->getIdUser())->setIp($request->getClientIp()));
 
                 // Check if the file has been properly uploaded and signed
                 if ($res->getError()) {
@@ -130,10 +135,17 @@ class DataController extends Controller
                         ]
                     ]);
                 } else {
+                    // To format numbers
+                    $formatter = $this->get('app.locale_format');
+
                     return new JsonResponse([
                         'result' => [
-                            'success' => true,
-                            'html'    => $this->renderView('data/partials/file-upload-ok.html.twig')
+                            'success'   => true,
+                            'freespace' => $formatter->format(round($user->getStorageLeft() / 1024 / 1024, 2,
+                                PHP_ROUND_HALF_DOWN)),
+                            'usedspace' => $formatter->format(round(($user->getTotalStorage() - $user->getStorageLeft()) / 1024 / 1024,
+                                2, PHP_ROUND_HALF_DOWN)),
+                            'html'      => $this->renderView('data/partials/file-upload-ok.html.twig')
                         ]
                     ]);
                 }
@@ -155,6 +167,7 @@ class DataController extends Controller
         // User max filesize
         /** @var AccountType $type */
         $type = $this->get('app.master_data')->createAccountType($request->getLocale())->getRows()[$user->getType()];
+        $user->setTotalStorage($type->getMaxStorage());
 
         return $fullPage
             ? $this->render('data/file-upload.html.twig', [
@@ -229,7 +242,9 @@ class DataController extends Controller
     }
 
     /**
+     * Upload the file temporary using fileupload
      * @Route("/ajax/private/upload-file", name="ajax_file_upload")
+     *
      * @param Request $request
      *
      * @return Response
@@ -267,7 +282,9 @@ class DataController extends Controller
     }
 
     /**
+     * Render the file upload result
      * @Route("/data/upload/result", name="file_upload_res")
+     *
      * @param Request $request
      *
      * @return Response

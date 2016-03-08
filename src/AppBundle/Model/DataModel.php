@@ -84,22 +84,26 @@ class DataModel
     /**
      * Save and sign a file
      *
+     * @param User $user
      * @param File $file
      *
      * @return ResultSet
      */
-    public function uploadFile(File $file)
+    public function uploadFile(User $user, File $file)
     {
         // Save the file against the API
-        $res = $this->api->postJson('file', $file->toArray());
-        if ($res->getError()) {
-            return $res;
+        $newFile = $this->api->postJson('file', $file->toArray());
+        if (!$newFile->getError()) {
+            // Sign the file
+            $blockchain = $this->api->putJson('blockchain', $newFile->getRows()[0]->setIp($file->getIp())->toArray());
+            if ($blockchain->getError()) {
+                return $blockchain;
+            }
+            // Set user new space
+            $user->setStorageLeft($user->getStorageLeft() - $newFile->getRows()[0]->getSize());
         }
 
-        // Sign the file
-        $res = $this->api->putJson('blockchain', $res->getRows()[0]->setIp($file->getIp())->toArray());
-
-        return $res;
+        return $newFile;
     }
 
     /**

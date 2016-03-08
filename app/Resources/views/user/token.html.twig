@@ -11,7 +11,13 @@
         <div class="col-xs-12 col-sm-8 col-sm-offset-2">
             <h1>
                 {% if success == true %}
-                    {% trans %}Account confirmed!{% endtrans %}
+                    {% if type == 'V' %}
+                        {% trans %}Account confirmed!{% endtrans %}
+                    {% elseif type == 'E' %}
+                        {% trans %}Email changed!{% endtrans %}
+                    {% elseif type == 'P' %}
+                        {% trans %}Password changed!{% endtrans %}
+                    {% endif %}
                 {% else %}
                     {% trans %}Sorry, your token is expired{% endtrans %}
                 {% endif %}
