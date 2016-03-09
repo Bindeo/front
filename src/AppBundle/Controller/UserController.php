@@ -3,8 +3,10 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
+use AppBundle\Entity\UserIdentity;
 use AppBundle\Form\Type\EditPreferencesType;
 use AppBundle\Form\Type\ChangePasswordType;
+use AppBundle\Form\Type\IdentityType;
 use AppBundle\Form\Type\RegisterType;
 use AppBundle\Form\Type\PasswordResetType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -68,8 +70,7 @@ class UserController extends Controller
 
         // Form submitted
         if ($form->isSubmitted() && $form->isValid()) {
-            $user->setType(User::ROLE_USER)->setIp($request->getClientIp())->setLang($request->getSession()
-                                                                                             ->get('_locale'));
+            $user->setType(User::ROLE_USER)->setIp($request->getClientIp())->setLang($request->getLocale());
             // We can register the user against the API
             $api = $this->get('app.api_connection');
             $result = $api->postJson('account', $user->toArray());
@@ -248,6 +249,63 @@ class UserController extends Controller
     }
 
     /**
+     * @Route("/ajax/private/close-account", name="ajax_close_account")
+     * @param Request $request
+     *
+     * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function ajaxCloseAccountAction(Request $request)
+    {
+        // Logged user
+        /** @var User $user */
+        $user = $this->getUser();
+
+        // Verify user password
+        if (!password_verify($request->get('password'), $user->getPassword())) {
+            return new JsonResponse(['result' => ['success' => false]]);
+        }
+
+        // Close the account
+        $res = $this->get('app.api_connection')
+                    ->deleteJson('account', $user->setIp($request->getClientIp())->toArray());
+
+        if ($res->getError()) {
+            return new JsonResponse(['result' => ['success' => false]]);
+        } else {
+            return new JsonResponse(['result' => ['success' => true, 'url' => $this->generateUrl('logout')]]);
+        }
+    }
+
+    /**
+     * @Route("/user/identity", name="user_identity")
+     * @param Request $request
+     *
+     * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function identityAction(Request $request)
+    {
+        // Logged user
+        /** @var User $user */
+        $user = $this->getUser();
+
+        // Get user main identity
+        $identities = $this->get('app.api_connection')
+                           ->getJson('account_identities', ['idUser' => $user->getIdUser()])
+                           ->getRows();
+        $identity = reset($identities);
+
+        $form = $this->createForm(IdentityType::class, $identity);
+        $form->handleRequest($request);
+
+        // Form submitted
+        if ($form->isSubmitted() && $form->isValid()) {
+            //$result = $this->get('app.api_connection')->putJson('account_identities', $identity->toArray());
+        }
+
+        return $this->render('user/identities.html.twig', ['form' => $form->createView()]);
+    }
+
+    /**
      * @Route("/user/validate", name="validate_token")
      * @param Request $request
      *
@@ -335,33 +393,5 @@ class UserController extends Controller
         }
 
         return $this->render('user/password-reset.html.twig', ['form' => $form->createView()]);
-    }
-
-    /**
-     * @Route("/ajax/private/close-account", name="ajax_close_account")
-     * @param Request $request
-     *
-     * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     */
-    public function ajaxCloseAccountAction(Request $request)
-    {
-        // Logged user
-        /** @var User $user */
-        $user = $this->getUser();
-
-        // Verify user password
-        if (!password_verify($request->get('password'), $user->getPassword())) {
-            return new JsonResponse(['result' => ['success' => false]]);
-        }
-
-        // Close the account
-        $res = $this->get('app.api_connection')
-                    ->deleteJson('account', $user->setIp($request->getClientIp())->toArray());
-
-        if ($res->getError()) {
-            return new JsonResponse(['result' => ['success' => false]]);
-        } else {
-            return new JsonResponse(['result' => ['success' => true, 'url' => $this->generateUrl('logout')]]);
-        }
     }
 }

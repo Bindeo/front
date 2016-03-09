@@ -45,5 +45,6 @@ security:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/ajax/private, roles: ROLE_USER }
         - { path: ^/user/configuration, roles: ROLE_USER }
+        - { path: ^/user/identity, roles: ROLE_USER }
         - { path: ^/data/upload, roles: ROLE_USER }
         - { path: ^/data/library, roles: ROLE_USER }

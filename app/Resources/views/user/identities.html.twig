@@ -1,0 +1,26 @@
+{% extends 'base-log.html.twig' %}
+
+{% block title %}
+    {% trans %}Identity{% endtrans %}
+{% endblock %}
+
+{% block body %}
+<section class="">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+                <h1>{% trans %}Your identity{% endtrans %}</h1>
+                <p>{% trans %}Your name and your email address are being used for ownership notarization, if are not right, certificate is not valid for you{% endtrans %}.</p>
+                <div class="forms">
+                    {{ form_start(form, {'attr': {'autocomplete': 'off'}}) }}
+                        {{ form_errors(form) }}
+                        {{ form_row(form.name) }}
+                        {{ form_row(form.value) }}
+                        <button type="submit" class="btn btn-default">{% trans %}Save changes{% endtrans %}</button>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

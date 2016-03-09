@@ -25,6 +25,10 @@ user_configuration:
     path: /user/configuration
     defaults: { _controller: AppBundle:User:configuration }
 
+user_identity:
+    path: /user/identity
+    defaults: { _controller: AppBundle:User:identity }
+
 validate_token:
     path: /user/validate
     defaults: { _controller: AppBundle:User:validateToken }
