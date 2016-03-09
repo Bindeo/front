@@ -33,7 +33,7 @@ class ApiConnection
 
     public function __construct($baseUrl, $token, $routes)
     {
-        $this->baseUrl = $baseUrl;
+        $this->baseUrl = (defined('DEVELOPER') ? DEVELOPER .'.' : ''). $baseUrl;
         $this->curl = new Curl();
         $this->curl->setHeader('Authorization', 'Bearer ' . $token);
         $this->routes = $routes;
