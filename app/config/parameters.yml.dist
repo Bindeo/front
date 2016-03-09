@@ -10,6 +10,9 @@ parameters:
     # A secret key that's used to generate certain security-related tokens
     secret:            174a2b95bb27a46f8bc1e09179b2734c54c2837e
 
+    api_url: api.bindeo.com
+    api_token: 75be9f5e5234406d544d84e32e1747e4
+
     files:
         files_tmp_folder: ~
 
