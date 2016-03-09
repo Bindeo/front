@@ -10,6 +10,7 @@ use AppBundle\Form\Type\PasswordResetType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Cookie;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -334,5 +335,33 @@ class UserController extends Controller
         }
 
         return $this->render('user/password-reset.html.twig', ['form' => $form->createView()]);
+    }
+
+    /**
+     * @Route("/ajax/private/close-account", name="ajax_close_account")
+     * @param Request $request
+     *
+     * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function ajaxCloseAccountAction(Request $request)
+    {
+        // Logged user
+        /** @var User $user */
+        $user = $this->getUser();
+
+        // Verify user password
+        if (!password_verify($request->get('password'), $user->getPassword())) {
+            return new JsonResponse(['result' => ['success' => false]]);
+        }
+
+        // Close the account
+        $res = $this->get('app.api_connection')
+                    ->deleteJson('account', $user->setIp($request->getClientIp())->toArray());
+
+        if ($res->getError()) {
+            return new JsonResponse(['result' => ['success' => false]]);
+        } else {
+            return new JsonResponse(['result' => ['success' => true, 'url' => $this->generateUrl('logout')]]);
+        }
     }
 }

@@ -45,3 +45,7 @@ file_upload_res:
 ajax_file_upload:
     path: /ajax/private/upload-file
     defaults: { _controller: AppBundle:Data:ajaxUploadFile }
+
+ajax_close_account:
+    path: /ajax/private/close-account
+    defaults: { _controller: AppBundle:User:ajaxCloseAccount }

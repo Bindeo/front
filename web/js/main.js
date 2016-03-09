@@ -82,15 +82,15 @@ var main = (function() {
     };
 
     /**
-     * Send a standard form via ajax
+     * Create the promise of sending a form
+     * @param form
      * @returns Promise
      */
-    var sendForm = function(form) {
-        //event.preventDefault();
+    var sendSimpleForm = function(form) {
         // Publish the start sending status
 
-        var promise = $.when($.ajax({
-            url       : form.attr('data-url'),
+        return $.when($.ajax({
+            url       : form.attr('action'),
             type      : "post",
             dataType  : "json",
             data      : form.serialize(),
@@ -99,6 +99,15 @@ var main = (function() {
                 $.publish('sending.forms', [form, true]);
             }
         }));
+    };
+
+    /**
+     * Send a standard form via ajax
+     * @returns Promise
+     */
+    var sendForm = function(form) {
+        // Create the promise
+        var promise = sendSimpleForm(form);
 
         promise.then(
             // Done
@@ -133,9 +142,10 @@ var main = (function() {
 
     // Public methods
     return {
-        init       : init,
-        sendForm   : sendForm,
-        sendRequest: sendRequest
+        init          : init,
+        sendSimpleForm: sendSimpleForm,
+        sendForm      : sendForm,
+        sendRequest   : sendRequest
     };
 })();
 
@@ -210,12 +220,12 @@ var paginator = (function() {
 
                 // Paginate
                 $.publish('loading.paginator', true);
-                data = dataFunc(currentPage+1);
+                data = dataFunc(currentPage + 1);
 
                 // Ajax call
                 $.when(main.sendRequest(dataUrl, data)).then(
                     // done
-                    function(response){
+                    function(response) {
                         if(response.result.success) {
                             // Añadimos el html devuelto
                             paginatorContainer.find('[data-id="paginator"]').replaceWith(response.result.html);
@@ -226,7 +236,7 @@ var paginator = (function() {
 
                     },
                     // fail
-                    function(response){
+                    function(response) {
                         deferred.reject();
                     }
                 );
@@ -238,7 +248,7 @@ var paginator = (function() {
 
     // Public methods
     return {
-        init: init,
+        init          : init,
         setCurrentPage: setCurrentPage
     };
 })();
