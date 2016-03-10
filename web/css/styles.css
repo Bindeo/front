@@ -9,6 +9,11 @@
   cursor: copy !important;
 }
 
+/* line 9, ../sass/includes/_0_helper.scss */
+.margin-top-25 {
+  margin-top: 25px;
+}
+
 /* line 1, ../sass/includes/_0_basics.scss */
 a {
   color: #0089E7;
@@ -253,6 +258,25 @@ label {
   margin: 10px 0 5px;
   font-size: 14px;
   font-weight: 400;
+}
+
+/* line 88, ../sass/includes/_1_layout.scss */
+.section-home-proofs {
+  padding: 30px 0;
+  background: #004C7F;
+  color: #fff;
+}
+
+/* line 94, ../sass/includes/_1_layout.scss */
+.section-home-public {
+  padding: 30px 0;
+}
+
+/* line 98, ../sass/includes/_1_layout.scss */
+.section-home-start {
+  padding: 30px 0;
+  background: #0070BD;
+  color: #fff;
 }
 
 /* line 2, ../sass/includes/_1_forms.scss */
@@ -561,72 +585,41 @@ label {
   font-weight: 300;
   color: #333;
 }
-@media (min-width: 768px) {
-  /* line 157, ../sass/includes/_1_user.scss */
-  .body-user .col-tools .tools-path ul.dropdown-menu {
-    border-radius: 0;
-  }
-}
-@media (min-width: 768px) {
-  /* line 164, ../sass/includes/_1_user.scss */
-  .body-user .col-tools .tools-path ul.dropdown-menu > li > a {
-    padding: 8px 10px;
-  }
-}
-@media (min-width: 768px) {
-  /* line 170, ../sass/includes/_1_user.scss */
-  .body-user .col-tools .tools-path ul.dropdown-menu > li.active > a {
-    background: rgba(0, 0, 0, 0.25);
-  }
-}
-/* line 180, ../sass/includes/_1_user.scss */
+/* line 160, ../sass/includes/_1_user.scss */
 .body-user .col-tools .tools-size {
   text-align: right;
 }
-@media (min-width: 768px) {
-  /* line 180, ../sass/includes/_1_user.scss */
-  .body-user .col-tools .tools-size {
-    margin-top: 15px;
-    text-align: left;
-  }
-}
-@media (min-width: 768px) {
-  /* line 146, ../sass/includes/_1_user.scss */
-  .body-user .col-tools {
-    padding-right: 0;
-  }
-}
-/* line 198, ../sass/includes/_1_user.scss */
+/* line 171, ../sass/includes/_1_user.scss */
 .body-user .list > ul > li.item {
   background: white;
   margin: 0 0 10px;
   box-shadow: rgba(0, 0, 0, 0.25) 0 0 1px;
   height: 44px;
 }
-/* line 205, ../sass/includes/_1_user.scss */
+/* line 178, ../sass/includes/_1_user.scss */
 .body-user .list > ul > li.item > div {
   height: 100%;
 }
-/* line 207, ../sass/includes/_1_user.scss */
+/* line 180, ../sass/includes/_1_user.scss */
 .body-user .list > ul > li.item > div > div {
   height: 100%;
 }
-/* line 212, ../sass/includes/_1_user.scss */
+/* line 185, ../sass/includes/_1_user.scss */
 .body-user .list > ul > li.item .item-icon {
   background: #eee;
   text-align: center;
   font-size: 18px;
 }
-/* line 217, ../sass/includes/_1_user.scss */
+/* line 190, ../sass/includes/_1_user.scss */
 .body-user .list > ul > li.item .item-icon span {
   line-height: 44px;
   opacity: 0.5;
 }
-/* line 223, ../sass/includes/_1_user.scss */
+/* line 196, ../sass/includes/_1_user.scss */
 .body-user .list > ul > li.item .item-name {
   padding: 0;
 }
-/* line 226, ../sass/includes/_1_user.scss */
+/* line 199, ../sass/includes/_1_user.scss */
 .body-user .list > ul > li.item .item-name > a {
   display: block;
   padding: 12px 15px;
@@ -634,22 +627,22 @@ label {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-/* line 233, ../sass/includes/_1_user.scss */
+/* line 206, ../sass/includes/_1_user.scss */
 .body-user .list > ul > li.item .item-name > a span {
   float: right;
   margin-left: 10px;
   color: #ccc;
 }
-/* line 241, ../sass/includes/_1_user.scss */
+/* line 214, ../sass/includes/_1_user.scss */
 .body-user .list > ul > li.item .item-opts {
   padding: 0;
 }
-/* line 244, ../sass/includes/_1_user.scss */
+/* line 217, ../sass/includes/_1_user.scss */
 .body-user .list > ul > li.item .item-opts > .btn-group {
   width: 100%;
   height: 100%;
 }
-/* line 248, ../sass/includes/_1_user.scss */
+/* line 221, ../sass/includes/_1_user.scss */
 .body-user .list > ul > li.item .item-opts > .btn-group > a {
   background: #eee;
   display: block;
@@ -659,26 +652,26 @@ label {
   line-height: 46px;
   font-size: 18px;
 }
-/* line 262, ../sass/includes/_1_user.scss */
+/* line 235, ../sass/includes/_1_user.scss */
 .body-user .list > ul > li.item:hover span {
   opacity: 1.0;
 }
-/* line 269, ../sass/includes/_1_user.scss */
+/* line 242, ../sass/includes/_1_user.scss */
 .body-user .list > ul > li.item.item-load .item-name {
-  background-image: url(./../images/assets/list-item-loading.gif);
+  background-image: url(./../images/assets/load-item.gif);
   background-repeat: no-repeat;
   background-position-y: 17px;
   background-position-x: 15px;
 }
-/* line 275, ../sass/includes/_1_user.scss */
+/* line 248, ../sass/includes/_1_user.scss */
 .body-user .list > ul > li.item.item-load .item-name > a {
   padding-left: 40px;
 }
-/* line 283, ../sass/includes/_1_user.scss */
+/* line 256, ../sass/includes/_1_user.scss */
 .body-user .list > ul > li.item.item-search .col-button {
   border-left: 1px solid rgba(0, 0, 0, 0.14);
 }
-/* line 292, ../sass/includes/_1_user.scss */
+/* line 265, ../sass/includes/_1_user.scss */
 .body-user .list > ul > li.item.item-search .col-button .dropdown-menu .active > a:before {
   content: "\e013";
   font-family: "Glyphicons Halflings";
@@ -687,25 +680,30 @@ label {
   display: inline-block;
   font-size: 10px;
 }
-/* line 305, ../sass/includes/_1_user.scss */
+/* line 278, ../sass/includes/_1_user.scss */
 .body-user .list > ul > li.item.item-search .item-name > input {
   border: none;
   border-radius: 0;
   box-shadow: none;
   height: 44px;
 }
-/* line 316, ../sass/includes/_1_user.scss */
+/* line 289, ../sass/includes/_1_user.scss */
+.body-user .list > ul > li.item-loading {
+  background-image: url(./../images/assets/load-more.gif);
+  background-repeat: no-repeat;
+  background-position: center 15px;
+  text-align: center;
+  padding: 55px 15px 15px;
+}
+/* line 298, ../sass/includes/_1_user.scss */
 .body-user .list > ul > li.item-empty {
-  background: none;
   background-image: url(./../images/icons/states_message.png);
   background-repeat: no-repeat;
   background-position: center 15px;
-  border: none;
-  box-shadow: none;
   text-align: center;
   padding: 150px 15px 15px;
 }
-/* line 328, ../sass/includes/_1_user.scss */
+/* line 307, ../sass/includes/_1_user.scss */
 .body-user .list > ul > li.item-empty h3 {
   margin: 0;
 }
@@ -755,7 +753,7 @@ label {
   color: #ddd;
 }
 
-/* line 21, ../sass/includes/_2_dropdown.scss */
+/* line 22, ../sass/includes/_2_dropdown.scss */
 .dropdown-path a.dropdown-toggle {
   background: none;
   border: none;
@@ -765,32 +763,13 @@ label {
   width: 100%;
   color: black;
 }
-@media (min-width: 768px) {
-  /* line 32, ../sass/includes/_2_dropdown.scss */
-  .dropdown-path a.dropdown-toggle {
-    display: none;
-  }
-  /* line 36, ../sass/includes/_2_dropdown.scss */
-  .dropdown-path ul.dropdown-menu {
-    background: none;
-    position: relative;
-    display: block;
-    min-width: 100%;
-    border: none;
-    box-shadow: none;
-    margin: 0;
-    padding: 0;
-  }
-  /* line 46, ../sass/includes/_2_dropdown.scss */
-  .dropdown-path ul.dropdown-menu a {
-    padding: 10px;
-    font-weight: 300;
-  }
-  /* line 50, ../sass/includes/_2_dropdown.scss */
-  .dropdown-path ul.dropdown-menu a span {
-    margin-right: 10px;
-    color: rgba(0, 0, 0, 0.25);
-  }
+/* line 33, ../sass/includes/_2_dropdown.scss */
+.dropdown-path ul.dropdown-menu a {
+  padding-left: 15px;
+}
+/* line 36, ../sass/includes/_2_dropdown.scss */
+.dropdown-path ul.dropdown-menu a span {
+  margin-right: 5px;
 }
 
 /* line 1, ../sass/includes/_2_notifications.scss */
