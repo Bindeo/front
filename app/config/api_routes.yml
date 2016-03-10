@@ -6,7 +6,6 @@ parameters:
         users: /users
         account: /account
         account_password: /account/password
-        account_email: /account/email
         account_type: /account/type
         account_token: /account/token
         account_identities: /account/identities

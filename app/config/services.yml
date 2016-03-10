@@ -60,3 +60,9 @@ services:
         arguments: ['@app.master_data', '@app.api_connection', '@security.token_storage', '@translator', '%files%']
         tags:
             - { name: app.model }
+
+    app.model.user:
+        class: AppBundle\Model\UserModel
+        arguments: ['@app.api_connection', '@translator']
+        tags:
+            - { name: app.model }

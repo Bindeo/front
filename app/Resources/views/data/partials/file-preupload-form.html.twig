@@ -5,7 +5,7 @@
 
 <div class="form-group {% if form_errors(form.password) != '' %}has-error{% else %}collapse{% endif %}" data-id="pre_upload_password">
     {{ form_label(form.password) }}
-    {{ form_widget(form.password) }}
+    {{ form_widget(form.password, {'attr': {'placeholder': 'Your password'}}) }}
     {{ form_errors(form.password) }}
 </div>
 

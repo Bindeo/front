@@ -125,6 +125,8 @@ var main = (function() {
                         $.publish('main.notifications', [true, response.result.message]);
                     } else if(response.result.html) {
                         $('section[data-type="main"]').replaceWith(response.result.html);
+                    } else {
+                        form.replaceWith(response.result.form);
                     }
                 } else {
                     // Errors

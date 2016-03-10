@@ -1,9 +1,10 @@
 /**
  * User functionality
  */
-var user = (function() {
+var users = (function() {
     var init = function() {
         $('body').on('submit', 'form[name="close-account"]', closeAccount);
+        $('body').on('change', '#pre_upload_email,#change_identity_email', showPassword);
     };
 
     /**
@@ -43,6 +44,10 @@ var user = (function() {
         );
     };
 
+    var showPassword = function() {
+        $(this).parents('form').find('input[type="password"]:hidden').attr('required', 'required').parent().show();
+    };
+
     // Public methods
     return {
         init: init
@@ -50,5 +55,5 @@ var user = (function() {
 })();
 
 $(document).ready(function() {
-    user.init();
+    users.init();
 });

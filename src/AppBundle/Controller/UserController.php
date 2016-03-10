@@ -6,7 +6,7 @@ use AppBundle\Entity\User;
 use AppBundle\Entity\UserIdentity;
 use AppBundle\Form\Type\EditPreferencesType;
 use AppBundle\Form\Type\ChangePasswordType;
-use AppBundle\Form\Type\IdentityType;
+use AppBundle\Form\Type\ChangeIdentityType;
 use AppBundle\Form\Type\RegisterType;
 use AppBundle\Form\Type\PasswordResetType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -292,17 +292,52 @@ class UserController extends Controller
         $identities = $this->get('app.api_connection')
                            ->getJson('account_identities', ['idUser' => $user->getIdUser()])
                            ->getRows();
+        /** @var UserIdentity $identity */
         $identity = reset($identities);
 
-        $form = $this->createForm(IdentityType::class, $identity);
+        $newUser = (new User())->setOldEmail($identity->getValue())
+                               ->setEmail($identity->getValue())
+                               ->setName($identity->getName())
+                               ->setIdUser($user->getIdUser());
+        $form = $this->createForm(ChangeIdentityType::class, $newUser);
         $form->handleRequest($request);
 
         // Form submitted
         if ($form->isSubmitted() && $form->isValid()) {
-            //$result = $this->get('app.api_connection')->putJson('account_identities', $identity->toArray());
+            // Data is valid, modify the user and send the confirm email
+            $res = $this->get('app.model.user')
+                        ->changeIdentity($user,
+                            $newUser->setIp($request->getClientIp())->setLang($request->getLocale()));
+
+            if (isset($res['error'])) {
+                if ($res['error'][0] == '') {
+                    $form->addError(new FormError($res['error'][1]));
+                } else {
+                    $form->get($res['error'][0])->addError(new FormError($res['error'][1]));
+                }
+            }
+
+            // Check if the form is still valid
+            if ($form->isValid()) {
+                return new JsonResponse([
+                    'result' => [
+                        'success' => true,
+                        'form'    => $this->renderView('user/partials/identities-form.html.twig',
+                            ['form' => $form->createView(), 'success' => true, 'changed' => $res['changed']])
+                    ]
+                ]);
+            } else {
+                return new JsonResponse([
+                    'result' => [
+                        'success' => false,
+                        'form'    => $this->renderView('user/partials/identities-form.html.twig',
+                            ['form' => $form->createView(), 'success' => false])
+                    ]
+                ]);
+            }
         }
 
-        return $this->render('user/identities.html.twig', ['form' => $form->createView()]);
+        return $this->render('user/identities.html.twig', ['form' => $form->createView(), 'success' => false]);
     }
 
     /**
@@ -355,7 +390,10 @@ class UserController extends Controller
                 $success = true;
                 // If the user is logged, update the entity
                 if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-                    $this->getUser()->setConfirmed(1)->setEmail($result->getRows()[0]->getEmail());
+                    $this->getUser()
+                         ->setConfirmed(1)
+                         ->setEmail($result->getRows()[0]->getEmail())
+                         ->setName($result->getRows()[0]->getName());
                 }
             }
         }

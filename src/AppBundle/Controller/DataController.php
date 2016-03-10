@@ -5,9 +5,8 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\AccountType;
 use AppBundle\Entity\File;
 use AppBundle\Entity\User;
-use AppBundle\Form\Type\PreUploadType;
+use AppBundle\Form\Type\ChangeIdentityType;
 use AppBundle\Form\Type\UploadFileType;
-use Symfony\Component\DomCrawler\Form;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -198,7 +197,7 @@ class DataController extends Controller
                                ->setEmail($user->getEmail())
                                ->setName($user->getName())
                                ->setIdUser($user->getIdUser());
-        $form = $this->createForm(PreUploadType::class, $newUser);
+        $form = $this->createForm(ChangeIdentityType::class, $newUser);
         $form->handleRequest($request);
 
         // Form submitted
@@ -207,7 +206,7 @@ class DataController extends Controller
                 $newUser->setIp($request->getClientIp())->setLang($user->getLang());
 
                 // Data is valid, modify the user and send the confirm email
-                $res = $this->get('app.model.data')->unconfirmedUpload($user, $newUser);
+                $res = $this->get('app.model.user')->changeIdentity($user, $newUser);
 
                 if (isset($res['error'])) {
                     if ($res['error'][0] == '') {

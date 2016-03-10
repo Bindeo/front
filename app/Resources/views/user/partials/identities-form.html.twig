@@ -1,0 +1,23 @@
+{{ form_start(form, {'attr': {'data-action': 'ajax-form', 'autocomplete': 'off'}}) }}
+{% if success %}
+<div class="alert alert-success">
+    <ul class="list-unstyled">
+        <li>{% if changed %}
+                {% trans %}Your identity has been updated{% endtrans %}
+            {% else %}
+                {% trans %}A verification email has been sent to your new email, you need to verify it before changes are apply{% endtrans %}
+            {% endif %}
+        </li>
+    </ul>
+</div>
+{% endif %}
+    {{ form_errors(form) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.email) }}
+<div class="form-group {% if form_errors(form.password) != '' %}has-error{% else %}collapse{% endif %}" data-id="pre_upload_password">
+    {{ form_label(form.password) }}
+    {{ form_widget(form.password, {'attr': {'placeholder': 'Your password'}}) }}
+    {{ form_errors(form.password) }}
+</div>
+<button type="submit" class="btn btn-default">{% trans %}Save changes{% endtrans %}</button>
+{{ form_end(form) }}
