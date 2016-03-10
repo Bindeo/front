@@ -14,9 +14,9 @@
 <section class="">
     <div class="container">
         <div class="row">
-            <div class="col-xs-12 col-sm-3 col-tools">
+            <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-tools">
                 <div data-id="fileFilters" class="row">
-                    <div class="col-xs-6 col-sm-12 tools-path">
+                    <div class="col-xs-6 tools-path">
                         <div class="dropdown dropdown-path">
                             <a class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> Folder <span class="caret"></span> </a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -29,7 +29,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-xs-6 col-sm-12 tools-size">
+                    <div class="col-xs-6 tools-size">
                         <div class="visible-xs">
                             {% trans with {'%space%': '<span data-id="freespace">'~freespace~'</span>'} %}%space% GB free{% endtrans %}
                         </div>
@@ -40,7 +40,7 @@
                 </div>
             </div>
 
-            <div class="list col-xs-12 col-sm-9">
+            <div class="list col-xs-12 col-sm-10 col-sm-offset-1">
                 <ul class="list-unstyled">
                     <li data-id="fileFilters" class="item item-search">
                         <div>
