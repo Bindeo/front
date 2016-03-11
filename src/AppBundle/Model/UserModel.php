@@ -5,7 +5,7 @@ namespace AppBundle\Model;
 use AppBundle\Entity\User;
 use AppBundle\Entity\UserIdentity;
 use Bindeo\DataModel\Exceptions;
-use Symfony\Component\Translation\DataCollectorTranslator;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class UserModel
 {
@@ -16,9 +16,9 @@ class UserModel
      * UserModel constructor.
      *
      * @param ApiConnection           $api
-     * @param DataCollectorTranslator $translator
+     * @param TranslatorInterface $translator
      */
-    public function __construct(ApiConnection $api, DataCollectorTranslator $translator)
+    public function __construct(ApiConnection $api, TranslatorInterface $translator)
     {
         $this->api = $api;
         $this->translator = $translator;

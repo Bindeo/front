@@ -10,7 +10,7 @@ use Bindeo\Filter\FilesFilter;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Component\Translation\DataCollectorTranslator;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class DataModel
 {
@@ -24,17 +24,17 @@ class DataModel
     /**
      * DataModel constructor.
      *
-     * @param MasterDataFactory       $masterData
-     * @param ApiConnection           $api
-     * @param TokenStorageInterface   $tokenStorage
-     * @param DataCollectorTranslator $translator
-     * @param string                  $filesConf
+     * @param MasterDataFactory     $masterData
+     * @param ApiConnection         $api
+     * @param TokenStorageInterface $tokenStorage
+     * @param TranslatorInterface   $translator
+     * @param string                $filesConf
      */
     public function __construct(
         MasterDataFactory $masterData,
         ApiConnection $api,
         TokenStorageInterface $tokenStorage,
-        DataCollectorTranslator $translator,
+        TranslatorInterface $translator,
         $filesConf
     ) {
         $this->masterData = $masterData;
