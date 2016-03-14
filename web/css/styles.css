@@ -172,7 +172,6 @@ label {
 
 /* line 1, ../sass/includes/_1_layout.scss */
 .cookies {
-  display: none;
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -182,16 +181,16 @@ label {
   color: #fff;
   z-index: 8101;
 }
-/* line 12, ../sass/includes/_1_layout.scss */
+/* line 11, ../sass/includes/_1_layout.scss */
 .cookies > div {
   text-align: center;
 }
-/* line 15, ../sass/includes/_1_layout.scss */
+/* line 14, ../sass/includes/_1_layout.scss */
 .cookies > div a {
   margin-left: 10px;
 }
 
-/* line 22, ../sass/includes/_1_layout.scss */
+/* line 21, ../sass/includes/_1_layout.scss */
 .section-home {
   background: url(./../images/bg2.jpg);
   background-position: center center;
@@ -201,11 +200,11 @@ label {
   min-height: 560px;
   text-align: center;
 }
-/* line 31, ../sass/includes/_1_layout.scss */
+/* line 30, ../sass/includes/_1_layout.scss */
 .section-home h1, .section-home h2, .section-home h3, .section-home h4 {
   text-shadow: black 0 0 25px;
 }
-/* line 35, ../sass/includes/_1_layout.scss */
+/* line 34, ../sass/includes/_1_layout.scss */
 .section-home h1 {
   margin-top: 60px;
   font-size: 24px;
@@ -213,66 +212,66 @@ label {
   color: white;
 }
 @media (min-width: 768px) {
-  /* line 35, ../sass/includes/_1_layout.scss */
+  /* line 34, ../sass/includes/_1_layout.scss */
   .section-home h1 {
     margin-top: 120px;
     font-size: 36px;
   }
 }
-/* line 47, ../sass/includes/_1_layout.scss */
+/* line 46, ../sass/includes/_1_layout.scss */
 .section-home h2 {
   font-size: 18px;
   color: white;
 }
 @media (min-width: 768px) {
-  /* line 47, ../sass/includes/_1_layout.scss */
+  /* line 46, ../sass/includes/_1_layout.scss */
   .section-home h2 {
     font-size: 20px;
   }
 }
-/* line 56, ../sass/includes/_1_layout.scss */
+/* line 55, ../sass/includes/_1_layout.scss */
 .section-home .action {
   margin-top: 30px;
 }
-/* line 59, ../sass/includes/_1_layout.scss */
+/* line 58, ../sass/includes/_1_layout.scss */
 .section-home .action .btn {
   min-width: 240px;
 }
 
-/* line 65, ../sass/includes/_1_layout.scss */
+/* line 64, ../sass/includes/_1_layout.scss */
 .section-home-features {
   padding: 30px 0;
 }
-/* line 69, ../sass/includes/_1_layout.scss */
+/* line 68, ../sass/includes/_1_layout.scss */
 .section-home-features .row > div > div {
   text-align: center;
   padding: 15px;
 }
-/* line 73, ../sass/includes/_1_layout.scss */
+/* line 72, ../sass/includes/_1_layout.scss */
 .section-home-features .row > div > div img {
   margin: 0 auto;
   max-height: 32px;
 }
-/* line 78, ../sass/includes/_1_layout.scss */
+/* line 77, ../sass/includes/_1_layout.scss */
 .section-home-features .row > div > div h3 {
   margin: 10px 0 5px;
   font-size: 14px;
   font-weight: 400;
 }
 
-/* line 88, ../sass/includes/_1_layout.scss */
+/* line 87, ../sass/includes/_1_layout.scss */
 .section-home-proofs {
   padding: 30px 0;
   background: #004C7F;
   color: #fff;
 }
 
-/* line 94, ../sass/includes/_1_layout.scss */
+/* line 93, ../sass/includes/_1_layout.scss */
 .section-home-public {
   padding: 30px 0;
 }
 
-/* line 98, ../sass/includes/_1_layout.scss */
+/* line 97, ../sass/includes/_1_layout.scss */
 .section-home-start {
   padding: 30px 0;
   background: #0070BD;
@@ -361,6 +360,15 @@ label {
 /* line 98, ../sass/includes/_1_forms.scss */
 .list-actions > a:last-child {
   margin-right: 0;
+}
+
+/* line 106, ../sass/includes/_1_forms.scss */
+.form-inline-size .size-medium select {
+  width: 120px;
+}
+/* line 112, ../sass/includes/_1_forms.scss */
+.form-inline-size .size-big select {
+  width: 200px;
 }
 
 @media (max-width: 767px) {
@@ -774,13 +782,12 @@ label {
 
 /* line 1, ../sass/includes/_2_notifications.scss */
 .notifications {
-  display: none;
   position: fixed;
   bottom: 15px;
   width: 100%;
   z-index: 1040;
 }
-/* line 9, ../sass/includes/_2_notifications.scss */
+/* line 8, ../sass/includes/_2_notifications.scss */
 .notifications .alert {
   margin: 0;
 }
@@ -810,7 +817,12 @@ label {
   color: #fff;
 }
 
-/* line 22, ../sass/styles.scss */
+/* line 2, ../sass/includes/_2_list.scss */
+.list-bulk > li {
+  margin-bottom: 10px;
+}
+
+/* line 24, ../sass/styles.scss */
 body {
   font-family: "Open Sans", sans-serif;
   text-shadow: rgba(0, 0, 0, 0.01) 0 0 1px;
@@ -818,7 +830,154 @@ body {
   font-weight: 300;
   font-size: 14px;
 }
-/* line 29, ../sass/styles.scss */
+/* line 1, ../sass/includes/_3_edu.scss */
+body.edu {
+  background: #fff;
+  background-image: url("./../images/edu/isdi/bg.png");
+  background-repeat: repeat no-repeat;
+  background-position: center -30px;
+}
+/* line 7, ../sass/includes/_3_edu.scss */
+body.edu section.header {
+  margin-bottom: 25px;
+}
+/* line 10, ../sass/includes/_3_edu.scss */
+body.edu section.header .nav {
+  margin: 15px 0 25px;
+  padding: 10px 0;
+  border-bottom: 1px dotted #858585;
+}
+/* line 19, ../sass/includes/_3_edu.scss */
+body.edu section.header .nav .pull-right {
+  text-align: right;
+}
+/* line 22, ../sass/includes/_3_edu.scss */
+body.edu section.header .nav .pull-right .more {
+  display: inline;
+  margin-right: 25px;
+}
+/* line 28, ../sass/includes/_3_edu.scss */
+body.edu section.header .nav .pull-right .lang button {
+  background: none;
+  padding: 0;
+  border: none;
+  box-shadow: none;
+}
+@media (min-width: 768px) {
+  /* line 28, ../sass/includes/_3_edu.scss */
+  body.edu section.header .nav .pull-right .lang button {
+    top: -1px;
+  }
+}
+/* line 39, ../sass/includes/_3_edu.scss */
+body.edu section.header .nav .pull-right .lang .dropdown-menu {
+  min-width: 140px;
+}
+/* line 47, ../sass/includes/_3_edu.scss */
+body.edu section.header .brand .thumbnail {
+  padding: 10px 0 20px;
+}
+/* line 51, ../sass/includes/_3_edu.scss */
+body.edu section.header .brand h1 {
+  text-align: center;
+}
+/* line 59, ../sass/includes/_3_edu.scss */
+body.edu section.body .hash {
+  margin-bottom: 15px;
+}
+/* line 62, ../sass/includes/_3_edu.scss */
+body.edu section.body .hash .button {
+  padding-left: 0;
+}
+/* line 66, ../sass/includes/_3_edu.scss */
+body.edu section.body .hash .form-group, body.edu section.body .hash input, body.edu section.body .hash button {
+  width: 100%;
+}
+/* line 71, ../sass/includes/_3_edu.scss */
+body.edu section.body .drag {
+  border: 1px dotted #858585;
+  padding: 35px 25px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+/* line 80, ../sass/includes/_3_edu.scss */
+body.edu section.body .drag .btn-file {
+  border: none;
+  background: none;
+  box-shadow: none;
+}
+/* line 85, ../sass/includes/_3_edu.scss */
+body.edu section.body .drag .btn-file input[type=file] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  outline: none;
+  background: white;
+  cursor: inherit;
+  display: block;
+}
+/* line 103, ../sass/includes/_3_edu.scss */
+body.edu section.body .result {
+  margin-bottom: 50px;
+  text-align: center;
+}
+/* line 107, ../sass/includes/_3_edu.scss */
+body.edu section.body .result h2 {
+  text-align: center;
+}
+/* line 116, ../sass/includes/_3_edu.scss */
+body.edu section.body .details {
+  margin-bottom: 30px;
+}
+/* line 120, ../sass/includes/_3_edu.scss */
+body.edu section.body .details ul li {
+  padding: 10px 0;
+  border-bottom: 1px dotted #eee;
+}
+/* line 124, ../sass/includes/_3_edu.scss */
+body.edu section.body .details ul li > div > div:first-child {
+  font-weight: 400;
+}
+/* line 128, ../sass/includes/_3_edu.scss */
+body.edu section.body .details ul li:last-child {
+  border-bottom: 0;
+}
+/* line 136, ../sass/includes/_3_edu.scss */
+body.edu section.body .sign > div {
+  background: #eee;
+  padding: 20px;
+  border-radius: 5px;
+}
+/* line 141, ../sass/includes/_3_edu.scss */
+body.edu section.body .sign > div img {
+  border-radius: 100%;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 0 1px;
+}
+/* line 150, ../sass/includes/_3_edu.scss */
+body.edu footer {
+  background: #212121;
+  margin-top: 50px;
+  color: #fff;
+}
+/* line 158, ../sass/includes/_3_edu.scss */
+body.edu footer > div > div > div {
+  background-image: url("./../images/edu/isdi/footer-seal.png");
+  background-repeat: no-repeat;
+  background-position: right 20px;
+  padding: 50px 0 100px;
+}
+/* line 166, ../sass/includes/_3_edu.scss */
+body.edu footer .tech {
+  margin-top: 30px;
+}
+/* line 35, ../sass/styles.scss */
 body > nav {
   z-index: 1030;
 }
