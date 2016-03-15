@@ -1,0 +1,58 @@
+{% extends 'base-log.html.twig' %}
+
+{% block title %}
+    {% trans %}Notarize your collection{% endtrans %}
+{% endblock %}
+
+{% block body %}
+<section class="section-drag hidden-xs">
+    <div class="container">
+        <!-- Object: Drag -->
+        <div class="drag" data-action="fileupload" data-name="upload_file_bulk" data-url="{{ path('ajax_file_upload') }}?norender=1"
+             data-numfiles="15" data-confirmed="1">
+            {{ include('data/partials/file-upload-div.html.twig', {'numFiles': 15}) }}
+        </div>
+        <!-- //Drag -->
+    </div>
+    <div class="drop">
+        <div>
+            <div id="drop-area">
+                {% trans %}Drop your file{% endtrans %}...
+            </div>
+        </div>
+    </div>
+</section>
+<section class="">
+    <div class="container">
+        {{ form_start(form, {'attr': {'class': 'form-inline form-inline-size', 'autocomplete': 'off'}}) }}
+        <ul id="upload_file" class="list-unstyled list-bulk" data-prototype="{{ include('edu/partials/bulk-file-form.html.twig', {'file': form.files.vars.prototype})|e }}">
+        {% for file in form.files %}
+            {{ include('edu/partials/bulk-file-form.html.twig') }}
+        {% endfor %}
+        </ul>
+
+        <div class="form-group">
+            <button class="btn btn-default{% if form.files|length == 0 %} collapse{% endif %}" type="submit">Publicar</button>
+        </div>
+        {{ form_end(form) }}
+    </div>
+</section>
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('libs/jQuery-File-Upload-9.12.1/css/jquery.fileupload.css') }}">
+    <link rel="stylesheet" href="{{ asset('libs/jQuery-File-Upload-9.12.1/css/jquery.fileupload-ui.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+    {# Libraries #}
+    <script src="{{ asset('libs/jQuery-File-Upload-9.12.1/js/cors/jquery.postmessage-transport.js') }}"></script>
+    <script src="{{ asset('libs/jQuery-File-Upload-9.12.1/js//vendor/jquery.ui.widget.js') }}"></script>
+    <script src="{{ asset('libs/jQuery-File-Upload-9.12.1/js/jquery.iframe-transport.js') }}"></script>
+    <script src="{{ asset('libs/jQuery-File-Upload-9.12.1/js/jquery.fileupload.js') }}"></script>
+    <!--[if (gte IE 8)&(lt IE 10)]>
+    <script src="{{ asset('libs/jQuery-File-Upload-9.12.1/js/cors/jquery.xdr-transport.js') }}"></script>
+    <![endif]-->
+    {# Own js #}
+    <script src="{{ asset('js/files.js') }}"></script>
+{% endblock %}

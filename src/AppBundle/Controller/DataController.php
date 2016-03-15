@@ -270,13 +270,23 @@ class DataController extends Controller
                 $size = round($size / 1000, 2) . ' KB';
             }
 
-            return new JsonResponse([
-                'success' => true,
-                'name'    => 'upload_file',
-                'path'    => $newFile->getPath(),
-                'html'    => $this->renderView('data/partials/file-uploaded.html.twig',
-                    ['name' => $newFile->getFileOrigName(), 'size' => $size])
-            ]);
+            // We can return the object or a rendered html
+            if ($request->get('norender')) {
+                return new JsonResponse([
+                    'success'  => true,
+                    'name'     => 'upload_file',
+                    'path'     => $newFile->getPath(),
+                    'filename' => $newFile->getFileOrigName()
+                ]);
+            } else {
+                return new JsonResponse([
+                    'success' => true,
+                    'name'    => 'upload_file',
+                    'path'    => $newFile->getPath(),
+                    'html'    => $this->renderView('data/partials/file-uploaded.html.twig',
+                        ['name' => $newFile->getFileOrigName(), 'size' => $size])
+                ]);
+            }
         }
     }
 

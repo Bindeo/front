@@ -23,11 +23,20 @@ var files = (function() {
          */
         $.subscribe('add.files', function(event, name, data) {
             $('.alert').hide();
-            $('div[data-name="' + name + '"] .file').hide();
-            $('#' + name + '_name').val(data.originalFiles[0].name);
-            $('#' + name + '_fileOrigName').val(data.originalFiles[0].name);
-            $('#' + name).show();
-            $('#' + name + '_done').html('');
+
+            if(name != "upload_file_bulk") {
+                $('div[data-name="' + name + '"] .file').hide();
+                $('#' + name + '_name').val(data.files[0].name);
+                $('#' + name + '_fileOrigName').val(data.files[0].name);
+                $('#' + name).show();
+                $('#' + name + '_done').html('');
+            }
+
+            // Loading bar
+            var loadOrig = $(".load:hidden");
+            var newBar = loadOrig.clone();
+            newBar.attr('id', data.files[0].name).show();
+            loadOrig.after(newBar);
         });
 
         /**
@@ -39,20 +48,58 @@ var files = (function() {
         });
 
         /**
-         * Files uploaded
+         * Files uploaded, general subscriber
          */
-        $.subscribe('upload.files', function(event, result) {
-            $('.load:visible').hide();
+        $.subscribe('upload.files', function(event, name, data) {
+            var result = data.result;
+            $('[id="' + data.files[0].name + '"').remove();
 
-            if(result.success == true) {
-                $('#' + result.name + '_path').val(result.path);
-                $('#' + result.name + '_done').replaceWith(result.html);
-            } else {
-                $('#' + result.name).hide();
-                $('#' + result.name + '_path').val('');
-                $('#' + result.name + '_fileOrigName').val('');
-                $('#' + result.name + '_done').html('');
+            if(result.success != true) {
                 $.publish('errors.files', [result.name, result.error]);
+            }
+        });
+
+        /**
+         * Files uploaded, upload_file subscriber
+         */
+        $.subscribe('upload.files', function(event, name, data) {
+            if(name == "upload_file") {
+                var result = data.result;
+                if(result.success == true) {
+                    $('#' + result.name + '_path').val(result.path);
+                    $('#' + result.name + '_done').replaceWith(result.html);
+                } else {
+                    $('#' + result.name).hide();
+                    $('#' + result.name + '_path').val('');
+                    $('#' + result.name + '_fileOrigName').val('');
+                    $('#' + result.name + '_done').html('');
+                }
+            }
+        });
+
+        /**
+         * Files uploaded, upload_file_bulk subscriber
+         */
+        $.subscribe('upload.files', function(event, name, data) {
+            if(name == "upload_file_bulk") {
+                var result = data.result;
+                if(result.success == true) {
+                    // Add the prototype
+                    var container = $('#upload_file');
+                    var number = container.find('li').length;
+                    var prototype = $(container.attr('data-prototype').replace(/__name__/g, number));
+
+                    // Set file data
+                    prototype.find('[id="bulk_transaction_files_'+number+'_path"]').val(result.path);
+                    prototype.find('[id="bulk_transaction_files_'+number+'_fileOrigName"]').val(result.filename);
+                    prototype.find('span[data-name="fileOrigName"]').html(result.filename);
+
+                    // Append the prototype
+                    container.append(prototype);
+
+                    // Show submit
+                    container.parent().find('[type="submit"]').show();
+                }
             }
         });
 
@@ -60,7 +107,7 @@ var files = (function() {
          * Manage fileupload error layer
          */
         $.subscribe('errors.files', function(event, name, type) {
-            var errordiv = $('[data-action="fileupload"][data-name="' + name + '"]').parent().find('[data-type="error-size"]');
+            var errordiv = $('[data-action="fileupload"][data-name="' + name + '"]').find('[data-type="error-size"]');
             errordiv.find('li').hide();
 
             if(type == 'freespace') {
@@ -68,6 +115,9 @@ var files = (function() {
                 errordiv.slideDown();
             } else if(type == 'filesize') {
                 errordiv.find('li[data-name="filesize"]').show();
+                errordiv.slideDown();
+            } else if(type == 'maxfiles') {
+                errordiv.find('li[data-name="maxfiles"]').show();
                 errordiv.slideDown();
             } else {
                 errordiv.hide();
@@ -114,6 +164,19 @@ var files = (function() {
     };
 
     /**
+     * Deferred generator of fileUpload
+     * @param obj
+     * @returns {*}
+     */
+    var fileUploadDeferred = function(obj) {
+        obj.fileupload({
+            autoUpload: true
+        });
+
+        return obj;
+    };
+
+    /**
      * Initialize fileuploads areas
      * @returns {boolean}
      */
@@ -125,60 +188,63 @@ var files = (function() {
 
         $('[data-action="fileupload"]').each(function() {
             var obj = $(this);
-            var progressBar = obj.find('.load .progress-bar');
+            var load = obj.find('.load');
+            var numFiles = obj.attr('data-numfiles');
+            if(!numFiles) numFiles = 1;
 
-            obj.fileupload({
-                sequentialUploads: true,
-                maxNumberOfFiles : 1,
-                autoUpload       : true,
-                dragover         : function(e, data) {
-                    $.publish('drop_zone.files', [true]);
-                },
-                add              : function(e, data) {
-                    $.publish('drop_zone.files', [false]);
+            // Create the promise
+            var promise = fileUploadDeferred(obj);
 
-                    // Check if the user is confirmed
-                    if(obj.attr('data-confirmed') != 1) {
-                        data.abort();
-                        window.location.href = '/data/upload';
-                    }
+            // Assign events to promise
+            promise.on('fileuploadadd', function(e, data) {
+                // File added
+                $.publish('drop_zone.files', [false]);
 
-                    // Check the max size
-                    var filesize = obj.attr('data-maxfilesize');
-                    if(filesize > 0 && data.files[0].size > filesize) {
-                        data.abort();
-                        $.publish('errors.files', [obj.attr('data-name'), 'filesize']);
-                        return false;
-                    }
-
-                    // Check free storage left
-                    var freespace = obj.attr('data-freespace');
-                    if(freespace > 0 && data.files[0].size > freespace) {
-                        data.abort();
-                        $.publish('errors.files', [obj.attr('data-name'), 'freespace']);
-                        return false;
-                    }
-
-                    // No errors
-                    $.publish('errors.files', [obj.attr('data-name')]);
-                    $.publish('add.files', [obj.attr('data-name'), data]);
-                    data.submit();
-
-                    return false;
-                },
-                start            : function(e, data) {
-                    progressBar.css('width', '0%').html('0%');
-                    obj.find('.load').show();
-                },
-                always           : function(e, data) {
-                    $.publish('upload.files', [data.result]);
-                },
-                progress         : function(e, data) {
-                    // Modify the progress bar
-                    var progress = parseInt(data.loaded / data.total * 100, 10);
-                    progressBar.css('width', progress + '%').html(progress + '%');
+                // Check if the user is confirmed
+                if(obj.attr('data-confirmed') != 1) {
+                    data.abort();
+                    window.location.href = '/data/upload';
                 }
+
+                // Check maximum number of files
+                if(data.originalFiles.length > numFiles) {
+                    data.abort();
+                    $.publish('errors.files', [obj.attr('data-name'), 'maxfiles']);
+                    return false;
+                }
+
+                // Check the max size
+                var filesize = obj.attr('data-maxfilesize');
+                if(filesize > 0 && data.files[0].size > filesize) {
+                    data.abort();
+                    $.publish('errors.files', [obj.attr('data-name'), 'filesize']);
+                    return false;
+                }
+
+                // Check free storage left
+                var freespace = obj.attr('data-freespace');
+                if(freespace > 0 && data.files[0].size > freespace) {
+                    data.abort();
+                    $.publish('errors.files', [obj.attr('data-name'), 'freespace']);
+                    return false;
+                }
+
+                // No errors
+                $.publish('errors.files', [obj.attr('data-name')]);
+                $.publish('add.files', [obj.attr('data-name'), data]);
+            }).on('fileuploadalways', function(e, data) {
+                // Finish file upload
+                $.publish('upload.files', [obj.attr('data-name'), data]);
+            }).on('fileuploadprogress', function(e, data) {
+                // Modify the progress bar
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                $('[id="' + data.files[0].name + '"').find('.progress-bar').css('width', progress + '%').html(progress + '%');
             });
+        });
+
+        // Catch dragover event
+        $(window).on('dragover', function(e, data) {
+            $.publish('drop_zone.files', [true]);
         });
 
         // Catch dragleave event
