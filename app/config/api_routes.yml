@@ -15,3 +15,4 @@ parameters:
         blockchain_coins: /data/blockchain/coins
         blockchain_info: /data/blockchain/info
         blockchain_test: /data/blockchain/test
+        bulk_transaction: /bulk

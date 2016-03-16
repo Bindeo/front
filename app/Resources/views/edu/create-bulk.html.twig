@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body %}
-<section class="section-drag hidden-xs">
+<section class="section-drag" data-type="main">
     <div class="container">
         <!-- Object: Drag -->
         <div class="drag" data-action="fileupload" data-name="upload_file_bulk" data-url="{{ path('ajax_file_upload') }}?norender=1"
@@ -21,20 +21,8 @@
             </div>
         </div>
     </div>
-</section>
-<section class="">
     <div class="container">
-        {{ form_start(form, {'attr': {'class': 'form-inline form-inline-size', 'autocomplete': 'off'}}) }}
-        <ul id="upload_file" class="list-unstyled list-bulk" data-prototype="{{ include('edu/partials/bulk-file-form.html.twig', {'file': form.files.vars.prototype})|e }}">
-        {% for file in form.files %}
-            {{ include('edu/partials/bulk-file-form.html.twig') }}
-        {% endfor %}
-        </ul>
-
-        <div class="form-group">
-            <button class="btn btn-default{% if form.files|length == 0 %} collapse{% endif %}" type="submit">Publicar</button>
-        </div>
-        {{ form_end(form) }}
+        {{ include('edu/partials/bulk-transaction-form.html.twig') }}
     </div>
 </section>
 {% endblock %}

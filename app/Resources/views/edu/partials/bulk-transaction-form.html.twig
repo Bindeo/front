@@ -1,0 +1,11 @@
+{{ form_start(form, {'attr': {'class': 'form-inline form-inline-size', 'autocomplete': 'off', 'data-action': 'ajax-form'}}) }}
+<ul id="upload_file" class="list-unstyled list-bulk" data-prototype="{{ include('edu/partials/bulk-file-form.html.twig', {'file': form.files.vars.prototype})|e }}">
+    {% for file in form.files %}
+        {{ include('edu/partials/bulk-file-form.html.twig') }}
+    {% endfor %}
+</ul>
+
+<div class="form-group">
+    <button class="btn btn-default{% if form.files|length == 0 %} collapse{% endif %}" type="submit">Publicar</button>
+</div>
+{{ form_end(form) }}

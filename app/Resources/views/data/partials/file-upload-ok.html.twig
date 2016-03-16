@@ -3,8 +3,14 @@
         <div class="row">
             <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
                 <h1>{% trans %}Job in progress!{% endtrans %}</h1>
-                <p>{% trans %}Your file is being notarized, soon you will receive a confirmation email with the certificate attached{% endtrans %}.</p>
-
+                <p>
+                    {% if message == 'fileupload' %}
+                        {% trans %}Your file is being notarized{% endtrans %},
+                    {% elseif message == 'bulk' %}
+                        {% trans %}Your collection is being notarized{% endtrans %},
+                    {% endif %}
+                    {% trans %}soon you will receive a confirmation email with the certificate attached{% endtrans %}.
+                </p>
                 <div class="list-actions">
                     <a href="{{ path('file_upload') }}" class="btn btn-default">{% trans %}Upload a new file{% endtrans %}</a>
                     <a href="{{ path('file_library') }}" class="btn btn-link">{% trans %}Go to Library{% endtrans %}</a>

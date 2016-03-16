@@ -144,7 +144,7 @@ class DataController extends Controller
                                 PHP_ROUND_HALF_DOWN)),
                             'usedspace' => $formatter->format(round(($user->getTotalStorage() - $user->getStorageLeft()) / 1024 / 1024,
                                 2, PHP_ROUND_HALF_DOWN)),
-                            'html'      => $this->renderView('data/partials/file-upload-ok.html.twig')
+                            'html'      => $this->renderView('data/partials/file-upload-ok.html.twig', ['message' => 'fileupload'])
                         ]
                     ]);
                 }
