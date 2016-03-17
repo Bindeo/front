@@ -24,7 +24,7 @@ var files = (function() {
         $.subscribe('add.files', function(event, name, data) {
             $('.alert').hide();
 
-            if(name != "upload_file_bulk") {
+            if(name == "upload_file") {
                 $('div[data-name="' + name + '"] .file').hide();
                 $('#' + name + '_name').val(data.files[0].name);
                 $('#' + name + '_fileOrigName').val(data.files[0].name);
@@ -90,8 +90,8 @@ var files = (function() {
                     var prototype = $(container.attr('data-prototype').replace(/__name__/g, number));
 
                     // Set file data
-                    prototype.find('[id="bulk_transaction_files_'+number+'_path"]').val(result.path);
-                    prototype.find('[id="bulk_transaction_files_'+number+'_fileOrigName"]').val(result.filename);
+                    prototype.find('[id="bulk_transaction_files_' + number + '_path"]').val(result.path);
+                    prototype.find('[id="bulk_transaction_files_' + number + '_fileOrigName"]').val(result.filename);
                     prototype.find('span[data-name="fileOrigName"]').html(result.filename);
 
                     // Append the prototype
@@ -99,6 +99,18 @@ var files = (function() {
 
                     // Show submit
                     container.parent().find('[type="submit"]').show();
+                }
+            }
+        });
+
+        /**
+         * Files uploaded, upload_file_bulk_verify subscriber
+         */
+        $.subscribe('upload.files', function(event, name, data) {
+            if(name == "upload_file_bulk_verify") {
+                var result = data.result.result;
+                if(result.success == true && result.html) {
+                    $('section[data-type="main"]').replaceWith(result.html);
                 }
             }
         });

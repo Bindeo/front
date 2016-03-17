@@ -104,6 +104,17 @@ class ResultSet
                 $object = new MediaType((array)$data->attributes);
                 $res = [$object->getIdType(), $object];
                 break;
+            case 'bulk_files':
+                // Fill the entity class
+                if (!$this->entity) {
+                    $this->entity = 'AppBundle\Entity\BulkFile';
+                } elseif ($this->entity != 'AppBundle\Entity\BulkFile') {
+                    throw new HttpException(500);
+                }
+
+                $object = new BulkFile((array)$data->attributes);
+                $res = [$object->getIdBulkFile(), $object];
+                break;
             default:
                 throw new HttpException(500);
         }
@@ -131,9 +142,15 @@ class ResultSet
                 }
             } else {
                 // Single registry
-                list($key, $row) = $this->getObject($data->data);
-                $this->rows[0] = $row;
-                $this->numRows = 1;
+                // Check if we have content
+                if (count((array)$data->data->attributes) > 0) {
+                    list($key, $row) = $this->getObject($data->data);
+                    $this->rows[0] = $row;
+                    $this->numRows = 1;
+                } else {
+                    $this->numRows = 0;
+                    $this->numPages = 0;
+                }
             }
         } elseif (isset($data->error)) {
             $this->error = (array)$data->error;

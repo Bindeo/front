@@ -18,6 +18,7 @@
 </head>
 <body{% block bodyclass %}{% endblock %}>
 
+{% block navbar_base %}
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -32,6 +33,7 @@
     </div>
     <!-- /.container-fluid -->
 </nav>
+{% endblock %}
 <div class="notifications" id="notifications">
     <div class="container">
         <div class="alert" role="alert"></div>

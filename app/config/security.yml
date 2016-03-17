@@ -48,4 +48,4 @@ security:
         - { path: ^/user/identity, roles: ROLE_USER }
         - { path: ^/data/upload, roles: ROLE_USER }
         - { path: ^/data/library, roles: ROLE_USER }
-        - { path: ^/edu/isdi, roles: ROLE_USER }
+        - { path: ^/edu/isdi/notarize, roles: ROLE_USER }

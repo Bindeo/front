@@ -1,0 +1,117 @@
+<section class="body">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+                {% if result != 'valid' %}
+                <div class="result">
+                    <h2 class="text-danger"><span class="glyphicon glyphicon-remove"></span> {% trans %}Unverifiable document{% endtrans %}
+                    </h2>
+                    <h3 class="text-danger">{% if file.hash %}Hash: {{ file.hash }}{% else %}Id: {{ file.uniqueId }}{% endif %}</h3>
+                </div>
+                <p>{% trans with {'%email%': '<a href="mailto:documentation@isdi.es">documentation@isdi.es</a>'} %}It is not possible to verify document authenticity, please, contact %email% attaching the document for assistance{% endtrans %}.</p>
+
+                {% else %}
+
+                <div class="result">
+                    <h2 class="text-success"><span class="glyphicon glyphicon-ok"></span> {% trans %}Valid document{% endtrans %}</h2>
+                    <h3 class="text-success">{% if file.hash %}Hash: {{ file.hash }}{% else %}Id: {{ file.uniqueId }}{% endif %}</h3>
+                </div>
+                <p>{% trans with{'%issuer%': 'ISDI'} %}This document has been issued by %issuer%, please, check the following control fields that you will find inside document content{% endtrans %}:</p>
+                <div class="details">
+                    <ul class="list-unstyled">
+                        <li>
+                            <div class="row">
+                                <div class="col-xs-4">{% trans %}Type{% endtrans %}</div>
+                                <div class="col-xs-8">{{ types[file.fileType] }}</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="row">
+                                <div class="col-xs-4">{% trans %}Unique identifier{% endtrans %}</div>
+                                <div class="col-xs-8">{{ file.uniqueId }}</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="row">
+                                <div class="col-xs-4">{% trans %}Expedition date{% endtrans %}</div>
+                                <div class="col-xs-8">{{ file.getFormattedFileDate() }}</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="row">
+                                <div class="col-xs-4">{% trans %}Beneficiary{% endtrans %}</div>
+                                <div class="col-xs-8">{{ file.getInitials() }}</div>
+                            </div>
+                        </li>
+                        {% if file.idContent is not null %}
+                        <li>
+                            <div class="row">
+                                <div class="col-xs-4">{% trans %}Degree{% endtrans %}</div>
+                                <div class="col-xs-8"><a href="#">{{ contents[file.idContent] }}</a></div>
+                            </div>
+                        </li>
+                        {% endif %}
+                        {% if file.qualification is not null %}
+                        <li>
+                            <div class="row">
+                                <div class="col-xs-4">{% trans %}Qualification{% endtrans %}</div>
+                                <div class="col-xs-8">{{ qualifications[file.qualification] }}</div>
+                            </div>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+                <div class="sign">
+                    {% trans %}Signed by{% endtrans %}
+                    <div>
+                        <div class="row">
+                            <div class="col-xs-3 col-sm-2"><img src="{{ asset('images/edu/isdi/profile.png') }}" class="img-responsive">
+                            </div>
+                            <div class="col-xs-9 col-sm-10">
+                                ISDI, Instituto Superior para el Desarrollo de Internet
+                                <div>{{ blockchain.getFormattedBcDate() }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tech">
+                    {% trans %}Technical information{% endtrans %}:
+                    <div>
+                        <ul class="list-unstyled">
+                            <li>
+                                <div class="name">{% trans %}Platform{% endtrans %}</div>
+                                <div class="value">Bitcoin Blockchain (live)</div>
+                            </li>
+                            <li>
+                                <div class="name">{% trans %}Transacction ID{% endtrans %}</div>
+                                <div class="value">
+                                    <a href="https://www.blocktrail.com/tBTC/tx/{{ blockchain.transaction }}" target="_blank">
+                                        {{ blockchain.transaction }}
+                                    </a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="name">{% trans %}Timestamp{% endtrans %}</div>
+                                <div class="value">{{ blockchain.getFormattedBcDate() }}</div>
+                            </li>
+                            <li>
+                                <div class="name">{% trans %}Index hash{% endtrans %}</div>
+                                <div class="value">{{ blockchain.hash }}
+                                </div>
+                            </li>
+                            <li>
+                                <div class="name">{% trans %}Blockchain Block{% endtrans %}</div>
+                                <div class="value">
+                                    <a href="https://www.blocktrail.com/tBTC/block/{{ blockchain.bcBlock }}" target="_blank">
+                                        {{ blockchain.bcBlock }}
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>

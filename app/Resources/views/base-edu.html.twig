@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    ISDI - {% trans %}Documents authenticity certification{% endtrans %}
+{% endblock %}
+
+{% block bodyclass %} class="edu"{% endblock %}
+
+{% block navbar_base %}{% endblock %}
+{% block footer %}
+    <footer class="footer">
+        <div class="container">
+            <div class="">
+                <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+                    <div class="note">
+                        {% trans with {'%company%': 'ISDI - Instituto Superior para el Desarrollo de Internet'} %}Free service offered by %company%{% endtrans %}
+                    </div>
+                    <div class="copy">
+                        © 2016 ISDI
+                    </div>
+                    <div class="tech">
+                        {% trans with {'%bindeo%': '<a href="/">Bindeo</a>'} %}Powered by %bindeo%{% endtrans %}.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+{% endblock %}

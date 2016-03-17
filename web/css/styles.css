@@ -854,7 +854,7 @@ body.edu section.header .nav .pull-right {
 /* line 22, ../sass/includes/_3_edu.scss */
 body.edu section.header .nav .pull-right .more {
   display: inline;
-  margin-right: 25px;
+  margin-right: 15px;
 }
 /* line 28, ../sass/includes/_3_edu.scss */
 body.edu section.header .nav .pull-right .lang button {
@@ -883,31 +883,32 @@ body.edu section.header .brand h1 {
 }
 /* line 59, ../sass/includes/_3_edu.scss */
 body.edu section.body .hash {
+  margin-top: 25px;
   margin-bottom: 15px;
 }
-/* line 62, ../sass/includes/_3_edu.scss */
+/* line 63, ../sass/includes/_3_edu.scss */
 body.edu section.body .hash .button {
   padding-left: 0;
 }
-/* line 66, ../sass/includes/_3_edu.scss */
+/* line 67, ../sass/includes/_3_edu.scss */
 body.edu section.body .hash .form-group, body.edu section.body .hash input, body.edu section.body .hash button {
   width: 100%;
 }
-/* line 71, ../sass/includes/_3_edu.scss */
+/* line 72, ../sass/includes/_3_edu.scss */
 body.edu section.body .drag {
   border: 1px dotted #858585;
-  padding: 35px 25px;
+  padding: 50px 25px;
   text-align: center;
   position: relative;
   overflow: hidden;
 }
-/* line 80, ../sass/includes/_3_edu.scss */
+/* line 81, ../sass/includes/_3_edu.scss */
 body.edu section.body .drag .btn-file {
   border: none;
   background: none;
   box-shadow: none;
 }
-/* line 85, ../sass/includes/_3_edu.scss */
+/* line 86, ../sass/includes/_3_edu.scss */
 body.edu section.body .drag .btn-file input[type=file] {
   position: absolute;
   top: 0;
@@ -923,57 +924,87 @@ body.edu section.body .drag .btn-file input[type=file] {
   cursor: inherit;
   display: block;
 }
-/* line 103, ../sass/includes/_3_edu.scss */
+/* line 104, ../sass/includes/_3_edu.scss */
 body.edu section.body .result {
   margin-bottom: 50px;
   text-align: center;
 }
-/* line 107, ../sass/includes/_3_edu.scss */
+/* line 108, ../sass/includes/_3_edu.scss */
 body.edu section.body .result h2 {
   text-align: center;
 }
-/* line 116, ../sass/includes/_3_edu.scss */
+/* line 112, ../sass/includes/_3_edu.scss */
+body.edu section.body .result h3 {
+  margin-top: 5px;
+  font-size: 14px;
+}
+/* line 118, ../sass/includes/_3_edu.scss */
 body.edu section.body .details {
   margin-bottom: 30px;
 }
-/* line 120, ../sass/includes/_3_edu.scss */
+/* line 122, ../sass/includes/_3_edu.scss */
 body.edu section.body .details ul li {
   padding: 10px 0;
   border-bottom: 1px dotted #eee;
 }
-/* line 124, ../sass/includes/_3_edu.scss */
+/* line 126, ../sass/includes/_3_edu.scss */
 body.edu section.body .details ul li > div > div:first-child {
   font-weight: 400;
 }
-/* line 128, ../sass/includes/_3_edu.scss */
+/* line 130, ../sass/includes/_3_edu.scss */
 body.edu section.body .details ul li:last-child {
   border-bottom: 0;
 }
-/* line 136, ../sass/includes/_3_edu.scss */
+/* line 137, ../sass/includes/_3_edu.scss */
+body.edu section.body .sign {
+  margin-bottom: 30px;
+}
+/* line 140, ../sass/includes/_3_edu.scss */
 body.edu section.body .sign > div {
   background: #eee;
+  margin-top: 5px;
   padding: 20px;
   border-radius: 5px;
 }
-/* line 141, ../sass/includes/_3_edu.scss */
+/* line 146, ../sass/includes/_3_edu.scss */
 body.edu section.body .sign > div img {
   border-radius: 100%;
   box-shadow: rgba(0, 0, 0, 0.25) 0 0 1px;
 }
-/* line 150, ../sass/includes/_3_edu.scss */
+/* line 154, ../sass/includes/_3_edu.scss */
+body.edu section.body .tech > div {
+  background: #eee;
+  margin-top: 5px;
+  padding: 20px;
+  border-radius: 5px;
+}
+/* line 161, ../sass/includes/_3_edu.scss */
+body.edu section.body .tech > div ul li {
+  margin-bottom: 5px;
+}
+/* line 165, ../sass/includes/_3_edu.scss */
+body.edu section.body .tech > div ul li div.name {
+  color: #ccc;
+  font-size: 12px;
+}
+/* line 170, ../sass/includes/_3_edu.scss */
+body.edu section.body .tech > div ul li div.value {
+  font-family: "Courier New";
+}
+/* line 180, ../sass/includes/_3_edu.scss */
 body.edu footer {
   background: #212121;
   margin-top: 50px;
   color: #fff;
 }
-/* line 158, ../sass/includes/_3_edu.scss */
+/* line 188, ../sass/includes/_3_edu.scss */
 body.edu footer > div > div > div {
   background-image: url("./../images/edu/isdi/footer-seal.png");
   background-repeat: no-repeat;
   background-position: right 20px;
   padding: 50px 0 100px;
 }
-/* line 166, ../sass/includes/_3_edu.scss */
+/* line 196, ../sass/includes/_3_edu.scss */
 body.edu footer .tech {
   margin-top: 30px;
 }

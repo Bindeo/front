@@ -17,24 +17,26 @@ class BulkFileType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         // Values for demo
-        $types = ['Tipo' => '', 'Diploma' => 1, 'Derechos de autor' => 2];
+        $types = ['Type' => '', 'Diploma' => 1, 'Derechos de autor' => 2];
         $qualifications = [
-            'Calificación'  => '',
-            '(No aplica)'   => '-',
-            'Sobresaliente' => 'A',
-            'Notable'       => 'B',
-            'Bien'          => 'C',
-            'Suficiente'    => 'D'
+            'Qualification'    => '',
+            '(Does not apply)' => 0,
+            'Sobresaliente'    => 'A',
+            'Notable'          => 'B',
+            'Bien'             => 'C',
+            'Suficiente'       => 'D'
         ];
+
+        $format = 'dd/MM/yyyy';
 
         $builder->add('fileType', ChoiceType::class, ['choices' => $types, 'label' => false])
                 ->add('uniqueId', TextType::class, ['label' => false])
                 ->add('fullName', TextType::class, ['label' => false])
                 ->add('fileDate', DateType::class, [
-                    'label'  => false,
-                    'widget' => 'single_text',
-                    'format' => 'dd/MM/yyyy',
-                    'invalid_message' => 'Formato válido dd/MM/yyyy'
+                    'label'           => false,
+                    'widget'          => 'single_text',
+                    'format'          => $format,
+                    'invalid_message' => 'Valid format ' . $format
                 ])
                 ->add('qualification', ChoiceType::class, ['choices' => $qualifications, 'label' => false])
                 ->add('path', HiddenType::class)
@@ -45,10 +47,10 @@ class BulkFileType extends AbstractType
             $form = $event->getForm();
 
             // Values for demo
-            $signs = ['Firma' => '', 'ISDI' => 1, 'Internet Academi' => 2];
+            $signs = ['Signature' => '', 'ISDI' => 1, 'Internet Academi' => 2];
             $content = [
-                'Contenido de control'                       => '',
-                '(No aplica)'                                => 0,
+                'Control content'                            => '',
+                '(Does not apply)'                           => 0,
                 'Máster Community Manager y Social Media'    => 1,
                 'Indicadores de éxito en las Redes Sociales' => 2
             ];

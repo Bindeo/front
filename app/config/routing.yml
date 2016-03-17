@@ -51,6 +51,10 @@ edu_notarize:
     path: /edu/isdi/notarize
     defaults: { _controller: AppBundle:Edu:createBulkTransaction }
 
+edu_home:
+    path: /edu/isdi
+    defaults: { _controller: AppBundle:Edu:home }
+
 # Private ajax calls
 ajax_file_upload:
     path: /ajax/private/upload-file

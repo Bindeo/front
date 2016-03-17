@@ -25,6 +25,9 @@
                 </div>
                 <div>
                     <p class="form-notice">
+                        {% trans %}Do you already have Bindeo account?{% endtrans %} <a href="{{ path('login') }}">{% trans %}Sign in!{% endtrans %}</a>
+                    </p>
+                    <p class="form-notice">
                         {% trans with {'%a_terms%': '<a href="'~path('index')~'">', '%a_privacy%': '<a href="'~path('index')~'">', '%a_end%': '</a>'} %}
                         By creating account you accept the %a_terms%terms and conditions%a_end% and %a_privacy%privacy policy%a_end%
                         {% endtrans %}

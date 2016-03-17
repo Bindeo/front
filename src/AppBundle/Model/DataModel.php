@@ -3,6 +3,7 @@
 namespace AppBundle\Model;
 
 use AppBundle\Entity\AccountType;
+use AppBundle\Entity\BulkFile;
 use AppBundle\Entity\File;
 use AppBundle\Entity\ResultSet;
 use AppBundle\Entity\User;
@@ -78,6 +79,19 @@ class DataModel
                              ->setPath($file->move($this->filesConf['files_tmp_folder'])->getRealPath())
                              ->setSize($size);
         }
+    }
+
+    /**
+     * Upload temporary bulk files
+     *
+     * @param UploadedFile $file
+     *
+     * @return BulkFile
+     */
+    public function uploadTmpBulkFile(UploadedFile $file)
+    {
+        // Move the file to a temp folder
+        return (new BulkFile())->setPath($file->move($this->filesConf['files_tmp_folder'])->getRealPath());
     }
 
     /**

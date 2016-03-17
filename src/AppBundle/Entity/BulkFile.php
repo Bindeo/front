@@ -68,4 +68,22 @@ class BulkFile extends BulkFileAbstract
 
         return $this;
     }
+
+    /**
+     * Get fullname initials
+     * @return string
+     */
+    public function getInitials()
+    {
+        $initials = '';
+        if ($this->fullName) {
+            foreach (explode(' ', $this->fullName) as $word) {
+                if ($word != '') {
+                    $initials .= substr($word, 0, 1);
+                }
+            }
+        }
+
+        return mb_strtoupper($initials);
+    }
 }
