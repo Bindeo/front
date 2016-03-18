@@ -1,36 +1,6 @@
 {% extends 'base-edu.html.twig' %}
 
 {% block body %}
-<section class="header">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
-                <div class="nav">
-                    <div class="pull-left">
-                        <a href="http://www.isdi.es"><span class="glyphicon glyphicon-arrow-left"></span> {% trans with {'%web%': 'isdi.es'} %}Back to %web%{% endtrans %}</a>
-                    </div>
-                    <div class="pull-right">
-                        <div class="more">
-                            <span class="glyphicon glyphicon-earphone"></span> 900 814 144
-                        </div>
-                        <div class="lang btn-group">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Español <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-right">
-                                <li><a href="#">English</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="brand">
-                    <a class="thumbnail" href="http://www.isdi.es"> <img src="{{ asset('images/edu/isdi/isdi.png') }}"></a>
-                    <h1>{% trans %}Documents authenticity certification{% endtrans %}</h1>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 <section class="body" data-type="main">
     <div class="container">
         <div class="row">

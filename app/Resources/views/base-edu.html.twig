@@ -6,7 +6,45 @@
 
 {% block bodyclass %} class="edu"{% endblock %}
 
-{% block navbar_base %}{% endblock %}
+{% block navbar_base %}
+    <section class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+                    <div class="nav">
+                        <div class="pull-left">
+                            <a href="http://www.isdi.es"><span class="glyphicon glyphicon-arrow-left"></span> {% trans with {'%web%': 'isdi.es'} %}Back to %web%{% endtrans %}</a>
+                        </div>
+                        <div class="pull-right">
+                            <div class="more">
+                                <span class="glyphicon glyphicon-earphone"></span> 900 814 144
+                            </div>
+                            {% if not app.user %}
+                            <div class="lang btn-group">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {% if app.request.locale == 'es_ES' %}Español{% else %}English{% endif %} <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li>
+                                        <a href="#" data-url="{{ path('ajax_change_locale') }}"
+                                           data-locale="{% if app.request.locale != 'es_ES' %}es_ES{% else %}en_US{% endif %}">
+                                            {% if app.request.locale != 'es_ES' %}Español{% else %}English{% endif %}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="brand">
+                        <a class="thumbnail" href="http://www.isdi.es"> <img src="{{ asset('images/edu/isdi/isdi.png') }}"></a>
+                        <h1>{% trans %}Documents authenticity certification{% endtrans %}</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
 {% block footer %}
     <footer class="footer">
         <div class="container">

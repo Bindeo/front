@@ -63,3 +63,7 @@ ajax_file_upload:
 ajax_close_account:
     path: /ajax/private/close-account
     defaults: { _controller: AppBundle:User:ajaxCloseAccount }
+
+ajax_change_locale:
+    path: /ajax/public/change-locale
+    defaults: { _controller: AppBundle:Default:ajaxChangeLocale }

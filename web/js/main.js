@@ -21,6 +21,7 @@ var main = (function() {
     var init = function() {
         subscriptors();
         $('body').on('submit', 'form[data-action="ajax-form"]', sendStandardForm);
+        $('body').on('click', 'a[data-locale]', changeLocale);
     };
 
     var subscriptors = function() {
@@ -140,6 +141,17 @@ var main = (function() {
         );
 
         return promise;
+    };
+
+    /**
+     * Change not logged users locale
+     */
+    var changeLocale = function(event) {
+        event.preventDefault();
+
+        $.when(sendRequest($(this).attr('data-url'), 'l=' + $(this).attr('data-locale'))).done(function(response) {
+            window.location.reload();
+        });
     };
 
     // Public methods
