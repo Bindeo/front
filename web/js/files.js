@@ -54,7 +54,7 @@ var files = (function() {
             var result = data.result;
             $('[id="' + data.files[0].name + '"').remove();
 
-            if(result.success != true) {
+            if(!result.success) {
                 $.publish('errors.files', [result.name, result.error]);
             }
         });
@@ -65,7 +65,7 @@ var files = (function() {
         $.subscribe('upload.files', function(event, name, data) {
             if(name == "upload_file") {
                 var result = data.result;
-                if(result.success == true) {
+                if(result.success) {
                     $('#' + result.name + '_path').val(result.path);
                     $('#' + result.name + '_done').replaceWith(result.html);
                 } else {
@@ -83,7 +83,7 @@ var files = (function() {
         $.subscribe('upload.files', function(event, name, data) {
             if(name == "upload_file_bulk") {
                 var result = data.result;
-                if(result.success == true) {
+                if(result.success) {
                     // Add the prototype
                     var container = $('#upload_file');
                     var number = container.find('li').length;
@@ -109,7 +109,7 @@ var files = (function() {
         $.subscribe('upload.files', function(event, name, data) {
             if(name == "upload_file_bulk_verify") {
                 var result = data.result.result;
-                if(result.success == true && result.html) {
+                if(result.success && result.html) {
                     $('section[data-type="main"]').replaceWith(result.html);
                 }
             }
@@ -200,7 +200,6 @@ var files = (function() {
 
         $('[data-action="fileupload"]').each(function() {
             var obj = $(this);
-            var load = obj.find('.load');
             var numFiles = obj.attr('data-numfiles');
             if(!numFiles) numFiles = 1;
 
