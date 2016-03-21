@@ -15,3 +15,14 @@
 </div>
 <!-- /.navbar-collapse -->
 {% endblock %}
+{% block footer %}
+{% if app.request.cookies.has('ACCEPT_COOKIES') == false %}
+    <div class="cookies">
+        <div class="container">
+            {% trans %}We use cookies to improve safety and user experience{% endtrans %}
+            <a href="#">{% trans %}More information{% endtrans %}</a>
+            <a href="#" data-action="dismiss-cookies">{% trans %}Ok, understood{% endtrans %}</a>
+        </div>
+    </div>
+{% endif %}
+{% endblock %}

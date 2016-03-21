@@ -5,304 +5,606 @@
       <tool tool-id="symfony" tool-name="Symfony"/>
     </header>
     <body>
-      <trans-unit id="11541e6cfa3608ac3529b0ed01690d80" resname="Documents authenticity certification" approved="yes">
+      <trans-unit id="11541e6cfa3608ac3529b0ed01690d80" resname="Documents authenticity certification">
         <source>Documents authenticity certification</source> <target state="translated">Certificación de autenticidad de documentos</target> </trans-unit>
-      <trans-unit id="f6a64140ba35cf39c183f70e4ee76e6a" resname="Back to %web%" approved="yes">
-        <source>Back to %web%</source> <target state="translated">Volver a %web%</target> </trans-unit>
-      <trans-unit id="2f0d6e1793b7d0fd1235daa8c706d1f9" resname="Free service offered by %company%" approved="yes">
-        <source>Free service offered by %company%</source> <target state="translated">Servicio gratuito ofrecido por %company%</target> </trans-unit>
-      <trans-unit id="e0c9c6c013824733be1e883734ba4972" resname="Powered by %bindeo%" approved="yes">
-        <source>Powered by %bindeo%</source> <target state="translated">Con la tecnología de %bindeo%</target> </trans-unit>
-      <trans-unit id="11f581ede2d21a7f2c9c8f6fdc9eb754" resname="Password reset" approved="yes">
-        <source>Password reset</source> <target state="translated">Reiniciar contraseña</target> </trans-unit>
-      <trans-unit id="a68ae8f1a61d382dc4482bf0f718c4b3" resname="To reset your password, type the email address you use to sign in to Bindeo" approved="yes">
-        <source>To reset your password, type the email address you use to sign in to Bindeo</source> <target state="translated">Para reiniciar tu contraseña, introduce la dirección de e-mail que usaste al registrarte en Bindeo</target> </trans-unit>
-      <trans-unit id="09f70e547738d86643cfadc904efa271" resname="Reset my password" approved="yes">
-        <source>Reset my password</source> <target state="translated">Reiniciar mi contraseña</target> </trans-unit>
-      <trans-unit id="4bd9ef088a14b5f6fd9ef86e6f33037f" resname="Need help?" approved="yes">
-        <source>Need help?</source> <target state="translated">¿Necesitas ayuda?</target> </trans-unit>
-      <trans-unit id="8c3f90b8db1dc3f36294175f66b04f94" resname="New in Bindeo?" approved="yes">
-        <source>New in Bindeo?</source> <target state="translated">¿Nuevo en Bindeo?</target> </trans-unit>
-      <trans-unit id="cedcf6fe65a8f2849fe11e316d6c9923" resname="Sign up now" approved="yes">
-        <source>Sign up now</source> <target state="translated">Regístrate ahora</target> </trans-unit>
-      <trans-unit id="b6d4223e60986fa4c9af77ee5f7149c5" resname="Sign in" approved="yes">
-        <source>Sign in</source> <target state="translated">Iniciar sesión</target> </trans-unit>
-      <trans-unit id="744959a0cc12c8bff1860f3f3df5e390" resname="Sing in to Bindeo" approved="yes">
-        <source>Sing in to Bindeo</source> <target state="translated">Inicia sesión en Bindeo</target> </trans-unit>
-      <trans-unit id="89a50d12e2af0def13fd70ec4362d996" resname="Type your email and password and click button to sing in" approved="yes">
-        <source>Type your email and password and click button to sing in</source> <target state="translated">Introduce tu email y contraseña y pulsa en el botón para entrar</target> </trans-unit>
-      <trans-unit id="ce8ae9da5b7cd6c3df2929543a9af92d" resname="Email" approved="yes">
-        <source>Email</source> <target state="translated">E-mail</target> </trans-unit>
-      <trans-unit id="dc647eb65e6711e155375218212b3964" resname="Password" approved="yes">
-        <source>Password</source> <target state="translated">Contraseña</target> </trans-unit>
-      <trans-unit id="98f130908bdb82901f3bc905870908fb" resname="Forgot password" approved="yes">
-        <source>Forgot password</source> <target state="translated">Contraseña olvidada</target> </trans-unit>
-      <trans-unit id="d9776f0775997b2e698c6975420b5c5d" resname="Sign up" approved="yes">
-        <source>Sign up</source> <target state="translated">Crear cuenta</target> </trans-unit>
-      <trans-unit id="b0f1b294c6cab8fbb7c12e3cc1129e05" resname="Start today to protect your property!" approved="yes">
-        <source>Start today to protect your property!</source> <target state="translated">¡Empieza hoy mismo a proteger tu propiedad!</target> </trans-unit>
-      <trans-unit id="42369faa6a6b243aac58683f3874bf99" resname="Create account" approved="yes">
-        <source>Create account</source> <target state="translated">Crear cuenta</target> </trans-unit>
-      <trans-unit id="6e01daeba3fe8f64bf42a9e64ae86291" resname="Do you already have Bindeo account?" approved="yes">
-        <source>Do you already have Bindeo account?</source> <target state="translated">¿Ya tienes una cuenta Bindeo?</target> </trans-unit>
-      <trans-unit id="a2b333e9fa62b23be00d2508e4486f6e" resname="Sign in!" approved="yes">
-        <source>Sign in!</source> <target state="translated">¡Inicia sesión!</target> </trans-unit>
-      <trans-unit id="f5c9f59409dc21a2466d0bb97792bd6c" resname="By creating account you accept the %a_terms%terms and conditions%a_end% and %a_privacy%privacy policy%a_end%" approved="yes">
-        <source>By creating account you accept the %a_terms%terms and conditions%a_end% and %a_privacy%privacy policy%a_end%</source> <target state="translated">Al crear cuenta aceptas los %a_terms%términos y condiciones%a_end% y la %a_privacy%política de privacidad%a_end%</target> </trans-unit>
-      <trans-unit id="ca7960c43f6e85420c85976f31b3b783" resname="Validate your change" approved="yes">
-        <source>Validate your change</source> <target state="translated">Valida tus cambios</target> </trans-unit>
-      <trans-unit id="8f572283292f29843c6b9de46c1dbecd" resname="Account confirmed!" approved="yes">
-        <source>Account confirmed!</source> <target state="translated">¡Cuenta confirmada!</target> </trans-unit>
-      <trans-unit id="fa6ebfa465ec170931037010cce3c0de" resname="Email changed!" approved="yes">
-        <source>Email changed!</source> <target state="translated">¡E-mail cambiado!</target> </trans-unit>
-      <trans-unit id="486b7d3b3ca271d873ef1c9d4c0e07a7" resname="Password changed!" approved="yes">
-        <source>Password changed!</source> <target state="translated">¡Contraseña cambiada!</target> </trans-unit>
-      <trans-unit id="dde4255a730828aecd28ec847f14f87f" resname="Sorry, your token is expired" approved="yes">
-        <source>Sorry, your token is expired</source> <target state="translated">Lo sentimos, tu token está caducado</target> </trans-unit>
-      <trans-unit id="a11e88d155982d7b172dbf322e56b726" resname="Check your inbox" approved="yes">
-        <source>Check your inbox</source> <target state="translated">Comprueba tu bandeja de entrada</target> </trans-unit>
-      <trans-unit id="4c708a4f337511de76f039cd652232f8" resname="If we found an account associated with this email address %email%, you will find and email in your inbox shortly" approved="yes">
-        <source>If we found an account associated with this email address %email%, you will find and email in your inbox shortly</source> <target state="translated">Si encontramos una cuenta asociada con esta dirección de e-mail %email%, encontrarás un e-mail en tu bandeja de entrada en breve</target> </trans-unit>
-      <trans-unit id="75411b89360f9969b6508d2625ec1801" resname="If you're not sure about which email you used to sign up in to Bindeo or experience any other problem, please, %a_start%contact us%a_end%" approved="yes">
-        <source>If you're not sure about which email you used to sign up in to Bindeo or experience any other problem, please, %a_start%contact us%a_end%</source> <target state="translated">Si no estás seguro acerca de qué e-mail usaste para registrarte en Bindeo o experimentas algún otro problema, por favor, %a_start%contáctanos%a_end%</target> </trans-unit>
-      <trans-unit id="51aece13ecee725fbd3aa4884a15dc86" resname="Choose your new password" approved="yes">
-        <source>Choose your new password</source> <target state="translated">Elige tu nueva contraseña</target> </trans-unit>
-      <trans-unit id="6cb7090163eaf02a157011650f3361f3" resname="Type and repeat your new sign in password" approved="yes">
-        <source>Type and repeat your new sign in password</source> <target state="translated">Introduce y repite tu nueva contraseña</target> </trans-unit>
-      <trans-unit id="0b39c5aca15b84b1ad53a94d6b3feb78" resname="Change password" approved="yes">
-        <source>Change password</source> <target state="translated">Cambiar contraseña</target> </trans-unit>
-      <trans-unit id="c9c5c65fb4af9cf90eb99b3b84424189" resname="Identity" approved="yes">
-        <source>Identity</source> <target state="translated">Identidad</target> </trans-unit>
-      <trans-unit id="6d1841e1ecd2119d4910713c498823e1" resname="Your identity" approved="yes">
-        <source>Your identity</source> <target state="translated">Tu identidad</target> </trans-unit>
-      <trans-unit id="ac63c86a55041e871992de90dd50246b" resname="Your name and your email address are being used for ownership notarization, if are not right, certificate won't be valid for you" approved="yes">
-        <source>Your name and your email address are being used for ownership notarization, if are not right, certificate won't be valid for you</source> <target state="translated">Tu nombre y tu dirección de e-mail están siendo usados para notarizar la propiedad, si no están correctos, el certificado no será válido para ti</target> </trans-unit>
-      <trans-unit id="014016c396c238d7fc3a85a9feb6494b" resname="Close my account" approved="yes">
-        <source>Close my account</source> <target state="translated">Cancelar mi cuenta</target> </trans-unit>
-      <trans-unit id="fa1598bae213bf1754007f925973a0ec" resname="Your can cancel and close your account anytime, for your security, we will keep all information for 7 days" approved="yes">
-        <source>Your can cancel and close your account anytime, for your security, we will keep all information for 7 days</source> <target state="translated">Puedes cancelar y borrar tu cuenta en cualquier momento, por tu seguridad, mantendremos toda la información durante 7 días</target> </trans-unit>
-      <trans-unit id="c851e3b27f89ce7d07e406d7051003d2" resname="Close account" approved="yes">
-        <source>Close account</source> <target state="translated">Cancelar cuenta</target> </trans-unit>
-      <trans-unit id="dd2f5ddc47ad23aed67f716aa5bc175b" resname="All your data will be deleted" approved="yes">
-        <source>All your data will be deleted</source> <target state="translated">Todos tus datos serán borrados</target> </trans-unit>
-      <trans-unit id="ee9a5212a2bbd526886926a1da6eb1e0" resname="For your secutiry, please, type again your Bindeo's account password" approved="yes">
-        <source>For your secutiry, please, type again your Bindeo's account password</source> <target state="translated">Por tu seguridad, por favor, introduce de nuevo tu contraseña de Bindeo</target> </trans-unit>
-      <trans-unit id="0fd2cf0b653e1889fa214c0665a8d027" resname="Your password is not correct" approved="yes">
-        <source>Your password is not correct</source> <target state="translated">Tu contraseña no es correcta</target> </trans-unit>
-      <trans-unit id="5d7082ba243946c386add021cced19cd" resname="Your identity has been updated" approved="yes">
-        <source>Your identity has been updated</source> <target state="translated">Tu identidad ha sido actualizada</target> </trans-unit>
-      <trans-unit id="ac0ae47c781ccc515f9bed2ff39afe57" resname="A verification email has been sent to your new email, you need to verify it before changes are applied" approved="yes">
-        <source>A verification email has been sent to your new email, you need to verify it before changes are applied</source> <target state="translated">Un e-mail de verificación ha sido enviado a tu nueva dirección, necesitas validarlo antes de que los cambios sean aplicados</target> </trans-unit>
-      <trans-unit id="daa6b483e9f6ca081ec7e0b4a352f9e9" resname="Save changes" approved="yes">
-        <source>Save changes</source> <target state="translated">Guardar cambios</target> </trans-unit>
-      <trans-unit id="d0834fcec6337785ee749c8f5464f6f6" resname="Preferences" approved="yes">
-        <source>Preferences</source> <target state="translated">Preferencias</target> </trans-unit>
-      <trans-unit id="878f5415740c1d51d7753c84f7ca9658" resname="Update your account preferences" approved="yes">
-        <source>Update your account preferences</source> <target state="translated">Actualiza las preferencias de tu cuenta</target> </trans-unit>
-      <trans-unit id="5cf7a9de30c6dc027c3622f16ccffc1f" resname="Data successfully updated" approved="yes">
-        <source>Data successfully updated</source> <target state="translated">Datos actualizados correctamente</target> </trans-unit>
-      <trans-unit id="9e291047ee94d6048985655535d4358f" resname="Update preferences" approved="yes">
-        <source>Update preferences</source> <target state="translated">Actualizar preferencias</target> </trans-unit>
-      <trans-unit id="006c27f204c663f9457ff296dcb83e1b" resname="Change sign in password" approved="yes">
-        <source>Change sign in password</source> <target state="translated">Cambiar contraseña de inicio de sesión</target> </trans-unit>
-      <trans-unit id="254f642527b45bc260048e30704edb39" resname="Configuration" approved="yes">
-        <source>Configuration</source> <target state="translated">Configuración</target> </trans-unit>
-      <trans-unit id="5c5d9753f4e04535b543750d98fffb5d" resname="To check an electronic document ownership or emitted by %company%, please, enter the identification number or drag the original document inside the box" approved="yes">
-        <source>To check an electronic document ownership or emitted by %company%, please, enter the identification number or drag the original document inside the box</source> <target state="translated">Para cotejar un documento electrónico propiedad o emitido por %company%, por favor, introduzca el número de identificación único del mismo o arrastre el documento original dentro del recuadro</target> </trans-unit>
-      <trans-unit id="00cfb9772dae67f5417b4b488ec304bf" resname="Unique document identifier" approved="yes">
-        <source>Unique document identifier</source> <target state="translated">Identificador único del documento</target> </trans-unit>
-      <trans-unit id="060bf2d587991d8f090a1309b285291c" resname="Check" approved="yes">
-        <source>Check</source> <target state="translated">Comprobar</target> </trans-unit>
-      <trans-unit id="1f103c19fd35d4777711bf7bc8c18433" resname="Drag here the file or click to upload it" approved="yes">
-        <source>Drag here the file or click to upload it</source> <target state="translated">Arrastra aquí el fichero o pulsa para subirlo</target> </trans-unit>
-      <trans-unit id="7dbfdb67a0d573c60439269373b65810" resname="Loading file, please wait" approved="yes">
-        <source>Loading file, please wait</source> <target state="translated">Cargando fichero, por favor espere</target> </trans-unit>
-      <trans-unit id="ea4788705e6873b424c65e91c2846b19" resname="Cancel" approved="yes">
-        <source>Cancel</source> <target state="translated">Cancelar</target> </trans-unit>
-      <trans-unit id="36119112754253c6f778bf6354747818" resname="Drop your file" approved="yes">
-        <source>Drop your file</source> <target state="translated">Suelta tu fichero</target> </trans-unit>
-      <trans-unit id="e6652b6902bd07cb365a34bd010ed274" resname="Notarize your collection" approved="yes">
-        <source>Notarize your collection</source> <target state="translated">Notariza tu colección</target> </trans-unit>
-      <trans-unit id="962db69a7bdc9d8db916f4cd37998c6b" resname="Unverifiable document" approved="yes">
-        <source>Unverifiable document</source> <target state="translated">Documento no verificable</target> </trans-unit>
-      <trans-unit id="b913eb7f7d8866108b84ee053b3f71c1" resname="It is not possible to verify document authenticity, please, contact %email% attaching the document for assistance" approved="yes">
-        <source>It is not possible to verify document authenticity, please, contact %email% attaching the document for assistance</source> <target state="translated">No es posible verificar la autenticidad del documento, por favor, contacta con %email% adjuntando el documento para recibir asistencia</target> </trans-unit>
-      <trans-unit id="fc2449dc1ab6799d5f14275a7558d724" resname="Valid document" approved="yes">
-        <source>Valid document</source> <target state="translated">Documento válido</target> </trans-unit>
-      <trans-unit id="b4d3b36fe89b60b319b43f2097d40756" resname="This document has been issued by %issuer%, please, check the following control fields that you will find inside document content" approved="yes">
-        <source>This document has been issued by %issuer%, please, check the following control fields that you will find inside document content</source> <target state="translated">Este documento ha sido emitido por %issuer%, por favor, comprueba los siguientes campos de control que encontrará dentro del contenido del documento</target> </trans-unit>
-      <trans-unit id="a1fa27779242b4902f7ae3bdd5c6d508" resname="Type" approved="yes">
-        <source>Type</source> <target state="translated">Tipo</target> </trans-unit>
-      <trans-unit id="c1c123990faa9bf28b9d93bac9fb4e95" resname="Unique identifier" approved="yes">
-        <source>Unique identifier</source> <target state="translated">Identificador único</target> </trans-unit>
-      <trans-unit id="adcbc5de64f6e1f15be68f45fbb5ee60" resname="Expedition date" approved="yes">
-        <source>Expedition date</source> <target state="translated">Fecha de expedición</target> </trans-unit>
-      <trans-unit id="bc4bee1370166bd48330dd13b2de699c" resname="Beneficiary" approved="yes">
-        <source>Beneficiary</source> <target state="translated">Beneficiario</target> </trans-unit>
-      <trans-unit id="6669c4dc00cb161446821b3529ca07d8" resname="Degree" approved="yes">
-        <source>Degree</source> <target state="translated">Titulación</target> </trans-unit>
-      <trans-unit id="4b047525248642a12841969959fe4851" resname="Qualification" approved="yes">
-        <source>Qualification</source> <target state="translated">Calificación</target> </trans-unit>
-      <trans-unit id="adcd5bc1b9c6e646af6d5effb9d60f83" resname="Signed by" approved="yes">
-        <source>Signed by</source> <target state="translated">Firmado por</target> </trans-unit>
-      <trans-unit id="1cc0d3105e2664958a391fcc2bc0473a" resname="Technical information" approved="yes">
-        <source>Technical information</source> <target state="translated">Información técnica</target> </trans-unit>
-      <trans-unit id="419f3742e6de8e0ec4b22cce005e7630" resname="Platform" approved="yes">
-        <source>Platform</source> <target state="translated">Plataforma</target> </trans-unit>
-      <trans-unit id="696ac36215036afd3ee8a607a8f24a61" resname="Transacction ID" approved="yes">
-        <source>Transacction ID</source> <target state="translated">Id de transacción</target> </trans-unit>
-      <trans-unit id="a3d5de3eac8bb00ae86fd1a1005f1500" resname="Timestamp" approved="yes">
-        <source>Timestamp</source> <target state="translated">Marca de tiempo</target> </trans-unit>
-      <trans-unit id="69bc53e9652ab35bf7719089e0c80bf9" resname="Index hash" approved="yes">
-        <source>Index hash</source> <target state="translated">Hash del índice</target> </trans-unit>
-      <trans-unit id="43a8bd4719207145e5055837055384f4" resname="Blockchain Block" approved="yes">
-        <source>Blockchain Block</source> <target state="translated">Bloque de Blockchain</target> </trans-unit>
-      <trans-unit id="d8f34616d2924c538074e545ba70c343" resname="Bindeo: Protect your intellectual property" approved="yes">
-        <source>Bindeo: Protect your intellectual property</source> <target state="translated">Bindeo: Protege tu propiedad intelectual</target> </trans-unit>
-      <trans-unit id="49ee3087348e8d44e1feda1917443987" resname="Name" approved="yes">
-        <source>Name</source> <target state="translated">Nombre</target> </trans-unit>
-      <trans-unit id="8e55577a8ed3b20bff65d23c000280d4" resname="Surname" approved="yes">
-        <source>Surname</source> <target state="translated">Apellidos</target> </trans-unit>
-      <trans-unit id="4994a8ffeba4ac3140beb89e8d41f174" resname="Language" approved="yes">
-        <source>Language</source> <target state="translated">Idioma</target> </trans-unit>
-      <trans-unit id="3544848f820b9d94a3f3871a382cf138" resname="New password" approved="yes">
-        <source>New password</source> <target state="translated">Nueva contraseña</target> </trans-unit>
-      <trans-unit id="062d2b8bc2cfac7772c75ae8090fb9d1" resname="Old password" approved="yes">
-        <source>Old password</source> <target state="translated">Antigua contraseña</target> </trans-unit>
-      <trans-unit id="c1379f85e83c7ae0e84b3bce5737af85" resname="Repeat password" approved="yes">
-        <source>Repeat password</source> <target state="translated">Repite contraseña</target> </trans-unit>
-      <trans-unit id="d554d9bf0cd8f79c215600eeb77825e8" resname="Your email" approved="yes">
-        <source>Your email</source> <target state="translated">Tu e-mail</target> </trans-unit>
-      <trans-unit id="ed583b79eb1122b8e369654dd26af443" resname="Type of asset" approved="yes">
-        <source>Type of asset</source> <target state="translated">Tipo de bien</target> </trans-unit>
-      <trans-unit id="8c09001c99ecb6fdd8d6023fcf039054" resname="Signature" approved="yes">
-        <source>Signature</source> <target state="translated">Firma</target> </trans-unit>
-      <trans-unit id="922456d6ef0b44d2ae7c173f9263ff8c" resname="Control content" approved="yes">
-        <source>Control content</source> <target state="translated">Contenido de control</target> </trans-unit>
-      <trans-unit id="5b949d2101e596971b2c4b786ea9661d" resname="Does not apply" approved="yes">
-        <source>Does not apply</source> <target state="translated">No aplica</target> </trans-unit>
-      <trans-unit id="44749712dbec183e983dcd78a7736c41" resname="Date" approved="yes">
-        <source>Date</source> <target state="translated">Fecha</target> </trans-unit>
-      <trans-unit id="b1f1d33e829e43339fbe690d989131bc" resname="There was a problem with your request, please try it later" approved="yes">
-        <source>There was a problem with your request, please try it later</source> <target state="translated">Hubo un problema con tu petición, por favor intenta de nuevo más tarde</target> </trans-unit>
-      <trans-unit id="380f0c54be3dcdd88160d07df0ca4008" resname="The email is already used" approved="yes">
-        <source>The email is already used</source> <target state="translated">El e-mail ya está usado</target> </trans-unit>
-      <trans-unit id="733d90b4b4d415fe7071bf3a5e07eb46" resname="We have a problem updating your preferences, please try again later" approved="yes">
-        <source>We have a problem updating your preferences, please try again later</source> <target state="translated">Tenemos un problema actualizando tus preferencias, por favor inténtalo de nuevo más tarde</target> </trans-unit>
-      <trans-unit id="fa2b9feceb1122a7e79d6c1ae7654c7b" resname="We have a problem creating your account, please try again later" approved="yes">
-        <source>We have a problem creating your account, please try again later</source> <target state="translated">Tenemos un problema creando tu cuenta, por favor inténtalo de nuevo más tarde</target> </trans-unit>
-      <trans-unit id="be77997d63f857e52ce18d0d8f2cfb8b" resname="We have a problem updating your password, please try again later" approved="yes">
-        <source>We have a problem updating your password, please try again later</source> <target state="translated">Tenemos un problema actualizando tu contraseña, por favor inténtalo de nuevo más tarde</target> </trans-unit>
-      <trans-unit id="561376cd859ca8e55a4e7c2e1491b8cd" resname="You have to upload a file" approved="yes">
-        <source>You have to upload a file</source> <target state="translated">Tienes que subir un fichero</target> </trans-unit>
-      <trans-unit id="1d00815d0968e9e27abf2365033c0637" resname="You have already uploaded the same file" approved="yes">
-        <source>You have already uploaded the same file</source> <target state="translated">Ya has subido el mismo fichero</target> </trans-unit>
-      <trans-unit id="8f7cdbdad80503ea02dcc9ff36790892" resname="Valid format dd/MM/yyyy" approved="yes">
-        <source>Valid format dd/MM/yyyy</source> <target state="translated">Formato válido dd/MM/yyyy</target> </trans-unit>
-      <trans-unit id="ba3809173bb6273d4465f2d8b62dc991" resname="Bindeo is the application to protect and manage your property" approved="yes">
-        <source>Bindeo is the application to protect and manage your property</source> <target state="translated">Bindeo es la aplicación para proteger y gestionar tu propiedad</target> </trans-unit>
-      <trans-unit id="8b6db1eca796d31771132db3a675db2d" resname="Start here" approved="yes">
-        <source>Start here</source> <target state="translated">Empieza aquí</target> </trans-unit>
-      <trans-unit id="deb10517653c255364175796ace3553f" resname="Product" approved="yes">
-        <source>Product</source> <target state="translated">Producto</target> </trans-unit>
-      <trans-unit id="e22ac25b066b201473de7aa700ef5d92" resname="Pricing" approved="yes">
-        <source>Pricing</source> <target state="translated">Precios</target> </trans-unit>
-      <trans-unit id="70d529695c253d17e992cb9265abc57f" resname="Mission" approved="yes">
-        <source>Mission</source> <target state="translated">Misión</target> </trans-unit>
-      <trans-unit id="b1f0b866ff1e540503531b72d365a681" resname="Cases" approved="yes">
-        <source>Cases</source> <target state="translated">Casos</target> </trans-unit>
-      <trans-unit id="db5eb84117d06047c97c9a0191b5fffe" resname="Support" approved="yes">
-        <source>Support</source> <target state="translated">Soporte</target> </trans-unit>
-      <trans-unit id="73f78c42d0a9c090a96bca28ccd826b6" resname="File library" approved="yes">
-        <source>File library</source> <target state="translated">Librería de ficheros</target> </trans-unit>
-      <trans-unit id="6f50d28f868787582fde84eb7c13a2ee" resname="All items" approved="yes">
-        <source>All items</source> <target state="translated">Todos los elementos</target> </trans-unit>
-      <trans-unit id="7cf93a4a9e585a369e96e3ad0495abaa" resname="Notarized" approved="yes">
-        <source>Notarized</source> <target state="translated">Notarizado</target> </trans-unit>
-      <trans-unit id="b97610672fd9962a5dc46f8ce2025ffe" resname="Getting certificate" approved="yes">
-        <source>Getting certificate</source> <target state="translated">Consiguiendo certificado</target> </trans-unit>
-      <trans-unit id="a7e253cd8dd95da3e20daf45519a8dc2" resname="Trash" approved="yes">
-        <source>Trash</source> <target state="translated">Papelera</target> </trans-unit>
-      <trans-unit id="5fe6005bf6e415c950c011fb65f12b8f" resname="Deleted" approved="yes">
-        <source>Deleted</source> <target state="translated">Borrados</target> </trans-unit>
-      <trans-unit id="8b55c034ba01c709929e27049e483582" resname="%space% GB free" approved="yes">
-        <source>%space% GB free</source> <target state="translated">%space% GB libre</target> </trans-unit>
-      <trans-unit id="c501a79f47e4c4edbab6e69193295cd4" resname="%space% GB of %total% GB used" approved="yes">
-        <source>%space% GB of %total% GB used</source> <target state="translated">%space% GB de %total% GB usados</target> </trans-unit>
-      <trans-unit id="abb81bda3fcf66a011dc00b205349007" resname="Search by name or filename" approved="yes">
-        <source>Search by name or filename</source> <target state="translated">Buscar por nombre o nombre de fichero</target> </trans-unit>
-      <trans-unit id="d7778d0c64b6ba21494c97f77a66885a" resname="Filter" approved="yes">
-        <source>Filter</source> <target state="translated">Filtrar</target> </trans-unit>
-      <trans-unit id="b1c94ca2fbc3e78fc30069c8d0f01680" resname="All" approved="yes">
-        <source>All</source> <target state="translated">Todo</target> </trans-unit>
-      <trans-unit id="f0dd2d00f8c9514d5282da97c4227df9" resname="Show first" approved="yes">
-        <source>Show first</source> <target state="translated">Mostrar primero</target> </trans-unit>
-      <trans-unit id="236c7642a79eeb1b4154eb4712bd4068" resname="Newer" approved="yes">
-        <source>Newer</source> <target state="translated">Más recientes</target> </trans-unit>
-      <trans-unit id="625fd29749d91880963143cfd589bd8f" resname="Older" approved="yes">
-        <source>Older</source> <target state="translated">Más antiguos</target> </trans-unit>
-      <trans-unit id="afc493b6574d5529ed0ffa6f18f05b20" resname="Smaller" approved="yes">
-        <source>Smaller</source> <target state="translated">Más pequeños</target> </trans-unit>
-      <trans-unit id="a2890fe02723e33ccc9c10f15ff58df4" resname="Bigger" approved="yes">
-        <source>Bigger</source> <target state="translated">Más grandes</target> </trans-unit>
-      <trans-unit id="c7de86f69db264c3950d8ae46ed2e33f" resname="Upload files" approved="yes">
-        <source>Upload files</source> <target state="translated">Subir ficheros</target> </trans-unit>
-      <trans-unit id="ef1fb99744c1e164c8c787cbb6c6fd24" resname="Confirm your account" approved="yes">
-        <source>Confirm your account</source> <target state="translated">Confirmar tu cuenta</target> </trans-unit>
-      <trans-unit id="0d5057fe45574a8ef724edc24783b2dc" resname="Important!" approved="yes">
-        <source>Important!</source> <target state="translated">¡Importante!</target> </trans-unit>
-      <trans-unit id="1dd7783dad401395908b777a9e4675c2" resname="Please, confirm your data" approved="yes">
-        <source>Please, confirm your data</source> <target state="translated">Por favor, confirma tus datos</target> </trans-unit>
-      <trans-unit id="96510d7a2ee5442bbe4f8ef05cd0ac1d" resname="Drag &amp; drop you file here" approved="yes">
-        <source>Drag &amp; drop you file here</source> <target state="translated">Arrastra y suelta tu fichero aquí</target> </trans-unit>
-      <trans-unit id="44f2ac7459445cf073ada0d5b9bd028d" resname="Upload file or take a photo" approved="yes">
-        <source>Upload file or take a photo</source> <target state="translated">Sube un fichero o haz una foto</target> </trans-unit>
-      <trans-unit id="e437ed2e27a5e5eca7c91bbc248086d5" resname="Upload any file" approved="yes">
-        <source>Upload any file</source> <target state="translated">Sube cualquier fichero</target> </trans-unit>
-      <trans-unit id="f0aa25cd443edb4cacf75bb24c5ad303" resname="Ops!" approved="yes">
-        <source>Ops!</source> <target state="translated">¡Ups!</target> </trans-unit>
-      <trans-unit id="96bf12bcd057e4cad1ab3624f989ccad" resname="You exceeded your max file size of %size% KB" approved="yes">
-        <source>You exceeded your max file size of %size% KB</source> <target state="translated">Superaste tu tamaño máximo de fichero de %size% KB</target> </trans-unit>
-      <trans-unit id="397b0832f12c2c46d1e074ae489e726e" resname="You only have %size% GB or free space" approved="yes">
-        <source>You only have %size% GB or free space</source> <target state="translated">Sólo tienes %size% GB de espacio libre</target> </trans-unit>
-      <trans-unit id="a95c0ac8c155be26569730efec586848" resname="You only can upload %maxfiles% files at the same time" approved="yes">
-        <source>You only can upload %maxfiles% files at the same time</source> <target state="translated">Sólo puedes subir %maxfiles% ficheros al mismo tiempo</target> </trans-unit>
-      <trans-unit id="74ff4bad28abee3489bd8ca138b80bb6" resname="No files found" approved="yes">
-        <source>No files found</source> <target state="translated">No hay ficheros</target> </trans-unit>
-      <trans-unit id="17f45fcaf303361c7a563dc5ca53ec9d" resname="Do you want %a_start%upload%a_end% a file?" approved="yes">
-        <source>Do you want %a_start%upload%a_end% a file?</source> <target state="translated">¿Quieres empezar a %a_start%subir%a_end% un fichero?</target> </trans-unit>
-      <trans-unit id="cd0255f32110d043f3889f7536760a5c" resname="Loading more files" approved="yes">
-        <source>Loading more files</source> <target state="translated">Cargando más ficheros</target> </trans-unit>
-      <trans-unit id="83122435ed7e49aa55c18c2da8941a0d" resname="Great, check your inbox!" approved="yes">
-        <source>Great, check your inbox!</source> <target state="translated">¡Genial, revisa tu bandeja de entrada!</target> </trans-unit>
-      <trans-unit id="389ce7b776a428bd6a9824ff47f2cd6c" resname="We've sent you an email to %email% for allow to confirm your email address" approved="yes">
-        <source>We've sent you an email to %email% for allow to confirm your email address</source> <target state="translated">Te hemos enviado un e-mail a %email% para que puedas confirmar tu dirección</target> </trans-unit>
-      <trans-unit id="1063e38cb53d94d386f21227fcd84717" resname="Remove" approved="yes">
-        <source>Remove</source> <target state="translated">Borrar</target> </trans-unit>
-      <trans-unit id="9dd53aaefbce61e3f74d3a491a279046" resname="Job in progress!" approved="yes">
-        <source>Job in progress!</source> <target state="translated">¡Trabajo en curso!</target> </trans-unit>
-      <trans-unit id="92c240b1e613919e904d00918fed1c5f" resname="Your file is being notarized" approved="yes">
-        <source>Your file is being notarized</source> <target state="translated">Tu fichero está siendo notarizado</target> </trans-unit>
-      <trans-unit id="80f95ad4ab9c7321de4ebfc19c92b976" resname="Your collection is being notarized" approved="yes">
-        <source>Your collection is being notarized</source> <target state="translated">Tu colección está siendo notarizada</target> </trans-unit>
-      <trans-unit id="eca35c20e0b9d27c1a3701c687c722d2" resname="soon you will receive a confirmation email with the certificate attached" approved="yes">
-        <source>soon you will receive a confirmation email with the certificate attached</source> <target state="translated">pronto recibirás una confirmación por e-mail con el certificado adjunto</target> </trans-unit>
-      <trans-unit id="93ee55ee88a97dda046a01d20389e509" resname="Upload a new file" approved="yes">
-        <source>Upload a new file</source> <target state="translated">Subir un nuevo fichero</target> </trans-unit>
-      <trans-unit id="611d02d3f79e001c3eaf982b4fdaeafc" resname="Go to Library" approved="yes">
-        <source>Go to Library</source> <target state="translated">Ir a la Librería</target> </trans-unit>
-      <trans-unit id="3c3ed70be7082a525339b29a10adbe9b" resname="Send me verification email" approved="yes">
-        <source>Send me verification email</source> <target state="translated">Enviadme un e-mail de verificación</target> </trans-unit>
-      <trans-unit id="20b8bee5085053a580561ea378789ebc" resname="There was an error uploading the file" approved="yes">
-        <source>There was an error uploading the file</source> <target state="translated">Hubo un error subiendo el fichero</target> </trans-unit>
-      <trans-unit id="722917f7ee83c261f831e079b280298d" resname="Owner identity" approved="yes">
-        <source>Owner identity</source> <target state="translated">Identidad del propietario</target> </trans-unit>
-      <trans-unit id="4a309b93a45d1adbded268048f6bae4d" resname="Manage identities" approved="yes">
-        <source>Manage identities</source> <target state="translated">Gestionar identidades</target> </trans-unit>
-      <trans-unit id="300164193661588726870b90627c4d0a" resname="Register ownership" approved="yes">
-        <source>Register ownership</source> <target state="translated">Registrar propiedad</target> </trans-unit>
-      <trans-unit id="0323de4f66a1700e2173e9bcdce02715" resname="Logout" approved="yes">
-        <source>Logout</source> <target state="translated">Cerrar sesión</target> </trans-unit>
+      <trans-unit id="f6a64140ba35cf39c183f70e4ee76e6a" resname="Back to %web%">
+        <source>Back to %web%</source>
+        <target state="translated">Volver a %web%</target>
+      </trans-unit>
+      <trans-unit id="2f0d6e1793b7d0fd1235daa8c706d1f9" resname="Free service offered by %company%">
+        <source>Free service offered by %company%</source>
+        <target state="translated">Servicio gratuito ofrecido por %company%</target>
+      </trans-unit>
+      <trans-unit id="e0c9c6c013824733be1e883734ba4972" resname="Powered by %bindeo%">
+        <source>Powered by %bindeo%</source>
+        <target state="translated">Con la tecnología de %bindeo%</target>
+      </trans-unit>
+      <trans-unit id="11f581ede2d21a7f2c9c8f6fdc9eb754" resname="Password reset">
+        <source>Password reset</source>
+        <target state="translated">Reiniciar contraseña</target>
+      </trans-unit>
+      <trans-unit id="a68ae8f1a61d382dc4482bf0f718c4b3" resname="To reset your password, type the email address you use to sign in to Bindeo">
+        <source>To reset your password, type the email address you use to sign in to Bindeo</source>
+        <target state="translated">Para reiniciar tu contraseña, introduce la dirección de e-mail que usaste al registrarte en Bindeo</target>
+      </trans-unit>
+      <trans-unit id="09f70e547738d86643cfadc904efa271" resname="Reset my password">
+        <source>Reset my password</source>
+        <target state="translated">Reiniciar mi contraseña</target>
+      </trans-unit>
+      <trans-unit id="4bd9ef088a14b5f6fd9ef86e6f33037f" resname="Need help?">
+        <source>Need help?</source>
+        <target state="translated">¿Necesitas ayuda?</target>
+      </trans-unit>
+      <trans-unit id="8c3f90b8db1dc3f36294175f66b04f94" resname="New in Bindeo?">
+        <source>New in Bindeo?</source>
+        <target state="translated">¿Nuevo en Bindeo?</target>
+      </trans-unit>
+      <trans-unit id="cedcf6fe65a8f2849fe11e316d6c9923" resname="Sign up now">
+        <source>Sign up now</source>
+        <target state="translated">Regístrate ahora</target>
+      </trans-unit>
+      <trans-unit id="b6d4223e60986fa4c9af77ee5f7149c5" resname="Sign in">
+        <source>Sign in</source>
+        <target state="translated">Iniciar sesión</target>
+      </trans-unit>
+      <trans-unit id="744959a0cc12c8bff1860f3f3df5e390" resname="Sing in to Bindeo">
+        <source>Sing in to Bindeo</source>
+        <target state="translated">Inicia sesión en Bindeo</target>
+      </trans-unit>
+      <trans-unit id="89a50d12e2af0def13fd70ec4362d996" resname="Type your email and password and click button to sing in">
+        <source>Type your email and password and click button to sing in</source>
+        <target state="translated">Introduce tu email y contraseña y pulsa en el botón para entrar</target>
+      </trans-unit>
+      <trans-unit id="ce8ae9da5b7cd6c3df2929543a9af92d" resname="Email">
+        <source>Email</source>
+        <target state="translated">E-mail</target>
+      </trans-unit>
+      <trans-unit id="dc647eb65e6711e155375218212b3964" resname="Password">
+        <source>Password</source>
+        <target state="translated">Contraseña</target>
+      </trans-unit>
+      <trans-unit id="98f130908bdb82901f3bc905870908fb" resname="Forgot password">
+        <source>Forgot password</source>
+        <target state="translated">Contraseña olvidada</target>
+      </trans-unit>
+      <trans-unit id="d9776f0775997b2e698c6975420b5c5d" resname="Sign up">
+        <source>Sign up</source>
+        <target state="translated">Crear cuenta</target>
+      </trans-unit>
+      <trans-unit id="b0f1b294c6cab8fbb7c12e3cc1129e05" resname="Start today to protect your property!">
+        <source>Start today to protect your property!</source>
+        <target state="translated">¡Empieza hoy mismo a proteger tu propiedad!</target>
+      </trans-unit>
+      <trans-unit id="42369faa6a6b243aac58683f3874bf99" resname="Create account">
+        <source>Create account</source>
+        <target state="translated">Crear cuenta</target>
+      </trans-unit>
+      <trans-unit id="6e01daeba3fe8f64bf42a9e64ae86291" resname="Do you already have Bindeo account?">
+        <source>Do you already have Bindeo account?</source>
+        <target state="translated">¿Ya tienes una cuenta Bindeo?</target>
+      </trans-unit>
+      <trans-unit id="a2b333e9fa62b23be00d2508e4486f6e" resname="Sign in!">
+        <source>Sign in!</source>
+        <target state="translated">¡Inicia sesión!</target>
+      </trans-unit>
+      <trans-unit id="f5c9f59409dc21a2466d0bb97792bd6c" resname="By creating account you accept the %a_terms%terms and conditions%a_end% and %a_privacy%privacy policy%a_end%">
+        <source>By creating account you accept the %a_terms%terms and conditions%a_end% and %a_privacy%privacy policy%a_end%</source>
+        <target state="translated">Al crear cuenta aceptas los %a_terms%términos y condiciones%a_end% y la %a_privacy%política de privacidad%a_end%</target>
+      </trans-unit>
+      <trans-unit id="ca7960c43f6e85420c85976f31b3b783" resname="Validate your change">
+        <source>Validate your change</source>
+        <target state="translated">Valida tus cambios</target>
+      </trans-unit>
+      <trans-unit id="8f572283292f29843c6b9de46c1dbecd" resname="Account confirmed!">
+        <source>Account confirmed!</source>
+        <target state="translated">¡Cuenta confirmada!</target>
+      </trans-unit>
+      <trans-unit id="fa6ebfa465ec170931037010cce3c0de" resname="Email changed!">
+        <source>Email changed!</source>
+        <target state="translated">¡E-mail cambiado!</target>
+      </trans-unit>
+      <trans-unit id="486b7d3b3ca271d873ef1c9d4c0e07a7" resname="Password changed!">
+        <source>Password changed!</source>
+        <target state="translated">¡Contraseña cambiada!</target>
+      </trans-unit>
+      <trans-unit id="dde4255a730828aecd28ec847f14f87f" resname="Sorry, your token is expired">
+        <source>Sorry, your token is expired</source>
+        <target state="translated">Lo sentimos, tu token está caducado</target>
+      </trans-unit>
+      <trans-unit id="a11e88d155982d7b172dbf322e56b726" resname="Check your inbox">
+        <source>Check your inbox</source>
+        <target state="translated">Comprueba tu bandeja de entrada</target>
+      </trans-unit>
+      <trans-unit id="4c708a4f337511de76f039cd652232f8" resname="If we found an account associated with this email address %email%, you will find and email in your inbox shortly">
+        <source>If we found an account associated with this email address %email%, you will find and email in your inbox shortly</source>
+        <target state="translated">Si encontramos una cuenta asociada con esta dirección de e-mail %email%, encontrarás un e-mail en tu bandeja de entrada en breve</target>
+      </trans-unit>
+      <trans-unit id="75411b89360f9969b6508d2625ec1801" resname="If you're not sure about which email you used to sign up in to Bindeo or experience any other problem, please, %a_start%contact us%a_end%">
+        <source>If you're not sure about which email you used to sign up in to Bindeo or experience any other problem, please, %a_start%contact us%a_end%</source>
+        <target state="translated">Si no estás seguro acerca de qué e-mail usaste para registrarte en Bindeo o experimentas algún otro problema, por favor, %a_start%contáctanos%a_end%</target>
+      </trans-unit>
+      <trans-unit id="51aece13ecee725fbd3aa4884a15dc86" resname="Choose your new password">
+        <source>Choose your new password</source>
+        <target state="translated">Elige tu nueva contraseña</target>
+      </trans-unit>
+      <trans-unit id="6cb7090163eaf02a157011650f3361f3" resname="Type and repeat your new sign in password">
+        <source>Type and repeat your new sign in password</source>
+        <target state="translated">Introduce y repite tu nueva contraseña</target>
+      </trans-unit>
+      <trans-unit id="0b39c5aca15b84b1ad53a94d6b3feb78" resname="Change password">
+        <source>Change password</source>
+        <target state="translated">Cambiar contraseña</target>
+      </trans-unit>
+      <trans-unit id="c9c5c65fb4af9cf90eb99b3b84424189" resname="Identity">
+        <source>Identity</source>
+        <target state="translated">Identidad</target>
+      </trans-unit>
+      <trans-unit id="6d1841e1ecd2119d4910713c498823e1" resname="Your identity">
+        <source>Your identity</source>
+        <target state="translated">Tu identidad</target>
+      </trans-unit>
+      <trans-unit id="96610b3cbb7b1459de3859ff01cbe396" resname="Your name and your email address are being used for ownership notarization, if are not right, certificate won't be valid for you">
+        <source>Your name and your email address are being used for ownership notarization, if are not right, certificate won't be valid for you</source>
+        <target state="translated">Tu nombre y tu dirección de e-mail están siendo usados para notarizar la propiedad, si no están correctos, el certificado no será válido para ti</target>
+      </trans-unit>
+      <trans-unit id="014016c396c238d7fc3a85a9feb6494b" resname="Close my account">
+        <source>Close my account</source>
+        <target state="translated">Cancelar mi cuenta</target>
+      </trans-unit>
+      <trans-unit id="fa1598bae213bf1754007f925973a0ec" resname="Your can cancel and close your account anytime, for your security, we will keep all information for 7 days">
+        <source>Your can cancel and close your account anytime, for your security, we will keep all information for 7 days</source>
+        <target state="translated">Puedes cancelar y borrar tu cuenta en cualquier momento, por tu seguridad, mantendremos toda la información durante 7 días</target>
+      </trans-unit>
+      <trans-unit id="c851e3b27f89ce7d07e406d7051003d2" resname="Close account">
+        <source>Close account</source>
+        <target state="translated">Cancelar cuenta</target>
+      </trans-unit>
+      <trans-unit id="dd2f5ddc47ad23aed67f716aa5bc175b" resname="All your data will be deleted">
+        <source>All your data will be deleted</source>
+        <target state="translated">Todos tus datos serán borrados</target>
+      </trans-unit>
+      <trans-unit id="ee9a5212a2bbd526886926a1da6eb1e0" resname="For your secutiry, please, type again your Bindeo's account password">
+        <source>For your secutiry, please, type again your Bindeo's account password</source>
+        <target state="translated">Por tu seguridad, por favor, introduce de nuevo tu contraseña de Bindeo</target>
+      </trans-unit>
+      <trans-unit id="0fd2cf0b653e1889fa214c0665a8d027" resname="Your password is not correct">
+        <source>Your password is not correct</source>
+        <target state="translated">Tu contraseña no es correcta</target>
+      </trans-unit>
+      <trans-unit id="5d7082ba243946c386add021cced19cd" resname="Your identity has been updated">
+        <source>Your identity has been updated</source>
+        <target state="translated">Tu identidad ha sido actualizada</target>
+      </trans-unit>
+      <trans-unit id="5ecf0bc370339f4d6f8cf150a605771e" resname="A verification email has been sent to your new email, you need to verify it before changes are applied">
+        <source>A verification email has been sent to your new email, you need to verify it before changes are applied</source>
+        <target state="translated">Un e-mail de verificación ha sido enviado a tu nueva dirección, necesitas validarlo antes de que los cambios sean aplicados</target>
+      </trans-unit>
+      <trans-unit id="daa6b483e9f6ca081ec7e0b4a352f9e9" resname="Save changes">
+        <source>Save changes</source>
+        <target state="translated">Guardar cambios</target>
+      </trans-unit>
+      <trans-unit id="d0834fcec6337785ee749c8f5464f6f6" resname="Preferences">
+        <source>Preferences</source>
+        <target state="translated">Preferencias</target>
+      </trans-unit>
+      <trans-unit id="878f5415740c1d51d7753c84f7ca9658" resname="Update your account preferences">
+        <source>Update your account preferences</source>
+        <target state="translated">Actualiza las preferencias de tu cuenta</target>
+      </trans-unit>
+      <trans-unit id="5cf7a9de30c6dc027c3622f16ccffc1f" resname="Data successfully updated">
+        <source>Data successfully updated</source>
+        <target state="translated">Datos actualizados correctamente</target>
+      </trans-unit>
+      <trans-unit id="9e291047ee94d6048985655535d4358f" resname="Update preferences">
+        <source>Update preferences</source>
+        <target state="translated">Actualizar preferencias</target>
+      </trans-unit>
+      <trans-unit id="006c27f204c663f9457ff296dcb83e1b" resname="Change sign in password">
+        <source>Change sign in password</source>
+        <target state="translated">Cambiar contraseña de inicio de sesión</target>
+      </trans-unit>
+      <trans-unit id="254f642527b45bc260048e30704edb39" resname="Configuration">
+        <source>Configuration</source>
+        <target state="translated">Configuración</target>
+      </trans-unit>
+      <trans-unit id="5c5d9753f4e04535b543750d98fffb5d" resname="To check an electronic document ownership or emitted by %company%, please, enter the identification number or drag the original document inside the box">
+        <source>To check an electronic document ownership or emitted by %company%, please, enter the identification number or drag the original document inside the box</source>
+        <target state="translated">Para cotejar un documento electrónico propiedad o emitido por %company%, por favor, introduzca el número de identificación único del mismo o arrastre el documento original dentro del recuadro</target>
+      </trans-unit>
+      <trans-unit id="00cfb9772dae67f5417b4b488ec304bf" resname="Unique document identifier">
+        <source>Unique document identifier</source>
+        <target state="translated">Identificador único del documento</target>
+      </trans-unit>
+      <trans-unit id="060bf2d587991d8f090a1309b285291c" resname="Check">
+        <source>Check</source>
+        <target state="translated">Comprobar</target>
+      </trans-unit>
+      <trans-unit id="1f103c19fd35d4777711bf7bc8c18433" resname="Drag here the file or click to upload it">
+        <source>Drag here the file or click to upload it</source>
+        <target state="translated">Arrastra aquí el fichero o pulsa para subirlo</target>
+      </trans-unit>
+      <trans-unit id="7dbfdb67a0d573c60439269373b65810" resname="Loading file, please wait">
+        <source>Loading file, please wait</source>
+        <target state="translated">Cargando fichero, por favor espere</target>
+      </trans-unit>
+      <trans-unit id="ea4788705e6873b424c65e91c2846b19" resname="Cancel">
+        <source>Cancel</source>
+        <target state="translated">Cancelar</target>
+      </trans-unit>
+      <trans-unit id="36119112754253c6f778bf6354747818" resname="Drop your file">
+        <source>Drop your file</source>
+        <target state="translated">Suelta tu fichero</target>
+      </trans-unit>
+      <trans-unit id="e6652b6902bd07cb365a34bd010ed274" resname="Notarize your collection">
+        <source>Notarize your collection</source>
+        <target state="translated">Notariza tu colección</target>
+      </trans-unit>
+      <trans-unit id="962db69a7bdc9d8db916f4cd37998c6b" resname="Unverifiable document">
+        <source>Unverifiable document</source>
+        <target state="translated">Documento no verificable</target>
+      </trans-unit>
+      <trans-unit id="b913eb7f7d8866108b84ee053b3f71c1" resname="It is not possible to verify document authenticity, please, contact %email% attaching the document for assistance">
+        <source>It is not possible to verify document authenticity, please, contact %email% attaching the document for assistance</source>
+        <target state="translated">No es posible verificar la autenticidad del documento, por favor, contacta con %email% adjuntando el documento para recibir asistencia</target>
+      </trans-unit>
+      <trans-unit id="fc2449dc1ab6799d5f14275a7558d724" resname="Valid document">
+        <source>Valid document</source>
+        <target state="translated">Documento válido</target>
+      </trans-unit>
+      <trans-unit id="b4d3b36fe89b60b319b43f2097d40756" resname="This document has been issued by %issuer%, please, check the following control fields that you will find inside document content">
+        <source>This document has been issued by %issuer%, please, check the following control fields that you will find inside document content</source>
+        <target state="translated">Este documento ha sido emitido por %issuer%, por favor, comprueba los siguientes campos de control que encontrará dentro del contenido del documento</target>
+      </trans-unit>
+      <trans-unit id="a1fa27779242b4902f7ae3bdd5c6d508" resname="Type">
+        <source>Type</source>
+        <target state="translated">Tipo</target>
+      </trans-unit>
+      <trans-unit id="c1c123990faa9bf28b9d93bac9fb4e95" resname="Unique identifier">
+        <source>Unique identifier</source>
+        <target state="translated">Identificador único</target>
+      </trans-unit>
+      <trans-unit id="adcbc5de64f6e1f15be68f45fbb5ee60" resname="Expedition date">
+        <source>Expedition date</source>
+        <target state="translated">Fecha de expedición</target>
+      </trans-unit>
+      <trans-unit id="bc4bee1370166bd48330dd13b2de699c" resname="Beneficiary">
+        <source>Beneficiary</source>
+        <target state="translated">Beneficiario</target>
+      </trans-unit>
+      <trans-unit id="6669c4dc00cb161446821b3529ca07d8" resname="Degree">
+        <source>Degree</source>
+        <target state="translated">Titulación</target>
+      </trans-unit>
+      <trans-unit id="4b047525248642a12841969959fe4851" resname="Qualification">
+        <source>Qualification</source>
+        <target state="translated">Calificación</target>
+      </trans-unit>
+      <trans-unit id="adcd5bc1b9c6e646af6d5effb9d60f83" resname="Signed by">
+        <source>Signed by</source>
+        <target state="translated">Firmado por</target>
+      </trans-unit>
+      <trans-unit id="1cc0d3105e2664958a391fcc2bc0473a" resname="Technical information">
+        <source>Technical information</source>
+        <target state="translated">Información técnica</target>
+      </trans-unit>
+      <trans-unit id="419f3742e6de8e0ec4b22cce005e7630" resname="Platform">
+        <source>Platform</source>
+        <target state="translated">Plataforma</target>
+      </trans-unit>
+      <trans-unit id="696ac36215036afd3ee8a607a8f24a61" resname="Transacction ID">
+        <source>Transacction ID</source>
+        <target state="translated">Id de transacción</target>
+      </trans-unit>
+      <trans-unit id="a3d5de3eac8bb00ae86fd1a1005f1500" resname="Timestamp">
+        <source>Timestamp</source>
+        <target state="translated">Marca de tiempo</target>
+      </trans-unit>
+      <trans-unit id="69bc53e9652ab35bf7719089e0c80bf9" resname="Index hash">
+        <source>Index hash</source>
+        <target state="translated">Hash del índice</target>
+      </trans-unit>
+      <trans-unit id="43a8bd4719207145e5055837055384f4" resname="Blockchain Block">
+        <source>Blockchain Block</source>
+        <target state="translated">Bloque de Blockchain</target>
+      </trans-unit>
+      <trans-unit id="d8f34616d2924c538074e545ba70c343" resname="Bindeo: Protect your intellectual property">
+        <source>Bindeo: Protect your intellectual property</source>
+        <target state="translated">Bindeo: Protege tu propiedad intelectual</target>
+      </trans-unit>
+      <trans-unit id="49ee3087348e8d44e1feda1917443987" resname="Name">
+        <source>Name</source>
+        <target state="translated">Nombre</target>
+      </trans-unit>
+      <trans-unit id="8e55577a8ed3b20bff65d23c000280d4" resname="Surname">
+        <source>Surname</source>
+        <target state="translated">Apellidos</target>
+      </trans-unit>
+      <trans-unit id="4994a8ffeba4ac3140beb89e8d41f174" resname="Language">
+        <source>Language</source>
+        <target state="translated">Idioma</target>
+      </trans-unit>
+      <trans-unit id="3544848f820b9d94a3f3871a382cf138" resname="New password">
+        <source>New password</source>
+        <target state="translated">Nueva contraseña</target>
+      </trans-unit>
+      <trans-unit id="062d2b8bc2cfac7772c75ae8090fb9d1" resname="Old password">
+        <source>Old password</source>
+        <target state="translated">Antigua contraseña</target>
+      </trans-unit>
+      <trans-unit id="c1379f85e83c7ae0e84b3bce5737af85" resname="Repeat password">
+        <source>Repeat password</source>
+        <target state="translated">Repite contraseña</target>
+      </trans-unit>
+      <trans-unit id="d554d9bf0cd8f79c215600eeb77825e8" resname="Your email">
+        <source>Your email</source>
+        <target state="translated">Tu e-mail</target>
+      </trans-unit>
+      <trans-unit id="ed583b79eb1122b8e369654dd26af443" resname="Type of asset">
+        <source>Type of asset</source>
+        <target state="translated">Tipo de bien</target>
+      </trans-unit>
+      <trans-unit id="8c09001c99ecb6fdd8d6023fcf039054" resname="Signature">
+        <source>Signature</source>
+        <target state="translated">Firma</target>
+      </trans-unit>
+      <trans-unit id="922456d6ef0b44d2ae7c173f9263ff8c" resname="Control content">
+        <source>Control content</source>
+        <target state="translated">Contenido de control</target>
+      </trans-unit>
+      <trans-unit id="5b949d2101e596971b2c4b786ea9661d" resname="Does not apply">
+        <source>Does not apply</source>
+        <target state="translated">No aplica</target>
+      </trans-unit>
+      <trans-unit id="44749712dbec183e983dcd78a7736c41" resname="Date">
+        <source>Date</source>
+        <target state="translated">Fecha</target>
+      </trans-unit>
+      <trans-unit id="b1f1d33e829e43339fbe690d989131bc" resname="There was a problem with your request, please try it later">
+        <source>There was a problem with your request, please try it later</source>
+        <target state="translated">Hubo un problema con tu petición, por favor intenta de nuevo más tarde</target>
+      </trans-unit>
+      <trans-unit id="380f0c54be3dcdd88160d07df0ca4008" resname="The email is already used">
+        <source>The email is already used</source>
+        <target state="translated">El e-mail ya está usado</target>
+      </trans-unit>
+      <trans-unit id="733d90b4b4d415fe7071bf3a5e07eb46" resname="We have a problem updating your preferences, please try again later">
+        <source>We have a problem updating your preferences, please try again later</source>
+        <target state="translated">Tenemos un problema actualizando tus preferencias, por favor inténtalo de nuevo más tarde</target>
+      </trans-unit>
+      <trans-unit id="fa2b9feceb1122a7e79d6c1ae7654c7b" resname="We have a problem creating your account, please try again later">
+        <source>We have a problem creating your account, please try again later</source>
+        <target state="translated">Tenemos un problema creando tu cuenta, por favor inténtalo de nuevo más tarde</target>
+      </trans-unit>
+      <trans-unit id="be77997d63f857e52ce18d0d8f2cfb8b" resname="We have a problem updating your password, please try again later">
+        <source>We have a problem updating your password, please try again later</source>
+        <target state="translated">Tenemos un problema actualizando tu contraseña, por favor inténtalo de nuevo más tarde</target>
+      </trans-unit>
+      <trans-unit id="561376cd859ca8e55a4e7c2e1491b8cd" resname="You have to upload a file">
+        <source>You have to upload a file</source>
+        <target state="translated">Tienes que subir un fichero</target>
+      </trans-unit>
+      <trans-unit id="1d00815d0968e9e27abf2365033c0637" resname="You have already uploaded the same file">
+        <source>You have already uploaded the same file</source>
+        <target state="translated">Ya has subido el mismo fichero</target>
+      </trans-unit>
+      <trans-unit id="8f7cdbdad80503ea02dcc9ff36790892" resname="Valid format dd/MM/yyyy">
+        <source>Valid format dd/MM/yyyy</source>
+        <target state="translated">Formato válido dd/MM/yyyy</target>
+      </trans-unit>
+      <trans-unit id="ba3809173bb6273d4465f2d8b62dc991" resname="Bindeo is the application to protect and manage your property">
+        <source>Bindeo is the application to protect and manage your property</source>
+        <target state="translated">Bindeo es la aplicación para proteger y gestionar tu propiedad</target>
+      </trans-unit>
+      <trans-unit id="8b6db1eca796d31771132db3a675db2d" resname="Start here">
+        <source>Start here</source>
+        <target state="translated">Empieza aquí</target>
+      </trans-unit>
+      <trans-unit id="deb10517653c255364175796ace3553f" resname="Product">
+        <source>Product</source>
+        <target state="translated">Producto</target>
+      </trans-unit>
+      <trans-unit id="e22ac25b066b201473de7aa700ef5d92" resname="Pricing">
+        <source>Pricing</source>
+        <target state="translated">Precios</target>
+      </trans-unit>
+      <trans-unit id="70d529695c253d17e992cb9265abc57f" resname="Mission">
+        <source>Mission</source>
+        <target state="translated">Misión</target>
+      </trans-unit>
+      <trans-unit id="b1f0b866ff1e540503531b72d365a681" resname="Cases">
+        <source>Cases</source>
+        <target state="translated">Casos</target>
+      </trans-unit>
+      <trans-unit id="db5eb84117d06047c97c9a0191b5fffe" resname="Support">
+        <source>Support</source>
+        <target state="translated">Soporte</target>
+      </trans-unit>
+      <trans-unit id="73f78c42d0a9c090a96bca28ccd826b6" resname="File library">
+        <source>File library</source>
+        <target state="translated">Librería de ficheros</target>
+      </trans-unit>
+      <trans-unit id="6f50d28f868787582fde84eb7c13a2ee" resname="All items">
+        <source>All items</source>
+        <target state="translated">Todos los elementos</target>
+      </trans-unit>
+      <trans-unit id="7cf93a4a9e585a369e96e3ad0495abaa" resname="Notarized">
+        <source>Notarized</source>
+        <target state="translated">Notarizado</target>
+      </trans-unit>
+      <trans-unit id="b97610672fd9962a5dc46f8ce2025ffe" resname="Getting certificate">
+        <source>Getting certificate</source>
+        <target state="translated">Consiguiendo certificado</target>
+      </trans-unit>
+      <trans-unit id="a7e253cd8dd95da3e20daf45519a8dc2" resname="Trash">
+        <source>Trash</source>
+        <target state="translated">Papelera</target>
+      </trans-unit>
+      <trans-unit id="5fe6005bf6e415c950c011fb65f12b8f" resname="Deleted">
+        <source>Deleted</source>
+        <target state="translated">Borrados</target>
+      </trans-unit>
+      <trans-unit id="8b55c034ba01c709929e27049e483582" resname="%space% GB free">
+        <source>%space% GB free</source>
+        <target state="translated">%space% GB libre</target>
+      </trans-unit>
+      <trans-unit id="c501a79f47e4c4edbab6e69193295cd4" resname="%space% GB of %total% GB used">
+        <source>%space% GB of %total% GB used</source>
+        <target state="translated">%space% GB de %total% GB usados</target>
+      </trans-unit>
+      <trans-unit id="abb81bda3fcf66a011dc00b205349007" resname="Search by name or filename">
+        <source>Search by name or filename</source>
+        <target state="translated">Buscar por nombre o nombre de fichero</target>
+      </trans-unit>
+      <trans-unit id="d7778d0c64b6ba21494c97f77a66885a" resname="Filter">
+        <source>Filter</source>
+        <target state="translated">Filtrar</target>
+      </trans-unit>
+      <trans-unit id="b1c94ca2fbc3e78fc30069c8d0f01680" resname="All">
+        <source>All</source>
+        <target state="translated">Todo</target>
+      </trans-unit>
+      <trans-unit id="f0dd2d00f8c9514d5282da97c4227df9" resname="Show first">
+        <source>Show first</source>
+        <target state="translated">Mostrar primero</target>
+      </trans-unit>
+      <trans-unit id="236c7642a79eeb1b4154eb4712bd4068" resname="Newer">
+        <source>Newer</source>
+        <target state="translated">Más recientes</target>
+      </trans-unit>
+      <trans-unit id="625fd29749d91880963143cfd589bd8f" resname="Older">
+        <source>Older</source>
+        <target state="translated">Más antiguos</target>
+      </trans-unit>
+      <trans-unit id="afc493b6574d5529ed0ffa6f18f05b20" resname="Smaller">
+        <source>Smaller</source>
+        <target state="translated">Más pequeños</target>
+      </trans-unit>
+      <trans-unit id="a2890fe02723e33ccc9c10f15ff58df4" resname="Bigger">
+        <source>Bigger</source>
+        <target state="translated">Más grandes</target>
+      </trans-unit>
+      <trans-unit id="c7de86f69db264c3950d8ae46ed2e33f" resname="Upload files">
+        <source>Upload files</source>
+        <target state="translated">Subir ficheros</target>
+      </trans-unit>
+      <trans-unit id="ef1fb99744c1e164c8c787cbb6c6fd24" resname="Confirm your account">
+        <source>Confirm your account</source>
+        <target state="translated">Confirmar tu cuenta</target>
+      </trans-unit>
+      <trans-unit id="0d5057fe45574a8ef724edc24783b2dc" resname="Important!">
+        <source>Important!</source>
+        <target state="translated">¡Importante!</target>
+      </trans-unit>
+      <trans-unit id="1dd7783dad401395908b777a9e4675c2" resname="Please, confirm your data">
+        <source>Please, confirm your data</source>
+        <target state="translated">Por favor, confirma tus datos</target>
+      </trans-unit>
+      <trans-unit id="96510d7a2ee5442bbe4f8ef05cd0ac1d" resname="Drag &amp; drop you file here">
+        <source>Drag &amp; drop you file here</source>
+        <target state="translated">Arrastra y suelta tu fichero aquí</target>
+      </trans-unit>
+      <trans-unit id="44f2ac7459445cf073ada0d5b9bd028d" resname="Upload file or take a photo">
+        <source>Upload file or take a photo</source>
+        <target state="translated">Sube un fichero o haz una foto</target>
+      </trans-unit>
+      <trans-unit id="e437ed2e27a5e5eca7c91bbc248086d5" resname="Upload any file">
+        <source>Upload any file</source>
+        <target state="translated">Sube cualquier fichero</target>
+      </trans-unit>
+      <trans-unit id="f0aa25cd443edb4cacf75bb24c5ad303" resname="Ops!">
+        <source>Ops!</source>
+        <target state="translated">¡Ups!</target>
+      </trans-unit>
+      <trans-unit id="96bf12bcd057e4cad1ab3624f989ccad" resname="You exceeded your max file size of %size% KB">
+        <source>You exceeded your max file size of %size% KB</source>
+        <target state="translated">Superaste tu tamaño máximo de fichero de %size% KB</target>
+      </trans-unit>
+      <trans-unit id="397b0832f12c2c46d1e074ae489e726e" resname="You only have %size% GB or free space">
+        <source>You only have %size% GB or free space</source>
+        <target state="translated">Sólo tienes %size% GB de espacio libre</target>
+      </trans-unit>
+      <trans-unit id="a95c0ac8c155be26569730efec586848" resname="You only can upload %maxfiles% files at the same time">
+        <source>You only can upload %maxfiles% files at the same time</source>
+        <target state="translated">Sólo puedes subir %maxfiles% ficheros al mismo tiempo</target>
+      </trans-unit>
+      <trans-unit id="74ff4bad28abee3489bd8ca138b80bb6" resname="No files found">
+        <source>No files found</source>
+        <target state="translated">No hay ficheros</target>
+      </trans-unit>
+      <trans-unit id="17f45fcaf303361c7a563dc5ca53ec9d" resname="Do you want %a_start%upload%a_end% a file?">
+        <source>Do you want %a_start%upload%a_end% a file?</source>
+        <target state="translated">¿Quieres empezar a %a_start%subir%a_end% un fichero?</target>
+      </trans-unit>
+      <trans-unit id="cd0255f32110d043f3889f7536760a5c" resname="Loading more files">
+        <source>Loading more files</source>
+        <target state="translated">Cargando más ficheros</target>
+      </trans-unit>
+      <trans-unit id="83122435ed7e49aa55c18c2da8941a0d" resname="Great, check your inbox!">
+        <source>Great, check your inbox!</source>
+        <target state="translated">¡Genial, revisa tu bandeja de entrada!</target>
+      </trans-unit>
+      <trans-unit id="389ce7b776a428bd6a9824ff47f2cd6c" resname="We've sent you an email to %email% for allow to confirm your email address">
+        <source>We've sent you an email to %email% for allow to confirm your email address</source>
+        <target state="translated">Te hemos enviado un e-mail a %email% para que puedas confirmar tu dirección</target>
+      </trans-unit>
+      <trans-unit id="1063e38cb53d94d386f21227fcd84717" resname="Remove">
+        <source>Remove</source>
+        <target state="translated">Borrar</target>
+      </trans-unit>
+      <trans-unit id="9dd53aaefbce61e3f74d3a491a279046" resname="Job in progress!">
+        <source>Job in progress!</source>
+        <target state="translated">¡Trabajo en curso!</target>
+      </trans-unit>
+      <trans-unit id="92c240b1e613919e904d00918fed1c5f" resname="Your file is being notarized">
+        <source>Your file is being notarized</source>
+        <target state="translated">Tu fichero está siendo notarizado</target>
+      </trans-unit>
+      <trans-unit id="80f95ad4ab9c7321de4ebfc19c92b976" resname="Your collection is being notarized">
+        <source>Your collection is being notarized</source>
+        <target state="translated">Tu colección está siendo notarizada</target>
+      </trans-unit>
+      <trans-unit id="eca35c20e0b9d27c1a3701c687c722d2" resname="soon you will receive a confirmation email with the certificate attached">
+        <source>soon you will receive a confirmation email with the certificate attached</source>
+        <target state="translated">pronto recibirás una confirmación por e-mail con el certificado adjunto</target>
+      </trans-unit>
+      <trans-unit id="93ee55ee88a97dda046a01d20389e509" resname="Upload a new file">
+        <source>Upload a new file</source>
+        <target state="translated">Subir un nuevo fichero</target>
+      </trans-unit>
+      <trans-unit id="611d02d3f79e001c3eaf982b4fdaeafc" resname="Go to Library">
+        <source>Go to Library</source>
+        <target state="translated">Ir a la Librería</target>
+      </trans-unit>
+      <trans-unit id="3c3ed70be7082a525339b29a10adbe9b" resname="Send me verification email">
+        <source>Send me verification email</source>
+        <target state="translated">Enviadme un e-mail de verificación</target>
+      </trans-unit>
+      <trans-unit id="20b8bee5085053a580561ea378789ebc" resname="There was an error uploading the file">
+        <source>There was an error uploading the file</source>
+        <target state="translated">Hubo un error subiendo el fichero</target>
+      </trans-unit>
+      <trans-unit id="722917f7ee83c261f831e079b280298d" resname="Owner identity">
+        <source>Owner identity</source>
+        <target state="translated">Identidad del propietario</target>
+      </trans-unit>
+      <trans-unit id="4a309b93a45d1adbded268048f6bae4d" resname="Manage identities">
+        <source>Manage identities</source>
+        <target state="translated">Gestionar identidades</target>
+      </trans-unit>
+      <trans-unit id="300164193661588726870b90627c4d0a" resname="Register ownership">
+        <source>Register ownership</source>
+        <target state="translated">Registrar propiedad</target>
+      </trans-unit>
+      <trans-unit id="0323de4f66a1700e2173e9bcdce02715" resname="Logout">
+        <source>Logout</source>
+        <target state="translated">Cerrar sesión</target>
+      </trans-unit>
+      <trans-unit id="361c6dec2035f892e1747dc98d269871" resname="We use cookies to improve safety and user experience" approved="yes">
+        <source>We use cookies to improve safety and user experience</source> <target state="translated">Utilizamos cookies para mejorar la seguridad y tu experiencia de usuario</target> </trans-unit>
+      <trans-unit id="ab066b3292d8ab61ef3b5c77169cdd19" resname="More information" approved="yes">
+        <source>More information</source> <target state="translated">Más información</target> </trans-unit>
+      <trans-unit id="d16620a0c233addfbb6154f08335a71e" resname="Ok, understood" approved="yes">
+        <source>Ok, understood</source> <target state="translated">Ok, entendido</target> </trans-unit>
     </body>
   </file>
 </xliff>

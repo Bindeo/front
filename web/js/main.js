@@ -22,6 +22,7 @@ var main = (function() {
         subscriptors();
         $('body').on('submit', 'form[data-action="ajax-form"]', sendStandardForm);
         $('body').on('click', 'a[data-locale]', changeLocale);
+        $('body').on('click', 'a[data-action="dismiss-cookies"]', dismissCookies);
     };
 
     var subscriptors = function() {
@@ -152,6 +153,11 @@ var main = (function() {
         $.when(sendRequest($(this).attr('data-url'), 'l=' + $(this).attr('data-locale'))).done(function(response) {
             window.location.reload();
         });
+    };
+
+    var dismissCookies = function(event) {
+        $(this).parents('.cookies').remove();
+        return false;
     };
 
     // Public methods
