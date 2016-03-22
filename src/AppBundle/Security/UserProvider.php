@@ -3,7 +3,7 @@
 namespace AppBundle\Security;
 
 use AppBundle\Entity\User;
-use AppBundle\Model\ApiConnection;
+use Bindeo\Util\ApiConnection;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;

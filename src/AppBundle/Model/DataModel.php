@@ -8,6 +8,7 @@ use AppBundle\Entity\File;
 use AppBundle\Entity\ResultSet;
 use AppBundle\Entity\User;
 use Bindeo\Filter\FilesFilter;
+use Bindeo\Util\ApiConnection;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;

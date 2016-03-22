@@ -2,21 +2,15 @@
 
 namespace AppBundle\Entity;
 
+use Bindeo\DataModel\ClientResultSetAbstract;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * Populate an API request
  * @package AppBundle\Entity
  */
-class ResultSet
+class ResultSet extends ClientResultSetAbstract
 {
-    private $entity;
-    private $rows;
-    private $numRows;
-    private $curPage;
-    private $numPages;
-    private $error;
-
     /**
      * Get the appropriate object
      *
@@ -24,7 +18,7 @@ class ResultSet
      *
      * @return array
      */
-    private function getObject(\stdClass $data)
+    protected function getObject(\stdClass $data)
     {
         switch ($data->type) {
             case 'users':
@@ -120,88 +114,5 @@ class ResultSet
         }
 
         return $res;
-    }
-
-    public function __construct(\stdClass $data = null)
-    {
-        // Convert the answer into objects
-        if ($data === null) {
-            $this->numRows = 0;
-            $this->numPages = 0;
-        } elseif (isset($data->data)) {
-            $this->rows = [];
-            if (isset($data->total_pages)) {
-                // List of data
-                $this->numPages = $data->total_pages;
-                $this->curPage = isset($data->current_page) ? $data->current_page : 1;
-                $this->numRows = count($data->data);
-
-                foreach ($data->data as $row) {
-                    list($key, $row) = $this->getObject($row);
-                    $this->rows[$key] = $row;
-                }
-            } else {
-                // Single registry
-                // Check if we have content
-                if (count((array)$data->data->attributes) > 0) {
-                    list($key, $row) = $this->getObject($data->data);
-                    $this->rows[0] = $row;
-                    $this->numRows = 1;
-                } else {
-                    $this->numRows = 0;
-                    $this->numPages = 0;
-                }
-            }
-        } elseif (isset($data->error)) {
-            $this->error = (array)$data->error;
-        }
-    }
-
-    /**
-     * @return string
-     */
-    public function getEntity()
-    {
-        return $this->entity;
-    }
-
-    /**
-     * @return array
-     */
-    public function getRows()
-    {
-        return $this->rows;
-    }
-
-    /**
-     * @return array
-     */
-    public function getNumRows()
-    {
-        return $this->numRows;
-    }
-
-    /**
-     * @return int
-     */
-    public function getCurPage()
-    {
-        return $this->curPage;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getNumPages()
-    {
-        return $this->numPages;
-    }
-
-    /**
-     * @return array
-     */
-    public function getError()
-    {
-        return $this->error;
     }
 }

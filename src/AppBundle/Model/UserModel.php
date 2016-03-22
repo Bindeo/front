@@ -5,6 +5,7 @@ namespace AppBundle\Model;
 use AppBundle\Entity\User;
 use AppBundle\Entity\UserIdentity;
 use Bindeo\DataModel\Exceptions;
+use Bindeo\Util\ApiConnection;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class UserModel

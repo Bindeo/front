@@ -1,6 +1,3 @@
-imports:
-    - { resource: api_routes.yml }
-
 # Learn more about services, parameters and containers at
 # http://symfony.com/doc/current/book/service_container.html
 services:
@@ -10,8 +7,8 @@ services:
 
     # To connect against the API
     app.api_connection:
-        class:        AppBundle\Model\ApiConnection
-        arguments:    ['%api_url%', '%api_token%', '%api_routes%']
+        class:        Bindeo\Util\ApiConnection
+        arguments:    ['%api_url%', '%api_token%', 'front']
 
     # Master data factory
     app.master_data:

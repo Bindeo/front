@@ -2,7 +2,7 @@
 
 namespace AppBundle\Security;
 
-use AppBundle\Model\ApiConnection;
+use Bindeo\Util\ApiConnection;
 use \Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\RedirectResponse;

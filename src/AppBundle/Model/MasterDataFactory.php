@@ -3,6 +3,7 @@
 namespace AppBundle\Model;
 
 use AppBundle\Entity\ResultSet;
+use Bindeo\Util\ApiConnection;
 
 class MasterDataFactory
 {
