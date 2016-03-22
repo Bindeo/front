@@ -6,3 +6,8 @@ for file in ./web/js/*.js
 do
     uglifyjs $file -c -m -o $file
 done
+for file in ./web/css/*.css
+do
+    uglifycss --ugly-comments $file > ${file}_old
+    mv ${file}_old $file
+done
