@@ -11,7 +11,7 @@ parameters:
     secret:            174a2b95bb27a46f8bc1e09179b2734c54c2837e
 
     api_url: private.bindeo.com
-    api_token: 75be9f5e5234406d544d84e32e1747e4
+    api_token: 680ef7583f177ef707ebd0800de41c13f86270ed92948442a91c7e21cf5a0bbe
 
     files:
         files_tmp_folder: ~
