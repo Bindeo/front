@@ -52,7 +52,10 @@ class BulkFileType extends AbstractType
                 'Control content'                            => '',
                 '(Does not apply)'                           => 0,
                 'Máster Community Manager y Social Media'    => 1,
-                'Indicadores de éxito en las Redes Sociales' => 2
+                'Indicadores de éxito en las Redes Sociales' => 2,
+                'MIB España - Máster en Internet Business'   => 3,
+                'MIB México - Máster en Internet Business'   => 4,
+                'MDA - Máster en Digital Analytics'          => 5
             ];
 
             $form->add('idSign', ChoiceType::class, [

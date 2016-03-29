@@ -36,6 +36,7 @@ class EduController extends Controller
                 if (isset($tmpFile)) {
                     $file->setHash(hash_file('sha256', $file->getPath()));
                 }
+
                 return new JsonResponse([
                     'result' => [
                         'success' => true,
@@ -65,7 +66,10 @@ class EduController extends Controller
                 $types = [1 => 'Diploma', 2 => 'Derechos de autor'];
                 $contents = [
                     1 => 'Máster Community Manager y Social Media',
-                    2 => 'Indicadores de éxito en las Redes Sociales'
+                    2 => 'Indicadores de éxito en las Redes Sociales',
+                    3 => 'MIB España - Máster en Internet Business',
+                    4 => 'MIB México - Máster en Internet Business',
+                    5 => 'MDA - Máster en Digital Analytics'
                 ];
                 $qualifications = [
                     'A' => 'Sobresaliente',
