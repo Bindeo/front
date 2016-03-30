@@ -55,6 +55,10 @@ edu_home:
     path: /edu/isdi
     defaults: { _controller: AppBundle:Edu:home }
 
+edu_verify:
+    path: /edu/isdi/verify/{uniqueId}
+    defaults: { _controller: AppBundle:Edu:verify }
+
 # Private ajax calls
 ajax_file_upload:
     path: /ajax/private/upload-file

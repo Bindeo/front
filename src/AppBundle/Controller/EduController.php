@@ -25,18 +25,30 @@ class EduController extends Controller
     public function homeAction(Request $request)
     {
         // Check if we have an identifier
-        if ($request->isXmlHttpRequest() and (($id = $request->get('uniqueId')) or ($tmpFile = $request->files->get('file')))) {
-            // Check against the api
-            $file = $id ? new BulkFile(['uniqueId' => $id]) : $this->get('app.model.data')->uploadTmpBulkFile($tmpFile);
-            $res = $this->get('app.api_connection')->getJson('bulk_verify', $file->toArray());
+        if ($request->isXmlHttpRequest() and ($request->get('uniqueId') or $request->files->get('file'))) {
+            return $this->forward('AppBundle:Edu:verify');
+        }
 
-            // Check if we have found the file
-            if ($res->getNumRows() == 0) {
-                // For making results more elegant, if user uploaded a file and we didn't find it, we calculate the hash
-                if (isset($tmpFile)) {
-                    $file->setHash(hash_file('sha256', $file->getPath()));
-                }
+        return $this->render('edu/home.html.twig');
+    }
 
+    public function verifyAction(Request $request)
+    {
+        $id = $request->get('uniqueId');
+        $tmpFile = $request->files->get('file');
+
+        // Check against the api
+        $file = $id ? new BulkFile(['uniqueId' => $id]) : $this->get('app.model.data')->uploadTmpBulkFile($tmpFile);
+        $res = $this->get('app.api_connection')->getJson('bulk_verify', $file->toArray());
+
+        // Check if we have found the file
+        if ($res->getNumRows() == 0) {
+            // For making results more elegant, if user uploaded a file and we didn't find it, we calculate the hash
+            if (isset($tmpFile)) {
+                $file->setHash(hash_file('sha256', $file->getPath()));
+            }
+
+            if ($request->isXmlHttpRequest()) {
                 return new JsonResponse([
                     'result' => [
                         'success' => true,
@@ -45,39 +57,46 @@ class EduController extends Controller
                     ]
                 ]);
             } else {
-                /** @var BulkFile $file */
-                $file = $res->getRows()[0];
-                // Get blockchain transaction information
-                $res = $this->get('app.api_connection')
-                            ->getJson('blockchain', ['transaction' => $file->getTransaction(), 'mode' => 'full']);
+                return $this->render('edu/verify.html.twig', [
+                    'result' => 'notvalid',
+                    'file'   => $file
+                ]);
+            }
+        } else {
+            /** @var BulkFile $file */
+            $file = $res->getRows()[0];
+            // Get blockchain transaction information
+            $res = $this->get('app.api_connection')
+                        ->getJson('blockchain', ['transaction' => $file->getTransaction(), 'mode' => 'full']);
 
-                // Transaction doesn't exist
-                if ($res->getNumRows() == 0) {
-                    return new JsonResponse([
-                        'result' => [
-                            'success' => true,
-                            'html'    => $this->renderView('edu/partials/verify.html.twig',
-                                ['result' => 'notvalid', 'file' => $file])
-                        ]
-                    ]);
-                }
+            // Transaction doesn't exist
+            if ($res->getNumRows() == 0) {
+                return new JsonResponse([
+                    'result' => [
+                        'success' => true,
+                        'html'    => $this->renderView('edu/partials/verify.html.twig',
+                            ['result' => 'notvalid', 'file' => $file])
+                    ]
+                ]);
+            }
 
-                // Types defined for demo
-                $types = [1 => 'Diploma', 2 => 'Derechos de autor'];
-                $contents = [
-                    1 => 'Máster Community Manager y Social Media',
-                    2 => 'Indicadores de éxito en las Redes Sociales',
-                    3 => 'MIB España - Máster en Internet Business',
-                    4 => 'MIB México - Máster en Internet Business',
-                    5 => 'MDA - Máster en Digital Analytics'
-                ];
-                $qualifications = [
-                    'A' => 'Sobresaliente',
-                    'B' => 'Notable',
-                    'C' => 'Bien',
-                    'D' => 'Suficiente'
-                ];
+            // Types defined for demo
+            $types = [1 => 'Diploma', 2 => 'Derechos de autor'];
+            $contents = [
+                1 => 'Máster Community Manager y Social Media',
+                2 => 'Indicadores de éxito en las Redes Sociales',
+                3 => 'MIB España - Máster en Internet Business',
+                4 => 'MIB México - Máster en Internet Business',
+                5 => 'MDA - Máster en Digital Analytics'
+            ];
+            $qualifications = [
+                'A' => 'Sobresaliente',
+                'B' => 'Notable',
+                'C' => 'Bien',
+                'D' => 'Suficiente'
+            ];
 
+            if ($request->isXmlHttpRequest()) {
                 return new JsonResponse([
                     'result' => [
                         'success' => true,
@@ -91,10 +110,17 @@ class EduController extends Controller
                         ])
                     ]
                 ]);
+            } else {
+                return $this->render('edu/verify.html.twig', [
+                    'result'         => 'valid',
+                    'file'           => $file,
+                    'blockchain'     => $res->getRows()[0],
+                    'types'          => $types,
+                    'contents'       => $contents,
+                    'qualifications' => $qualifications
+                ]);
             }
         }
-
-        return $this->render('edu/home.html.twig');
     }
 
     /**
