@@ -37,7 +37,7 @@ class User extends UserAbstract implements UserInterface
 
     /**
      * @Assert\NotBlank(groups={"registration", "pre-upload"})
-     * @Assert\Length(max=256, groups={"registration", "pre-upload"})
+     * @Assert\Length(min=2, max=256, groups={"registration", "pre-upload"})
      */
     protected $name;
 

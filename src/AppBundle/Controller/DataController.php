@@ -203,7 +203,7 @@ class DataController extends Controller
         // Form submitted
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                $newUser->setIp($request->getClientIp())->setLang($user->getLang());
+                $newUser->setIp($request->getClientIp());
 
                 // Data is valid, modify the user and send the confirm email
                 $res = $this->get('app.model.user')->changeIdentity($user, $newUser);

@@ -307,7 +307,7 @@ class UserController extends Controller
             // Data is valid, modify the user and send the confirm email
             $res = $this->get('app.model.user')
                         ->changeIdentity($user,
-                            $newUser->setIp($request->getClientIp())->setLang($request->getLocale()));
+                            $newUser->setIp($request->getClientIp()));
 
             if (isset($res['error'])) {
                 if ($res['error'][0] == '') {
@@ -424,7 +424,7 @@ class UserController extends Controller
             // Reset password
             $this->get('app.api_connection')
                  ->getJson('account_password',
-                     $user->setIp($request->getClientIp())->setLang($request->getLocale())->toArray());
+                     $user->setIp($request->getClientIp())->toArray());
 
             return $this->render('user/password-reset-ok.html.twig',
                 ['email' => $user->getEmail(), 'contact' => $this->getParameter('emails')['contact']]);

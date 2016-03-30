@@ -22,13 +22,13 @@
         "php": ">=5.6.0",
         "ext-curl": "*",
         "ext-apcu": "*",
-        "symfony/symfony": "3.0.*",
+        "symfony/symfony": "^3.0",
         "symfony/monolog-bundle": "^2.8",
         "sensio/distribution-bundle": "^5.0",
         "incenteev/composer-parameter-handler": "^2.0",
-        "egulias/email-validator": "~1.2",
+        "egulias/email-validator": "^1.2",
         "symfony/assetic-bundle": "^2.7",
-        "php-curl-class/php-curl-class": "~4.0"
+        "php-curl-class/php-curl-class": "^4.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
