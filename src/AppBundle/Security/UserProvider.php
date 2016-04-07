@@ -32,7 +32,7 @@ class UserProvider implements UserProviderInterface
     {
         // Get the user via API
         $res = $this->api->getJson('users', ['email' => $username]);
-        if ($res->getError() or !($user = $res->getRows()[0])) {
+        if ($res->getError() or !isset($res->getRows()[0]) or !($user = $res->getRows()[0])) {
             throw new UsernameNotFoundException();
         } else {
             return $user;
