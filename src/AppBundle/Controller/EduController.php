@@ -141,9 +141,12 @@ class EduController extends Controller
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                $bulkTransaction->setIdUser($this->getUser()->getIdUser())->setIp($request->getClientIp());
+                // ISDI client, temporary for this demo version
+                $bulkTransaction->setClientType('C')->setIdClient(5)->setIp($request->getClientIp())->setType('Smart Certificates')->setElementsType('F')->setExternalId('ISDI_'.md5(time()));
                 // Send to the api
-                $res = $this->get('app.api_connection')->postJson('bulk_transaction', $bulkTransaction->toArray());
+                $params = $bulkTransaction->toArray();
+                $params['mode'] = 'create';
+                $res = $this->get('app.api_connection')->postJson('bulk_transaction', $params);
 
                 // Check if the bulk transaction has been properly created and signed
                 if ($res->getError()) {
