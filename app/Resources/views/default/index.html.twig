@@ -5,14 +5,64 @@
 {% block body %}
 <section class="section-home">
     <div class="container-fluid">
-        <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3">
-            <h1>{% trans %}Bindeo is the application to protect and manage your property{% endtrans %}.</h1>
-            <h2>Extended explanation here.</h2>
-            {% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-            <div class="action clearfix">
-                <a href="{{ path('register') }}" class="btn btn-primary btn-lg">{% trans %}Start here{% endtrans %}</a>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3">
+                <h1>Create a verifiable record of any data or business process on the blockchain</h1>
+                <h2>Make your data smarter</h2>
+
+                <div class="action clearfix">
+                    <a href="mailto:discover@bindeo.com" class="btn btn-primary btn-lg">Contact us</a>
+                </div>
             </div>
-            {% endif %}
+        </div>
+    </div>
+</section>
+<section class="section-home-features">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div>
+                    <img src="{{ asset('images/icons/line/the-world.png') }}" class="img-responsive">
+                    <h3>Record your data</h3>
+                    <p>Collect your business data and create a secure immutable record on blockchain.</p>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div>
+                    <img src="{{ asset('images/icons/features/padlock.png') }}" class="img-responsive">
+                    <h3>Get audit trail</h3>
+                    <p>Proof the existence, integrity, ownership and timestamp of each transaction.</p>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div>
+                    <img src="{{ asset('images/icons/line/zoom-tool.png') }}" class="img-responsive">
+                    <h3>Absolutely verifiable</h3>
+                    <p>From your applications or third parties, reduce errors, fraud, and cost of audit claims.</p>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div>
+                    <img src="{{ asset('images/icons/line/small-light-bulb.png') }}" class="img-responsive">
+                    <h3>Scale to millions</h3>
+                    <p>Financial, medical, legal, educational or inventory records, without buying any cryptocurrency.</p>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div>
+                    <img src="{{ asset('images/icons/line/setting-tool.png') }}" class="img-responsive">
+                    <h3>Powerful API</h3>
+                    <p>Integration with a REST API from your existing desktop, web or mobile applications.</p>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div>
+                    <img src="{{ asset('images/icons/features/shield.png') }}" class="img-responsive">
+                    <h3>Security and privacy first</h3>
+                    <p>We store cryptographic fingerprints on blockchain, the most powerful existing network.</p>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -20,20 +70,11 @@
 
 {% block footer %}
 <footer class="footer">
-    <div class="container-fluid container-links">
-        <div class="container">
-            <p class="text-muted ">Place footer content here... for example a list of links...</p>
-        </div>
-    </div>
     <div class="container-fluid container-strip">
         <div class="container">
             <div class="row">
                 <div class="col-xs-8 col-sm-9 left">
-                    Some text here...!
-                </div>
-                <div class="col-xs-4 col-sm-3 right">
-                    <a href="#"> <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> </a> <a href="#">
-                        <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> </a> <a href="#"> <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> </a>
+                    © Bindeo, Ltd
                 </div>
             </div>
         </div>

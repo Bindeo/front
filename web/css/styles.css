@@ -10,6 +10,11 @@
 }
 
 /* line 9, ../sass/includes/_0_helper.scss */
+.margin-bottom-0 {
+  margin-bottom: 0;
+}
+
+/* line 13, ../sass/includes/_0_helper.scss */
 .margin-top-25 {
   margin-top: 25px;
 }
@@ -215,7 +220,7 @@ label {
   /* line 34, ../sass/includes/_1_layout.scss */
   .section-home h1 {
     margin-top: 120px;
-    font-size: 36px;
+    font-size: 30px;
   }
 }
 /* line 46, ../sass/includes/_1_layout.scss */
@@ -254,7 +259,7 @@ label {
 }
 /* line 77, ../sass/includes/_1_layout.scss */
 .section-home-features .row > div > div h3 {
-  margin: 10px 0 5px;
+  margin: 20px 0 5px;
   font-size: 14px;
   font-weight: 400;
 }
@@ -371,6 +376,12 @@ label {
   width: 200px;
 }
 
+/* line 1, ../sass/includes/_1_modals.scss */
+.modal {
+  /*
+   * Generic
+   */
+}
 @media (max-width: 767px) {
   /* line 3, ../sass/includes/_1_modals.scss */
   .modal .modal-dialog {
@@ -438,6 +449,16 @@ label {
   .modal.in .modal-dialog {
     transform: translate(0, 0);
   }
+}
+/* line 78, ../sass/includes/_1_modals.scss */
+.modal .list-group .list-group-item {
+  padding: 0;
+}
+/* line 80, ../sass/includes/_1_modals.scss */
+.modal .list-group .list-group-item > a {
+  display: block;
+  width: 100%;
+  padding: 10px 15px;
 }
 
 /* line 3, ../sass/includes/_1_single.scss */
@@ -1109,7 +1130,7 @@ body footer .container-links p {
 /* line 13, ../sass/includes/_1_footer.scss */
 body footer .container-strip {
   background: #212121;
-  padding: 20px 0;
+  padding: 20px 0 50px;
   color: rgba(255, 255, 255, 0.75);
 }
 /* line 18, ../sass/includes/_1_footer.scss */

@@ -2,15 +2,17 @@
 {% block bodyclass %} class="body-single"{% endblock %}
 {% block navbar %}
 <!-- Collect the nav links, forms, and other content for toggling -->
+{#
 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">{% trans %}Product{% endtrans %}</a></li>
-        <li><a href="#">{% trans %}Pricing{% endtrans %}</a></li>
-        <li><a href="#">{% trans %}Mission{% endtrans %}</a></li>
-        <li><a href="#">{% trans %}Cases{% endtrans %}</a></li>
-        <li><a href="#">{% trans %}Support{% endtrans %}</a></li>
         <li><a href="{{ path('login') }}">{% trans %}Sign in{% endtrans %}</a></li>
         <li class="highlight"><a href="{{ path('register') }}">{% trans %}Sign up{% endtrans %}</a></li>
+    </ul>
+</div>
+#}
+<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav navbar-right">
+        <li class="highlight"><a href="mailto:discover@bindeo.com">Contact us</a></li>
     </ul>
 </div>
 <!-- /.navbar-collapse -->
