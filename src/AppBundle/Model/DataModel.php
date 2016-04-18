@@ -131,7 +131,7 @@ class DataModel
     public function library($user, Request $request)
     {
         // Instantiate files filter
-        $filter = (new FilesFilter())->setIdUser($user->getIdUser())
+        $filter = (new FilesFilter())->setIdClient($user->getIdUser())
                                      ->setStatus($request->get('status'))
                                      ->setSpecialFilter($request->get('special'))
                                      ->setMediaType($request->get('media-type'))

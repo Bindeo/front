@@ -16,11 +16,6 @@ class File extends FileAbstract
     /**
      * @Assert\NotBlank(groups={"upload-file"})
      */
-    protected $idType;
-
-    /**
-     * @Assert\NotBlank(groups={"upload-file"})
-     */
     protected $path;
 
     /**

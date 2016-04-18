@@ -28,15 +28,7 @@ class UploadFileType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         // File types master data
-        $types = [];
-        foreach ($this->types->getRows() as $row) {
-            $types[$row->getName()] = $row->getIdType();
-        }
-
-        $builder->add('name', TextType::class)
-                ->add('idType', ChoiceType::class, ['choices' => $types, 'label' => 'Type of asset'])
-                ->add('path', HiddenType::class)
-                ->add('fileOrigName', HiddenType::class);
+        $builder->add('name', TextType::class)->add('path', HiddenType::class)->add('fileOrigName', HiddenType::class);
 
         // Generate a custom select with user data
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
@@ -53,7 +45,7 @@ class UploadFileType extends AbstractType
                 }
             }
 
-            $form->add('idUser', ChoiceType::class, [
+            $form->add('idClient', ChoiceType::class, [
                 'choices' => $choices,
                 'label'   => 'Owner identity'
             ]);

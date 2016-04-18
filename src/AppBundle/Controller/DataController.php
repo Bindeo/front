@@ -115,7 +115,7 @@ class DataController extends Controller
                 // Successful upload
                 $request->getSession()->set('fileupload', 'ok');
                 $res = $this->get('app.model.data')
-                            ->uploadFile($user, $file->setIdUser($user->getIdUser())->setIp($request->getClientIp()));
+                            ->uploadFile($user, $file->setIdClient($user->getIdUser())->setIp($request->getClientIp()));
 
                 // Check if the file has been properly uploaded and signed
                 if ($res->getError()) {

@@ -76,17 +76,6 @@ class ResultSet extends ClientResultSetAbstract
                 $object = new AccountType((array)$data->attributes);
                 $res = [$object->getIdType(), $object];
                 break;
-            case 'file_type':
-                // Fill the entity class
-                if (!$this->entity) {
-                    $this->entity = 'AppBundle\Entity\FileType';
-                } elseif ($this->entity != 'AppBundle\Entity\FileType') {
-                    throw new HttpException(500);
-                }
-
-                $object = new FileType((array)$data->attributes);
-                $res = [$object->getIdType(), $object];
-                break;
             case 'media_type':
                 // Fill the entity class
                 if (!$this->entity) {
