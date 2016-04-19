@@ -135,7 +135,6 @@ class DataModel
                                      ->setStatus($request->get('status'))
                                      ->setSpecialFilter($request->get('special'))
                                      ->setMediaType($request->get('media-type'))
-                                     ->setFileType($request->get('file-type'))
                                      ->setName($request->get('name'))
                                      ->setOrder($request->get('order'))
                                      ->setPage($request->get('page'));
