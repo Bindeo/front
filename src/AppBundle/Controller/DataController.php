@@ -60,8 +60,8 @@ class DataController extends Controller
                 'files'      => $files,
                 'freespace'  => $formatter->format(round($user->getStorageLeft() / 1024 / 1024, 2,
                     PHP_ROUND_HALF_DOWN)),
-                'used'       => $formatter->format(round(($user->getTotalStorage() - $user->getStorageLeft()) / 1024 / 1024,
-                    2, PHP_ROUND_HALF_DOWN)),
+                'used'       => $formatter->format(round(($user->getTotalStorage() - $user->getStorageLeft()) / 1024 /
+                                                         1024, 2, PHP_ROUND_HALF_DOWN)),
                 'total'      => $formatter->format(round($user->getTotalStorage() / 1024 / 1024, 2,
                     PHP_ROUND_HALF_DOWN))
             ]);
@@ -82,8 +82,9 @@ class DataController extends Controller
         /** @var User $user */
         $user = $this->getUser();
 
-        $response = $user->getConfirmed() ? $this->confirmedUpload($request, $user, true)
-            : $this->unconfirmedUpload($request, $user);
+        // Only users with national identity number and confirmed could upload files
+        $response = ($user->getConfirmed() and $user->getCurrentIdentity()->getDocument())
+            ? $this->confirmedUpload($request, $user, true) : $this->unconfirmedUpload($request, $user);
 
         return $response;
     }
@@ -114,8 +115,7 @@ class DataController extends Controller
             if ($form->isValid()) {
                 // Successful upload
                 $request->getSession()->set('fileupload', 'ok');
-                $res = $this->get('app.model.data')
-                            ->uploadFile($user, $file->setIdClient($user->getIdUser())->setIp($request->getClientIp()));
+                $res = $this->get('app.model.data')->uploadFile($user, $file->setIp($request->getClientIp()));
 
                 // Check if the file has been properly uploaded and signed
                 if ($res->getError()) {
@@ -142,9 +142,11 @@ class DataController extends Controller
                             'success'   => true,
                             'freespace' => $formatter->format(round($user->getStorageLeft() / 1024 / 1024, 2,
                                 PHP_ROUND_HALF_DOWN)),
-                            'usedspace' => $formatter->format(round(($user->getTotalStorage() - $user->getStorageLeft()) / 1024 / 1024,
-                                2, PHP_ROUND_HALF_DOWN)),
-                            'html'      => $this->renderView('data/partials/file-upload-ok.html.twig', ['message' => 'fileupload'])
+                            'usedspace' => $formatter->format(round(($user->getTotalStorage() -
+                                                                     $user->getStorageLeft()) / 1024 / 1024, 2,
+                                PHP_ROUND_HALF_DOWN)),
+                            'html'      => $this->renderView('data/partials/file-upload-ok.html.twig',
+                                ['message' => 'fileupload'])
                         ]
                     ]);
                 }
@@ -193,20 +195,18 @@ class DataController extends Controller
      */
     private function unconfirmedUpload(Request $request, $user)
     {
-        $newUser = (new User())->setOldEmail($user->getEmail())
-                               ->setEmail($user->getEmail())
-                               ->setName($user->getName())
-                               ->setIdUser($user->getIdUser());
-        $form = $this->createForm(ChangeIdentityType::class, $newUser);
+        // Get user main identity
+        $identity = clone $user->getCurrentIdentity();
+
+        $identity->setOldValue($identity->getValue())->setOldDocument($identity->getDocument());
+        $form = $this->createForm(ChangeIdentityType::class, $identity);
         $form->handleRequest($request);
 
         // Form submitted
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                $newUser->setIp($request->getClientIp());
-
                 // Data is valid, modify the user and send the confirm email
-                $res = $this->get('app.model.user')->changeIdentity($user, $newUser);
+                $res = $this->get('app.model.user')->changeIdentity($user, $identity->setIp($request->getClientIp()));
 
                 if (isset($res['error'])) {
                     if ($res['error'][0] == '') {
@@ -223,7 +223,7 @@ class DataController extends Controller
                     'result' => [
                         'success' => true,
                         'html'    => $this->renderView('data/partials/file-preupload-ok.html.twig',
-                            ['email' => $newUser->getEmail()])
+                            ['email' => $identity->getValue()])
                     ]
                 ]);
             } else {
@@ -250,6 +250,11 @@ class DataController extends Controller
      */
     public function ajaxUploadFileAction(Request $request)
     {
+        $user = $this->getUser();
+        if (!$user->getConfirmed() or !$user->getCurrentIdentity()->getDocument()) {
+            return new JsonResponse(['success' => false, 'redirect' => '/data/upload']);
+        }
+
         /** @var UploadedFile $file */
         $file = $request->files->get('file');
 

@@ -21,6 +21,7 @@ class User extends UserAbstract implements UserInterface
     // Set mandatory fields for forms
     /**
      * @Assert\NotBlank(groups={"registration", "login", "pre-upload", "password-reset"})
+     * @Assert\Length(max=128, groups={"registration", "login", "pre-upload", "password-reset"})
      * @Assert\Email(
      *     groups={"registration", "pre-upload"},
      *     strict = true,
@@ -32,8 +33,6 @@ class User extends UserAbstract implements UserInterface
      * )
      */
     protected $email;
-
-    protected $oldEmail;
 
     /**
      * @Assert\NotBlank(groups={"registration", "pre-upload"})
@@ -53,30 +52,13 @@ class User extends UserAbstract implements UserInterface
      */
     protected $oldPassword;
 
+    /**
+     * @var UserIdentity[]
+     */
     protected $identities;
 
     /**
-     * @return mixed
-     */
-    public function getOldEmail()
-    {
-        return $this->oldEmail;
-    }
-
-    /**
-     * @param mixed $oldEmail
-     *
-     * @return $this
-     */
-    public function setOldEmail($oldEmail)
-    {
-        $this->oldEmail = $oldEmail;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
+     * @return UserIdentity[]
      */
     public function getIdentities()
     {
@@ -84,7 +66,7 @@ class User extends UserAbstract implements UserInterface
     }
 
     /**
-     * @param mixed $identities
+     * @param UserIdentity[] $identities
      *
      * @return $this
      */
@@ -93,6 +75,18 @@ class User extends UserAbstract implements UserInterface
         $this->identities = $identities;
 
         return $this;
+    }
+
+    /**
+     * @return UserIdentity
+     */
+    public function getCurrentIdentity()
+    {
+        if ($this->identities) {
+            return reset($this->identities);
+        } else {
+            return null;
+        }
     }
 
     // ENTITY METHODS

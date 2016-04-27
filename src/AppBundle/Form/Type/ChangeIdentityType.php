@@ -2,7 +2,7 @@
 
 namespace AppBundle\Form\Type;
 
-use AppBundle\Entity\User;
+use AppBundle\Entity\UserIdentity;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -16,21 +16,22 @@ class ChangeIdentityType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('name', TextType::class)
-                ->add('email', EmailType::class)
+                ->add('value', EmailType::class, ['label' => 'Email'])
+                ->add('document', TextType::class, ['label' => 'National Identity Number'])
                 ->add('password', PasswordType::class, ['required' => false, 'label' => 'Confirm your password']);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class'        => 'AppBundle\Entity\User',
+            'data_class'        => 'AppBundle\Entity\UserIdentity',
             'validation_groups' => function(FormInterface $form) {
-                /** @var User $data */
+                /** @var UserIdentity $data */
                 $data = $form->getData();
-                $groups = ['pre-upload'];
+                $groups = ['pre-upload', 'identity'];
 
                 // If the user has changed his email, we add the change-email validation group
-                if ($data->getEmail() and $data->getOldEmail() and $data->getEmail() != $data->getOldEmail()) {
+                if ($data->getValue() and $data->getOldValue() and $data->getValue() != $data->getOldValue()) {
                     $groups[] = 'change-email';
                 }
 

@@ -7,6 +7,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class BulkTransaction extends BulkTransactionAbstract
 {
+    /**
+     * @Assert\Valid()
+     */
+    protected $files;
+
     public function __construct($array = [])
     {
         parent::__construct($array);

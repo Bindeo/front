@@ -2,34 +2,28 @@
 
 namespace AppBundle\Form\Type;
 
-use AppBundle\Model\MasterDataFactory;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class UploadFileType extends AbstractType
 {
-    /**
-     * @var \AppBundle\Entity\ResultSet
-     */
-    private $types;
-
-    public function __construct(Session $session, MasterDataFactory $masterData)
-    {
-        $this->types = $masterData->createFileType($session->get('_locale'));
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        // File types master data
-        $builder->add('name', TextType::class)->add('path', HiddenType::class)->add('fileOrigName', HiddenType::class);
-
+        // Form info
+        $builder->add('path', HiddenType::class)
+                ->add('fileOrigName', HiddenType::class)
+                ->add('mode', HiddenType::class)
+                ->add('signType', HiddenType::class)
+                ->add('signers', CollectionType::class, [
+                    'entry_type'   => SignerType::class,
+                    'label'        => false,
+                    'allow_add'    => true,
+                    'allow_delete' => true
+                ]);
+        /*
         // Generate a custom select with user data
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
             $form = $event->getForm();
@@ -50,6 +44,7 @@ class UploadFileType extends AbstractType
                 'label'   => 'Owner identity'
             ]);
         });
+        */
     }
 
     public function configureOptions(OptionsResolver $resolver)

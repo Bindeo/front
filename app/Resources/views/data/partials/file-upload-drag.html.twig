@@ -4,8 +4,17 @@
     {{ include('data/partials/file-upload-div.html.twig', {'numFiles': 1}) }}
     <div id="upload_file_done"></div>
 </div>
-<div class="forms collapse" id="upload_file">
-    {{ include('data/partials/file-upload-form.html.twig') }}
+<div class="forms" id="upload_file">
+    <section class="">
+        <div class="modal fade" tabindex="-1" role="dialog" id="modal-prepare">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    {{ include('data/partials/file-upload-form.html.twig') }}
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+    </section>
 </div>
 <div class="drop">
     <div>

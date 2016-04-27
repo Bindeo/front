@@ -37,8 +37,6 @@ class MasterDataFactory
                 // We need to retrieve data from the API
                 if ($type == 'accountType') {
                     $route = 'general_account_types';
-                } elseif ($type == 'fileType') {
-                    $route = 'general_file_types';
                 } elseif ($type == 'mediaType') {
                     $route = 'general_media_types';
                 } else {
@@ -65,18 +63,6 @@ class MasterDataFactory
     public function createAccountType($locale)
     {
         return $this->getData('accountType', $locale);
-    }
-
-    /**
-     * Get the file type master data in the given locale
-     *
-     * @param string $locale
-     *
-     * @return ResultSet
-     */
-    public function createFileType($locale)
-    {
-        return $this->getData('fileType', $locale);
     }
 
     /**

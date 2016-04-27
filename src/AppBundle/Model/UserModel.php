@@ -16,7 +16,7 @@ class UserModel
     /**
      * UserModel constructor.
      *
-     * @param ApiConnection           $api
+     * @param ApiConnection       $api
      * @param TranslatorInterface $translator
      */
     public function __construct(ApiConnection $api, TranslatorInterface $translator)
@@ -28,34 +28,33 @@ class UserModel
     /**
      * Change the necessary user data
      *
-     * @param User $user
-     * @param User $newUser
+     * @param User         $user
+     * @param UserIdentity $identity
      *
      * @return array
      */
-    public function changeIdentity(User $user, User $newUser)
+    public function changeIdentity(User $user, UserIdentity $identity)
     {
-        $newUser->clean();
-        $newUser->setEmail(mb_strtolower($newUser->getEmail()));
+        $identity->clean();
 
         // Flag to mark when the user changed
         $changed = false;
 
         // Change identity only if it was changed
-        if ($newUser->getOldEmail() != $newUser->getEmail() or $user->getName() != $newUser->getName()) {
+        if ($identity->getOldValue() != $identity->getValue() or $user->getName() != $identity->getName() or
+            $identity->getDocument() != $identity->getOldDocument()
+        ) {
             // If email has changed, password is necessary
-            if ($newUser->getOldEmail() != $newUser->getEmail() and !password_verify($newUser->getPassword(),
-                    $user->getPassword())
+            if ($identity->getOldValue() != $identity->getValue() and
+                !password_verify($identity->getPassword(), $user->getPassword())
             ) {
+                $identity->setDocument($identity->getOldDocument())->setName($user->getName());
+
                 return ['error' => ['password', $this->translator->trans('Your password is not correct')]];
             }
 
             // Change the identity
-            $res = $this->api->putJson('account_identities', (new UserIdentity())->setIdUser($newUser->getIdUser())
-                                                                                 ->setName($newUser->getName())
-                                                                                 ->setValue($newUser->getEmail())
-                                                                                 ->setIp($newUser->getIp())
-                                                                                 ->toArray());
+            $res = $this->api->putJson('account_identities', $identity->toArray());
 
             // Check api errors
             if ($res->getError()) {
@@ -71,19 +70,23 @@ class UserModel
                 }
             } else {
                 // Update logged user if he changed
-                if ($res->getRows()[0]->getName() != $user->getName() or $res->getRows()[0]->getEmail() != $user->getEmail()) {
+                if ($res->getRows()[0]->getName() != $user->getName() or
+                    $res->getRows()[0]->getEmail() != $user->getEmail()
+                ) {
                     $user->setName($res->getRows()[0]->getName())->setEmail($res->getRows()[0]->getEmail());
                     $changed = true;
                 }
             }
         } elseif (!$user->getConfirmed()) {
             // Resend the validation token
-            $this->api->getJson('account_token', $newUser->toArray());
+            $this->api->getJson('account_token', $user->toArray());
         } else {
             $changed = true;
         }
 
         // Return data
+        $user->setIdentities([$identity->getIdIdentity() => $identity]);
+
         return ['success' => true, 'changed' => $changed];
     }
 }

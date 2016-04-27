@@ -6,6 +6,7 @@ use AppBundle\Entity\AccountType;
 use AppBundle\Entity\BulkFile;
 use AppBundle\Entity\File;
 use AppBundle\Entity\ResultSet;
+use AppBundle\Entity\Signer;
 use AppBundle\Entity\User;
 use Bindeo\Filter\FilesFilter;
 use Bindeo\Util\ApiConnection;
@@ -105,6 +106,26 @@ class DataModel
      */
     public function uploadFile(User $user, File $file)
     {
+        // Fill necessary data
+        $file->setClientType('U')->setIdClient($user->getIdUser())->setName($file->getFileOrigName());
+
+        // Add signers depending on the sign mode
+        if ($file->getMode() == 'S') {
+            if ($file->getSignType() == 'M' or $file->getSignType() == 'A') {
+                $creator = (new Signer())->setName($user->getName())
+                                         ->setIdUser($user->getIdUser())
+                                         ->setEmail($user->getEmail())
+                                         ->setPhone($user->getPhone())
+                                         ->setCreator(1)
+                                         ->setIdIdentity($user->getCurrentIdentity()->getIdIdentity());
+
+                // Add creator to the first position of signers array
+                $signers = $file->getSigners();
+                array_unshift($signers, $creator);
+                $file->setSigners($signers);
+            }
+        }
+
         // Save the file against the API
         $newFile = $this->api->postJson('file', $file->toArray());
         if (!$newFile->getError()) {
@@ -114,7 +135,9 @@ class DataModel
                 return $blockchain;
             }
             // Set user new space
-            $user->setStorageLeft($user->getStorageLeft() - $newFile->getRows()[0]->getSize());
+            if ($user->getType() != 1) {
+                $user->setStorageLeft($user->getStorageLeft() - $newFile->getRows()[0]->getSize());
+            }
         }
 
         return $newFile;

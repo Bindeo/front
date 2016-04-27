@@ -5,26 +5,46 @@
         <li><span class="glyphicon glyphicon-exclamation-sign"></span> {% trans %}Ops!{% endtrans %} {% trans %}There was an error uploading the file{% endtrans %}.</li>
     </ul>
 </div>
-{{ form_row(form.name) }}
-<div class="form-group">
-    <label for="upload_file_idType" class="control-label required display-block">{% trans %}Owner identity{% endtrans %}
-        <a href="#" class="pull-right">{% trans %}Manage identities{% endtrans %}</a>
-    </label>
-    {{ form_errors(form.idClient) }}
-    {{ form_widget(form.idClient) }}
+
+<div class="modal-header">
+    <h4 class="modal-title">{% trans %}Want send to sign this document or just notarize it?{% endtrans %}</h4>
 </div>
-{#
-<div class="form-group has-error has-feedback">
-    <label for="field-name">Name</label>
+<div class="modal-body">
     <div>
-        <input type="text" class="form-control" name="name" id="field-name" placeholder="(e.g. Shareholder's agreement)">
+        <ul class="list-group">
+            <li class="list-group-item"><a name="options" data-mode="N" href="#">{% trans %}No, just notarize it{% endtrans %}</a></li>
+        </ul>
 
-        <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <a name="options" data-mode="S" data-type="A" href="#">
+                    {% trans %}Yes, to sign me and others{% endtrans %}
+                </a>
+            </li>
+            <li class="list-group-item">
+                <a name="options" data-mode="S" data-type="O" href="#">
+                    {% trans %}Yes, to sign just other{% endtrans %}
+                </a>
+            </li>
+            <li class="list-group-item">
+                <a name="options" data-mode="S" data-type="M" href="#">
+                    {% trans %}Yes, to sign only me{% endtrans %}
+                </a>
+            </li>
+        </ul>
+    </div>
 
-        <span id="" class="help-block">Introduce una dirección de correo válida</span>
+    <div data-id="to-sign">
+        <p>{% trans %}Great, who others needs to sign?{% endtrans %}</p>
+        <ul class="list-unstyled modal-recipients-list" data-prototype="{{ include('data/partials/signer-form.html.twig', {'signer': form.signers.vars.prototype})|e }}">
+            {% for signer in form.signers %}
+                {{ include('data/partials/signer-form.html.twig') }}
+            {% endfor %}
+        </ul>
     </div>
 </div>
-#}
-{{ form_widget(form.path) }}
-<button type="submit" class="btn btn-default">{% trans %}Register ownership{% endtrans %}</button>
+<div data-id="to-sign" class="modal-footer">
+    <button type="button" data-action="add-signer" class="btn btn-link padding-left-0 pull-left" href="#">+ {% trans %}Add signer{% endtrans %}</button>
+    <button type="submit" class="btn btn-primary">{% trans %}Send{% endtrans %}</button>
+</div>
 {{ form_end(form) }}

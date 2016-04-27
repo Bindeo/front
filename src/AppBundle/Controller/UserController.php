@@ -292,44 +292,46 @@ class UserController extends Controller
         $user = $this->getUser();
 
         // Get user main identity
-        $identities = $this->get('app.api_connection')
-                           ->getJson('account_identities', ['idUser' => $user->getIdUser()])
-                           ->getRows();
-        /** @var UserIdentity $identity */
-        $identity = reset($identities);
+        $identity = clone $user->getCurrentIdentity();
 
-        $newUser = (new User())->setOldEmail($identity->getValue())
-                               ->setEmail($identity->getValue())
-                               ->setName($identity->getName())
-                               ->setIdUser($user->getIdUser());
-        $form = $this->createForm(ChangeIdentityType::class, $newUser);
+        $identity->setOldValue($identity->getValue())->setOldDocument($identity->getDocument());
+        $form = $this->createForm(ChangeIdentityType::class, $identity);
         $form->handleRequest($request);
 
         // Form submitted
-        if ($form->isSubmitted() && $form->isValid()) {
-            // Data is valid, modify the user and send the confirm email
-            $res = $this->get('app.model.user')
-                        ->changeIdentity($user,
-                            $newUser->setIp($request->getClientIp()));
-
-            if (isset($res['error'])) {
-                if ($res['error'][0] == '') {
-                    $form->addError(new FormError($res['error'][1]));
-                } else {
-                    $form->get($res['error'][0])->addError(new FormError($res['error'][1]));
-                }
-            }
-
-            // Check if the form is still valid
+        if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                return new JsonResponse([
-                    'result' => [
-                        'success' => true,
-                        'form'    => $this->renderView('user/partials/identities-form.html.twig',
-                            ['form' => $form->createView(), 'success' => true, 'changed' => $res['changed']])
-                    ]
-                ]);
+                // Data is valid, modify the user and send the confirm email
+                $res = $this->get('app.model.user')->changeIdentity($user, $identity->setIp($request->getClientIp()));
+
+                if (isset($res['error'])) {
+                    if ($res['error'][0] == '') {
+                        $form->addError(new FormError($res['error'][1]));
+                    } else {
+                        $form->get($res['error'][0])->addError(new FormError($res['error'][1]));
+                    }
+                }
+
+                // Check if the form is still valid
+                if ($form->isValid()) {
+                    return new JsonResponse([
+                        'result' => [
+                            'success' => true,
+                            'form'    => $this->renderView('user/partials/identities-form.html.twig',
+                                ['form' => $form->createView(), 'success' => true, 'changed' => $res['changed']])
+                        ]
+                    ]);
+                } else {
+                    return new JsonResponse([
+                        'result' => [
+                            'success' => false,
+                            'form'    => $this->renderView('user/partials/identities-form.html.twig',
+                                ['form' => $form->createView(), 'success' => false])
+                        ]
+                    ]);
+                }
             } else {
+
                 return new JsonResponse([
                     'result' => [
                         'success' => false,
@@ -426,8 +428,7 @@ class UserController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             // Reset password
             $this->get('app.api_connection')
-                 ->getJson('account_password',
-                     $user->setIp($request->getClientIp())->toArray());
+                 ->getJson('account_password', $user->setIp($request->getClientIp())->toArray());
 
             return $this->render('user/password-reset-ok.html.twig',
                 ['email' => $user->getEmail(), 'contact' => $this->getParameter('emails')['contact']]);

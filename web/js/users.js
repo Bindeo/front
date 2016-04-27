@@ -4,7 +4,7 @@
 var users = (function() {
     var init = function() {
         $('body').on('submit', 'form[name="close-account"]', closeAccount);
-        $('body').on('change', '#pre_upload_email,#change_identity_email', showPassword);
+        $('body').on('change', '#pre_upload_email,#change_identity_value', showPassword);
     };
 
     /**

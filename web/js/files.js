@@ -4,6 +4,9 @@ var files = (function() {
         fileUpload();
         $('body').on('click', '[data-action="remove-uploaded-file"]', removeUploadedFile);
         $('body').on('submit', 'form[name="upload_file"]', sendFormFile);
+        $('body').on('click', 'form[name="upload_file"] a[name="options"]', uploadOptions);
+        $('body').on('click', 'form[name="upload_file"] [data-action="add-signer"]', addSigner);
+        $('body').on('click', 'form[name="upload_file"] [data-action="remove-signer"]', removeSigner);
         // Library
         $('body').on('click', '[data-id="fileFilters"] ul li a', chooseFilter);
         $('body').on('keyup', '[data-id="fileFilters"] input', function(e) {
@@ -26,9 +29,9 @@ var files = (function() {
 
             if(name == "upload_file") {
                 $('div[data-name="' + name + '"] .file').hide();
-                $('#' + name + '_name').val(data.files[0].name);
                 $('#' + name + '_fileOrigName').val(data.files[0].name);
-                $('#' + name).show();
+                $('#modal-prepare [data-id="to-sign"]').hide();
+                $('#modal-prepare').modal('show');
                 $('#' + name + '_done').html('');
             }
 
@@ -55,7 +58,11 @@ var files = (function() {
             $('[id="' + data.files[0].name + '"').remove();
 
             if(!result.success) {
-                $.publish('errors.files', [result.name, result.error]);
+                if (result.redirect) {
+                    window.location.href = result.redirect;
+                } else {
+                    $.publish('errors.files', [result.name, result.error]);
+                }
             }
         });
 
@@ -69,7 +76,7 @@ var files = (function() {
                     $('#' + result.name + '_path').val(result.path);
                     $('#' + result.name + '_done').replaceWith(result.html);
                 } else {
-                    $('#' + result.name).hide();
+                    $('#modal-prepare').modal('hide');
                     $('#' + result.name + '_path').val('');
                     $('#' + result.name + '_fileOrigName').val('');
                     $('#' + result.name + '_done').html('');
@@ -140,30 +147,32 @@ var files = (function() {
          * Manage files list filter
          */
         $.subscribe('listFilters.files', function(event) {
-            var params = '';
-            $('[data-id="fileFilters"] li.active').each(function() {
-                if($(this).attr('data-type') != undefined) {
+            if($('#fileList').length) {
+                var params = '';
+                $('[data-id="fileFilters"] li.active').each(function() {
+                    if($(this).attr('data-type') != undefined) {
+                        if(params != '') params += '&';
+                        params += $(this).attr('data-type') + '=' + $(this).attr('data-value');
+                    }
+                });
+
+                // Text
+                var text = $('[data-id="fileFilters"] input[data-type="name"]');
+                if(text.val()) {
                     if(params != '') params += '&';
-                    params += $(this).attr('data-type') + '=' + $(this).attr('data-value');
+                    params += 'name=' + text.val();
                 }
-            });
 
-            // Text
-            var text = $('[data-id="fileFilters"] input[data-type="name"]');
-            if(text.val()) {
-                if(params != '') params += '&';
-                params += 'name=' + text.val();
+                // Ajax request to render new files list
+                $.when(main.sendRequest('/data/library', params)).done(function(response) {
+                    if(response.result.success) {
+                        var fileList = $('#fileList');
+                        fileList.hide().html(response.result.html);
+                        fileList.slideDown('fast');
+                        paginator.setCurrentPage(1);
+                    }
+                });
             }
-
-            // Ajax request to render new files list
-            $.when(main.sendRequest('/data/library', params)).done(function(response) {
-                if(response.result.success) {
-                    var fileList = $('#fileList');
-                    fileList.hide().html(response.result.html);
-                    fileList.slideDown('fast');
-                    paginator.setCurrentPage(1);
-                }
-            });
         });
 
         /**
@@ -272,8 +281,6 @@ var files = (function() {
         var name = $(this).parents('[data-action="fileupload"]').attr('data-name');
 
         // Clean all related fields
-        $('#' + name).hide();
-        $('#' + name + '_name').val('');
         $('#' + name + '_done').html('');
         $('form[name="' + name + '"]').find('input[name="' + name + '[path]"]').val('');
         $('div[data-name="' + name + '"] .file').show();
@@ -289,6 +296,7 @@ var files = (function() {
         event.preventDefault();
         main.sendForm($(this)).done(function(response) {
             if(response.result.success) {
+                $(".modal-backdrop:visible").hide();
                 $.publish('listFilters.files');
                 $.publish('space.files', response.result);
             }
@@ -338,6 +346,80 @@ var files = (function() {
 
             return params;
         });
+    };
+
+    /**
+     * Add new signer
+     */
+    var addSigner = function() {
+        // Get prototype and signers number
+        var container = $('div[data-id="to-sign"] ul[data-prototype]');
+        var number = container.find('>li').length;
+
+        // Instantiate prototype
+        var prototype = $(container.attr('data-prototype').replace(/__name__/g, number));
+
+        // Append the prototype
+        container.append(prototype);
+
+        return false;
+    };
+
+    /**
+     * Remove signer
+     */
+    var removeSigner = function() {
+        var li = $(this).parents('li');
+
+        // Subtract one element to ids
+        li.nextAll().each(function() {
+            // We need to replace all ids in element row to
+            var oldId = $(this).prevAll().length;
+            var newId = oldId - 1;
+            var reg = new RegExp("_" + oldId + "_", "g");
+            var reg2 = new RegExp("\\[" + oldId + "\\]", "g");
+            var html = $(this).html().replace(reg, '_' + newId + '_').replace(reg2, '[' + newId + ']');
+            $(this).html(html);
+        });
+
+        // Remove element
+        li.remove();
+
+        return false;
+    };
+
+    /**
+     * Options to upload the file
+     */
+    var uploadOptions = function(event) {
+        event.preventDefault();
+
+        // Set selected mode in form
+        var mode = $(this).attr('data-mode');
+        $('#upload_file_mode').val(mode);
+
+        if(mode == 'N') {
+            // Send form
+            $(this).parents('form').submit();
+        } else {
+            // Remove previous signers
+            $('div[data-id="to-sign"] ul[data-prototype]').attr('data-signers', 0).html('');
+
+            // Types of signatures
+            var type = $(this).attr('data-type');
+            $('#upload_file_signType').val(type);
+
+            if(type == 'A' || type == 'O') {
+                // To sign
+                $(this).parents('form').find('[data-id="to-sign"]').show();
+
+                // Add signer
+                addSigner();
+            } else {
+                // Submit form
+                $(this).parents('form').submit();
+            }
+        }
     };
 
     // Public methods

@@ -51,11 +51,11 @@ services:
         arguments: ['@session']
 
     # Forms
-    app.form.type.uploadfile:
-        class: AppBundle\Form\Type\UploadFileType
-        arguments: ['@session', '@app.master_data']
-        tags:
-            - { name: form.type }
+    #app.form.type.uploadfile:
+    #    class: AppBundle\Form\Type\UploadFileType
+    #    arguments: ['@session', '@app.master_data']
+    #    tags:
+    #        - { name: form.type }
 
     # Models
     app.model.data:

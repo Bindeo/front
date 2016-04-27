@@ -9,6 +9,7 @@ class BulkFile extends BulkFileAbstract
 {
     /**
      * @Assert\NotBlank(groups={"create-bulk"})
+     * @Assert\Length(min=4,max=64)
      */
     protected $uniqueId;
 
@@ -24,7 +25,7 @@ class BulkFile extends BulkFileAbstract
 
     /**
      * @Assert\NotBlank(groups={"create-bulk"})
-     * @Assert\Length(max=128)
+     * @Assert\Length(min=2,max=128)
      */
     protected $fullName;
 

@@ -81,6 +81,7 @@
                 </ul>
                 <ul id="fileList" class="list-unstyled">
                     {{ include('data/partials/file-list.html.twig') }}
+                    {#
                     <li class="">
                         <div class="">
                             Modals launcher:
@@ -91,8 +92,8 @@
                                 <li><a href="#" data-toggle="modal" data-target="#modal-public">Public page</a></li>
                             </ul>
                         </div>
-
                     </li>
+                    #}
                 </ul>
             </div>
 
@@ -229,18 +230,18 @@
 {% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('libs/jQuery-File-Upload-9.12.1/css/jquery.fileupload.css') }}">
-    <link rel="stylesheet" href="{{ asset('libs/jQuery-File-Upload-9.12.1/css/jquery.fileupload-ui.css') }}">
+    <link rel="stylesheet" href="{{ asset('libs/jQuery-File-Upload-9.12.3/css/jquery.fileupload.css') }}">
+    <link rel="stylesheet" href="{{ asset('libs/jQuery-File-Upload-9.12.3/css/jquery.fileupload-ui.css') }}">
 {% endblock %}
 
 {% block javascripts %}
     {# Libraries #}
-    <script src="{{ asset('libs/jQuery-File-Upload-9.12.1/js/cors/jquery.postmessage-transport.js') }}"></script>
-    <script src="{{ asset('libs/jQuery-File-Upload-9.12.1/js//vendor/jquery.ui.widget.js') }}"></script>
-    <script src="{{ asset('libs/jQuery-File-Upload-9.12.1/js/jquery.iframe-transport.js') }}"></script>
-    <script src="{{ asset('libs/jQuery-File-Upload-9.12.1/js/jquery.fileupload.js') }}"></script>
+    <script src="{{ asset('libs/jQuery-File-Upload-9.12.3/js/cors/jquery.postmessage-transport.js') }}"></script>
+    <script src="{{ asset('libs/jQuery-File-Upload-9.12.3/js//vendor/jquery.ui.widget.js') }}"></script>
+    <script src="{{ asset('libs/jQuery-File-Upload-9.12.3/js/jquery.iframe-transport.js') }}"></script>
+    <script src="{{ asset('libs/jQuery-File-Upload-9.12.3/js/jquery.fileupload.js') }}"></script>
     <!--[if (gte IE 8)&(lt IE 10)]>
-    <script src="{{ asset('libs/jQuery-File-Upload-9.12.1/js/cors/jquery.xdr-transport.js') }}"></script>
+    <script src="{{ asset('libs/jQuery-File-Upload-9.12.3/js/cors/jquery.xdr-transport.js') }}"></script>
     <![endif]-->
     {# Own js #}
     <script src="{{ asset('js/files.js') }}"></script>

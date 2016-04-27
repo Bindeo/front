@@ -6,10 +6,6 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>{% block title %}{% trans %}Bindeo - Blockchain Web Services{% endtrans %}{% endblock %}</title>
 
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="{{ asset('libs/bootstrap_3.3.6/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('libs/bootstrap_3.3.6/css/bootstrap-theme.min.css') }}">
-
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 
     {% block stylesheets %}{% endblock %}
@@ -48,7 +44,7 @@
     <script src="{{ asset('libs/respond_1.4.2/respond.min.js') }}"></script>
     <![endif]-->
 
-    <script src="{{ asset('libs/jquery_2.2.1/jquery.min.js') }}"></script>
+    <script src="{{ asset('libs/jquery_2.2.3/jquery.min.js') }}"></script>
     <script src="{{ asset('libs/bootstrap_3.3.6/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
 {% block javascripts %}{% endblock %}
