@@ -8,10 +8,13 @@ use AppBundle\Entity\File;
 use AppBundle\Entity\ResultSet;
 use AppBundle\Entity\Signer;
 use AppBundle\Entity\User;
+use Bindeo\DataModel\Exceptions;
 use Bindeo\Filter\FilesFilter;
 use Bindeo\Util\ApiConnection;
+use Bindeo\Util\Tools;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
@@ -163,6 +166,84 @@ class DataModel
                                      ->setPage($request->get('page'));
 
         $res = $this->api->getJson('files', $filter->toArray());
+
+        return $res;
+    }
+
+    /**
+     * Get a signer through a token
+     *
+     * @param array $params
+     *
+     * @return Signer
+     */
+    public function getSigner(array $params)
+    {
+        $res = $this->api->getJson('signature_signer', $params);
+
+        // Check authorization
+        if ($res->getNumRows() == 0) {
+            return null;
+        } else {
+            // No errors
+            return $res->getRows()[0];
+        }
+    }
+
+    /**
+     * Get a signable doc by token
+     *
+     * @param array            $params
+     * @param SessionInterface $session
+     * @param string           $baseUrl
+     *
+     * @return array
+     */
+    public function getSignableDoc(array $params, SessionInterface $session, $baseUrl)
+    {
+        $res = $this->api->getJson('signature', $params);
+
+        // Check authorization
+        if ($res->getError()) {
+            if ($res->getError()['code'] = 403 and $res->getError()['message'] == Exceptions::FEW_PRIVILEGES) {
+                $res = ['authorization' => false, 'error' => 'user'];
+            } else {
+                $res = ['authorization' => false, 'error' => 'token'];
+            }
+        } else {
+            // No errors
+            /** @var File $file */
+            $file = $res->getRows()[0];
+
+            if ($file->getPages() == 0) {
+                $res = ['authorization' => false, 'error' => 'file'];
+            } else {
+                $res = ['authorization' => true];
+
+                // Key to encode files path
+                $key = random_bytes(8);
+                $session->set('viewKey', $key);
+
+                // Generate url to download file
+                $data = [$file->getPath(), $file->getName()];
+                $res['file'] = $file->setPath(str_replace('__FILE__',
+                    Tools::safeBase64Encode(mcrypt_encrypt(MCRYPT_DES, $key, json_encode($data), MCRYPT_MODE_ECB)),
+                    $baseUrl));
+
+                // Generate pages preview urls
+                $file->decodePages();
+                $pages = [];
+                foreach ($file->getPagesPreviews() as $page) {
+                    if (is_file($page)) {
+                        $data = [$page, basename($file->getName())];
+                        $pages[] = str_replace('__FILE__',
+                            Tools::safeBase64Encode(mcrypt_encrypt(MCRYPT_DES, $key, json_encode($data), MCRYPT_MODE_ECB)),
+                            $baseUrl);
+                    }
+                }
+                $file->setPagesPreviews($pages);
+            }
+        }
 
         return $res;
     }

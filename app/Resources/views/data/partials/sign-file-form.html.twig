@@ -1,0 +1,14 @@
+{{ form_start(form, {'attr': {'data-action': 'ajax-form', 'autocomplete': 'off'}}) }}
+<div class="modal-body">
+    {{ form_errors(form) }}
+    <p>{% trans %}We've sent a 4-digit PIN code to your email address, type it here{% endtrans %}:</p>
+
+    {{ form_row(form.code, {'attr': {'placeholder': 'PIN code'}}) }}
+    {{ form_row(form.name, {'attr': {'placeholder': 'Full name'}}) }}
+    {{ form_row(form.document, {'attr': {'placeholder': 'National Identity Number'}}) }}
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">{% trans %}Cancel{% endtrans %}</button>
+    <button type="submit" class="btn btn-primary">{% trans %}Yes, sign now{% endtrans %}</button>
+</div>
+{{ form_end(form) }}

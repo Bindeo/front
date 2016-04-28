@@ -87,7 +87,7 @@ class ResultSet extends ClientResultSetAbstract
                 $object = new MediaType((array)$data->attributes);
                 $res = [$object->getIdType(), $object];
                 break;
-            case 'bulk_transaction':
+            case 'bulk_transactions':
                 // Fill the entity class
                 if (!$this->entity) {
                     $this->entity = 'AppBundle\Entity\BulkTransaction';
@@ -108,6 +108,17 @@ class ResultSet extends ClientResultSetAbstract
 
                 $object = new BulkFile((array)$data->attributes);
                 $res = [$object->getIdBulkFile(), $object];
+                break;
+            case 'signers':
+                // Fill the entity class
+                if (!$this->entity) {
+                    $this->entity = 'AppBundle\Entity\Signer';
+                } elseif ($this->entity != 'AppBundle\Entity\Signer') {
+                    throw new HttpException(500);
+                }
+
+                $object = new Signer((array)$data->attributes);
+                $res = [$object->getEmail(), $object];
                 break;
             default:
                 throw new HttpException(500);

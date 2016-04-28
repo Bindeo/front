@@ -14,6 +14,8 @@ var files = (function() {
                 chooseFilter();
             }
         });
+        // Sign files
+        $('body').on('click', '[data-target="#modal-sign"]', requestCode);
         pagination();
     };
 
@@ -420,6 +422,13 @@ var files = (function() {
                 $(this).parents('form').submit();
             }
         }
+    };
+
+    /**
+     * Request via ajax call a new signature code generation
+     */
+    var requestCode = function(event) {
+        main.sendRequest('/ajax/generate-sign-code');
     };
 
     // Public methods

@@ -1,0 +1,72 @@
+{% extends is_granted('IS_AUTHENTICATED_REMEMBERED') ? 'base-log.html.twig' : 'base-nolog.html.twig' %}
+
+{% block title %}
+    {% trans %}Review and sign document{% endtrans %}
+{% endblock %}
+
+{% block body %}
+{% if not authorization %}
+<section data-type="main">
+<section class="">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
+                <h1>Review and sign document</h1>
+                {% if error == 'user' %}
+                <p>{% trans %}You must to be logged with same email you received the signature invitation{% endtrans %}</p>
+                {% elseif error == 'token' %}
+                <p>{% trans %}Token to sign document has expired, please contact who sent you the invitation{% endtrans %}</p>
+                {% else %}
+                <p>{% trans %}Document has not been processed yet, please try again in few seconds{% endtrans %}</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% else %}
+<section class="">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
+                <h1>{% trans %}Review and sign document{% endtrans %}</h1>
+                <p>{{ file.name }} ({% transchoice file.pages %}{1} %count% page|]2,Inf]%count% pages{% endtranschoice %}),
+                    {% trans with {'%a_start%': '<a href="'~file.path~'">', '%a_end%': '</a>'} %}if you have problems viewing it %a_start% download original%a_end%{% endtrans %}</p>
+                <div class="viewer">
+                    {% for page in file.pagesPreviews %}
+                    <div>
+                        <img class="img-responsive" src="{{ page }}">
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="sign-button">
+    <div>
+        <div class="container">
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-sign">{% trans %}Sign document!{% endtrans %}</button>
+        </div>
+    </div>
+</section>
+<section class="">
+    <div class="modal fade" tabindex="-1" role="dialog" id="modal-sign">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <div class="modal-header">
+                    <h4 class="modal-title">{% trans %}Sign document{% endtrans %}</h4>
+                </div>
+                {{ include('data/partials/sign-file-form.html.twig') }}
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+</section>
+</section>
+{% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/files.js') }}"></script>
+    <script src="{{ asset('js/users.js') }}"></script>
+{% endblock %}

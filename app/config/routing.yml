@@ -45,6 +45,18 @@ file_upload_res:
     path: /data/upload/result
     defaults: { _controller: AppBundle:Data:uploadFileResult }
 
+file_signature:
+    path: /data/signature/{token}
+    defaults: { _controller: AppBundle:Data:getSignableDoc }
+
+ajax_generate_sign_code:
+    path: /ajax/generate-sign-code
+    defaults: { _controller: AppBundle:Data:ajaxGenerateCode }
+
+file_view:
+    path: /data/view/{file}
+    defaults: { _controller: AppBundle:Data:viewFile }
+
 # Education
 
 edu_notarize:

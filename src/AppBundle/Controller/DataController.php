@@ -6,14 +6,18 @@ use AppBundle\Entity\AccountType;
 use AppBundle\Entity\File;
 use AppBundle\Entity\User;
 use AppBundle\Form\Type\ChangeIdentityType;
+use AppBundle\Form\Type\SignerType;
 use AppBundle\Form\Type\UploadFileType;
+use Bindeo\Util\Tools;
 use Symfony\Component\Form\FormError;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Annotation\Route;
 
 class DataController extends Controller
@@ -320,5 +324,154 @@ class DataController extends Controller
             return $this->render('data/file-upload-preok.html.twig',
                 ['email' => $request->getSession()->get('fileupload')]);
         }
+    }
+
+    /**
+     * View a signable document through user token
+     * @Route("/data/signature/{token}", name="file_signature")
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function getSignableDocAction(Request $request)
+    {
+        // If user is logged, send user id too
+        $params = ['token' => $request->get('token')];
+
+        // Build signer
+        $signer = $this->get('app.model.data')->getSigner($params);
+
+        // If we haven't got signer, we return the error
+        if (!$signer) {
+            return $this->render('data/signable-doc.html.twig', ['authorization' => false, 'error' => 'token']);
+        }
+
+        $signer->setToken($params['token']);
+
+        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            /** @var User $user */
+            $user = $this->getUser();
+            $params['idUser'] = $user->getIdUser();
+            $identity = $user->getCurrentIdentity();
+
+            $signer->setIdUser($user->getIdUser())
+                   ->setIdIdentity($identity->getIdIdentity())
+                   ->setName($identity->getName())
+                   ->setEmail($identity->getValue())
+                   ->setDocument($identity->getDocument())
+                   ->setLang($user->getLang());
+        } else {
+            $signer->setLang($request->cookies->get('LOCALE'));
+        }
+
+        $form = $this->createForm(SignerType::class, $signer);
+        $form->handleRequest($request);
+
+        // Form submitted
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                // Send pin code
+                $signer->setIp($request->getClientIp());
+                $res = $this->get('app.api_connection')
+                            ->putJson('signature', $signer->setIp($request->getClientIp())->toArray());
+
+                // If there was an error
+                if ($res->getError()) {
+                    $form->addError(new FormError($this->get('translator')->trans('There was a problem signing the document, please try again later')));
+
+                    return new JsonResponse([
+                        'result' => [
+                            'success' => false,
+                            'form'    => $this->renderView('data/partials/sign-file-form.html.twig',
+                                ['form' => $form->createView()])
+                        ]
+                    ]);
+                } else {
+                    return new JsonResponse([
+                        'result' => [
+                            'success'   => true,
+                            'html'      => $this->renderView('data/partials/file-upload-ok.html.twig', ['message' => 'signature'])
+                        ]
+                    ]);
+                }
+
+
+
+            } else {
+                return new JsonResponse([
+                    'result' => [
+                        'success' => false,
+                        'form'    => $this->renderView('data/partials/sign-file-form.html.twig',
+                            ['form' => $form->createView()])
+                    ]
+                ]);
+            }
+        } else {
+            // Get document
+            $res = $this->get('app.model.data')
+                        ->getSignableDoc($params, $request->getSession(),
+                            $this->generateUrl('file_view', ['file' => '__FILE__']));
+
+            // Renderize form
+            $res['form'] = $form->createView();
+
+            return $this->render('data/signable-doc.html.twig', $res);
+        }
+    }
+
+    /**
+     * Request a signature code generation
+     * @Route("/ajax/generate-sign-code", name="ajax_generate_sign_code")
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function ajaxGenerateCodeAction(Request $request)
+    {
+        if ($request->isXmlHttpRequest()) {
+            // Get token from url referer
+            $referer = explode('/', $request->server->get('HTTP_REFERER'));
+            $token = array_pop($referer);
+            $this->get('app.api_connection')->getJson('signature_code', [
+                'token' => $token,
+                'lang'  => $request->cookies->get('LOCALE'),
+                'ip'    => $request->getClientIp()
+            ]);
+
+            return new Response();
+        } else {
+            throw $this->createNotFoundException('Url not found');
+        }
+    }
+
+    /**
+     * Download a file encoded with key
+     * @Route("/data/view/{file}", name="file_view")
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function viewFileAction(Request $request)
+    {
+        // Use session key
+        $key = $request->getSession()->get('viewKey');
+
+        // Decode url
+        $file = trim(mcrypt_decrypt(MCRYPT_DES, $key, Tools::safeBase64Decode($request->get('file')), MCRYPT_MODE_ECB));
+        list($filePath, $filename) = json_decode($file);
+
+        if (!$filePath or !is_file($filePath)) {
+            throw $this->createNotFoundException('The file does not exist');
+        }
+
+        // Download file
+        $response = new BinaryFileResponse($filePath);
+        $response->trustXSendfileTypeHeader();
+        $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_INLINE, $filename);
+
+        return $response;
     }
 }
