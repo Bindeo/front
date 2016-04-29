@@ -1,19 +1,25 @@
 {% extends is_granted('IS_AUTHENTICATED_REMEMBERED') ? 'base-log.html.twig' : 'base-nolog.html.twig' %}
 
 {% block title %}
-    {% trans %}Review and sign document{% endtrans %}
+    {% if authorization and signer.signed %}
+        {% trans %}Review the document{% endtrans %}
+    {% else %}
+        {% trans %}Review and sign the document{% endtrans %}
+    {% endif %}
 {% endblock %}
 
 {% block body %}
-{% if not authorization %}
 <section data-type="main">
+{% if not authorization %}
 <section class="">
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
-                <h1>Review and sign document</h1>
+                <h1>
+                    {% trans %}Review and sign the document{% endtrans %}
+                </h1>
                 {% if error == 'user' %}
-                <p>{% trans %}You must to be logged with same email you received the signature invitation{% endtrans %}</p>
+                <p>{% trans with {'%a_start%':'<a href="'~(is_granted('IS_AUTHENTICATED_REMEMBERED') ? path('logout') : path('login'))~'">', '%a_end%': '</a>'} %}You must to be %a_start%logged%a_end% with an account allowed by this document{% endtrans %}</p>
                 {% elseif error == 'token' %}
                 <p>{% trans %}Token to sign document has expired, please contact who sent you the invitation{% endtrans %}</p>
                 {% else %}
@@ -28,7 +34,11 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
-                <h1>{% trans %}Review and sign document{% endtrans %}</h1>
+                <h1>{% if signer.signed %}
+                        {% trans %}Review the document{% endtrans %}
+                    {% else %}
+                        {% trans %}Review and sign the document{% endtrans %}
+                    {% endif %}</h1>
                 <p>{{ file.name }} ({% transchoice file.pages %}{1} %count% page|]2,Inf]%count% pages{% endtranschoice %}),
                     {% trans with {'%a_start%': '<a href="'~file.path~'">', '%a_end%': '</a>'} %}if you have problems viewing it %a_start% download original%a_end%{% endtrans %}</p>
                 <div class="viewer">
@@ -42,10 +52,11 @@
         </div>
     </div>
 </section>
+{% if not signer.signed %}
 <section class="sign-button">
     <div>
         <div class="container">
-            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-sign">{% trans %}Sign document!{% endtrans %}</button>
+            <button type="button" class="btn btn-default" data-token="{{ signer.token }}" data-toggle="modal" data-target="#modal-sign">{% trans %}Sign document!{% endtrans %}</button>
         </div>
     </div>
 </section>
@@ -62,8 +73,9 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 </section>
-</section>
 {% endif %}
+{% endif %}
+</section>
 {% endblock %}
 
 {% block javascripts %}

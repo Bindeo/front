@@ -157,7 +157,8 @@ class DataModel
     public function library($user, Request $request)
     {
         // Instantiate files filter
-        $filter = (new FilesFilter())->setIdClient($user->getIdUser())
+        $filter = (new FilesFilter())->setClientType('U')
+                                     ->setIdClient($user->getIdUser())
                                      ->setStatus($request->get('status'))
                                      ->setSpecialFilter($request->get('special'))
                                      ->setMediaType($request->get('media-type'))
@@ -179,6 +180,12 @@ class DataModel
      */
     public function getSigner(array $params)
     {
+        // Token only could be numeric if user is logged
+        if (is_numeric($params['token']) and !isset($params['idUser'])) {
+            return null;
+        }
+
+        // Get signer
         $res = $this->api->getJson('signature_signer', $params);
 
         // Check authorization
@@ -215,7 +222,7 @@ class DataModel
             /** @var File $file */
             $file = $res->getRows()[0];
 
-            if ($file->getPages() == 0) {
+            if ($file->getPages() == 0 or !$file->getPagesPreviews()) {
                 $res = ['authorization' => false, 'error' => 'file'];
             } else {
                 $res = ['authorization' => true];
@@ -237,8 +244,8 @@ class DataModel
                     if (is_file($page)) {
                         $data = [$page, basename($file->getName())];
                         $pages[] = str_replace('__FILE__',
-                            Tools::safeBase64Encode(mcrypt_encrypt(MCRYPT_DES, $key, json_encode($data), MCRYPT_MODE_ECB)),
-                            $baseUrl);
+                            Tools::safeBase64Encode(mcrypt_encrypt(MCRYPT_DES, $key, json_encode($data),
+                                MCRYPT_MODE_ECB)), $baseUrl);
                     }
                 }
                 $file->setPagesPreviews($pages);

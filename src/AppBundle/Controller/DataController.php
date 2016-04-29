@@ -138,21 +138,34 @@ class DataController extends Controller
                         ]
                     ]);
                 } else {
-                    // To format numbers
-                    $formatter = $this->get('app.locale_format');
+                    // Depends on the mode
+                    if ($file->getMode() == 'S' and ($file->getSignType() == 'M' or $file->getSignType() == 'A')) {
+                        // If user uploaded a file to sign and he wants to sign too, we redirect him to the signature page
 
-                    return new JsonResponse([
-                        'result' => [
-                            'success'   => true,
-                            'freespace' => $formatter->format(round($user->getStorageLeft() / 1024 / 1024, 2,
-                                PHP_ROUND_HALF_DOWN)),
-                            'usedspace' => $formatter->format(round(($user->getTotalStorage() -
-                                                                     $user->getStorageLeft()) / 1024 / 1024, 2,
-                                PHP_ROUND_HALF_DOWN)),
-                            'html'      => $this->renderView('data/partials/file-upload-ok.html.twig',
-                                ['message' => 'fileupload'])
-                        ]
-                    ]);
+                        return new JsonResponse([
+                            'result' => [
+                                'success'  => true,
+                                'redirect' => $this->generateUrl('file_signature',
+                                    ['token' => $res->getRows()[0]->getIdFile()])
+                            ]
+                        ]);
+                    } else {
+                        // To format numbers
+                        $formatter = $this->get('app.locale_format');
+
+                        return new JsonResponse([
+                            'result' => [
+                                'success'   => true,
+                                'freespace' => $formatter->format(round($user->getStorageLeft() / 1024 / 1024, 2,
+                                    PHP_ROUND_HALF_DOWN)),
+                                'usedspace' => $formatter->format(round(($user->getTotalStorage() -
+                                                                         $user->getStorageLeft()) / 1024 / 1024, 2,
+                                    PHP_ROUND_HALF_DOWN)),
+                                'html'      => $this->renderView('data/partials/file-upload-ok.html.twig',
+                                    ['message' => 'fileupload'])
+                            ]
+                        ]);
+                    }
                 }
             } else {
                 if ($form->getErrors() and (!$file->getPath() or !$file->getFileOrigName())) {
@@ -339,20 +352,22 @@ class DataController extends Controller
         // If user is logged, send user id too
         $params = ['token' => $request->get('token')];
 
+        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            $params['idUser'] = $this->getUser()->getIdUser();
+        }
+
         // Build signer
         $signer = $this->get('app.model.data')->getSigner($params);
 
         // If we haven't got signer, we return the error
         if (!$signer) {
-            return $this->render('data/signable-doc.html.twig', ['authorization' => false, 'error' => 'token']);
+            return $this->render('data/signable-doc.html.twig',
+                ['authorization' => false, 'error' => is_numeric($params['token']) ? 'user' : 'token']);
         }
-
-        $signer->setToken($params['token']);
 
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             /** @var User $user */
             $user = $this->getUser();
-            $params['idUser'] = $user->getIdUser();
             $identity = $user->getCurrentIdentity();
 
             $signer->setIdUser($user->getIdUser())
@@ -362,7 +377,7 @@ class DataController extends Controller
                    ->setDocument($identity->getDocument())
                    ->setLang($user->getLang());
         } else {
-            $signer->setLang($request->cookies->get('LOCALE'));
+            $signer->setLang($request->getLocale());
         }
 
         $form = $this->createForm(SignerType::class, $signer);
@@ -378,7 +393,13 @@ class DataController extends Controller
 
                 // If there was an error
                 if ($res->getError()) {
-                    $form->addError(new FormError($this->get('translator')->trans('There was a problem signing the document, please try again later')));
+                    if ($res->getError()['code'] = 403) {
+                        $form->addError(new FormError($this->get('translator')
+                                                           ->trans('Your PIN code has expired, please click again in sign document button to receive a new one')));
+                    } else {
+                        $form->addError(new FormError($this->get('translator')
+                                                           ->trans('There was a problem signing the document, please try again later')));
+                    }
 
                     return new JsonResponse([
                         'result' => [
@@ -390,14 +411,12 @@ class DataController extends Controller
                 } else {
                     return new JsonResponse([
                         'result' => [
-                            'success'   => true,
-                            'html'      => $this->renderView('data/partials/file-upload-ok.html.twig', ['message' => 'signature'])
+                            'success' => true,
+                            'html'    => $this->renderView('data/partials/file-upload-ok.html.twig',
+                                ['message' => 'signature'])
                         ]
                     ]);
                 }
-
-
-
             } else {
                 return new JsonResponse([
                     'result' => [
@@ -407,22 +426,23 @@ class DataController extends Controller
                     ]
                 ]);
             }
-        } else {
-            // Get document
-            $res = $this->get('app.model.data')
-                        ->getSignableDoc($params, $request->getSession(),
-                            $this->generateUrl('file_view', ['file' => '__FILE__']));
-
-            // Renderize form
-            $res['form'] = $form->createView();
-
-            return $this->render('data/signable-doc.html.twig', $res);
         }
+
+        // Get document
+        $res = $this->get('app.model.data')
+                    ->getSignableDoc($params, $request->getSession(),
+                        $this->generateUrl('file_view', ['file' => '__FILE__']));
+
+        // Renderize form
+        $res['form'] = $form->createView();
+        $res['signer'] = $signer;
+
+        return $this->render('data/signable-doc.html.twig', $res);
     }
 
     /**
      * Request a signature code generation
-     * @Route("/ajax/generate-sign-code", name="ajax_generate_sign_code")
+     * @Route("/ajax/generate-sign-code/{token}", name="ajax_generate_sign_code")
      *
      * @param Request $request
      *
@@ -431,14 +451,19 @@ class DataController extends Controller
     public function ajaxGenerateCodeAction(Request $request)
     {
         if ($request->isXmlHttpRequest()) {
-            // Get token from url referer
-            $referer = explode('/', $request->server->get('HTTP_REFERER'));
-            $token = array_pop($referer);
-            $this->get('app.api_connection')->getJson('signature_code', [
-                'token' => $token,
-                'lang'  => $request->cookies->get('LOCALE'),
+            // Params to send
+            $params = [
+                'token' => $request->get('token'),
+                'lang'  => $request->getLocale(),
                 'ip'    => $request->getClientIp()
-            ]);
+            ];
+
+            // If user is logged, we send user too
+            if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+                $params['idUser'] = $this->getUser()->getIdUser();
+            }
+
+            $this->get('app.api_connection')->getJson('signature_code', $params);
 
             return new Response();
         } else {

@@ -50,7 +50,7 @@ file_signature:
     defaults: { _controller: AppBundle:Data:getSignableDoc }
 
 ajax_generate_sign_code:
-    path: /ajax/generate-sign-code
+    path: /ajax/generate-sign-code/{token}
     defaults: { _controller: AppBundle:Data:ajaxGenerateCode }
 
 file_view:

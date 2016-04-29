@@ -16,6 +16,8 @@ var files = (function() {
         });
         // Sign files
         $('body').on('click', '[data-target="#modal-sign"]', requestCode);
+        $('body').on('submit', 'form[name="signer"]', sendFormSigner);
+
         pagination();
     };
 
@@ -60,7 +62,7 @@ var files = (function() {
             $('[id="' + data.files[0].name + '"').remove();
 
             if(!result.success) {
-                if (result.redirect) {
+                if(result.redirect) {
                     window.location.href = result.redirect;
                 } else {
                     $.publish('errors.files', [result.name, result.error]);
@@ -428,7 +430,20 @@ var files = (function() {
      * Request via ajax call a new signature code generation
      */
     var requestCode = function(event) {
-        main.sendRequest('/ajax/generate-sign-code');
+        main.sendRequest('/ajax/generate-sign-code/' + $(this).attr('data-token'));
+    };
+
+    /**
+     * Send signer form
+     * @param event
+     */
+    var sendFormSigner = function(event) {
+        event.preventDefault();
+        main.sendForm($(this)).done(function(response) {
+            if(response.result.success) {
+                $(".modal-backdrop").remove();
+            }
+        });
     };
 
     // Public methods
