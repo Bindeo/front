@@ -45,9 +45,17 @@ file_upload_res:
     path: /data/upload/result
     defaults: { _controller: AppBundle:Data:uploadFileResult }
 
+generate_signature_certificate:
+    path: /data/signature/generate-certificate
+    defaults: { _controller: AppBundle:Data:generateSignCert }
+
 file_signature:
     path: /data/signature/{token}
     defaults: { _controller: AppBundle:Data:getSignableDoc }
+
+file_signature_certificate:
+    path: /data/signature/{token}/certificate
+    defaults: { _controller: AppBundle:Data:signatureCertificate }
 
 ajax_generate_sign_code:
     path: /ajax/generate-sign-code/{token}

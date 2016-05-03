@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Bindeo\DataModel\UserIdentityAbstract;
+use Bindeo\DataModel\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class UserIdentity extends UserIdentityAbstract

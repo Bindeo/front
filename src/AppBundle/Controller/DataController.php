@@ -499,4 +499,39 @@ class DataController extends Controller
 
         return $response;
     }
+
+    /**
+     * Download a signature certificate
+     * @Route("/data/signature/{token}/certificate", name="file_signature_certificate")
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function signatureCertificateAction(Request $request)
+    {
+        // Get element
+
+        return $this->render('data/signature-certificate.html.twig');
+    }
+
+    /**
+     * Generate a signature certificate
+     * @Route("/data/signature/generate-certificate", name="file_signature_certificate")
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function generateSignCertAction(Request $request)
+    {
+        // Get element
+        $res = $this->get('app.model.data')->signatureCertificate($request->get('t'), $request->get('u'));
+
+        $res['lang'] = $request->getLocale() == 'es_ES' ? 'ES' : 'EN';
+
+        // TODO Get addresses of accounts...
+
+        return $this->render('data/signature-certificate.html.twig', $res);
+    }
 }

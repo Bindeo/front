@@ -59,9 +59,6 @@ class UserController extends Controller
      */
     public function registerAction(Request $request)
     {
-        // Temporary registry is deactivated
-        return new RedirectResponse('/');
-
         // If we are already logged we redirect the user to the homepage
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             return new RedirectResponse('/');

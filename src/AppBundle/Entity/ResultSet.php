@@ -120,6 +120,28 @@ class ResultSet extends ClientResultSetAbstract
                 $object = new Signer((array)$data->attributes);
                 $res = [$object->getEmail(), $object];
                 break;
+            case 'oauth_clients':
+                // Fill the entity class
+                if (!$this->entity) {
+                    $this->entity = 'AppBundle\Entity\OAuthClient';
+                } elseif ($this->entity != 'AppBundle\Entity\OAuthClient') {
+                    throw new HttpException(500);
+                }
+
+                $object = new OAuthClient((array)$data->attributes);
+                $res = [$object->getEmail(), $object];
+                break;
+            case 'signatures':
+                // Fill the entity class
+                if (!$this->entity) {
+                    $this->entity = 'AppBundle\Entity\DocsSignature';
+                } elseif ($this->entity != 'AppBundle\Entity\DocsSignature') {
+                    throw new HttpException(500);
+                }
+
+                $object = new DocsSignature((array)$data->attributes);
+                $res = [0, $object];
+                break;
             default:
                 throw new HttpException(500);
         }

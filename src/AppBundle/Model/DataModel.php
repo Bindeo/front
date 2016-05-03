@@ -4,11 +4,14 @@ namespace AppBundle\Model;
 
 use AppBundle\Entity\AccountType;
 use AppBundle\Entity\BulkFile;
+use AppBundle\Entity\DocsSignature;
 use AppBundle\Entity\File;
 use AppBundle\Entity\ResultSet;
 use AppBundle\Entity\Signer;
 use AppBundle\Entity\User;
+use AppBundle\Entity\UserIdentity;
 use Bindeo\DataModel\Exceptions;
+use Bindeo\DataModel\UserInterface;
 use Bindeo\Filter\FilesFilter;
 use Bindeo\Util\ApiConnection;
 use Bindeo\Util\Tools;
@@ -250,6 +253,79 @@ class DataModel
                 }
                 $file->setPagesPreviews($pages);
             }
+        }
+
+        return $res;
+    }
+
+    /**
+     * Generate a signature certificate
+     *
+     * @param string $token
+     * @param int    $idUser
+     *
+     * @return array
+     */
+    public function signatureCertificate($token, $idUser)
+    {
+        $res = $this->api->getJson('signature_certificate',
+            ['token' => $token, 'clientType' => 'U', 'idClient' => $idUser]);
+
+        // Check authorization
+        if ($res->getError()) {
+            if ($res->getError()['code'] = 403 and $res->getError()['message'] == Exceptions::FEW_PRIVILEGES) {
+                $res = ['authorization' => false, 'error' => 'user'];
+            } else {
+                $res = ['authorization' => false, 'error' => 'token'];
+            }
+        } else {
+            // No errors
+            /** @var DocsSignature $signature */
+            $signature = $res->getRows()[0];
+
+            // Convert objects
+            $signature->convertObjects();
+            /** @var File $file /
+             * $file = $res->getRows()[0];
+             * // Get document issuer
+             * if ($file->getClientType() == 'U') {
+             * $issuer = $this->api->getJson('account_identities', ['idUser' => $file->getIdClient()]);
+             * } else {
+             * $issuer = $this->api->getJson('oauth_clients', ['idClient' => $file->getIdClient()]);
+             * }
+             * if ($issuer->getError() or $issuer->getNumRows() == 0) {
+             * $res = ['authorization' => false, 'error' => 'user'];
+             * } else {
+             * $rows = $issuer->getRows();
+             * $issuer = reset($rows);
+             * /** @var UserInterface $issuer /
+             * // Get document signers
+             * $signers = $this->api->getJson('signature_signers',
+             * ['elementType' => $file->getElementType(), 'idElement' => $file->getElementId()]);
+             * if ($signers->getError() or $signers->getNumRows() == 0) {
+             * $res = ['authorization' => false, 'error' => 'user'];
+             * } else {
+             * // Get Bulk Transaction
+             * $bulk = $this->api->getJson('bulk_transaction', [
+             * 'clientType' => $issuer->getUserType(),
+             * 'idClient'   => $issuer->getIdUser(),
+             * 'externalId' => 'Sign_Document_' . $file->getElementId()
+             * ]);
+             * if ($bulk->getError() or $bulk->getNumRows() == 0) {
+             * $res = ['authorization' => false, 'error' => 'user'];
+             * } else {
+             * $res = [
+             * 'authorization' => true,
+             * 'file'          => $file,
+             * 'issuer'        => $issuer,
+             * 'signers'       => $signers->getRows(),
+             * 'bulk'          => $bulk->getRows()[0]
+             * ];
+             * }
+             * }
+             * }*/
+
+            $res = ['authorization' => true, 'signature' => $signature];
         }
 
         return $res;
