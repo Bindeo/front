@@ -134,8 +134,8 @@ class DataModel
 
         // Save the file against the API
         $newFile = $this->api->postJson('file', $file->toArray());
-        if (!$newFile->getError()) {
-            // Sign the file
+        if (!$newFile->getError() and $file->getMode() != 'S') {
+            // Sign the file individually for no Signature mode
             $blockchain = $this->api->putJson('blockchain', $newFile->getRows()[0]->setIp($file->getIp())->toArray());
             if ($blockchain->getError()) {
                 return $blockchain;
