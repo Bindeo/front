@@ -53,10 +53,6 @@ file_signature:
     path: /data/signature/{token}
     defaults: { _controller: AppBundle:Data:getSignableDoc }
 
-file_signature_certificate:
-    path: /data/signature/{token}/certificate
-    defaults: { _controller: AppBundle:Data:signatureCertificate }
-
 ajax_generate_sign_code:
     path: /ajax/generate-sign-code/{token}
     defaults: { _controller: AppBundle:Data:ajaxGenerateCode }

@@ -19,6 +19,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Annotation\Route;
+use mikehaertl\wkhtmlto\Pdf;
 
 class DataController extends Controller
 {
@@ -501,21 +502,6 @@ class DataController extends Controller
     }
 
     /**
-     * Download a signature certificate
-     * @Route("/data/signature/{token}/certificate", name="file_signature_certificate")
-     *
-     * @param Request $request
-     *
-     * @return Response
-     */
-    public function signatureCertificateAction(Request $request)
-    {
-        // Get element
-
-        return $this->render('data/signature-certificate.html.twig');
-    }
-
-    /**
      * Generate a signature certificate
      * @Route("/data/signature/generate-certificate", name="file_signature_certificate")
      *
@@ -525,13 +511,36 @@ class DataController extends Controller
      */
     public function generateSignCertAction(Request $request)
     {
+        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            $idUser = $this->getUser()->getIdUser();
+        } elseif ($request->get('u') and $this->getParameter('secret') == $request->get('s')) {
+            $idUser = $request->get('u');
+        } else {
+            throw $this->createNotFoundException('Url not found');
+        }
+
         // Get element
-        $res = $this->get('app.model.data')->signatureCertificate($request->get('t'), $request->get('u'));
+        $res = $this->get('app.model.data')->signatureCertificate($request->get('t'), $idUser);
 
         $res['lang'] = $request->getLocale() == 'es_ES' ? 'ES' : 'EN';
+        $res['baseUrl'] = $request->getSchemeAndHttpHost();
 
-        // TODO Get addresses of accounts...
+        if (!$res['authorization']) {
+            return $this->render('data/signature-certificate.html.twig', $res);
+        }
 
-        return $this->render('data/signature-certificate.html.twig', $res);
+        // Generate PDF with the certificate
+        $pdf = new Pdf([
+            'margin-left'   => '0px',
+            'margin-right'  => '0px',
+            'margin-top'    => '750px',
+            'margin-bottom' => '450px',
+            'header-html'   => $this->renderView('data/signature-certificate-header.html.twig', $res),
+            'footer-html'   => $this->renderView('data/signature-certificate-footer.html.twig', $res)
+        ]);
+        $pdf->addPage($this->renderView('data/signature-certificate.html.twig', $res));
+
+        // Send file to the browser
+        $pdf->send('signature_certificate.pdf');
     }
 }

@@ -28,7 +28,8 @@
         "incenteev/composer-parameter-handler": "^2.0",
         "egulias/email-validator": "^1.2",
         "symfony/assetic-bundle": "^2.7",
-        "php-curl-class/php-curl-class": "^4.0"
+        "php-curl-class/php-curl-class": "^4.0",
+        "mikehaertl/phpwkhtmltopdf": "^2.1"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

@@ -263,13 +263,14 @@ class DataModel
      *
      * @param string $token
      * @param int    $idUser
+     * @param string $mode 'body', 'header' or 'footer' mode
      *
      * @return array
      */
-    public function signatureCertificate($token, $idUser)
+    public function signatureCertificate($token, $idUser, $mode = 'body')
     {
         $res = $this->api->getJson('signature_certificate',
-            ['token' => $token, 'clientType' => 'U', 'idClient' => $idUser]);
+            ['token' => $token, 'clientType' => 'U', 'idClient' => $idUser, 'mode' => $mode == 'body' ? 'full' : 'simple']);
 
         // Check authorization
         if ($res->getError()) {
@@ -285,45 +286,6 @@ class DataModel
 
             // Convert objects
             $signature->convertObjects();
-            /** @var File $file /
-             * $file = $res->getRows()[0];
-             * // Get document issuer
-             * if ($file->getClientType() == 'U') {
-             * $issuer = $this->api->getJson('account_identities', ['idUser' => $file->getIdClient()]);
-             * } else {
-             * $issuer = $this->api->getJson('oauth_clients', ['idClient' => $file->getIdClient()]);
-             * }
-             * if ($issuer->getError() or $issuer->getNumRows() == 0) {
-             * $res = ['authorization' => false, 'error' => 'user'];
-             * } else {
-             * $rows = $issuer->getRows();
-             * $issuer = reset($rows);
-             * /** @var UserInterface $issuer /
-             * // Get document signers
-             * $signers = $this->api->getJson('signature_signers',
-             * ['elementType' => $file->getElementType(), 'idElement' => $file->getElementId()]);
-             * if ($signers->getError() or $signers->getNumRows() == 0) {
-             * $res = ['authorization' => false, 'error' => 'user'];
-             * } else {
-             * // Get Bulk Transaction
-             * $bulk = $this->api->getJson('bulk_transaction', [
-             * 'clientType' => $issuer->getUserType(),
-             * 'idClient'   => $issuer->getIdUser(),
-             * 'externalId' => 'Sign_Document_' . $file->getElementId()
-             * ]);
-             * if ($bulk->getError() or $bulk->getNumRows() == 0) {
-             * $res = ['authorization' => false, 'error' => 'user'];
-             * } else {
-             * $res = [
-             * 'authorization' => true,
-             * 'file'          => $file,
-             * 'issuer'        => $issuer,
-             * 'signers'       => $signers->getRows(),
-             * 'bulk'          => $bulk->getRows()[0]
-             * ];
-             * }
-             * }
-             * }*/
 
             $res = ['authorization' => true, 'signature' => $signature];
         }
