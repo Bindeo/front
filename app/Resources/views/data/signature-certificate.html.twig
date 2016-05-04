@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{% trans %}Signature certificate{% endtrans %}</title>
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/pdf.css') }}">
-</head>
+{% extends 'base-certificate.html.twig' %}
+{% block body %}
 <body>
 {% if not authorization %}
 <section class="">
@@ -19,34 +14,6 @@
     </div>
 </section>
 {% else %}
-<section class="header">
-    <div class="container">
-        <div>
-            <div class="about">
-                <div class="row">
-                    <div class="col-xs-7">
-                        <div class="type-label">{% trans %}Bindeo unique identifier{% endtrans %}</div>
-                        <div class="type-value">{{ signature.bulk.externalId }}</div>
-                    </div>
-                    <div class="col-xs-3">
-                        <div class="type-label">{% trans %}Issue date{% endtrans %}</div>
-                        <div class="type-value">{{ signature.bulk.getFormattedDate('DATE_ATOM') }}</div>
-                    </div>
-                    <div class="col-xs-2">
-                        <div class="type-label">{% trans %}Type{% endtrans %}</div>
-                        <div class="type-value">
-                            {% if signature.bulk.closed %}
-                                {% trans %}Signature completed{% endtrans %}
-                            {% else %}
-                                {% trans %}Provisional{% endtrans %}
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 <section class="title">
     <div class="container">
         <div>
@@ -161,7 +128,7 @@
                     </tr>
                     <tr>
                         <td>{% trans %}Address{% endtrans %}</td>
-                        <td>{{ signature.bulk.account }} (PS2H)</td>
+                        <td>{{ signature.bulk.account }}{% if signature.signers|length > 1 %} (P2SH){% endif %}</td>
                     </tr>
                     <tr>
                         <td>{% trans %}Document integrity deposit{% endtrans %}</td>
@@ -177,25 +144,6 @@
         </div>
     </div>
 </section>
-<section class="footer">
-    <div class="container">
-        <div>
-            <div class="about">
-                <div class="row">
-                    <div class="col-xs-8">
-                        <div class="type-label">{{ signature.bulk.externalId }}</div>
-                    </div>
-                    <div class="col-xs-4">
-                        <div class="type-label pull-right">
-                            {% trans with {'%page%':'<span class="page"></span>', '%topage%':'<span class="topage"></span>'} %}PAGE %page% OF %topage%{% endtrans %}
-                            <span class="lang">{{ lang }}</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 {% endif %}
 </body>
-</html>
+{% endblock %}
