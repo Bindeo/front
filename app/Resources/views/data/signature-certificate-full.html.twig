@@ -14,7 +14,9 @@
     </div>
 </section>
 {% else %}
+{% include 'data/partials/signature-certificate-header.html.twig' %}
 {% include 'data/partials/signature-certificate.html.twig' %}
+{% include 'data/partials/signature-certificate-footer.html.twig' %}
 {% endif %}
 </body>
 {% endblock %}

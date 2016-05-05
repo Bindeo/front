@@ -11,7 +11,7 @@
             <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
         </div>
         <div class="item-name col-xs-10 col-sm-10">
-            <a href="{% if file.mode == 'S' %}{{ path('file_signature', {'token': file.idFile}) }}{% else %}#{% endif %}">
+            <a href="{% if file.mode == 'S' %}{{ path('file_signature', {'token': file.idBulk}) }}{% else %}#{% endif %}">
                 {{ file.name }}
             </a>
         </div>

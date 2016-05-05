@@ -1,0 +1,130 @@
+<section class="title">
+    <div class="container">
+        <div>
+            <img src="{{ baseUrl }}/images/bindeo_white_2.png" class="img-responsive">
+        </div>
+        <div>
+            <h1>{% trans %}Digital signature certificate{% endtrans %}</h1>
+            <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
+                and
+                scrambled it to make a type specimen book.
+            </p>
+        </div>
+    </div>
+</section>
+<section class="dataset">
+    <div class="container">
+        <h2>{% trans %}Documents{% endtrans %}</h2>
+        <ul class="list-files">
+            {% for file in signature.files %}
+            <li>
+                <span class="icon"></span>
+                <div class="type-label">{{ file.name }}</div>
+                <div class="type-value">{{ file.hash }}
+                    <br>{{ file.size|number_format }} bytes, {% transchoice file.pages %}{1} %count% page|]2,Inf]%count% pages{% endtranschoice %}
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>
+
+<section class="dataset">
+    <div class="container">
+        <h2>{% trans %}Issuer{% endtrans %}</h2>
+        <ul class="list-users">
+            <li>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <span class="icon"></span>
+                        <div class="type-label">{{ signature.issuer.name | upper }}</div>
+                        <div class="type-annex">
+                            <ul>
+                                <li>{% trans %}Identity{% endtrans %}: NIF {{ signature.issuer.document }}</li>
+                                <li>{% trans %}Email{% endtrans %}: {{ signature.issuer.email }}{#<span></span>{% trans %}Mobile phone{% endtrans %}: {{ issuer.phone }}#}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</section>
+<section class="dataset">
+    <div class="container">
+        <h2>{% trans %}Signatures{% endtrans %}</h2>
+        <ul class="list-users">
+            {% for signer in signature.signers %}
+            <li>
+                <div class="row">
+                    <div class="col-xs-7">
+                        <span class="icon"></span>
+                        <div class="type-label">{{ signer.name | upper }}</div>
+                        <div>{{ signer.account }}</div>
+                        <div class="type-annex">
+                            <ul>
+                                <li>{% trans %}Identity{% endtrans %}: NIF {{ signer.document }}</li>
+                                <li>{% trans %}Email{% endtrans %}: {{ signer.email }}
+                                    {% if signer.phone %}
+                                    <span></span>{% trans %}Mobile phone{% endtrans %}: {{ signer.phone }}</li>
+                                    {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xs-5">
+                        <div class="type-label">
+                            {% if signer.signed %}
+                                <span class="glyphicon glyphicon-ok"></span> {{ 'Signed' | trans | upper }}
+                            {% else %}
+                                <span class="glyphicon glyphicon-remove"></span> {{ 'Not signed' | trans | upper }}
+                            {% endif %}
+                        </div>
+                        <div>{{ signer.getFormattedDate('DATE_ATOM') }}</div>
+                        <div class="type-annex">
+                            <ul>
+                                <li>{% trans with {'%time%':24} %}Link Token %time%H email{% endtrans %}</li>
+                                <li>{% trans with {'%time%':10} %}4 digits PIN Code %time%M email{% endtrans %}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>
+<section class="dataset">
+    <div class="container">
+        <div>
+            <h2>{% trans %}Digital deposit{% endtrans %}</h2>
+            <div>
+                <table class="table two-columns">
+                    <tbody>
+                    <tr>
+                        <td>Blockchain Network</td>
+                        <td>BTC Bitcoin Global Network (Blockchain)</td>
+                    </tr>
+                    <tr>
+                        <td>{% trans %}Protocol{% endtrans %}</td>
+                        <td>BINDEO_ENHANCED_SING ({% trans %}version{% endtrans %} 1.0.0)</td>
+                    </tr>
+                    <tr>
+                        <td>{% trans %}Address{% endtrans %}</td>
+                        <td>{{ signature.bulk.account }}{% if signature.signers|length > 1 %} (P2SH){% endif %}</td>
+                    </tr>
+                    <tr>
+                        <td>{% trans %}Document integrity deposit{% endtrans %}</td>
+                        <td>{{ signature.bulk.linkedTransaction }}</td>
+                    </tr>
+                    <tr>
+                        <td>{% trans %}Signature certificate deposit{% endtrans %}</td>
+                        <td>{{ signature.bulk.transaction }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>

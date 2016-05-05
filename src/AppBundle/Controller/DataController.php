@@ -142,12 +142,11 @@ class DataController extends Controller
                     // Depends on the mode
                     if ($file->getMode() == 'S' and ($file->getSignType() == 'M' or $file->getSignType() == 'A')) {
                         // If user uploaded a file to sign and he wants to sign too, we redirect him to the signature page
-
                         return new JsonResponse([
                             'result' => [
                                 'success'  => true,
                                 'redirect' => $this->generateUrl('file_signature',
-                                    ['token' => $res->getRows()[0]->getIdFile()])
+                                    ['token' => $res->getRows()[0]->getIdBulk()])
                             ]
                         ]);
                     } else {
@@ -516,11 +515,13 @@ class DataController extends Controller
         } elseif ($request->get('u') and $this->getParameter('secret') == $request->get('s')) {
             $idUser = $request->get('u');
         } else {
-            throw $this->createNotFoundException('Url not found');
+            $res = ['authorization' => false];
         }
 
         // Get element
-        $res = $this->get('app.model.data')->signatureCertificate($request->get('t'), $idUser);
+        if (!isset($res)) {
+            $res = $this->get('app.model.data')->signatureCertificate($request->get('t'), $idUser);
+        }
 
         $res['lang'] = $request->getLocale() == 'es_ES' ? 'ES' : 'EN';
         $res['baseUrl'] = $request->getSchemeAndHttpHost();
@@ -529,18 +530,23 @@ class DataController extends Controller
             return $this->render('data/signature-certificate.html.twig', $res);
         }
 
-        // Generate PDF with the certificate
-        $pdf = new Pdf([
-            'margin-left'   => '0px',
-            'margin-right'  => '0px',
-            'margin-top'    => '750px',
-            'margin-bottom' => '450px',
-            'header-html'   => $this->renderView('data/signature-certificate-header.html.twig', $res),
-            'footer-html'   => $this->renderView('data/signature-certificate-footer.html.twig', $res)
-        ]);
-        $pdf->addPage($this->renderView('data/signature-certificate.html.twig', $res));
+        // Rendering only body
+        if ($request->get('m') == 'html') {
+            return $this->render('data/signature-certificate-full.html.twig', $res);
+        } else {
+            // Generate PDF with the certificate
+            $pdf = new Pdf([
+                'margin-left'   => '0px',
+                'margin-right'  => '0px',
+                'margin-top'    => '750px',
+                'margin-bottom' => '450px',
+                'header-html'   => $this->renderView('data/signature-certificate-header.html.twig', $res),
+                'footer-html'   => $this->renderView('data/signature-certificate-footer.html.twig', $res)
+            ]);
+            $pdf->addPage($this->renderView('data/signature-certificate.html.twig', $res));
 
-        // Send file to the browser
-        $pdf->send('signature_certificate.pdf');
+            // Send file to the browser
+            $pdf->send('signature_certificate.pdf');
+        }
     }
 }

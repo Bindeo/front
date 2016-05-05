@@ -1,0 +1,28 @@
+<section class="header">
+    <div class="container">
+        <div>
+            <div class="about">
+                <div class="row">
+                    <div class="col-xs-7">
+                        <div class="type-label">{% trans %}Bindeo unique identifier{% endtrans %}</div>
+                        <div class="type-value">{{ signature.bulk.externalId }}</div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="type-label">{% trans %}Issue date{% endtrans %}</div>
+                        <div class="type-value">{{ signature.bulk.getFormattedDate('DATE_ATOM') }}</div>
+                    </div>
+                    <div class="col-xs-2">
+                        <div class="type-label">{% trans %}Type{% endtrans %}</div>
+                        <div class="type-value">
+                            {% if signature.bulk.closed %}
+                                {% trans %}Signature completed{% endtrans %}
+                            {% else %}
+                                {% trans %}Provisional{% endtrans %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
