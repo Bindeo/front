@@ -343,6 +343,69 @@ class UserController extends Controller
     }
 
     /**
+     * @Route("/ajax/unconfirmed/change-email", name="ajax_change_email")
+     * @param Request $request
+     *
+     * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function ajaxChangeEmailAction(Request $request)
+    {
+        if (!$request->isXmlHttpRequest()) {
+            throw $this->createNotFoundException();
+        }
+
+        if (!($email = $request->get('e'))) {
+            $error = 'notvalid';
+        } else {
+            // Validate email
+            $validator = $this->get('validator');
+            $res = $validator->validate(new User(['email' => $email]), null, ['unconfirmed-email']);
+
+            if (!$res->count()) {
+                $error = '';
+                // Logged user
+                /** @var User $user */
+                $user = $this->getUser();
+
+                // Get user main identity and modify it
+                $identity = $user->getCurrentIdentity();
+
+                // If user does not have identity, we need to get it
+
+                $identity->setOldValue($identity->getValue())
+                         ->setOldDocument($identity->getDocument())
+                         ->setValue($email);
+
+                // Data is valid, modify the user and send the confirm email
+                $res = $this->get('app.model.user')
+                            ->changeIdentity($user,
+                                $identity->setIp($request->getClientIp())->setPassword($user->getPassword()));
+
+                if (isset($res['error'])) {
+                    $error = 'repeated';
+                } else {
+                    // Correct change, we need to update user if he changed his email
+                    if ($identity->getOldValue() != $identity->getValue()) {
+                        // Refresh user
+                        $token = $this->get('security.token_storage')->getToken();
+                        $token->getUser()->setEmail($identity->getValue());
+                        $token->setAuthenticated(false);
+                    }
+                }
+            } else {
+                $error = 'notvalid';
+            }
+        }
+
+        return new JsonResponse([
+            'result' => [
+                'success' => !$error,
+                'error'   => $error
+            ]
+        ]);
+    }
+
+    /**
      * @Route("/user/validate", name="validate_token")
      * @param Request $request
      *
@@ -432,5 +495,66 @@ class UserController extends Controller
         }
 
         return $this->render('user/password-reset.html.twig', ['form' => $form->createView()]);
+    }
+
+    /**
+     * Check if user has been confirmed in other navigator or machine
+     * @Route("/ajax/unconfirmed/check-confirmed", name="ajax_check_confirmed")
+     *
+     * @param Request $request
+     *
+     * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function ajaxCheckConfirmedAction(Request $request)
+    {
+        // Logged user
+        /** @var User $user */
+        $user = $this->getUser();
+
+        // Get user
+        $res = $this->get('app.api_connection')->getJson('users', ['idUser' => $user->getIdUser()]);
+
+        if ($res->getError()) {
+            return new JsonResponse(['result' => ['success' => false]]);
+        } else {
+            $res = $res->getRows();
+            $userDb = reset($res);
+
+            // Check if user is confirmed
+            if ($userDb->getConfirmed()) {
+                // Refresh roles
+                $token = $this->get('security.token_storage')->getToken();
+                $token->getUser()->setConfirmed(1);
+                $token->setAuthenticated(false);
+
+                return new JsonResponse(['result' => ['success' => true]]);
+            } else {
+                return new JsonResponse(['result' => ['success' => false]]);
+            }
+        }
+    }
+
+    /**
+     * Check if user has been confirmed in other navigator or machine
+     * @Route("/ajax/unconfirmed/resend-token", name="ajax_resend_token")
+     *
+     * @param Request $request
+     *
+     * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function ajaxResendTokenAction(Request $request)
+    {
+        // Logged user
+        /** @var User $user */
+        $user = $this->getUser();
+
+        // Resend the validation token
+        $res = $this->get('app.api_connection')->getJson('account_token', $user->toArray());
+
+        if ($res->getError()) {
+            return new JsonResponse(['result' => ['success' => false]]);
+        } else {
+            return new JsonResponse(['result' => ['success' => true]]);
+        }
     }
 }

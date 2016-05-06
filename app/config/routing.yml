@@ -76,6 +76,18 @@ edu_verify:
     defaults: { _controller: AppBundle:Edu:verify }
 
 # Private ajax calls
+ajax_check_confirmed:
+    path: /ajax/unconfirmed/check-confirmed
+    defaults: { _controller: AppBundle:User:ajaxCheckConfirmed }
+
+ajax_resend_token:
+    path: /ajax/unconfirmed/resend-token
+    defaults: { _controller: AppBundle:User:ajaxResendToken }
+
+ajax_change_email:
+    path: /ajax/unconfirmed/change-email
+    defaults: { _controller: AppBundle:User:ajaxChangeEmail }
+
 ajax_file_upload:
     path: /ajax/private/upload-file
     defaults: { _controller: AppBundle:Data:ajaxUploadFile }

@@ -2400,22 +2400,22 @@ pre code {
 }
 
 /* line 39, ../sass/bootstrap/_grid.scss */
-.row {
+.row, .cards {
   margin-left: -15px;
   margin-right: -15px;
 }
 /* line 14, ../sass/bootstrap/mixins/_clearfix.scss */
-.row:before, .row:after {
+.row:before, .cards:before, .row:after, .cards:after {
   content: " ";
   display: table;
 }
 /* line 19, ../sass/bootstrap/mixins/_clearfix.scss */
-.row:after {
+.row:after, .cards:after {
   clear: both;
 }
 
 /* line 11, ../sass/bootstrap/mixins/_grid-framework.scss */
-.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .cards > div, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .section-onboard > div > div > div, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .section-onboard > div > div > div, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .cards > div, .section-onboard > div > div > div, .col-sm-12, .col-md-12, .col-lg-12 {
   position: relative;
   min-height: 1px;
   padding-left: 15px;
@@ -2423,7 +2423,7 @@ pre code {
 }
 
 /* line 27, ../sass/bootstrap/mixins/_grid-framework.scss */
-.col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12 {
+.col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12, .cards > div, .section-onboard > div > div > div {
   float: left;
 }
 
@@ -2483,7 +2483,7 @@ pre code {
 }
 
 /* line 35, ../sass/bootstrap/mixins/_grid-framework.scss */
-.col-xs-12 {
+.col-xs-12, .cards > div, .section-onboard > div > div > div {
   width: 100%;
 }
 
@@ -2684,7 +2684,7 @@ pre code {
 
 @media (min-width: 768px) {
   /* line 27, ../sass/bootstrap/mixins/_grid-framework.scss */
-  .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12 {
+  .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .cards > div, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12 {
     float: left;
   }
 
@@ -2704,7 +2704,7 @@ pre code {
   }
 
   /* line 35, ../sass/bootstrap/mixins/_grid-framework.scss */
-  .col-sm-4 {
+  .col-sm-4, .cards > div {
     width: 33.33333%;
   }
 
@@ -2945,7 +2945,7 @@ pre code {
 }
 @media (min-width: 992px) {
   /* line 27, ../sass/bootstrap/mixins/_grid-framework.scss */
-  .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
+  .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .section-onboard > div > div > div, .col-md-11, .col-md-12 {
     float: left;
   }
 
@@ -2995,7 +2995,7 @@ pre code {
   }
 
   /* line 35, ../sass/bootstrap/mixins/_grid-framework.scss */
-  .col-md-10 {
+  .col-md-10, .section-onboard > div > div > div {
     width: 83.33333%;
   }
 
@@ -3145,7 +3145,7 @@ pre code {
   }
 
   /* line 60, ../sass/bootstrap/mixins/_grid-framework.scss */
-  .col-md-offset-1 {
+  .col-md-offset-1, .section-onboard > div > div > div {
     margin-left: 8.33333%;
   }
 
@@ -3206,7 +3206,7 @@ pre code {
 }
 @media (min-width: 1200px) {
   /* line 27, ../sass/bootstrap/mixins/_grid-framework.scss */
-  .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12 {
+  .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .section-onboard > div > div > div, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12 {
     float: left;
   }
 
@@ -3246,7 +3246,7 @@ pre code {
   }
 
   /* line 35, ../sass/bootstrap/mixins/_grid-framework.scss */
-  .col-lg-8 {
+  .col-lg-8, .section-onboard > div > div > div {
     width: 66.66667%;
   }
 
@@ -3411,7 +3411,7 @@ pre code {
   }
 
   /* line 60, ../sass/bootstrap/mixins/_grid-framework.scss */
-  .col-lg-offset-2 {
+  .col-lg-offset-2, .section-onboard > div > div > div {
     margin-left: 16.66667%;
   }
 
@@ -8968,17 +8968,17 @@ label {
   padding: 30px 0;
 }
 /* line 68, ../sass/includes/_1_layout.scss */
-.section-home-features .row > div > div {
+.section-home-features .row > div > div, .section-home-features .cards > div > div {
   text-align: center;
   padding: 15px;
 }
 /* line 72, ../sass/includes/_1_layout.scss */
-.section-home-features .row > div > div img {
+.section-home-features .row > div > div img, .section-home-features .cards > div > div img {
   margin: 0 auto;
   max-height: 32px;
 }
 /* line 77, ../sass/includes/_1_layout.scss */
-.section-home-features .row > div > div h3 {
+.section-home-features .row > div > div h3, .section-home-features .cards > div > div h3 {
   margin: 20px 0 5px;
   font-size: 14px;
   font-weight: 400;
@@ -9486,6 +9486,30 @@ label {
   margin: 0;
 }
 
+/* line 4, ../sass/includes/_2_cards.scss */
+.cards > div {
+  margin-bottom: 15px;
+}
+/* line 10, ../sass/includes/_2_cards.scss */
+.cards > div > div {
+  padding: 25px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+/* line 15, ../sass/includes/_2_cards.scss */
+.cards > div > div h2 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 16px;
+  font-weight: normal;
+  text-align: center;
+}
+/* line 28, ../sass/includes/_2_cards.scss */
+.cards > div > div a {
+  margin-top: 15px;
+  width: 100%;
+}
+
 /* line 1, ../sass/includes/_2_drop.scss */
 .drop {
   display: none;
@@ -9644,7 +9668,18 @@ label {
   margin-left: 10px;
 }
 
-/* line 24, ../sass/styles.scss */
+/* line 12, ../sass/includes/_3_section_onboard.scss */
+.section-onboard .intro {
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+/* line 16, ../sass/includes/_3_section_onboard.scss */
+.section-onboard .intro h1 {
+  font-size: 18px;
+  text-align: center;
+}
+
+/* line 28, ../sass/styles.scss */
 body {
   font-family: "Open Sans", sans-serif;
   text-shadow: rgba(0, 0, 0, 0.01) 0 0 1px;
@@ -9830,7 +9865,7 @@ body.edu footer > div > div > div {
 body.edu footer .tech {
   margin-top: 30px;
 }
-/* line 35, ../sass/styles.scss */
+/* line 39, ../sass/styles.scss */
 body > nav {
   z-index: 1030;
 }

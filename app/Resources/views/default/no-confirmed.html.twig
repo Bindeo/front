@@ -1,0 +1,83 @@
+{% extends 'base-log.html.twig' %}
+
+{% block title %}
+    {% trans %}Confirm your account{% endtrans %}
+{% endblock %}
+
+{% block body %}
+<section class="section-onboard">
+    <div class="container">
+        <div class="row">
+            <div class="intro">
+                <h1>{% trans %}Great, check your mailbox{% endtrans %}</h1>
+                <p>
+                    {% trans with {'%a_start%':'<a href="#" id="resend-confirmation">','%a_end%':'</a>'} %}In order to verify and protect your identity, we've sent you an email to confirm you address, please, check it or %a_start%send verification email again%a_end%{% endtrans %}.
+                </p>
+                <span data-id="resend-confirmation" class="collapse">{% trans %}Confirmation email has been send{% endtrans %}</span>
+            </div>
+            <div>
+                <div class="cards">
+                    <div>
+                        <div>
+                            <h2>{% trans %}Certify a file{% endtrans %}</h2>
+                            <p>{% trans %}Create an inmutable record of existence, ownership and integrity of any of your documents{% endtrans %}.</p>
+
+                            <a class="btn btn-primary" href="#" data-url="{{ path('file_upload') }}" data-toggle="modal" data-target="#modal-mail-verify">{% trans %}Upload file{% endtrans %}</a>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <h2>{% trans %}Sign a document{% endtrans %}</h2>
+                            <p>{% trans %}Select recipients and send any document to be signed. Easy, fast, secure and legally binding{% endtrans %}.</p>
+
+                            <a class="btn btn-primary" href="#" data-url="{{ path('file_upload') }}" data-toggle="modal" data-target="#modal-mail-verify">{% trans %}Upload document{% endtrans %}</a>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <h2>{% trans %}Sign with API{% endtrans %}</h2>
+                            <p>{% trans %}Integrate digital signature using your website or our interface with a developer-friendly API{% endtrans %}.</p>
+
+                            <a class="btn btn-primary" href="#" data-url="{{ path('index') }}" data-toggle="modal" data-target="#modal-mail-verify">{% trans %}Contact us{% endtrans %}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="">
+    <div class="modal fade" tabindex="-1" role="dialog" id="modal-mail-verify">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <div class="modal-header">
+                    <h4 class="modal-title">{% trans %}Please, verify your email address{% endtrans %}</h4>
+                </div>
+                <div class="modal-body">
+                    <p>{% trans %}In order to verify and protect your identity you need validate your email address{% endtrans %}.
+                        {% trans %}Please, confirm your address, click on "Send me verification" and check your mailbox{% endtrans %}:</p>
+                    <div class="share-send forms">
+                        <form id="change-email" class="labels-no">
+                            <div class="form-group has-feedback">
+                                <label for="field-email" class="control-label">{% trans %}Email Address{% endtrans %}</label>
+                                <input class="form-control" id="field-email" type="email" placeholder="{% trans %}Email Address{% endtrans %}" required="required">
+                                <span data-type="error" class="glyphicon glyphicon-remove form-control-feedback collapse" aria-hidden="true"></span>
+                                <span data-type="error-notvalid" class="help-block collapse">{% trans %}Email address is not valid{% endtrans %}</span>
+                                <span data-type="error-repeated" class="help-block collapse">{% trans %}Email account already exists{% endtrans %}</span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-id="change-email" class="btn btn-primary">{% trans %}Send me verification{% endtrans %}</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+</section>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/users.js') }}"></script>
+{% endblock %}

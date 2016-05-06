@@ -109,9 +109,6 @@ class DataController extends Controller
         $file = (new File())->setUser($user);
 
         // Create form
-        $user->setIdentities($this->get('app.api_connection')
-                                  ->getJson('account_identities', ['idUser' => $user->getIdUser()])
-                                  ->getRows());
         $form = $this->createForm(UploadFileType::class, $file);
 
         // Check the form

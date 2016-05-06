@@ -4,6 +4,7 @@ namespace AppBundle\Security;
 
 use AppBundle\Entity\User;
 use Bindeo\Util\ApiConnection;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
@@ -35,6 +36,9 @@ class UserProvider implements UserProviderInterface
         if ($res->getError() or !isset($res->getRows()[0]) or !($user = $res->getRows()[0])) {
             throw new UsernameNotFoundException();
         } else {
+            $user->setIdentities($this->api->getJson('account_identities', ['idUser' => $user->getIdUser()])
+                                           ->getRows());
+
             return $user;
         }
     }
@@ -55,6 +59,11 @@ class UserProvider implements UserProviderInterface
     {
         if (!$user instanceof User) {
             throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', get_class($user)));
+        } elseif ($user->getCurrentIdentity() and ($user->getEmail() != $user->getCurrentIdentity()->getEmail() and
+                                                   $user->getEmail() != $user->getCurrentIdentity()->getOldValue())
+        ) {
+            // Check if current user and identity are synchronized, if not, we logout user
+            throw new UsernameNotFoundException();
         }
 
         return $user;

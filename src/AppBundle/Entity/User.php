@@ -8,11 +8,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class User extends UserAbstract implements UserInterface
 {
-    const ROLE_ADMIN = 1;
-    const ROLE_USER  = 2;
-    const ROLE_VIP   = 3;
+    const ROLE_UNCONFIRMED = 0;
+    const ROLE_ADMIN       = 1;
+    const ROLE_USER        = 2;
+    const ROLE_VIP         = 3;
 
-    private $roles = [1 => 'ROLE_ADMIN', 2 => 'ROLE_USER', 3 => 'ROLE_VIP'];
+    private $roles = [0 => 'ROLE_UNCONFIRMED', 1 => 'ROLE_ADMIN', 2 => 'ROLE_USER', 3 => 'ROLE_VIP'];
     /**
      * Auxiliar attribute
      */
@@ -20,10 +21,10 @@ class User extends UserAbstract implements UserInterface
 
     // Set mandatory fields for forms
     /**
-     * @Assert\NotBlank(groups={"registration", "login", "pre-upload", "password-reset"})
-     * @Assert\Length(max=128, groups={"registration", "login", "pre-upload", "password-reset"})
+     * @Assert\NotBlank(groups={"registration", "login", "pre-upload", "password-reset", "unconfirmed-email"})
+     * @Assert\Length(max=128, groups={"registration", "login", "pre-upload", "password-reset", "unconfirmed-email"})
      * @Assert\Email(
-     *     groups={"registration", "pre-upload"},
+     *     groups={"registration", "pre-upload", "unconfirmed-email"},
      *     strict = true,
      *     checkMX = true
      * )
@@ -98,11 +99,15 @@ class User extends UserAbstract implements UserInterface
      */
     public function getRoles()
     {
-        if (isset($this->roles[$this->type])) {
-            return [$this->roles[$this->type]];
+        if (!$this->confirmed) {
+            $roles = [$this->roles[0]];
+        } elseif (isset($this->roles[$this->type])) {
+            $roles = [$this->roles[$this->type]];
         } else {
-            return null;
+            $roles = null;
         }
+
+        return $roles;
     }
 
     /**

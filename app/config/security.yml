@@ -44,8 +44,11 @@ security:
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/ajax/private, roles: ROLE_USER }
+        - { path: ^/ajax/unconfirmed, roles: ROLE_UNCONFIRMED }
         - { path: ^/user/configuration, roles: ROLE_USER }
         - { path: ^/user/identity, roles: ROLE_USER }
         - { path: ^/data/upload, roles: ROLE_USER }
         - { path: ^/data/library, roles: ROLE_USER }
         - { path: ^/edu/isdi/notarize, roles: ROLE_USER }
+
+    access_denied_url: index
