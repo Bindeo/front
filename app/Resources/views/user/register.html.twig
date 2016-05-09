@@ -16,7 +16,7 @@
                 {{ form_start(form, {'attr': {'class': 'labels-no', 'autocomplete': 'off'}}) }}
                 <p class="form-intro">Instructions...</p>
                 {{ form_errors(form) }}
-                {{ form_row(form.name, {'attr': {'placeholder': 'Your name'}}) }}
+                {{ form_row(form.name, {'attr': {'placeholder': 'Your name', 'data-focus': 'auto'}}) }}
                 {{ form_row(form.email, {'attr': {'placeholder': 'Your email'}}) }}
                 {{ form_row(form.password, {'attr': {'placeholder': 'New password'}}) }}
 

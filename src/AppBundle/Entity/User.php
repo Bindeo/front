@@ -158,4 +158,25 @@ class User extends UserAbstract implements UserInterface
 
         return $this;
     }
+
+    /**
+     * Store current identity in cache
+     * @return $this
+     */
+    public function cacheStoreIdentity()
+    {
+        // Store in apc
+        apc_store('use_identity_' . $this->idUser, $this->getCurrentIdentity());
+
+        return $this;
+    }
+
+    /**
+     * Fetch current identity from cache
+     * @return mixed
+     */
+    public function cacheFetchIdentity()
+    {
+        return apc_fetch('use_identity_' . $this->idUser);
+    }
 }

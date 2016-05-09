@@ -393,7 +393,7 @@ class UserController extends Controller
                     if ($identity->getOldValue() != $identity->getValue()) {
                         // Refresh user
                         $token = $this->get('security.token_storage')->getToken();
-                        $token->getUser()->setEmail($identity->getValue());
+                        $token->getUser()->setEmail($identity->getValue())->cacheStoreIdentity();
                         $token->setAuthenticated(false);
                     }
                 }
@@ -422,6 +422,8 @@ class UserController extends Controller
             throw new NotFoundHttpException();
         }
 
+        $api = $this->get('app.api_connection');
+
         // If we are changing password, we ask for the new one
         if ($type == 'P') {
             if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
@@ -435,7 +437,7 @@ class UserController extends Controller
             if ($form->isSubmitted() && $form->isValid()) {
                 // Reset password
                 // Try to validate the token against the API
-                $result = $this->get('app.api_connection')->putJson('account_token', [
+                $result = $api->putJson('account_token', [
                     'token'    => $token,
                     'ip'       => $request->getClientIp(),
                     'password' => $user->getPassword()
@@ -451,8 +453,7 @@ class UserController extends Controller
             }
         } else {
             // Try to validate the token against the API
-            $result = $this->get('app.api_connection')
-                           ->putJson('account_token', ['token' => $token, 'ip' => $request->getClientIp()]);
+            $result = $api->putJson('account_token', ['token' => $token, 'ip' => $request->getClientIp()]);
 
             if ($result->getError()) {
                 $success = false;
@@ -465,9 +466,13 @@ class UserController extends Controller
                     $token->getUser()
                           ->setConfirmed(1)
                           ->setEmail($result->getRows()[0]->getEmail())
-                          ->setName($result->getRows()[0]->getName());
+                          ->setName($result->getRows()[0]->getName())
+                          ->setIdentities(null);
                     $token->setAuthenticated(false);
                 }
+
+                // Clean cache
+                $result->getRows()[0]->cacheStoreIdentity();
             }
         }
 

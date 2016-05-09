@@ -59,7 +59,32 @@ class UserProvider implements UserProviderInterface
     {
         if (!$user instanceof User) {
             throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', get_class($user)));
-        } elseif ($user->getCurrentIdentity() and ($user->getEmail() != $user->getCurrentIdentity()->getEmail() and
+        } else {
+            $current = $user->getCurrentIdentity();
+
+            // Check current cache stored identity and compare with current user identity
+            if ($current) {
+                // check if current identity is the true current identity
+                $identity = $user->cacheFetchIdentity();
+
+                // If current identity is not valid, we unset it
+                if (!$identity or $identity->getEmail() != $current->getEmail()) {
+                    $current = null;
+                }
+            }
+
+            if (!$current) {
+                // Get identities
+                $user->setIdentities($this->api->getJson('account_identities', ['idUser' => $user->getIdUser()])
+                                               ->getRows());
+
+                // Store in apc
+                $user->cacheStoreIdentity();
+            }
+        }
+
+        // Check user and identity integrity
+        if ($user->getCurrentIdentity() and ($user->getEmail() != $user->getCurrentIdentity()->getEmail() and
                                                    $user->getEmail() != $user->getCurrentIdentity()->getOldValue())
         ) {
             // Check if current user and identity are synchronized, if not, we logout user

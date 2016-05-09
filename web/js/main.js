@@ -23,6 +23,7 @@ var main = (function() {
         $('body').on('submit', 'form[data-action="ajax-form"]', sendStandardForm);
         $('body').on('click', 'a[data-locale]', changeLocale);
         $('body').on('click', 'a[data-action="dismiss-cookies"]', dismissCookies);
+        gainFocus();
     };
 
     var subscriptors = function() {
@@ -56,6 +57,13 @@ var main = (function() {
         $.subscribe('freestamps.user', function(event, data) {
             $('#freestamps').html(data);
         });
+    };
+
+    /**
+     * Focus on mark form fields
+     */
+    var gainFocus = function() {
+        $('input[data-focus="auto"]:visible:first').focus();
     };
 
     /**
