@@ -5,15 +5,12 @@
 {% block body %}
 <section class="section-home">
     <div class="container-fluid">
-        <div class="clearfix"></div>
-        <div class="row">
-            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3">
-                <h1>Create a verifiable record of any data or business process on the blockchain</h1>
-                <h2>Make your data smarter</h2>
+        <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3">
+            <h1>{% trans %}eSignature platform with a new level of security based on blockchain{% endtrans %}</h1>
+            <h2>{% trans %}Get your documents signed by you and others{% endtrans %}</h2>
 
-                <div class="action clearfix">
-                    <a href="mailto:discover@bindeo.com" class="btn btn-primary btn-lg">Contact us</a>
-                </div>
+            <div class="action clearfix">
+                <a href="mailto:discover@bindeo.com" class="btn btn-success btn-lg">{% trans %}Contact us{% endtrans %}</a>
             </div>
         </div>
     </div>
@@ -23,44 +20,45 @@
         <div class="row">
             <div class="col-xs-12 col-sm-6 col-md-4">
                 <div>
-                    <img src="{{ asset('images/icons/line/the-world.png') }}" class="img-responsive">
-                    <h3>Record your data</h3>
-                    <p>Collect your business data and create a secure immutable record on blockchain.</p>
+                    <img src="{{ asset('images/icons/productivity/balance.png') }}" class="img-responsive">
+                    <h3>{% trans %}Legaly binding{% endtrans %}</h3>
+                    <p>{% trans %}Advanced digital signature fited to eIDAS, the upcoming European Regulation{% endtrans %}</p>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-4">
                 <div>
-                    <img src="{{ asset('images/icons/features/padlock.png') }}" class="img-responsive">
-                    <h3>Get audit trail</h3>
-                    <p>Proof the existence, integrity, ownership and timestamp of each transaction.</p>
+                    <img src="{{ asset('images/icons/productivity/productivity.png') }}" class="img-responsive">
+                    <h3>{% trans %}Blockchain technology{% endtrans %}</h3>
+                    <p>{% trans %}Shielded by the new hot technology and the most secure encryption algorithms{% endtrans %}</p>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-4">
                 <div>
-                    <img src="{{ asset('images/icons/line/zoom-tool.png') }}" class="img-responsive">
-                    <h3>Absolutely verifiable</h3>
-                    <p>From your applications or third parties, reduce errors, fraud, and cost of audit claims.</p>
+                    <img src="{{ asset('images/icons/productivity/rocket.png') }}" class="img-responsive">
+                    <h3>{% trans %}Get signature faster{% endtrans %}</h3>
+                    <p>{% trans %}Upload by drag&drop and fill recipients. 1-step for you. 1-step for your customers{% endtrans %}</p>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-4">
                 <div>
-                    <img src="{{ asset('images/icons/line/small-light-bulb.png') }}" class="img-responsive">
-                    <h3>Scale to millions</h3>
-                    <p>Financial, medical, legal, educational or inventory records, without buying any cryptocurrency.</p>
+                    <img src="{{ asset('images/icons/productivity/folder.png') }}" class="img-responsive">
+                    <h3>{% trans %}Say goodbye to paper{% endtrans %}</h3>
+                    <p>{% trans %}Forget print, scan, write, store and classify: keep organized your documents{% endtrans %}</p>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div>
+                    <img src="{{ asset('images/icons/productivity/distribution.png') }}" class="img-responsive">
+                    <h3>{% trans %}Anywhere, any device{% endtrans %}</h3>
+                    <p>{% trans %}Quick send documents for signature and get them signed from any device, with no installation{% endtrans %}</p>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-4">
                 <div>
-                    <img src="{{ asset('images/icons/line/setting-tool.png') }}" class="img-responsive">
-                    <h3>Powerful API</h3>
-                    <p>Integration with a REST API from your existing desktop, web or mobile applications.</p>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <div>
-                    <img src="{{ asset('images/icons/features/shield.png') }}" class="img-responsive">
-                    <h3>Security and privacy first</h3>
-                    <p>We store cryptographic fingerprints on blockchain, the most powerful existing network.</p>
+                    <img src="{{ asset('images/icons/productivity/puzzle.png') }}" class="img-responsive">
+                    <h3>{% trans %}Web & API integration{% endtrans %}</h3>
+                    <p>{% trans %}Add document singing feature to your website or app with our developer-friendly API{% endtrans %}</p>
                 </div>
             </div>
         </div>
@@ -74,12 +72,14 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-8 col-sm-9 left">
-                    © Bindeo, Ltd
+                    2016 © Bindeo, Ltd
+                </div>
+                <div class="col-xs-4 col-sm-3 right">
+                    <a href="mailto:discover@bindeo.com">{% trans %}Contact us{% endtrans %}</a>
                 </div>
             </div>
         </div>
     </div>
 </footer>
-
 {{ parent() }}
 {% endblock %}
