@@ -111,6 +111,7 @@ class UserController extends Controller
                 }
 
                 // Create the user token
+                $user->setIdentities($api->getJson('account_identities', ['idUser' => $user->getIdUser()])->getRows());
                 $token = new UsernamePasswordToken($user, '', "public", $user->getRoles());
                 $this->get("security.token_storage")->setToken($token);
 
@@ -368,7 +369,7 @@ class UserController extends Controller
                 $user = $this->getUser();
 
                 // Get user main identity and modify it
-                $identity = $user->getCurrentIdentity();
+                $identity = clone $user->getCurrentIdentity();
 
                 // If user does not have identity, we need to get it
 
@@ -376,7 +377,7 @@ class UserController extends Controller
                          ->setOldDocument($identity->getDocument())
                          ->setValue($email);
 
-                // Data is valid, modify the user and send the confirm email
+                // Data is valid, modify the user and send confirmation email
                 $res = $this->get('app.model.user')
                             ->changeIdentity($user,
                                 $identity->setIp($request->getClientIp())->setPassword($user->getPassword()));
@@ -455,10 +456,12 @@ class UserController extends Controller
                 $success = true;
                 // If the user is logged, update the entity
                 if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-                    $this->getUser()
-                         ->setConfirmed(1)
-                         ->setEmail($result->getRows()[0]->getEmail())
-                         ->setName($result->getRows()[0]->getName());
+                    // Update user data and refresh roles
+                    $token = $this->get('security.token_storage')->getToken();
+                    $token->getUser()->setConfirmed(1)
+                          ->setEmail($result->getRows()[0]->getEmail())
+                          ->setName($result->getRows()[0]->getName());
+                    $token->setAuthenticated(false);
                 }
             }
         }

@@ -54,24 +54,24 @@
                 <div class="modal-header">
                     <h4 class="modal-title">{% trans %}Please, verify your email address{% endtrans %}</h4>
                 </div>
-                <div class="modal-body">
-                    <p>{% trans %}In order to verify and protect your identity you need validate your email address{% endtrans %}.
-                        {% trans %}Please, confirm your address, click on "Send me verification" and check your mailbox{% endtrans %}:</p>
-                    <div class="share-send forms">
-                        <form id="change-email" class="labels-no">
-                            <div class="form-group has-feedback">
-                                <label for="field-email" class="control-label">{% trans %}Email Address{% endtrans %}</label>
-                                <input class="form-control" id="field-email" type="email" placeholder="{% trans %}Email Address{% endtrans %}" required="required">
-                                <span data-type="error" class="glyphicon glyphicon-remove form-control-feedback collapse" aria-hidden="true"></span>
-                                <span data-type="error-notvalid" class="help-block collapse">{% trans %}Email address is not valid{% endtrans %}</span>
-                                <span data-type="error-repeated" class="help-block collapse">{% trans %}Email account already exists{% endtrans %}</span>
-                            </div>
-                        </form>
+                <form id="change-email" class="labels-no" autocomplete="off">
+                    <div class="modal-body">
+                        <p>{% trans %}In order to verify and protect your identity you need validate your email address{% endtrans %}.
+                            {% trans %}Please, confirm your address, click on "Send me verification" and check your mailbox{% endtrans %}:</p>
+                        <div class="share-send forms">
+                                <div class="form-group has-feedback">
+                                    <input class="form-control" id="field-email" type="email" placeholder="{% trans %}Email Address{% endtrans %}" required="required" value="{{ user.email }}">
+                                    <span data-type="error" class="glyphicon glyphicon-remove form-control-feedback collapse" aria-hidden="true"></span>
+                                    <span data-type="error-notvalid" class="help-block collapse">{% trans %}Email address is not valid{% endtrans %}</span>
+                                    <span data-type="error-repeated" class="help-block collapse">{% trans %}Email account already exists{% endtrans %}</span>
+                                </div>
+
+                        </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" data-id="change-email" class="btn btn-primary">{% trans %}Send me verification{% endtrans %}</button>
-                </div>
+                    <div class="modal-footer">
+                        <button type="submit" data-id="change-email" class="btn btn-primary">{% trans %}Send me verification{% endtrans %}</button>
+                    </div>
+                </form>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->

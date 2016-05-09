@@ -7,10 +7,6 @@ var users = (function() {
         $('body').on('change', '#pre_upload_email,#change_identity_value', showPassword);
         $('body').on('click', 'a[data-target="#modal-mail-verify"]', checkConfirmed);
         $('body').on('click', '#resend-confirmation', resendConfirmation);
-        $('body').on('click', 'button[data-id="change-email"]', function(){
-            $('#change-email').submit();
-            return null;
-        });
         $('body').on('submit', '#change-email', changeEmail);
     };
 
@@ -93,6 +89,7 @@ var users = (function() {
 
         main.sendRequest('/ajax/unconfirmed/change-email', 'e='+encodeURIComponent($('#field-email').val())).done(function(response) {
             if (response.result.success) {
+                $('#modal-mail-verify').modal('hide');
                 $.publish('main.notifications', [response.result.success, $('span[data-id="resend-confirmation"]').html()]);
             } else {
                 div.addClass('has-error');

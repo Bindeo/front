@@ -88,8 +88,7 @@ class DataController extends Controller
         $user = $this->getUser();
 
         // Only users with national identity number and confirmed could upload files
-        $response = ($user->getConfirmed() and $user->getCurrentIdentity()->getDocument())
-            ? $this->confirmedUpload($request, $user, true) : $this->unconfirmedUpload($request, $user);
+        $response = $this->confirmedUpload($request, $user, true);
 
         return $response;
     }

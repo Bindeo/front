@@ -46,7 +46,7 @@ class UserModel
         ) {
             // If email has changed, password is necessary
             if ($identity->getOldValue() != $identity->getValue() and
-                !password_verify($identity->getPassword(), $user->getPassword())
+                ($user->getConfirmed() and !password_verify($identity->getPassword(), $user->getPassword()))
             ) {
                 $identity->setDocument($identity->getOldDocument())->setName($user->getName());
 
@@ -85,7 +85,9 @@ class UserModel
         }
 
         // Return data
-        $user->setIdentities([$identity->getIdIdentity() => $identity]);
+        if ($changed) {
+            $user->setIdentities([$identity->getIdIdentity() => $identity]);
+        }
 
         return ['success' => true, 'changed' => $changed];
     }
