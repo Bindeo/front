@@ -82,12 +82,12 @@ var users = (function() {
      * Change unconfirmed email or resend a verification email
      */
     var changeEmail = function() {
-        var id = $(this).attr('id');
-        var div = $('#field-email').parent();
+        var field = $('#field-email');
+        var div = field.parent();
         div.removeClass('has-error');
         div.find('span').hide();
 
-        main.sendRequest('/ajax/unconfirmed/change-email', 'e='+encodeURIComponent($('#field-email').val())).done(function(response) {
+        main.sendRequest('/ajax/unconfirmed/change-email', 'e='+encodeURIComponent(field.val())).done(function(response) {
             if (response.result.success) {
                 $('#modal-mail-verify').modal('hide');
                 $.publish('main.notifications', [response.result.success, $('span[data-id="resend-confirmation"]').html()]);
