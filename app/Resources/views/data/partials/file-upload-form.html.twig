@@ -35,7 +35,7 @@
     </div>
 
     <div data-id="to-sign">
-        <p>{% trans %}Great, who others needs to sign?{% endtrans %}</p>
+        <p>{% trans %}Great, who others need to sign?{% endtrans %}</p>
         <ul class="list-unstyled modal-recipients-list" data-prototype="{{ include('data/partials/signer-form.html.twig', {'signer': form.signers.vars.prototype})|e }}">
             {% for signer in form.signers %}
                 {{ include('data/partials/signer-form.html.twig') }}

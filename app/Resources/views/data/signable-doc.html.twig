@@ -23,7 +23,7 @@
                 {% elseif error == 'token' %}
                 <p>{% trans %}Token to sign document has expired, please contact who sent you the invitation{% endtrans %}</p>
                 {% else %}
-                <p>{% trans %}Document has not been processed yet, please try again in few seconds{% endtrans %}</p>
+                <p>{% trans %}Document has not been processed yet, please wait a few seconds{% endtrans %}</p>
                 {% endif %}
             </div>
         </div>
@@ -40,7 +40,7 @@
                         {% trans %}Review and sign the document{% endtrans %}
                     {% endif %}</h1>
                 <p>{{ file.name }} ({% transchoice file.pages %}{1} %count% page|]2,Inf]%count% pages{% endtranschoice %}),
-                    {% trans with {'%a_start%': '<a href="'~file.path~'">', '%a_end%': '</a>'} %}if you have problems viewing it %a_start% download original%a_end%{% endtrans %}</p>
+                    {% trans with {'%a_start%': '<a href="'~file.path~'">', '%a_end%': '</a>'} %}if you have problems viewing it %a_start%download original%a_end%{% endtrans %}</p>
                 <div class="viewer">
                     {% for page in file.pagesPreviews %}
                     <div>

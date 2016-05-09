@@ -599,12 +599,306 @@
         <source>Logout</source>
         <target state="translated">Cerrar sesión</target>
       </trans-unit>
-      <trans-unit id="361c6dec2035f892e1747dc98d269871" resname="We use cookies to improve safety and user experience" approved="yes">
-        <source>We use cookies to improve safety and user experience</source> <target state="translated">Utilizamos cookies para mejorar la seguridad y tu experiencia de usuario</target> </trans-unit>
-      <trans-unit id="ab066b3292d8ab61ef3b5c77169cdd19" resname="More information" approved="yes">
-        <source>More information</source> <target state="translated">Más información</target> </trans-unit>
-      <trans-unit id="d16620a0c233addfbb6154f08335a71e" resname="Ok, understood" approved="yes">
-        <source>Ok, understood</source> <target state="translated">Ok, entendido</target> </trans-unit>
+      <trans-unit id="361c6dec2035f892e1747dc98d269871" resname="We use cookies to improve safety and user experience">
+        <source>We use cookies to improve safety and user experience</source>
+        <target state="translated">Utilizamos cookies para mejorar la seguridad y tu experiencia de usuario</target>
+      </trans-unit>
+      <trans-unit id="ab066b3292d8ab61ef3b5c77169cdd19" resname="More information">
+        <source>More information</source>
+        <target state="translated">Más información</target>
+      </trans-unit>
+      <trans-unit id="d16620a0c233addfbb6154f08335a71e" resname="Ok, understood">
+        <source>Ok, understood</source>
+        <target state="translated">Ok, entendido</target>
+      </trans-unit>
+      <trans-unit id="4fe04ce94872b6f0b4ed9e955d0b1f71" resname="Signature certificate">
+        <source>Signature certificate</source>
+        <target state="translated">Certificado de firma</target>
+      </trans-unit>
+      <trans-unit id="354b07388a7b55ea26262cf9bda21645" resname="Your name, email address and national identity number are being used for ownership notarization, if are not right, certificate won't be valid for you">
+        <source>Your name, email address and national identity number are being used for ownership notarization, if are not right, certificate won't be valid for you</source>
+        <target state="translated">Tu nombre, dirección de e-mail y número del documento nacional de identidad son usados para la notarización de la propiedad, si no son correctos, el certificado no será válido para ti</target>
+      </trans-unit>
+      <trans-unit id="af48c9ac9891e02c3404c8d7142a4889" resname="Bindeo - Blockchain Web Services">
+        <source>Bindeo - Blockchain Web Services</source>
+        <target state="translated">Bindeo - Blockchain Web Services</target>
+      </trans-unit>
+      <trans-unit id="e9b856ad59165fa273fbe495788014f6" resname="Great, check your mailbox">
+        <source>Great, check your mailbox</source>
+        <target state="translated">Genial, revisa tu bandeja de entrada</target>
+      </trans-unit>
+      <trans-unit id="98d448b3445768c4e87c66eb6850d56d" resname="In order to verify and protect your identity, we've sent you an email to confirm you address, please, check it or %a_start%send verification email again%a_end%">
+        <source>In order to verify and protect your identity, we've sent you an email to confirm you address, please, check it or %a_start%send verification email again%a_end%</source>
+        <target state="translated">Con el fin de verificar y proteger tu identidad, te hemos enviado un e-mail para confirmar tu dirección, por favor, comprueba que lo hayas recibido o %a_start%te lo enviamos de nuevo%a_end%</target>
+      </trans-unit>
+      <trans-unit id="c3448552f001cb045708bf7115d9e3f9" resname="Confirmation email has been send">
+        <source>Confirmation email has been send</source>
+        <target state="translated">El e-mail de confirmación ha sido enviado</target>
+      </trans-unit>
+      <trans-unit id="ce89b2291ecfa9b97a28ab6acaeaf5a1" resname="Certify a file">
+        <source>Certify a file</source>
+        <target state="translated">Certifica un fichero</target>
+      </trans-unit>
+      <trans-unit id="23afa0c8f1560d9033c7588924e5bc8e" resname="Create an inmutable record of existence, ownership and integrity of any of your documents">
+        <source>Create an inmutable record of existence, ownership and integrity of any of your documents</source>
+        <target state="translated">Crea una prueba inmutable de existencia, propiedad e integridad de cualquiera de tus documentos</target>
+      </trans-unit>
+      <trans-unit id="ffeed24e8e4fd763c1d0d02c6e5d6e15" resname="Upload file">
+        <source>Upload file</source>
+        <target state="translated">Sube un fichero</target>
+      </trans-unit>
+      <trans-unit id="d4511b0c3d6c078be9bdc20e893861d8" resname="Sign a document">
+        <source>Sign a document</source>
+        <target state="translated">Firma un documento</target>
+      </trans-unit>
+      <trans-unit id="2abd1f161dd214168221f60aca4158be" resname="Select recipients and send any document to be signed. Easy, fast, secure and legally binding">
+        <source>Select recipients and send any document to be signed. Easy, fast, secure and legally binding</source>
+        <target state="translated">Elige destinatarios y envíales cualquier documento para ser firmado. Fácil, rápido, seguro y legalmente vinculante</target>
+      </trans-unit>
+      <trans-unit id="07553c2259a5c41c7db4fa77a6012678" resname="Upload document">
+        <source>Upload document</source>
+        <target state="translated">Sube un documento</target>
+      </trans-unit>
+      <trans-unit id="d4bb9a6e8220bba0f584b23c16b0cf52" resname="Sign with API">
+        <source>Sign with API</source>
+        <target state="translated">Firma mediante API</target>
+      </trans-unit>
+      <trans-unit id="e440797238e9661e0c1341dc0dc00d7a" resname="Integrate digital signature using your website or our interface with a developer-friendly API">
+        <source>Integrate digital signature using your website or our interface with a developer-friendly API</source>
+        <target state="translated">Integra firma digital utilizando nuestro website o nuestro interfaz con un API amigable para desarrolladores</target>
+      </trans-unit>
+      <trans-unit id="02d4482d332e1aef3437cd61c9bcc624" resname="Contact us">
+        <source>Contact us</source>
+        <target state="translated">Contáctanos</target>
+      </trans-unit>
+      <trans-unit id="1881141a25e6836dbd57c5f852b9a6d5" resname="Please, verify your email address">
+        <source>Please, verify your email address</source>
+        <target state="translated">Por favor, verifica tu dirección de e-mail</target>
+      </trans-unit>
+      <trans-unit id="26dda0abf82cac6a2da8c57ea4bfe278" resname="In order to verify and protect your identity you need validate your email address">
+        <source>In order to verify and protect your identity you need validate your email address</source>
+        <target state="translated">Con el fin de verificar y proteger su identidad necesita validar su dirección de e-mail</target>
+      </trans-unit>
+      <trans-unit id="f9e4b67fda3ddd3c7cc356d2b04caa91" resname="Please, confirm your address, click on &quot;Send me verification&quot; and check your mailbox">
+        <source>Please, confirm your address, click on "Send me verification" and check your mailbox</source>
+        <target state="translated">Por favor, confirma tu dirección, pulsa en "Enviadme la verificación" y comprueba tu bandeja de entrada</target>
+      </trans-unit>
+      <trans-unit id="643a860f992333b8600ea264aca7c4fc" resname="Email Address">
+        <source>Email Address</source>
+        <target state="translated">Dirección de e-mail</target>
+      </trans-unit>
+      <trans-unit id="a00acc9b49d721d1e3006715a0ce7014" resname="Email address is not valid">
+        <source>Email address is not valid</source>
+        <target state="translated">La dirección de e-mail no es válida</target>
+      </trans-unit>
+      <trans-unit id="9acdd13945f2bcf365cd5bd7015bcde1" resname="Email account already exists">
+        <source>Email account already exists</source>
+        <target state="translated">La cuenta de e-mail ya existe</target>
+      </trans-unit>
+      <trans-unit id="f15443d84578ff21e60289e5f0cebb11" resname="Send me verification">
+        <source>Send me verification</source>
+        <target state="translated">Enviadme la verificación</target>
+      </trans-unit>
+      <trans-unit id="2bbca513d5165f7ac12adb377feeb9e2" resname="Signer's name">
+        <source>Signer's name</source>
+        <target state="translated">Nombre del firmante</target>
+      </trans-unit>
+      <trans-unit id="b357b524e740bc85b9790a0712d84a30" resname="Email address">
+        <source>Email address</source>
+        <target state="translated">Dirección de e-mail</target>
+      </trans-unit>
+      <trans-unit id="5708983f6d397a8613b27bc98b9ade13" resname="PIN code">
+        <source>PIN code</source>
+        <target state="translated">Código PIN</target>
+      </trans-unit>
+      <trans-unit id="f11b368cddfe37c47af9b9d91c6ba4f0" resname="Full name">
+        <source>Full name</source>
+        <target state="translated">Nombre completo</target>
+      </trans-unit>
+      <trans-unit id="578a142a2fa16bb8edce6ec6b7b6d0c5" resname="National Identity Number">
+        <source>National Identity Number</source>
+        <target state="translated">Número del Documento Nacional de Identidad</target>
+      </trans-unit>
+      <trans-unit id="138e4809c20abecf9d25f1e5441846d9" resname="There was a problem signing the document, please try again later">
+        <source>There was a problem signing the document, please try again later</source>
+        <target state="translated">Hubo un problema firmando el documento, por favor intenta de nuevo más tarde</target>
+      </trans-unit>
+      <trans-unit id="d642a249f255091eab2b6affa71fe40e" resname="You do not have authorization, maybe you need to %a_start_l%login%a_end% with the correct account or %a_start_c%create%a_end% a new account with the same email">
+        <source>You do not have authorization, maybe you need to %a_start_l%login%a_end% with the correct account or %a_start_c%create%a_end% a new account with the same email</source>
+        <target state="translated">No tienes autorización, puede que necesites %a_start_l%iniciar sesión%a_end% con la cuenta correcta o %a_start_c%crear%a_end% una nueva cuenta con el mismo e-mail</target>
+      </trans-unit>
+      <trans-unit id="14324428ef26c0d4ea5d170cdd3ba17c" resname="Review the document">
+        <source>Review the document</source>
+        <target state="translated">Revisa el documento</target>
+      </trans-unit>
+      <trans-unit id="edda202d5b8bb68a34c203d48c9e30f0" resname="Review and sign the document">
+        <source>Review and sign the document</source>
+        <target state="translated">Revisa y firma el documento</target>
+      </trans-unit>
+      <trans-unit id="d3c22eaa6b75619e3672fb824ea13275" resname="You must to be %a_start%logged%a_end% with an account allowed by this document">
+        <source>You must to be %a_start%logged%a_end% with an account allowed by this document</source>
+        <target state="translated">Debes estar %a_start%logueado%a_end% con la cuenta permitida por este documento</target>
+      </trans-unit>
+      <trans-unit id="ddcc10f678642e68de10c51e88e0dab8" resname="Token to sign document has expired, please contact who sent you the invitation">
+        <source>Token to sign document has expired, please contact who sent you the invitation</source>
+        <target state="translated">El token para firmar este documento ha expirado, por favor contacta con quien te envió la invitación</target>
+      </trans-unit>
+      <trans-unit id="a6c27d916e09871639599a45f91bbc32" resname="Document has not been processed yet, please try again in few seconds">
+        <source>Document has not been processed yet, please try again in few seconds</source>
+        <target state="translated">El documento no ha sido procesado aún, por favor intenta de nuevo en unos segundos</target>
+      </trans-unit>
+      <trans-unit id="5e00aa58a2227a69591071e075aff41b" resname="{1} %count% page|]2,Inf]%count% pages">
+        <source>{1} %count% page|]2,Inf]%count% pages</source>
+        <target state="translated">{1} %count% página|]2,Inf]%count% páginas</target>
+      </trans-unit>
+      <trans-unit id="483d86e8cba6c1ac9a971917e3f9c1d5" resname="if you have problems viewing it %a_start% download original%a_end%">
+        <source>if you have problems viewing it %a_start% download original%a_end%</source>
+        <target state="translated">si tienes problemas visualizándolo %a_start%descarga el original%a_end%</target>
+      </trans-unit>
+      <trans-unit id="38b6bdfd221b6a9fcbeb86c09928305a" resname="Sign document!">
+        <source>Sign document!</source>
+        <target state="translated">¡Firma el documento!</target>
+      </trans-unit>
+      <trans-unit id="4bf89a8e21522eb12a9009aebf49258d" resname="Sign document">
+        <source>Sign document</source>
+        <target state="translated">Firma el documento</target>
+      </trans-unit>
+      <trans-unit id="7921cc39141cf56b6e3c5df47f9e1e87" resname="Bindeo unique identifier">
+        <source>Bindeo unique identifier</source>
+        <target state="translated">Identificador único de Bindeo</target>
+      </trans-unit>
+      <trans-unit id="37191f84729fec7597a697177c3b999e" resname="Issue date">
+        <source>Issue date</source>
+        <target state="translated">Fecha de emisión</target>
+      </trans-unit>
+      <trans-unit id="d48ebc228c9460c6ef7c044b2205ece5" resname="Signature completed">
+        <source>Signature completed</source>
+        <target state="translated">Firma completada</target>
+      </trans-unit>
+      <trans-unit id="879556b917aa201a4e3762375dbcb5bc" resname="Provisional">
+        <source>Provisional</source>
+        <target state="translated">Provisional</target>
+      </trans-unit>
+      <trans-unit id="6b70c2b3f18a971601b55216b68723f2" resname="Digital signature certificate">
+        <source>Digital signature certificate</source>
+        <target state="translated">Certificado de firma digital</target>
+      </trans-unit>
+      <trans-unit id="f28128b38efbc6134dc40751ee21fd29" resname="Documents">
+        <source>Documents</source>
+        <target state="translated">Documentos</target>
+      </trans-unit>
+      <trans-unit id="51360304ea03557e79bdf5ff9cd2e234" resname="Issuer">
+        <source>Issuer</source>
+        <target state="translated">Emisor</target>
+      </trans-unit>
+      <trans-unit id="dc1c9ce0179181c4f64b0bd191f2f05f" resname="Signatures">
+        <source>Signatures</source>
+        <target state="translated">Firmas</target>
+      </trans-unit>
+      <trans-unit id="41c2fff4867cc204120f001e7af20f7a" resname="Mobile phone">
+        <source>Mobile phone</source>
+        <target state="translated">Teléfono móvil</target>
+      </trans-unit>
+      <trans-unit id="71fed0c3428bf1a2e19af257c4bac379" resname="Signed">
+        <source>Signed</source>
+        <target state="translated">Firmado</target>
+      </trans-unit>
+      <trans-unit id="caa8ea1127b2b7c0610d7505036d25a3" resname="Not signed">
+        <source>Not signed</source>
+        <target state="translated">No firmado</target>
+      </trans-unit>
+      <trans-unit id="19ba59d55c9c4104a3c6c3a95086244b" resname="Link Token %time%H email">
+        <source>Link Token %time%H email</source>
+        <target state="translated">Enlace por Token %time%H e-mail</target>
+      </trans-unit>
+      <trans-unit id="d7fb3485e9c99d1408fb2adabb467b42" resname="4 digits PIN Code %time%M email">
+        <source>4 digits PIN Code %time%M email</source>
+        <target state="translated">Código PIN de 4 dígitos %time%M e-mail</target>
+      </trans-unit>
+      <trans-unit id="bdeb059da9103920ae73d73fc1ebc6a3" resname="Digital deposit">
+        <source>Digital deposit</source>
+        <target state="translated">Depósito digital</target>
+      </trans-unit>
+      <trans-unit id="888a77f5ac0748b6c8001822417df8b6" resname="Protocol">
+        <source>Protocol</source>
+        <target state="translated">Protocolo</target>
+      </trans-unit>
+      <trans-unit id="2af72f100c356273d46284f6fd1dfc08" resname="version">
+        <source>version</source>
+        <target state="translated">versión</target>
+      </trans-unit>
+      <trans-unit id="dd7bf230fde8d4836917806aff6a6b27" resname="Address">
+        <source>Address</source>
+        <target state="translated">Dirección</target>
+      </trans-unit>
+      <trans-unit id="1918e116376baaffa7321a501eed046a" resname="Document integrity deposit">
+        <source>Document integrity deposit</source>
+        <target state="translated">Depósito de integridad del documento</target>
+      </trans-unit>
+      <trans-unit id="5a83487d989f961b53f9548644b75751" resname="Signature certificate deposit">
+        <source>Signature certificate deposit</source>
+        <target state="translated">Depósito del certificado de firma</target>
+      </trans-unit>
+      <trans-unit id="67d18fe4eb41b81f79bd0903258cd576" resname="Your signature is completed, please wait until all signers complete their signatures and signed certificate is generated">
+        <source>Your signature is completed, please wait until all signers complete their signatures and signed certificate is generated</source>
+        <target state="translated">Tu firma está completada, por favor espera hasta que todos los firmantes completen sus firmas y el certificado esté generado</target>
+      </trans-unit>
+      <trans-unit id="d2d2e70cffc05f19d4e115c1dd8eed5b" resname="PAGE %page% OF %topage%">
+        <source>PAGE %page% OF %topage%</source>
+        <target state="translated">PÁGINA %page% DE %topage%</target>
+      </trans-unit>
+      <trans-unit id="4291a905a22b07d12a9f4e9fec24714b" resname="Want send to sign this document or just notarize it?">
+        <source>Want send to sign this document or just notarize it?</source>
+        <target state="translated">¿Quieres enviar este documento para firmar o sólo notarizarlo?</target>
+      </trans-unit>
+      <trans-unit id="c1369d99b502cca0bc9baa05df488b61" resname="No, just notarize it">
+        <source>No, just notarize it</source>
+        <target state="translated">No, solo notarizarlo</target>
+      </trans-unit>
+      <trans-unit id="11676fc3ee0eba5cc6deb3c981f83252" resname="Yes, to sign me and others">
+        <source>Yes, to sign me and others</source>
+        <target state="translated">Si, para firmarlo yo y otros</target>
+      </trans-unit>
+      <trans-unit id="42ae80329b1bc86b339805b66a26672d" resname="Yes, to sign just other">
+        <source>Yes, to sign just other</source>
+        <target state="translated">Si, para firmarlo solo otros</target>
+      </trans-unit>
+      <trans-unit id="b60508990ddabd18fa5b4fe197738fc6" resname="Yes, to sign only me" approved="yes">
+        <source>Yes, to sign only me</source> <target state="translated">Sí, para firmarlo solo yo</target> </trans-unit>
+      <trans-unit id="557fc52642decb7857f855b52eb81df0" resname="Great, who others needs to sign?">
+        <source>Great, who others needs to sign?</source>
+        <target state="translated">Genial, ¿qué otros necesitan firmarlo?</target>
+      </trans-unit>
+      <trans-unit id="97f6ac967db2467cb5d6ba8aa12a39b5" resname="Add signer">
+        <source>Add signer</source>
+        <target state="translated">Añadir firmante</target>
+      </trans-unit>
+      <trans-unit id="94966d90747b97d1f0f206c98a8b1ac3" resname="Send">
+        <source>Send</source>
+        <target state="translated">Enviar</target>
+      </trans-unit>
+      <trans-unit id="128a9d6416c7a42d94df0dad665c939a" resname="We've sent a 4-digit PIN code to your email address, type it here">
+        <source>We've sent a 4-digit PIN code to your email address, type it here</source>
+        <target state="translated">Hemos enviado un código PIN de 4 dígitos a tu dirección de e-mail, introdúcelo aquí</target>
+      </trans-unit>
+      <trans-unit id="9162d29046c9f0c109fa8141414ed30c" resname="Yes, sign now">
+        <source>Yes, sign now</source>
+        <target state="translated">Si, firmar ahora</target>
+      </trans-unit>
+      <trans-unit id="ac1a5ea9248945091ca61b345923848c" resname="Document has not been processed yet, please wait a few seconds">
+        <source>Document has not been processed yet, please wait a few seconds</source>
+        <target state="translated">El documento no ha sido procesado aún, por favor espera unos segundos</target>
+      </trans-unit>
+      <trans-unit id="e7df10f0df84605da69f5f8939b97ef2" resname="if you have problems viewing it %a_start%download original%a_end%">
+        <source>if you have problems viewing it %a_start%download original%a_end%</source>
+        <target state="translated">si tienes problemas visualizándolo %a_start%descarga el original%a_end%</target>
+      </trans-unit>
+      <trans-unit id="518a60a2aa9b41097bf5780f9f52b4e8" resname="Your signature is completed, please wait until all signers complete their signatures and certificate is generated">
+        <source>Your signature is completed, please wait until all signers complete their signatures and certificate is generated</source>
+        <target state="translated">Tu firma está completa, por favor espera a que todos los firmantes completen sus firmas y el certificado sea generado</target>
+      </trans-unit>
+      <trans-unit id="b833691e49d9ff11425b7a8a0e666ca7" resname="Great, who others need to sign?" approved="yes">
+        <source>Great, who others need to sign?</source> <target state="translated">Genial, ¿Qué otros necesitan firmarlo?</target> </trans-unit>
     </body>
   </file>
 </xliff>
