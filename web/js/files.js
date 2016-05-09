@@ -424,6 +424,9 @@ var files = (function() {
                 $(this).parents('form').submit();
             }
         }
+
+        // Hide options
+        $('div[data-name="upload-options"]').hide();
     };
 
     /**
