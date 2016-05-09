@@ -112,8 +112,12 @@ class UserController extends Controller
 
                 // Create the user token
                 $user->setIdentities($api->getJson('account_identities', ['idUser' => $user->getIdUser()])->getRows());
-                $token = new UsernamePasswordToken($user, '', "public", $user->getRoles());
+                $token = new UsernamePasswordToken($user, null, "main", $user->getRoles());
                 $this->get("security.token_storage")->setToken($token);
+
+                $session = $this->get('session');
+                $session->set('_security_' . "main", serialize($token));
+                $session->save();
 
                 // Fire the login event
                 // Logging the user in above the way we do it doesn't do this automatically
@@ -458,7 +462,8 @@ class UserController extends Controller
                 if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
                     // Update user data and refresh roles
                     $token = $this->get('security.token_storage')->getToken();
-                    $token->getUser()->setConfirmed(1)
+                    $token->getUser()
+                          ->setConfirmed(1)
                           ->setEmail($result->getRows()[0]->getEmail())
                           ->setName($result->getRows()[0]->getName());
                     $token->setAuthenticated(false);
