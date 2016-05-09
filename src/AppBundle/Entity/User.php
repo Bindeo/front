@@ -21,10 +21,10 @@ class User extends UserAbstract implements UserInterface
 
     // Set mandatory fields for forms
     /**
-     * @Assert\NotBlank(groups={"registration", "login", "pre-upload", "password-reset", "unconfirmed-email"})
-     * @Assert\Length(max=128, groups={"registration", "login", "pre-upload", "password-reset", "unconfirmed-email"})
+     * @Assert\NotBlank(groups={"registration", "login", "password-reset", "unconfirmed-email"})
+     * @Assert\Length(max=128, groups={"registration", "login", "password-reset", "unconfirmed-email"})
      * @Assert\Email(
-     *     groups={"registration", "pre-upload", "unconfirmed-email"},
+     *     groups={"registration", "unconfirmed-email"},
      *     strict = true,
      *     checkMX = true
      * )
@@ -36,8 +36,8 @@ class User extends UserAbstract implements UserInterface
     protected $email;
 
     /**
-     * @Assert\NotBlank(groups={"registration", "pre-upload"})
-     * @Assert\Length(min=2, max=256, groups={"registration", "pre-upload"})
+     * @Assert\NotBlank(groups={"registration"})
+     * @Assert\Length(min=2, max=256, groups={"registration"})
      */
     protected $name;
 

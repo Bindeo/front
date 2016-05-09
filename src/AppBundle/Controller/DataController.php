@@ -87,7 +87,7 @@ class DataController extends Controller
         /** @var User $user */
         $user = $this->getUser();
 
-        // Only users with national identity number and confirmed could upload files
+        // Only confirmed users could upload files
         $response = $this->confirmedUpload($request, $user, true);
 
         return $response;
@@ -199,61 +199,6 @@ class DataController extends Controller
     }
 
     /**
-     * Upload page for an unconfirmed user
-     *
-     * @param Request $request
-     * @param User    $user
-     *
-     * @return Response
-     */
-    private function unconfirmedUpload(Request $request, $user)
-    {
-        // Get user main identity
-        $identity = clone $user->getCurrentIdentity();
-
-        $identity->setOldValue($identity->getValue())->setOldDocument($identity->getDocument());
-        $form = $this->createForm(ChangeIdentityType::class, $identity);
-        $form->handleRequest($request);
-
-        // Form submitted
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
-                // Data is valid, modify the user and send the confirm email
-                $res = $this->get('app.model.user')->changeIdentity($user, $identity->setIp($request->getClientIp()));
-
-                if (isset($res['error'])) {
-                    if ($res['error'][0] == '') {
-                        $form->addError(new FormError($res['error'][1]));
-                    } else {
-                        $form->get($res['error'][0])->addError(new FormError($res['error'][1]));
-                    }
-                }
-            }
-
-            // Check if the form is still valid
-            if ($form->isValid()) {
-                return new JsonResponse([
-                    'result' => [
-                        'success' => true,
-                        'html'    => $this->renderView('data/partials/file-preupload-ok.html.twig',
-                            ['email' => $identity->getValue()])
-                    ]
-                ]);
-            } else {
-                return new JsonResponse([
-                    'result' => [
-                        'success' => false,
-                        'form'    => $this->renderView('data/partials/file-preupload-form.html.twig',
-                            ['form' => $form->createView()])
-                    ]
-                ]);
-            }
-        }
-
-        return $this->render('data/file-preupload.html.twig', ['form' => $form->createView()]);
-    }
-
-    /**
      * Upload the file temporary using fileupload
      * @Route("/ajax/private/upload-file", name="ajax_file_upload")
      *
@@ -263,11 +208,6 @@ class DataController extends Controller
      */
     public function ajaxUploadFileAction(Request $request)
     {
-        $user = $this->getUser();
-        if (!$user->getConfirmed() or !$user->getCurrentIdentity()->getDocument()) {
-            return new JsonResponse(['success' => false, 'redirect' => '/data/upload']);
-        }
-
         /** @var UploadedFile $file */
         $file = $request->files->get('file');
 

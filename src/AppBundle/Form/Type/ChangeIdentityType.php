@@ -28,7 +28,7 @@ class ChangeIdentityType extends AbstractType
             'validation_groups' => function(FormInterface $form) {
                 /** @var UserIdentity $data */
                 $data = $form->getData();
-                $groups = ['pre-upload', 'identity'];
+                $groups = ['identity'];
 
                 // If the user has changed his email, we add the change-email validation group
                 if ($data->getValue() and $data->getOldValue() and $data->getValue() != $data->getOldValue()) {

@@ -42,7 +42,9 @@
                         <div class="type-label">{{ signature.issuer.name | upper }}</div>
                         <div class="type-annex">
                             <ul>
+                                {% if signature.issuer.document %}
                                 <li>{% trans %}Identity{% endtrans %}: NIF {{ signature.issuer.document }}</li>
+                                {% endif %}
                                 <li>{% trans %}Email{% endtrans %}: {{ signature.issuer.email }}{#<span></span>{% trans %}Mobile phone{% endtrans %}: {{ issuer.phone }}#}</li>
                             </ul>
                         </div>
