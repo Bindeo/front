@@ -863,8 +863,10 @@
         <source>Yes, to sign just other</source>
         <target state="translated">Si, para firmarlo solo otros</target>
       </trans-unit>
-      <trans-unit id="b60508990ddabd18fa5b4fe197738fc6" resname="Yes, to sign only me" approved="yes">
-        <source>Yes, to sign only me</source> <target state="translated">Sí, para firmarlo solo yo</target> </trans-unit>
+      <trans-unit id="b60508990ddabd18fa5b4fe197738fc6" resname="Yes, to sign only me">
+        <source>Yes, to sign only me</source>
+        <target state="translated">Sí, para firmarlo solo yo</target>
+      </trans-unit>
       <trans-unit id="557fc52642decb7857f855b52eb81df0" resname="Great, who others needs to sign?">
         <source>Great, who others needs to sign?</source>
         <target state="translated">Genial, ¿qué otros necesitan firmarlo?</target>
@@ -897,8 +899,50 @@
         <source>Your signature is completed, please wait until all signers complete their signatures and certificate is generated</source>
         <target state="translated">Tu firma está completa, por favor espera a que todos los firmantes completen sus firmas y el certificado sea generado</target>
       </trans-unit>
-      <trans-unit id="b833691e49d9ff11425b7a8a0e666ca7" resname="Great, who others need to sign?" approved="yes">
-        <source>Great, who others need to sign?</source> <target state="translated">Genial, ¿Qué otros necesitan firmarlo?</target> </trans-unit>
+      <trans-unit id="b833691e49d9ff11425b7a8a0e666ca7" resname="Great, who others need to sign?">
+        <source>Great, who others need to sign?</source>
+        <target state="translated">Genial, ¿Qué otros necesitan firmarlo?</target>
+      </trans-unit>
+      <trans-unit id="c6732c19e846bb363a831e25aa8bb493" resname="Bindeo: New Security Level eSignature Platform">
+        <source>Bindeo: New Security Level eSignature Platform</source>
+        <target state="translated">Bindeo: La firma digital con un nuevo nivel de seguridad</target>
+      </trans-unit>
+      <trans-unit id="41848e2cf72a762acef6ba21a20c3f39" resname="eSignature platform with a new level of security based on blockchain">
+        <source>eSignature platform with a new level of security based on blockchain</source>
+        <target state="translated">Plataforma de firma digital con un nuevo nivel de seguridad basado en la Blockchain</target>
+      </trans-unit>
+      <trans-unit id="dba718e1348c82c7f1d5869da7d58faf" resname="Get your documents signed by you and others">
+        <source>Get your documents signed by you and others</source>
+        <target state="translated">Obtén tus documentos firmados por ti y por otros</target>
+      </trans-unit>
+      <trans-unit id="dbf6f52b93d92320723b0e2125b877da" resname="Legaly binding">
+        <source>Legaly binding</source>
+        <target state="translated">Legalmente vinculante</target>
+      </trans-unit>
+      <trans-unit id="ba95b420cf88b8c0bad1ac4a36d58378" resname="Advanced digital signature fited to eIDAS, the upcoming European Regulation" approved="yes">
+        <source>Advanced digital signature fited to eIDAS, the upcoming European Regulation</source> <target state="translated">Firma digital avanzada ajustada a eIDAS, el próximo Reglamento Europeo</target> </trans-unit>
+      <trans-unit id="2874f833fd4f69190438aa7cb5f052b5" resname="Blockchain technology" approved="yes">
+        <source>Blockchain technology</source> <target state="translated">Tecnología Blockchain</target> </trans-unit>
+      <trans-unit id="2a527b0cea7beaed63543806eb73dc57" resname="Shielded by the new hot technology and the most secure encryption algorithms" approved="yes">
+        <source>Shielded by the new hot technology and the most secure encryption algorithms</source> <target state="translated">Protegidos por esta nueva tecnología y los algoritmos de cifrado más seguros</target> </trans-unit>
+      <trans-unit id="391f4d2643e8ce57641679d7a1ca1910" resname="Get signature faster" approved="yes">
+        <source>Get signature faster</source> <target state="translated">Consigue la firma más rápido</target> </trans-unit>
+      <trans-unit id="418d6334ae4e2c26750d365831daac5c" resname="Upload by drag&amp;drop and fill recipients. 1-step for you. 1-step for your customers" approved="yes">
+        <source>Upload by drag&amp;drop and fill recipients. 1-step for you. 1-step for your customers</source> <target state="translated">Sube mediante drag&amp;drop y rellena destinatarios. 1-paso para ti. 1-paso para tus clientes</target> </trans-unit>
+      <trans-unit id="eabf8041904cef84ee522e0247ce41be" resname="Say goodbye to paper" approved="yes">
+        <source>Say goodbye to paper</source> <target state="translated">Di adiós al papel</target> </trans-unit>
+      <trans-unit id="a3dd399a89f44ad6268b040a7ec11917" resname="Forget print, scan, write, store and classify: keep organized your documents" approved="yes">
+        <source>Forget print, scan, write, store and classify: keep organized your documents</source> <target state="translated">Olvida imprimir, escanear, escribir, almacenar y clasificar: mantén organizados tus documentos</target> </trans-unit>
+      <trans-unit id="2c052b4ad753e35eb22b3a5224becf38" resname="Anywhere, any device" approved="yes">
+        <source>Anywhere, any device</source> <target state="translated">En cualquier parte, en cualquier dispositivo</target> </trans-unit>
+      <trans-unit id="7b736b59ab607196fded64e0746a13ec" resname="Quick send documents for signature and get them signed from any device, with no installation" approved="yes">
+        <source>Quick send documents for signature and get them signed from any device, with no installation</source> <target state="translated">Envía rápido documentos para firmar y obtenlos firmados desde cualquier dispositivo, sin instalaciones</target> </trans-unit>
+      <trans-unit id="7c3e568726c282a150680d2e2ef82be0" resname="Web &amp; API integration" approved="yes">
+        <source>Web &amp; API integration</source> <target state="translated">Integración Web &amp; API</target> </trans-unit>
+      <trans-unit id="c2b40848d4abf68962472d4119912c4c" resname="Add document singing feature to your website or app with our developer-friendly API" approved="yes">
+        <source>Add document singing feature to your website or app with our developer-friendly API</source> <target state="translated">Añade funcionalidad de firmar documentos a tu website o app con tu API amigable para desarrolladores</target> </trans-unit>
+      <trans-unit id="797945b32eb608c92a385aa9e6aacaa4" resname="Advanced digital signature fitted to eIDAS, the upcoming European Regulation" approved="yes">
+        <source>Advanced digital signature fitted to eIDAS, the upcoming European Regulation</source> <target state="translated">Firma digital avanzada ajustada a eIDAS, el próximo Reglamento Europeo</target> </trans-unit>
     </body>
   </file>
 </xliff>
