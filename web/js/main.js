@@ -24,6 +24,7 @@ var main = (function() {
         $('body').on('click', 'a[data-locale]', changeLocale);
         $('body').on('click', 'a[data-action="dismiss-cookies"]', dismissCookies);
         gainFocus();
+        getIp();
     };
 
     var subscriptors = function() {
@@ -272,6 +273,13 @@ var paginator = (function() {
                 return promise;
             }
         }
+    };
+
+    /**
+     * Get user ip
+     */
+    var getIp = function() {
+        
     };
 
     // Public methods

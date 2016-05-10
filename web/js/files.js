@@ -365,6 +365,20 @@ var files = (function() {
 
         // Append the prototype
         container.append(prototype);
+        
+        // If we are in development, default country 
+
+        // Initialize mobile prefix plugin in phone fields
+        prototype.find('input[data-name="mobile-phone"]').intlTelInput({
+            geoIpLookup: function(callback) {
+                $.get("http://ipinfo.io", function() {}, "jsonp").always(function(resp) {
+                    var countryCode = (resp && resp.country) ? resp.country : "";
+                    callback(countryCode);
+                });
+            },
+            initialCountry: "es",
+            utilsScript: "/libs/intl-tel-input_8.5.2/js/utils.js"
+        });
 
         return false;
     };
