@@ -8917,7 +8917,7 @@ label {
 
 /* line 21, ../sass/includes/_1_layout.scss */
 .section-home {
-  background: url(./../images/bg2.jpg);
+  background: url(./../images/bg-sign.jpg);
   background-position: center center;
   background-size: cover;
   margin-top: -55px;
@@ -8931,15 +8931,15 @@ label {
 }
 /* line 34, ../sass/includes/_1_layout.scss */
 .section-home h1 {
-  margin-top: 60px;
-  font-size: 24px;
-  font-weight: bold;
+  margin-top: 120px;
+  font-size: 20px;
+  font-weight: normal;
   color: white;
 }
 @media (min-width: 768px) {
   /* line 34, ../sass/includes/_1_layout.scss */
   .section-home h1 {
-    margin-top: 120px;
+    margin-top: 180px;
     font-size: 30px;
   }
 }
@@ -8948,55 +8948,51 @@ label {
   font-size: 18px;
   color: white;
 }
-@media (min-width: 768px) {
-  /* line 46, ../sass/includes/_1_layout.scss */
-  .section-home h2 {
-    font-size: 20px;
-  }
-}
-/* line 55, ../sass/includes/_1_layout.scss */
+/* line 51, ../sass/includes/_1_layout.scss */
 .section-home .action {
   margin-top: 30px;
 }
-/* line 58, ../sass/includes/_1_layout.scss */
+/* line 54, ../sass/includes/_1_layout.scss */
 .section-home .action .btn {
   min-width: 240px;
+  font-size: 16px;
+  font-weight: 300;
 }
 
-/* line 64, ../sass/includes/_1_layout.scss */
+/* line 62, ../sass/includes/_1_layout.scss */
 .section-home-features {
   padding: 30px 0;
 }
-/* line 68, ../sass/includes/_1_layout.scss */
+/* line 66, ../sass/includes/_1_layout.scss */
 .section-home-features .row > div > div, .section-home-features .cards > div > div {
   text-align: center;
   padding: 15px;
 }
-/* line 72, ../sass/includes/_1_layout.scss */
+/* line 70, ../sass/includes/_1_layout.scss */
 .section-home-features .row > div > div img, .section-home-features .cards > div > div img {
   margin: 0 auto;
-  max-height: 32px;
+  max-height: 40px;
 }
-/* line 77, ../sass/includes/_1_layout.scss */
+/* line 75, ../sass/includes/_1_layout.scss */
 .section-home-features .row > div > div h3, .section-home-features .cards > div > div h3 {
-  margin: 20px 0 5px;
+  margin: 25px 0 5px;
   font-size: 14px;
-  font-weight: 400;
+  font-weight: bold;
 }
 
-/* line 87, ../sass/includes/_1_layout.scss */
+/* line 85, ../sass/includes/_1_layout.scss */
 .section-home-proofs {
   padding: 30px 0;
   background: #004C7F;
   color: #fff;
 }
 
-/* line 93, ../sass/includes/_1_layout.scss */
+/* line 91, ../sass/includes/_1_layout.scss */
 .section-home-public {
   padding: 30px 0;
 }
 
-/* line 97, ../sass/includes/_1_layout.scss */
+/* line 95, ../sass/includes/_1_layout.scss */
 .section-home-start {
   padding: 30px 0;
   background: #0070BD;
@@ -9005,7 +9001,7 @@ label {
 
 /* line 2, ../sass/includes/_1_forms.scss */
 .forms h1 {
-  font-size: 30px;
+  font-size: 24px;
   font-weight: 300;
   text-align: center;
 }
@@ -9212,13 +9208,15 @@ label {
 
 /* line 3, ../sass/includes/_1_single.scss */
 .body-single nav.navbar {
-  background: #0070BD;
+  background: #222222;
   margin-top: 0;
 }
-/* line 9, ../sass/includes/_1_single.scss */
+/* line 10, ../sass/includes/_1_single.scss */
 .body-single nav.navbar .navbar-header .navbar-brand img {
   width: 100px;
   margin-top: -3px;
+  filter: contrast(100%);
+  -webkit-filter: contrast(100%);
 }
 
 /* line 1, ../sass/includes/_1_user.scss */
@@ -9885,50 +9883,60 @@ body > nav.navbar .navbar-header {
 /* line 13, ../sass/includes/_1_navbar.scss */
 body > nav.navbar .navbar-header .navbar-brand img {
   width: 120px;
-  opacity: 0.75;
+  opacitys: 0.75;
   margin-top: -6px;
 }
-/* line 20, ../sass/includes/_1_navbar.scss */
+@media (max-width: 767px) {
+  /* line 13, ../sass/includes/_1_navbar.scss */
+  body > nav.navbar .navbar-header .navbar-brand img {
+    filter: contrast(0%);
+    -webkit-filter: contrast(0%);
+  }
+}
+/* line 25, ../sass/includes/_1_navbar.scss */
 body > nav.navbar .navbar-header .navbar-toggle {
   border: none;
 }
-/* line 23, ../sass/includes/_1_navbar.scss */
+/* line 28, ../sass/includes/_1_navbar.scss */
 body > nav.navbar .navbar-header .navbar-toggle:hover {
   background: none;
 }
-/* line 27, ../sass/includes/_1_navbar.scss */
+/* line 32, ../sass/includes/_1_navbar.scss */
 body > nav.navbar .navbar-header .navbar-toggle .icon-bar {
   background: white;
 }
-/* line 34, ../sass/includes/_1_navbar.scss */
+/* line 39, ../sass/includes/_1_navbar.scss */
 body > nav.navbar .navbar-collapse {
   position: absolute;
-  width: 100%;
+  width: 200px;
   background: rgba(255, 255, 255, 0.85);
   border: none;
   box-shadow: none;
   z-index: 1099;
+  right: 20px;
+  border-radius: 5px;
 }
 @media (min-width: 768px) {
-  /* line 34, ../sass/includes/_1_navbar.scss */
+  /* line 39, ../sass/includes/_1_navbar.scss */
   body > nav.navbar .navbar-collapse {
     position: inherit;
+    width: 100%;
     background: none;
   }
 }
 @media (min-width: 768px) {
-  /* line 48, ../sass/includes/_1_navbar.scss */
+  /* line 56, ../sass/includes/_1_navbar.scss */
   body > nav.navbar .navbar-collapse ul.navbar-nav > li {
     padding-top: 7px;
     padding-bottom: 7px;
   }
 }
-/* line 57, ../sass/includes/_1_navbar.scss */
+/* line 65, ../sass/includes/_1_navbar.scss */
 body > nav.navbar .navbar-collapse ul.navbar-nav > li > a:hover {
   background: rgba(0, 0, 0, 0.15);
 }
 @media (min-width: 768px) {
-  /* line 55, ../sass/includes/_1_navbar.scss */
+  /* line 63, ../sass/includes/_1_navbar.scss */
   body > nav.navbar .navbar-collapse ul.navbar-nav > li > a {
     padding-top: 8px;
     padding-bottom: 8px;
@@ -9937,19 +9945,19 @@ body > nav.navbar .navbar-collapse ul.navbar-nav > li > a:hover {
     text-shadow: rgba(0, 0, 0, 0.25) 0 0 1px;
   }
 }
-/* line 71, ../sass/includes/_1_navbar.scss */
+/* line 79, ../sass/includes/_1_navbar.scss */
 body > nav.navbar .navbar-collapse ul.navbar-nav > li.active > a {
   background: rgba(255, 255, 255, 0.25);
 }
-/* line 74, ../sass/includes/_1_navbar.scss */
+/* line 82, ../sass/includes/_1_navbar.scss */
 body > nav.navbar .navbar-collapse ul.navbar-nav > li.active > a:hover {
   background: rgba(255, 255, 255, 0.5);
 }
-/* line 81, ../sass/includes/_1_navbar.scss */
+/* line 89, ../sass/includes/_1_navbar.scss */
 body > nav.navbar .navbar-collapse ul.navbar-nav > li.highlight > a {
   background: rgba(255, 255, 255, 0.15);
 }
-/* line 84, ../sass/includes/_1_navbar.scss */
+/* line 92, ../sass/includes/_1_navbar.scss */
 body > nav.navbar .navbar-collapse ul.navbar-nav > li.highlight > a:hover {
   background: rgba(255, 255, 255, 0.5);
 }
@@ -9969,25 +9977,35 @@ body footer .container-strip {
   padding: 20px 0 50px;
   color: rgba(255, 255, 255, 0.75);
 }
-/* line 18, ../sass/includes/_1_footer.scss */
+@media (max-width: 767px) {
+  /* line 13, ../sass/includes/_1_footer.scss */
+  body footer .container-strip {
+    padding-bottom: 70px;
+  }
+}
+/* line 22, ../sass/includes/_1_footer.scss */
 body footer .container-strip .right {
   text-align: right;
 }
-/* line 23, ../sass/includes/_1_footer.scss */
+/* line 26, ../sass/includes/_1_footer.scss */
+body footer .container-strip a {
+  color: #fff;
+}
+/* line 29, ../sass/includes/_1_footer.scss */
 body footer .container-strip a span {
   font-size: 18px;
   margin-left: 5px;
   color: rgba(255, 255, 255, 0.5);
 }
-/* line 30, ../sass/includes/_1_footer.scss */
+/* line 36, ../sass/includes/_1_footer.scss */
 body footer .container-strip a:hover span {
   color: white;
 }
-/* line 35, ../sass/includes/_1_footer.scss */
+/* line 41, ../sass/includes/_1_footer.scss */
 body footer .container-strip a:first-child span {
   margin-left: 0;
 }
-/* line 40, ../sass/includes/_1_footer.scss */
+/* line 46, ../sass/includes/_1_footer.scss */
 body footer .container-strip p {
   margin: 0;
 }
