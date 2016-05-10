@@ -57,10 +57,11 @@ class DataModel
      * Process file uploaded
      *
      * @param UploadedFile $file
+     * @param string       $ip
      *
      * @return File|string
      */
-    public function ajaxUploadFile(UploadedFile $file)
+    public function ajaxUploadFile(UploadedFile $file, $ip)
     {
         // We need to check that the file satisfies user max file size and free space
         $size = $file->getClientSize();
@@ -82,10 +83,20 @@ class DataModel
         if (isset($error)) {
             return $error;
         } else {
+            $file = (new File)->setFileOrigName($file->getClientOriginalName())
+                              ->setPath($file->move($this->filesConf['files_tmp_folder'])->getRealPath())
+                              ->setSize($size);
+
+            // Get user country
+            $res = $this->api->getJson('general_geolocalize', ['ip' => $ip]);
+
+            if ($res->getNumRows() != 0) {
+                // Set country ip in file object
+                $file->setIp($res->getRows()[0]->getIp());
+            }
+
             // Move the file to a temp folder to manage its data later and returns the new File
-            return (new File)->setFileOrigName($file->getClientOriginalName())
-                             ->setPath($file->move($this->filesConf['files_tmp_folder'])->getRealPath())
-                             ->setSize($size);
+            return $file;
         }
     }
 
@@ -269,8 +280,12 @@ class DataModel
      */
     public function signatureCertificate($token, $idUser, $mode = 'body')
     {
-        $res = $this->api->getJson('signature_certificate',
-            ['token' => $token, 'clientType' => 'U', 'idClient' => $idUser, 'mode' => $mode == 'body' ? 'full' : 'simple']);
+        $res = $this->api->getJson('signature_certificate', [
+            'token'      => $token,
+            'clientType' => 'U',
+            'idClient'   => $idUser,
+            'mode'       => $mode == 'body' ? 'full' : 'simple'
+        ]);
 
         // Check authorization
         if ($res->getError()) {

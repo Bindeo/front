@@ -24,7 +24,6 @@ var main = (function() {
         $('body').on('click', 'a[data-locale]', changeLocale);
         $('body').on('click', 'a[data-action="dismiss-cookies"]', dismissCookies);
         gainFocus();
-        getIp();
     };
 
     var subscriptors = function() {
@@ -169,12 +168,32 @@ var main = (function() {
         return false;
     };
 
+    /**
+     * Get user ip
+     */
+    var getIp = function() {
+        $.getJSON("//api.ipify.org?format=jsonp&callback=?",
+            function(json) {
+                console.log(json);
+            }
+        );
+
+        /*
+        var deferred = $.get("//ipinfo.io", function() {}, "jsonp");
+
+        console.log(deferred);
+
+        //return deferred;
+        */
+    };
+
     // Public methods
     return {
         init          : init,
         sendSimpleForm: sendSimpleForm,
         sendForm      : sendForm,
-        sendRequest   : sendRequest
+        sendRequest   : sendRequest,
+        getIp         : getIp
     };
 })();
 
@@ -273,13 +292,6 @@ var paginator = (function() {
                 return promise;
             }
         }
-    };
-
-    /**
-     * Get user ip
-     */
-    var getIp = function() {
-        
     };
 
     // Public methods

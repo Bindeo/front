@@ -18,8 +18,7 @@ class Signer extends SignerAbstract
      * @Assert\Length(max=128, groups={"upload-file"})
      * @Assert\Email(
      *     groups={"upload-file"},
-     *     strict = true,
-     *     checkMX = true
+     *     strict = true
      * )
      */
     protected $email;

@@ -216,7 +216,7 @@ class DataController extends Controller
         } else {
             // Process data
             /** @var File $newFile */
-            $newFile = $this->get('app.model.data')->ajaxUploadFile($file);
+            $newFile = $this->get('app.model.data')->ajaxUploadFile($file, $request->getClientIp());
             if (!($newFile instanceof File)) {
                 return new JsonResponse(['success' => false, 'name' => 'upload_file', 'error' => $newFile]);
             }
@@ -234,15 +234,19 @@ class DataController extends Controller
                     'success'  => true,
                     'name'     => 'upload_file',
                     'path'     => $newFile->getPath(),
-                    'filename' => $newFile->getFileOrigName()
+                    'filename' => $newFile->getFileOrigName(),
+                    'country'  => $newFile->getIp() ? mb_strtolower($newFile->getIp()) : 'es'
                 ]);
             } else {
                 return new JsonResponse([
                     'success' => true,
                     'name'    => 'upload_file',
                     'path'    => $newFile->getPath(),
-                    'html'    => $this->renderView('data/partials/file-uploaded.html.twig',
-                        ['name' => $newFile->getFileOrigName(), 'size' => $size])
+                    'html'    => $this->renderView('data/partials/file-uploaded.html.twig', [
+                        'name'    => $newFile->getFileOrigName(),
+                        'size'    => $size,
+                        'country' => $newFile->getIp() ? mb_strtolower($newFile->getIp()) : 'es'
+                    ])
                 ]);
             }
         }
@@ -484,5 +488,36 @@ class DataController extends Controller
             // Send file to the browser
             $pdf->send('signature_certificate.pdf');
         }
+    }
+
+    /**
+     * Check an email or phone field to validate it
+     * @Route("/ajax/public/check-field", name="ajax_check_field")
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function ajaxCheckFieldAction(Request $request)
+    {
+        $res = ['valid' => false];
+
+        // Get data
+        $type = $request->get('type');
+        $value = $request->get('value');
+
+        if ($type == 'email') {
+            // Mail type field, check if it is valid
+            $validator = $this->get('validator');
+            $res = $validator->validate(new User(['email' => $value]), null, ['unconfirmed-email']);
+
+            if (!$res->count()) {
+                $res['valid'] = true;
+            }
+        } elseif ($type == 'mobile-phone') {
+            // Mobile phone type field
+        }
+
+        return new JsonResponse($res);
     }
 }

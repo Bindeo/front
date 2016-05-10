@@ -96,6 +96,10 @@ ajax_close_account:
     path: /ajax/private/close-account
     defaults: { _controller: AppBundle:User:ajaxCloseAccount }
 
+ajax_check_field:
+    path: /ajax/public/check-field
+    defaults: { _controller: AppBundle:Data:ajaxCheckField }
+
 ajax_change_locale:
     path: /ajax/public/change-locale
     defaults: { _controller: AppBundle:Default:ajaxChangeLocale }

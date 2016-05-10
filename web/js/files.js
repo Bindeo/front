@@ -7,6 +7,8 @@ var files = (function() {
         $('body').on('click', 'form[name="upload_file"] a[name="options"]', uploadOptions);
         $('body').on('click', 'form[name="upload_file"] [data-action="add-signer"]', addSigner);
         $('body').on('click', 'form[name="upload_file"] [data-action="remove-signer"]', removeSigner);
+        $('body').on('change', 'input[data-checkable]', checkField);
+
         // Library
         $('body').on('click', '[data-id="fileFilters"] ul li a', chooseFilter);
         $('body').on('keyup', '[data-id="fileFilters"] input', function(e) {
@@ -186,6 +188,18 @@ var files = (function() {
             $('[data-id="freespace"]').html(result.freespace);
             $('[data-id="usedspace"]').html(result.usedspace);
         });
+
+        /**
+         * Check valid upload file to sign form
+         */
+        $.subscribe('signature.files', function(event) {
+            // Check if all checkable inputs are valid
+            if($('input[data-checkable][data-valid="false"]').length == 0) {
+                $('#submit-button').removeAttr('disabled');
+            } else {
+                $('#submit-button').attr('disabled', 'disabled');
+            }
+        });
     };
 
     /**
@@ -298,6 +312,7 @@ var files = (function() {
      */
     var sendFormFile = function(event) {
         event.preventDefault();
+
         main.sendForm($(this)).done(function(response) {
             if(response.result.success) {
                 $(".modal-backdrop:visible").hide();
@@ -365,20 +380,18 @@ var files = (function() {
 
         // Append the prototype
         container.append(prototype);
-        
-        // If we are in development, default country 
+
+        // If we are in development, default country
 
         // Initialize mobile prefix plugin in phone fields
         prototype.find('input[data-name="mobile-phone"]').intlTelInput({
-            geoIpLookup: function(callback) {
-                $.get("http://ipinfo.io", function() {}, "jsonp").always(function(resp) {
-                    var countryCode = (resp && resp.country) ? resp.country : "";
-                    callback(countryCode);
-                });
-            },
-            initialCountry: "es",
-            utilsScript: "/libs/intl-tel-input_8.5.2/js/utils.js"
+            initialCountry    : $('#upload_file_done').attr('data-country'),
+            preferredCountries: ['gb', 'us', 'es'],
+            utilsScript       : "/libs/intl-tel-input_8.5.2/js/utils.js"
         });
+
+        // Put submit button as disabled
+        $('#submit-button').attr('disabled', 'disabled');
 
         return false;
     };
@@ -403,7 +416,64 @@ var files = (function() {
         // Remove element
         li.remove();
 
+        // If we don't have more signers, show again options menu
+        if(!$('li[data-name="signer"]').length) {
+            $('div[data-name="upload-options"]').show();
+            $('form [data-id="to-sign"]').hide();
+            $.publish('signature.files');
+        }
+
         return false;
+    };
+
+    /**
+     * Check if field is correct
+     */
+    var checkField = function() {
+        // Check field
+        var input = $(this);
+        var url = '/ajax/public/check-field';
+        var valid = 'false';
+
+        if(input.attr('data-name') == 'email') {
+            // Email field
+            if(input.val() != '') {
+                // Check mx
+                $.when(main.sendRequest(url, 'type=email&value=' + input.val()))
+                    .done(function(response) {
+                        if(response.valid) {
+                            valid = 'true';
+                        } else {
+                            valid = 'false';
+                        }
+                    }).fail(function(response) {
+                    valid = 'false';
+                }).always(function(response) {
+                        $.publish('signature.files');
+                    }
+                );
+            } else {
+                valid = 'false';
+            }
+        } else if(input.attr('data-name') == 'mobile-phone') {
+            // Name field
+            if(input.val() == '' || input.intlTelInput("isValidNumber")) {
+                // Check lookup
+                valid = 'true';
+            } else {
+                valid = 'false';
+            }
+        } else {
+            // Name field
+            if(input.val() != '') {
+                valid = 'true';
+            } else {
+                valid = 'false';
+            }
+        }
+
+        input.attr('data-valid', valid);
+        $.publish('signature.files');
     };
 
     /**
