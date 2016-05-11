@@ -983,8 +983,12 @@
         <source>Create an immutable record of existence, ownership and integrity of any of your documents</source>
         <target state="signed-off">Crea una prueba inmutable de existencia, propiedad e integridad de cualquiera de tus documentos</target>
       </trans-unit>
-      <trans-unit id="c8fbc7767ae6feccb0690b76f9b91f76" resname="Sign or notarize" approved="yes">
-        <source>Sign or notarize</source> <target state="translated">Firma o notariza</target> </trans-unit>
+      <trans-unit id="c8fbc7767ae6feccb0690b76f9b91f76" resname="Sign or notarize">
+        <source>Sign or notarize</source>
+        <target state="translated">Firma o notariza</target>
+      </trans-unit>
+      <trans-unit id="fac1106ed483b40d9670110264e2f0af" resname="4 digits PIN Code %time%M mobile phone" approved="yes">
+        <source>4 digits PIN Code %time%M mobile phone</source> <target state="translated">Código PIN de 4 dígitos %time%M teléfono móvil</target> </trans-unit>
     </body>
   </file>
 </xliff>

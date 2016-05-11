@@ -87,7 +87,11 @@
                         <div class="type-annex">
                             <ul>
                                 <li>{% trans with {'%time%':24} %}Link Token %time%H email{% endtrans %}</li>
+                            {% if signer.method == 'E' %}
                                 <li>{% trans with {'%time%':10} %}4 digits PIN Code %time%M email{% endtrans %}</li>
+                            {% else %}
+                                <li>{% trans with {'%time%':10} %}4 digits PIN Code %time%M mobile phone{% endtrans %}</li>
+                            {% endif %}
                             </ul>
                         </div>
                     </div>
