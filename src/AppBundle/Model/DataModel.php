@@ -20,6 +20,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Component\Validator\Validator\RecursiveValidator;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class DataModel
 {
@@ -306,5 +308,37 @@ class DataModel
         }
 
         return $res;
+    }
+
+    /**
+     * Validate a field
+     *
+     * @param string $type
+     * @param string $value
+     * @param ValidatorInterface $validator
+     *
+     * @return bool
+     */
+    public function checkField($type, $value, ValidatorInterface $validator)
+    {
+        $valid = false;
+
+        if ($type == 'email') {
+            // Mail type field, check if it is valid
+            $res = $validator->validate(new User(['email' => $value]), null, ['unconfirmed-email']);
+
+            if (!$res->count()) {
+                $valid = true;
+            }
+        } elseif ($type == 'mobile-phone') {
+            // Mobile phone type field
+            $res = $this->api->getJson('validate_phone', ['phone' => trim($value)]);
+
+            if ($res->getNumRows() > 0) {
+                $valid = true;
+            }
+        }
+
+        return $valid;
     }
 }

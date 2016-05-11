@@ -1,15 +1,20 @@
 <li class="row" data-name="signer">
-    <div class="col-xs-12 col-sm-4">
-        {{ form_row(signer.name, {'attr': {'placeholder':"Signer's name", 'data-checkable':'true', 'data-valid':'false'}}) }}
+    <div class="col-xs-12 col-sm-4 form-group">
+        {{ form_widget(signer.name, {'attr': {'placeholder':"Signer's name", 'data-checkable':'true', 'data-valid':'false'}}) }}
+        {{ form_errors(signer.name) }}
+        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
     </div>
-    <div class="col-xs-8 col-sm-4">
-        {{ form_row(signer.email, {'attr': {'placeholder':"Email address", 'data-name':'email', 'data-checkable':'true', 'data-valid':'false'}}) }}
+    <div class="col-xs-8 col-sm-4 form-group">
+        {{ form_widget(signer.email, {'attr': {'placeholder':"Email address", 'data-name':'email', 'data-checkable':'true', 'data-valid':'false'}}) }}
+        {{ form_errors(signer.email) }}
+        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
     </div>
-    <div class="col-xs-4 col-sm-3">
-        {{ form_row(signer.phone, {'attr': {'data-name':'mobile-phone', 'data-checkable':'true', 'data-valid':'true'}}) }}
+    <div class="col-xs-4 col-sm-3 form-group">
+        {{ form_widget(signer.phone, {'attr': {'data-name':'mobile-phone', 'data-checkable':'true', 'data-valid':'true'}}) }}
+        {{ form_errors(signer.phone) }}
+        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
     </div>
     <div class="hidden-xs col-sm-1">
         <a class="btn btn-link" data-action="remove-signer" href="#"><span class="glyphicon glyphicon-remove"></span></a>
     </div>
-
 </li>

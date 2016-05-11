@@ -192,6 +192,21 @@ var files = (function() {
         /**
          * Check valid upload file to sign form
          */
+        $.subscribe('signature.files', function(event, input, value) {
+            if(input !== undefined) {
+                if(value) {
+                    $(input).attr('data-valid', 'true');
+                    $(input).parents('div.form-group').removeClass('has-loading').addClass('has-success').find('span.glyphicon').addClass('glyphicon-ok');
+                } else {
+                    $(input).attr('data-valid', 'false');
+                    $(input).parents('div.form-group').removeClass('has-loading').addClass('has-error').find('span.glyphicon').addClass('glyphicon-remove');
+                }
+            }
+        });
+
+        /**
+         * Check valid upload file to sign form
+         */
         $.subscribe('signature.files', function(event) {
             // Check if all checkable inputs are valid
             if($('input[data-checkable][data-valid="false"]').length == 0) {
@@ -313,7 +328,17 @@ var files = (function() {
     var sendFormFile = function(event) {
         event.preventDefault();
 
-        main.sendForm($(this)).done(function(response) {
+        var data = $(this).serializeArray();
+
+        // Get correct phone numbers
+        for (var i = 0, len = data.length; i < len; i++) {
+            if(data[i].name.match(/\[phone]/)) {
+                data[i].value = $('input[name="'+data[i].name+'"]').intlTelInput("getNumber");
+            }
+        }
+
+        // Send modified params string
+        main.sendForm($(this), $.param(data)).done(function(response) {
             if(response.result.success) {
                 $(".modal-backdrop:visible").hide();
                 $.publish('listFilters.files');
@@ -433,46 +458,53 @@ var files = (function() {
         // Check field
         var input = $(this);
         var url = '/ajax/public/check-field';
-        var valid = 'false';
+        var parent = input.parents('div.form-group');
+
+        // Remove errors
+        parent.removeClass('has-error has-success').find('span').removeClass('glyphicon-ok glyphicon-remove');
 
         if(input.attr('data-name') == 'email') {
             // Email field
             if(input.val() != '') {
+                // Set loading
+                parent.addClass('has-loading');
+
                 // Check mx
-                $.when(main.sendRequest(url, 'type=email&value=' + input.val()))
+                $.when(main.sendRequest(url, 'type=email&value=' + encodeURIComponent(input.val())))
                     .done(function(response) {
-                        if(response.valid) {
-                            valid = 'true';
-                        } else {
-                            valid = 'false';
-                        }
-                    }).fail(function(response) {
-                    valid = 'false';
-                }).always(function(response) {
-                        $.publish('signature.files');
-                    }
-                );
+                        $.publish('signature.files', [input, response.valid]);
+                    })
+                    .fail(function(response) {
+                        $.publish('signature.files', [input, false]);
+                    });
             } else {
-                valid = 'false';
+                $.publish('signature.files', [input, false]);
             }
         } else if(input.attr('data-name') == 'mobile-phone') {
             // Name field
-            if(input.val() == '' || input.intlTelInput("isValidNumber")) {
+            if(input.val() == '') {
+                $.publish('signature.files', [input, true]);
+            } else if(input.intlTelInput("isValidNumber")) {
                 // Check lookup
-                valid = 'true';
+                $.when(main.sendRequest(url, 'type=mobile-phone&value=' + encodeURIComponent(input.intlTelInput('getNumber'))))
+                    .done(function(response) {
+                        $.publish('signature.files', [input, response.valid]);
+                    })
+                    .fail(function(response) {
+                        $.publish('signature.files', [input, false]);
+                    });
             } else {
-                valid = 'false';
+                $.publish('signature.files', [input, false]);
             }
         } else {
             // Name field
-            if(input.val() != '') {
-                valid = 'true';
+            if(input.val().length > 1 && input.val().length < 257) {
+                $.publish('signature.files', [input, true]);
             } else {
-                valid = 'false';
+                $.publish('signature.files', [input, false]);
             }
         }
 
-        input.attr('data-valid', valid);
         $.publish('signature.files');
     };
 

@@ -94,16 +94,17 @@ var main = (function() {
     /**
      * Create the promise of sending a form
      * @param form
+     * @param data
      * @returns Promise
      */
-    var sendSimpleForm = function(form) {
+    var sendSimpleForm = function(form, data) {
         // Publish the start sending status
 
         return $.when($.ajax({
             url       : form.attr('action'),
             type      : "post",
             dataType  : "json",
-            data      : form.serialize(),
+            data      : data ? data : form.serialize(),
             async     : true,
             beforeSend: function() {
                 $.publish('sending.forms', [form, true]);
@@ -115,9 +116,9 @@ var main = (function() {
      * Send a standard form via ajax
      * @returns Promise
      */
-    var sendForm = function(form) {
+    var sendForm = function(form, data) {
         // Create the promise
-        var promise = sendSimpleForm(form);
+        var promise = sendSimpleForm(form, data);
 
         promise.then(
             // Done
@@ -179,12 +180,12 @@ var main = (function() {
         );
 
         /*
-        var deferred = $.get("//ipinfo.io", function() {}, "jsonp");
+         var deferred = $.get("//ipinfo.io", function() {}, "jsonp");
 
-        console.log(deferred);
+         console.log(deferred);
 
-        //return deferred;
-        */
+         //return deferred;
+         */
     };
 
     // Public methods

@@ -500,24 +500,10 @@ class DataController extends Controller
      */
     public function ajaxCheckFieldAction(Request $request)
     {
-        $res = ['valid' => false];
+        // Validate field
+        $valid = $this->get('app.model.data')
+                      ->checkField($request->get('type'), $request->get('value'), $this->get('validator'));
 
-        // Get data
-        $type = $request->get('type');
-        $value = $request->get('value');
-
-        if ($type == 'email') {
-            // Mail type field, check if it is valid
-            $validator = $this->get('validator');
-            $res = $validator->validate(new User(['email' => $value]), null, ['unconfirmed-email']);
-
-            if (!$res->count()) {
-                $res['valid'] = true;
-            }
-        } elseif ($type == 'mobile-phone') {
-            // Mobile phone type field
-        }
-
-        return new JsonResponse($res);
+        return new JsonResponse(['valid' => $valid]);
     }
 }
