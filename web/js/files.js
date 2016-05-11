@@ -317,6 +317,8 @@ var files = (function() {
         $('#' + name + '_done').html('');
         $('form[name="' + name + '"]').find('input[name="' + name + '[path]"]').val('');
         $('div[data-name="' + name + '"] .file').show();
+        $('div[data-name="upload-options"]').show();
+        $('form [data-id="to-sign"]').hide();
 
         return false;
     };

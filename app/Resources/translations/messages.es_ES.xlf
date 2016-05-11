@@ -967,14 +967,24 @@
         <source>Advanced digital signature fitted to eIDAS, the upcoming European Regulation</source>
         <target state="translated">Firma digital avanzada ajustada a eIDAS, el próximo Reglamento Europeo</target>
       </trans-unit>
-      <trans-unit id="648b468f070732d9a917f9309903e37f" resname="Get started!" approved="yes">
-        <source>Get started!</source> <target state="signed-off">¡Empieza!</target> </trans-unit>
-      <trans-unit id="0627551ed84b56ff22e2084552872361" resname="We use this information to save and protect your identity, it is advisable to enter your full name as it appears on your passport or national identity card" approved="yes">
-        <source>We use this information to save and protect your identity, it is advisable to enter your full name as it appears on your passport or national identity card</source> <target state="signed-off">Utilizamos esta información para guardar y proteger tu identidad, es recomendable introducir tu nombre y apellidos tal y como aparecen en tu pasaporte o documento nacional de identidad</target> </trans-unit>
-      <trans-unit id="2edd7c5cc65bfb2513d990b91d8924d5" resname="Check your mailbox" approved="yes">
-        <source>Check your mailbox</source> <target state="signed-off">Comprueba tu bandeja de entrada</target> </trans-unit>
-      <trans-unit id="765fc935d20ab0ed8ddccd9ff572637e" resname="Create an immutable record of existence, ownership and integrity of any of your documents" approved="yes">
-        <source>Create an immutable record of existence, ownership and integrity of any of your documents</source> <target state="signed-off">Crea una prueba inmutable de existencia, propiedad e integridad de cualquiera de tus documentos</target> </trans-unit>
+      <trans-unit id="648b468f070732d9a917f9309903e37f" resname="Get started!">
+        <source>Get started!</source>
+        <target state="signed-off">¡Empieza!</target>
+      </trans-unit>
+      <trans-unit id="0627551ed84b56ff22e2084552872361" resname="We use this information to save and protect your identity, it is advisable to enter your full name as it appears on your passport or national identity card">
+        <source>We use this information to save and protect your identity, it is advisable to enter your full name as it appears on your passport or national identity card</source>
+        <target state="signed-off">Utilizamos esta información para guardar y proteger tu identidad, es recomendable introducir tu nombre y apellidos tal y como aparecen en tu pasaporte o documento nacional de identidad</target>
+      </trans-unit>
+      <trans-unit id="2edd7c5cc65bfb2513d990b91d8924d5" resname="Check your mailbox">
+        <source>Check your mailbox</source>
+        <target state="signed-off">Comprueba tu bandeja de entrada</target>
+      </trans-unit>
+      <trans-unit id="765fc935d20ab0ed8ddccd9ff572637e" resname="Create an immutable record of existence, ownership and integrity of any of your documents">
+        <source>Create an immutable record of existence, ownership and integrity of any of your documents</source>
+        <target state="signed-off">Crea una prueba inmutable de existencia, propiedad e integridad de cualquiera de tus documentos</target>
+      </trans-unit>
+      <trans-unit id="c8fbc7767ae6feccb0690b76f9b91f76" resname="Sign or notarize" approved="yes">
+        <source>Sign or notarize</source> <target state="translated">Firma o notariza</target> </trans-unit>
     </body>
   </file>
 </xliff>
