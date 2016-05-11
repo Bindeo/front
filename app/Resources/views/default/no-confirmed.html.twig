@@ -9,7 +9,7 @@
     <div class="container">
         <div class="row">
             <div class="intro">
-                <h1>{% trans %}Great, check your mailbox{% endtrans %}</h1>
+                <h1>{% trans %}Check your mailbox{% endtrans %}</h1>
                 <p>
                     {% trans with {'%a_start%':'<a href="#" id="resend-confirmation">','%a_end%':'</a>'} %}In order to verify and protect your identity, we've sent you an email to confirm you address, please, check it or %a_start%send verification email again%a_end%{% endtrans %}.
                 </p>
@@ -20,7 +20,7 @@
                     <div>
                         <div>
                             <h2>{% trans %}Certify a file{% endtrans %}</h2>
-                            <p>{% trans %}Create an inmutable record of existence, ownership and integrity of any of your documents{% endtrans %}.</p>
+                            <p>{% trans %}Create an immutable record of existence, ownership and integrity of any of your documents{% endtrans %}.</p>
 
                             <a class="btn btn-primary" href="#" data-url="{{ path('file_upload') }}" data-toggle="modal" data-target="#modal-mail-verify">{% trans %}Upload file{% endtrans %}</a>
                         </div>

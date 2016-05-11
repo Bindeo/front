@@ -919,30 +919,62 @@
         <source>Legaly binding</source>
         <target state="translated">Legalmente vinculante</target>
       </trans-unit>
-      <trans-unit id="ba95b420cf88b8c0bad1ac4a36d58378" resname="Advanced digital signature fited to eIDAS, the upcoming European Regulation" approved="yes">
-        <source>Advanced digital signature fited to eIDAS, the upcoming European Regulation</source> <target state="translated">Firma digital avanzada ajustada a eIDAS, el próximo Reglamento Europeo</target> </trans-unit>
-      <trans-unit id="2874f833fd4f69190438aa7cb5f052b5" resname="Blockchain technology" approved="yes">
-        <source>Blockchain technology</source> <target state="translated">Tecnología Blockchain</target> </trans-unit>
-      <trans-unit id="2a527b0cea7beaed63543806eb73dc57" resname="Shielded by the new hot technology and the most secure encryption algorithms" approved="yes">
-        <source>Shielded by the new hot technology and the most secure encryption algorithms</source> <target state="translated">Protegidos por esta nueva tecnología y los algoritmos de cifrado más seguros</target> </trans-unit>
-      <trans-unit id="391f4d2643e8ce57641679d7a1ca1910" resname="Get signature faster" approved="yes">
-        <source>Get signature faster</source> <target state="translated">Consigue la firma más rápido</target> </trans-unit>
-      <trans-unit id="418d6334ae4e2c26750d365831daac5c" resname="Upload by drag&amp;drop and fill recipients. 1-step for you. 1-step for your customers" approved="yes">
-        <source>Upload by drag&amp;drop and fill recipients. 1-step for you. 1-step for your customers</source> <target state="translated">Sube mediante drag&amp;drop y rellena destinatarios. 1-paso para ti. 1-paso para tus clientes</target> </trans-unit>
-      <trans-unit id="eabf8041904cef84ee522e0247ce41be" resname="Say goodbye to paper" approved="yes">
-        <source>Say goodbye to paper</source> <target state="translated">Di adiós al papel</target> </trans-unit>
-      <trans-unit id="a3dd399a89f44ad6268b040a7ec11917" resname="Forget print, scan, write, store and classify: keep organized your documents" approved="yes">
-        <source>Forget print, scan, write, store and classify: keep organized your documents</source> <target state="translated">Olvida imprimir, escanear, escribir, almacenar y clasificar: mantén organizados tus documentos</target> </trans-unit>
-      <trans-unit id="2c052b4ad753e35eb22b3a5224becf38" resname="Anywhere, any device" approved="yes">
-        <source>Anywhere, any device</source> <target state="translated">En cualquier parte, en cualquier dispositivo</target> </trans-unit>
-      <trans-unit id="7b736b59ab607196fded64e0746a13ec" resname="Quick send documents for signature and get them signed from any device, with no installation" approved="yes">
-        <source>Quick send documents for signature and get them signed from any device, with no installation</source> <target state="translated">Envía rápido documentos para firmar y obtenlos firmados desde cualquier dispositivo, sin instalaciones</target> </trans-unit>
-      <trans-unit id="7c3e568726c282a150680d2e2ef82be0" resname="Web &amp; API integration" approved="yes">
-        <source>Web &amp; API integration</source> <target state="translated">Integración Web &amp; API</target> </trans-unit>
-      <trans-unit id="c2b40848d4abf68962472d4119912c4c" resname="Add document singing feature to your website or app with our developer-friendly API" approved="yes">
-        <source>Add document singing feature to your website or app with our developer-friendly API</source> <target state="translated">Añade funcionalidad de firmar documentos a tu website o app con tu API amigable para desarrolladores</target> </trans-unit>
-      <trans-unit id="797945b32eb608c92a385aa9e6aacaa4" resname="Advanced digital signature fitted to eIDAS, the upcoming European Regulation" approved="yes">
-        <source>Advanced digital signature fitted to eIDAS, the upcoming European Regulation</source> <target state="translated">Firma digital avanzada ajustada a eIDAS, el próximo Reglamento Europeo</target> </trans-unit>
+      <trans-unit id="ba95b420cf88b8c0bad1ac4a36d58378" resname="Advanced digital signature fited to eIDAS, the upcoming European Regulation">
+        <source>Advanced digital signature fited to eIDAS, the upcoming European Regulation</source>
+        <target state="translated">Firma digital avanzada ajustada a eIDAS, el próximo Reglamento Europeo</target>
+      </trans-unit>
+      <trans-unit id="2874f833fd4f69190438aa7cb5f052b5" resname="Blockchain technology">
+        <source>Blockchain technology</source>
+        <target state="translated">Tecnología Blockchain</target>
+      </trans-unit>
+      <trans-unit id="2a527b0cea7beaed63543806eb73dc57" resname="Shielded by the new hot technology and the most secure encryption algorithms">
+        <source>Shielded by the new hot technology and the most secure encryption algorithms</source>
+        <target state="translated">Protegidos por esta nueva tecnología y los algoritmos de cifrado más seguros</target>
+      </trans-unit>
+      <trans-unit id="391f4d2643e8ce57641679d7a1ca1910" resname="Get signature faster">
+        <source>Get signature faster</source>
+        <target state="translated">Consigue la firma más rápido</target>
+      </trans-unit>
+      <trans-unit id="418d6334ae4e2c26750d365831daac5c" resname="Upload by drag&amp;drop and fill recipients. 1-step for you. 1-step for your customers">
+        <source>Upload by drag&amp;drop and fill recipients. 1-step for you. 1-step for your customers</source>
+        <target state="translated"><![CDATA[Sube mediante drag&drop y rellena destinatarios. 1-paso para ti. 1-paso para tus clientes]]></target>
+      </trans-unit>
+      <trans-unit id="eabf8041904cef84ee522e0247ce41be" resname="Say goodbye to paper">
+        <source>Say goodbye to paper</source>
+        <target state="translated">Di adiós al papel</target>
+      </trans-unit>
+      <trans-unit id="a3dd399a89f44ad6268b040a7ec11917" resname="Forget print, scan, write, store and classify: keep organized your documents">
+        <source>Forget print, scan, write, store and classify: keep organized your documents</source>
+        <target state="translated">Olvida imprimir, escanear, escribir, almacenar y clasificar: mantén organizados tus documentos</target>
+      </trans-unit>
+      <trans-unit id="2c052b4ad753e35eb22b3a5224becf38" resname="Anywhere, any device">
+        <source>Anywhere, any device</source>
+        <target state="translated">En cualquier parte, en cualquier dispositivo</target>
+      </trans-unit>
+      <trans-unit id="7b736b59ab607196fded64e0746a13ec" resname="Quick send documents for signature and get them signed from any device, with no installation">
+        <source>Quick send documents for signature and get them signed from any device, with no installation</source>
+        <target state="translated">Envía rápido documentos para firmar y obtenlos firmados desde cualquier dispositivo, sin instalaciones</target>
+      </trans-unit>
+      <trans-unit id="7c3e568726c282a150680d2e2ef82be0" resname="Web &amp; API integration">
+        <source>Web &amp; API integration</source>
+        <target state="translated"><![CDATA[Integración Web & API]]></target>
+      </trans-unit>
+      <trans-unit id="c2b40848d4abf68962472d4119912c4c" resname="Add document singing feature to your website or app with our developer-friendly API">
+        <source>Add document singing feature to your website or app with our developer-friendly API</source>
+        <target state="translated">Añade funcionalidad de firmar documentos a tu website o app con tu API amigable para desarrolladores</target>
+      </trans-unit>
+      <trans-unit id="797945b32eb608c92a385aa9e6aacaa4" resname="Advanced digital signature fitted to eIDAS, the upcoming European Regulation">
+        <source>Advanced digital signature fitted to eIDAS, the upcoming European Regulation</source>
+        <target state="translated">Firma digital avanzada ajustada a eIDAS, el próximo Reglamento Europeo</target>
+      </trans-unit>
+      <trans-unit id="648b468f070732d9a917f9309903e37f" resname="Get started!" approved="yes">
+        <source>Get started!</source> <target state="signed-off">¡Empieza!</target> </trans-unit>
+      <trans-unit id="0627551ed84b56ff22e2084552872361" resname="We use this information to save and protect your identity, it is advisable to enter your full name as it appears on your passport or national identity card" approved="yes">
+        <source>We use this information to save and protect your identity, it is advisable to enter your full name as it appears on your passport or national identity card</source> <target state="signed-off">Utilizamos esta información para guardar y proteger tu identidad, es recomendable introducir tu nombre y apellidos tal y como aparecen en tu pasaporte o documento nacional de identidad</target> </trans-unit>
+      <trans-unit id="2edd7c5cc65bfb2513d990b91d8924d5" resname="Check your mailbox" approved="yes">
+        <source>Check your mailbox</source> <target state="signed-off">Comprueba tu bandeja de entrada</target> </trans-unit>
+      <trans-unit id="765fc935d20ab0ed8ddccd9ff572637e" resname="Create an immutable record of existence, ownership and integrity of any of your documents" approved="yes">
+        <source>Create an immutable record of existence, ownership and integrity of any of your documents</source> <target state="signed-off">Crea una prueba inmutable de existencia, propiedad e integridad de cualquiera de tus documentos</target> </trans-unit>
     </body>
   </file>
 </xliff>
