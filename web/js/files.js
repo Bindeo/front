@@ -445,8 +445,10 @@ var files = (function() {
         if(!$('li[data-name="signer"]').length) {
             $('div[data-name="upload-options"]').show();
             $('form [data-id="to-sign"]').hide();
-            $.publish('signature.files');
         }
+
+        // Check if form is correct
+        $.publish('signature.files');
 
         return false;
     };
