@@ -289,11 +289,6 @@ class DataController extends Controller
      */
     public function getSignableDocAction(Request $request)
     {
-        $date1 = new \DateTime();
-        $date2 = new \DateTime();
-        $date2->sub(new \DateInterval('PT5M'));
-
-        exit;
         // If user is logged, send user id too
         $params = ['token' => $request->get('token')];
 
