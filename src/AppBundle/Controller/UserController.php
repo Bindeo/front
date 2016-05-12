@@ -310,7 +310,8 @@ class UserController extends Controller
                     if ($res['error'][0] == '') {
                         $form->addError(new FormError($res['error'][1]));
                     } else {
-                        $form->get($res['error'][0])->addError(new FormError($res['error'][1]));
+                        $form->get($res['error'][0] == 'email' ? 'value' : $res['error'][0])
+                             ->addError(new FormError($res['error'][1]));
                     }
                 }
 
