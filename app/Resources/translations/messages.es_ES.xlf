@@ -987,8 +987,20 @@
         <source>Sign or notarize</source>
         <target state="translated">Firma o notariza</target>
       </trans-unit>
-      <trans-unit id="fac1106ed483b40d9670110264e2f0af" resname="4 digits PIN Code %time%M mobile phone" approved="yes">
-        <source>4 digits PIN Code %time%M mobile phone</source> <target state="translated">Código PIN de 4 dígitos %time%M teléfono móvil</target> </trans-unit>
+      <trans-unit id="fac1106ed483b40d9670110264e2f0af" resname="4 digits PIN Code %time%M mobile phone">
+        <source>4 digits PIN Code %time%M mobile phone</source>
+        <target state="translated">Código PIN de 4 dígitos %time%M teléfono móvil</target>
+      </trans-unit>
+      <trans-unit id="9ae387581a2c16d89a5e050b2e9e6c7c" resname="Your PIN code has expired, please click again in sign document button to receive a new one">
+        <source>Your PIN code has expired, please click again in sign document button to receive a new one</source>
+        <target state="signed-off">Tu código PIN ha caducado, por favor pulsa de nuevo en el botón de firmar documento para recibir uno nuevo</target>
+      </trans-unit>
+      <trans-unit id="ecb56dc0ccc58cb79279bfedeef42423" resname="We've sent a 4-digit PIN code to your phone number, type it here">
+        <source>We've sent a 4-digit PIN code to your phone number, type it here</source>
+        <target state="signed-off">Hemos enviado un código PIN de 4 dígitos a tu teléfono móvil, introdúcelo aquí</target>
+      </trans-unit>
+      <trans-unit id="6804cb0f50055f07fe3218f0f10277f2" resname="%count% page|%count% pages" approved="yes">
+        <source>%count% page|%count% pages</source> <target state="translated">%count% página|%count% páginas</target> </trans-unit>
     </body>
   </file>
 </xliff>

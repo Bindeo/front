@@ -24,6 +24,7 @@ var main = (function() {
         $('body').on('click', 'a[data-locale]', changeLocale);
         $('body').on('click', 'a[data-action="dismiss-cookies"]', dismissCookies);
         gainFocus();
+        countDown();
     };
 
     var subscriptors = function() {
@@ -64,6 +65,16 @@ var main = (function() {
      */
     var gainFocus = function() {
         $('input[data-focus="auto"]:visible:first').focus();
+    };
+
+    /**
+     * Countdown to reload page
+     */
+    var countDown = function() {
+        var countdown = $('#countdown');
+        if(countdown.length) {
+            setTimeout(function() {window.location.reload();}, countdown.attr('data-time'));
+        }
     };
 
     /**

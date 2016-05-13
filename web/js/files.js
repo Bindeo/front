@@ -562,10 +562,16 @@ var files = (function() {
      */
     var sendFormSigner = function(event) {
         event.preventDefault();
+
+        // Disable send button
+        var button = $(this).find('button[type="submit"]').attr('disabled', 'disabled');
+
         main.sendForm($(this)).done(function(response) {
             if(response.result.success) {
                 $(".modal-backdrop").remove();
             }
+        }).always(function(response) {
+            button.removeAttr('disabled');
         });
     };
 

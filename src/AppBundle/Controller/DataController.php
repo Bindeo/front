@@ -5,7 +5,6 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\AccountType;
 use AppBundle\Entity\File;
 use AppBundle\Entity\User;
-use AppBundle\Form\Type\ChangeIdentityType;
 use AppBundle\Form\Type\SignerType;
 use AppBundle\Form\Type\UploadFileType;
 use Bindeo\Util\Tools;
@@ -345,7 +344,7 @@ class DataController extends Controller
                         'result' => [
                             'success' => false,
                             'form'    => $this->renderView('data/partials/sign-file-form.html.twig',
-                                ['form' => $form->createView()])
+                                ['form' => $form->createView(), 'signer' => $signer])
                         ]
                     ]);
                 } else {
@@ -362,7 +361,7 @@ class DataController extends Controller
                     'result' => [
                         'success' => false,
                         'form'    => $this->renderView('data/partials/sign-file-form.html.twig',
-                            ['form' => $form->createView()])
+                            ['form' => $form->createView(), 'signer' => $signer])
                     ]
                 ]);
             }

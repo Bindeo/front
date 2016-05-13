@@ -1,7 +1,13 @@
 {{ form_start(form, {'attr': {'autocomplete': 'off'}}) }}
 <div class="modal-body">
     {{ form_errors(form) }}
-    <p>{% trans %}We've sent a 4-digit PIN code to your email address, type it here{% endtrans %}:</p>
+    <p>
+        {% if signer.phone %}
+            {% trans %}We've sent a 4-digit PIN code to your phone number, type it here{% endtrans %}:
+        {% else %}
+            {% trans %}We've sent a 4-digit PIN code to your email address, type it here{% endtrans %}:
+        {% endif %}
+    </p>
 
     {{ form_row(form.code, {'attr': {'placeholder': 'PIN code'}}) }}
     {{ form_row(form.name, {'attr': {'placeholder': 'Full name'}}) }}
