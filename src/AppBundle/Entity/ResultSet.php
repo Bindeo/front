@@ -87,6 +87,28 @@ class ResultSet extends ClientResultSetAbstract
                 $object = new MediaType((array)$data->attributes);
                 $res = [$object->getIdType(), $object];
                 break;
+            case 'processes_status':
+                // Fill the entity class
+                if (!$this->entity) {
+                    $this->entity = 'AppBundle\Entity\ProcessStatus';
+                } elseif ($this->entity != 'AppBundle\Entity\ProcessStatus') {
+                    throw new HttpException(500);
+                }
+
+                $object = new ProcessStatus((array)$data->attributes);
+                $res = [null, $object];
+                break;
+            case 'processes':
+                // Fill the entity class
+                if (!$this->entity) {
+                    $this->entity = 'AppBundle\Entity\ProcessStatus';
+                } elseif ($this->entity != 'AppBundle\Entity\ProcessStatus') {
+                    throw new HttpException(500);
+                }
+
+                $object = new ProcessStatus((array)$data->attributes);
+                $res = [null, $object];
+                break;
             case 'bulk_transactions':
                 // Fill the entity class
                 if (!$this->entity) {
