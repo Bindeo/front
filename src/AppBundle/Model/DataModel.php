@@ -13,6 +13,7 @@ use AppBundle\Entity\UserIdentity;
 use Bindeo\DataModel\Exceptions;
 use Bindeo\DataModel\UserInterface;
 use Bindeo\Filter\FilesFilter;
+use Bindeo\Filter\ProcessesFilter;
 use Bindeo\Util\ApiConnection;
 use Bindeo\Util\Tools;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -163,7 +164,7 @@ class DataModel
     }
 
     /**
-     * Get a list of files from the user
+     * Get a list of processes from the user
      *
      * @param User    $user
      * @param Request $request
@@ -173,16 +174,15 @@ class DataModel
     public function library($user, Request $request)
     {
         // Instantiate files filter
-        $filter = (new FilesFilter())->setClientType('U')
-                                     ->setIdClient($user->getIdUser())
-                                     ->setStatus($request->get('status'))
-                                     ->setSpecialFilter($request->get('special'))
-                                     ->setMediaType($request->get('media-type'))
-                                     ->setName($request->get('name'))
-                                     ->setOrder($request->get('order'))
-                                     ->setPage($request->get('page'));
+        $filter = (new ProcessesFilter())->setClientType('U')
+                                         ->setIdClient($user->getIdUser())
+                                         ->setType($request->get('type'))
+                                         ->setIdStatus($request->get('status'))
+                                         ->setName($request->get('name'))
+                                         ->setOrder($request->get('order'))
+                                         ->setPage($request->get('page'));
 
-        $res = $this->api->getJson('files', $filter->toArray());
+        $res = $this->api->getJson('processes', $filter->toArray());
 
         return $res;
     }
@@ -313,8 +313,8 @@ class DataModel
     /**
      * Validate a field
      *
-     * @param string $type
-     * @param string $value
+     * @param string             $type
+     * @param string             $value
      * @param ValidatorInterface $validator
      *
      * @return bool

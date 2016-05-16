@@ -101,12 +101,12 @@ class ResultSet extends ClientResultSetAbstract
             case 'processes':
                 // Fill the entity class
                 if (!$this->entity) {
-                    $this->entity = 'AppBundle\Entity\ProcessStatus';
-                } elseif ($this->entity != 'AppBundle\Entity\ProcessStatus') {
+                    $this->entity = 'AppBundle\Entity\Processes';
+                } elseif ($this->entity != 'AppBundle\Entity\Processes') {
                     throw new HttpException(500);
                 }
 
-                $object = new ProcessStatus((array)$data->attributes);
+                $object = new Process((array)$data->attributes);
                 $res = [null, $object];
                 break;
             case 'bulk_transactions':

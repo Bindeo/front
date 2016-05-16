@@ -36,7 +36,7 @@ class DataController extends Controller
         /** @var User $user */
         $user = $this->getUser();
 
-        // List of files
+        // List of processes
         $files = $this->get('app.model.data')->library($user, $request);
 
         // If is an Ajax request
