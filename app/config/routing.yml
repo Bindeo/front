@@ -35,7 +35,7 @@ validate_token:
 
 file_library:
     path: /data/library
-    defaults: { _controller: AppBundle:Data:fileLibrary }
+    defaults: { _controller: AppBundle:Data:library }
 
 file_upload:
     path: /data/upload

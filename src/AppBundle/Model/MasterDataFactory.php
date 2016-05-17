@@ -35,10 +35,12 @@ class MasterDataFactory
                 $this->masterData[$type][$locale] = apc_fetch($key);
             } else {
                 // We need to retrieve data from the API
-                if ($type == 'accountType') {
+                if ($type == 'accountTypes') {
                     $route = 'general_account_types';
-                } elseif ($type == 'mediaType') {
+                } elseif ($type == 'mediaTypes') {
                     $route = 'general_media_types';
+                } elseif ($type == 'processesStatus') {
+                    $route = 'processes_status';
                 } else {
                     return null;
                 }
@@ -60,9 +62,9 @@ class MasterDataFactory
      *
      * @return ResultSet
      */
-    public function createAccountType($locale)
+    public function createAccountTypes($locale)
     {
-        return $this->getData('accountType', $locale);
+        return $this->getData('accountTypes', $locale);
     }
 
     /**
@@ -72,8 +74,20 @@ class MasterDataFactory
      *
      * @return ResultSet
      */
-    public function createMediaType($locale)
+    public function createMediaTypes($locale)
     {
-        return $this->getData('mediaType', $locale);
+        return $this->getData('mediaTypes', $locale);
+    }
+
+    /**
+     * Get the processes status master data in the given locale
+     *
+     * @param string $locale
+     *
+     * @return ResultSet
+     */
+    public function createProcessesStatus($locale)
+    {
+        return $this->getData('processesStatus', $locale);
     }
 }

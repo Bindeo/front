@@ -96,7 +96,7 @@ class ResultSet extends ClientResultSetAbstract
                 }
 
                 $object = new ProcessStatus((array)$data->attributes);
-                $res = [null, $object];
+                $res = [$object->getType().'_'.$object->getIdStatus(), $object];
                 break;
             case 'processes':
                 // Fill the entity class

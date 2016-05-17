@@ -73,7 +73,7 @@ class DataModel
         if ($this->user->getType() != User::ROLE_ADMIN) {
             // User max filesize
             /** @var AccountType $type */
-            $type = $this->masterData->createAccountType($this->user->getLang())->getRows()[$this->user->getType()];
+            $type = $this->masterData->createAccountTypes($this->user->getLang())->getRows()[$this->user->getType()];
 
             // Filesize for users no admins
             if ($size > $type->getMaxFilesize() * 1024) {
@@ -174,7 +174,8 @@ class DataModel
     public function library($user, Request $request)
     {
         // Instantiate files filter
-        $filter = (new ProcessesFilter())->setClientType('U')
+        $filter = (new ProcessesFilter())->setLang($user->getLang())
+                                         ->setClientType('U')
                                          ->setIdClient($user->getIdUser())
                                          ->setType($request->get('type'))
                                          ->setIdStatus($request->get('status'))
@@ -196,8 +197,8 @@ class DataModel
      */
     public function getSigner(array $params)
     {
-        // Token only could be numeric if user is logged
-        if (is_numeric($params['token']) and !isset($params['idUser'])) {
+        // Token only could start in 's' if user is logged
+        if (substr($params['token'], 0, 1) == 's' and !isset($params['idUser'])) {
             return null;
         }
 

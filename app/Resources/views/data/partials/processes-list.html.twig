@@ -1,0 +1,86 @@
+{% if processes.getNumRows() == 0 %}
+<li class="empty">
+    {% trans %}No files found{% endtrans %},
+    {% trans with {'%a_start%': '<a href="'~path('file_upload')~'">', '%a_end%': '</a>'} %}Do you want %a_start%to upload%a_end% a file?{% endtrans %}
+</li>
+{% else %}
+{% for process in processes.getRows() %}
+<li>
+    <div class="row">
+        <div class="col-xs-12 col-sm-6">
+            <div><strong>{{ process.name }}</strong></div>
+            <div>
+                {% if process.type == 'N' %}
+                    {% trans %}Smart document{% endtrans %}
+                {% else %}
+                    {{ process.calculateData(user.email) }}
+                    {% if process.infoUser.signer %}
+                        {% if process.infoTotal > 2 %}
+                        {% trans with{'%other%':process.infoOther.name,'%count%':process.infoTotal-2} %}To sign: me, %other% and %count% more{% endtrans %}
+                        {% elseif process.infoTotal == 2 %}
+                            {% trans with{'%other%':process.infoOther.name} %}To sign: me and %other%{% endtrans %}
+                        {% else %}
+                            {% trans %}To sign: me{% endtrans %}
+                        {% endif %}
+                    {% elseif process.infoTotal > 1 %}
+                        {% trans with{'%other%':process.infoOther.name,'%count%':process.infoTotal-1} %}To sign: %other% and %count% more{% endtrans %}
+                    {% else %}
+                        {% trans with{'%other%':process.infoOther.name} %}To sign: %other%{% endtrans %}
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-xs-10 col-sm-5">
+            <div class="text-success">
+                {% if process.type == 'S' and process.idStatus == 1 %}
+                    {% if process.infoUser.signer == 1 and process.infoUser.signed == 0 %}
+                        {% if process.infoTotal > 1 %}
+                            {% trans with{'%pending%':process.infoPending} %}Your signature and %pending% more are required{% endtrans %}
+                        {% else %}
+                            {% trans %}Your signature is required{% endtrans %}
+                        {% endif %}
+                    {% else %}
+                        {% trans with{'%pending%':process.infoPending,'%total%':process.infoTotal} %}%pending% of %total% pending signatures{% endtrans %}
+                    {% endif %}
+                {% elseif process.type == 'S' and process.idStatus == 2 %}
+                    {% trans %}Signed and getting certificate{% endtrans %}
+                {% else %}
+                    {{ process.status }}
+                {% endif %}
+            </div>
+            <div>{{ process.formattedCtrlDate }}</div>
+        </div>
+        {% if process.type == 'S' %}
+        <div class="col-xs-2 col-sm-1">
+            <div class="btn-group pull-right">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li>
+                        <a href="{{ path('file_signature', {'token': 's'~process.idAltElement}) }}">
+                            {% if process.idStatus == 1 and process.infoUser.signer == 1 and process.infoUser.signed == 0 %}
+                                {% trans %}Sign document{% endtrans %}
+                            {% else %}
+                                {% trans %}Review document{% endtrans %}
+                            {% endif %}
+                        </a>
+                    </li>
+                    {% if process.idStatus == 2 or process.idStatus == 3 %}
+                    <li>
+                        <a href="{{ path('generate_signature_certificate') }}?t={{ process.idAltElement }}">
+                            {% trans %}Download certificate{% endtrans %}
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</li>
+{% endfor %}
+    {% if processes.getNumPages() > processes.getCurPage() %}
+        <li data-id="paginator" class="item-loading collapse">{% trans %}Loading more files{% endtrans %}...</li>
+    {% endif %}
+{% endif %}

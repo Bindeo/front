@@ -2141,7 +2141,7 @@ ol ol {
 }
 
 /* line 167, ../sass/bootstrap/_type.scss */
-.list-unstyled {
+.list-unstyled, .body-user .section-user-process ul.list {
   padding-left: 0;
   list-style: none;
 }
@@ -9492,6 +9492,276 @@ label {
   margin: 0;
 }
 
+/* line 1, ../sass/includes/_1_user2.scss */
+.body-user {
+  margin-bottom: 15px;
+}
+/* line 5, ../sass/includes/_1_user2.scss */
+.body-user nav.navbar {
+  background: #222;
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+/* line 13, ../sass/includes/_1_user2.scss */
+.body-user nav.navbar .navbar-header .navbar-brand img {
+  width: 100px;
+  margin-top: -3px;
+}
+@media (max-width: 767px) {
+  /* line 19, ../sass/includes/_1_user2.scss */
+  .body-user nav.navbar .navbar-collapse {
+    background: #fff;
+  }
+  /* line 24, ../sass/includes/_1_user2.scss */
+  .body-user nav.navbar .navbar-collapse ul.navbar-nav > li.active > a {
+    background: #eee;
+  }
+}
+@media (min-width: 768px) {
+  /* line 30, ../sass/includes/_1_user2.scss */
+  .body-user nav.navbar .navbar-collapse ul.navbar-nav > li {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  /* line 34, ../sass/includes/_1_user2.scss */
+  .body-user nav.navbar .navbar-collapse ul.navbar-nav > li > a {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+}
+/* line 44, ../sass/includes/_1_user2.scss */
+.body-user .section-drag {
+  background: #eee;
+  margin-top: -15px;
+  margin-bottom: 15px;
+}
+/* line 54, ../sass/includes/_1_user2.scss */
+.body-user .section-user-process ul.list > li {
+  position: relative;
+  padding: 15px 0;
+  border-bottom: 1px solid #eee;
+}
+/* line 63, ../sass/includes/_1_user2.scss */
+.body-user .drag {
+  position: relative;
+  margin: 0 0 15px;
+  padding: 15px;
+  text-align: center;
+  min-height: 172px;
+}
+/* line 72, ../sass/includes/_1_user2.scss */
+.body-user .drag .file h1 {
+  font-weight: 300;
+  font-size: 24px;
+}
+/* line 77, ../sass/includes/_1_user2.scss */
+.body-user .drag .file .sync {
+  margin-top: 20px;
+}
+/* line 80, ../sass/includes/_1_user2.scss */
+.body-user .drag .file .sync p {
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+/* line 86, ../sass/includes/_1_user2.scss */
+.body-user .drag .file .sync div a {
+  box-shadow: rgba(0, 0, 0, 0.25) 0 0 1px;
+  height: 50px;
+  width: 50px;
+  display: inline-block;
+  margin-right: 5px;
+}
+/* line 93, ../sass/includes/_1_user2.scss */
+.body-user .drag .file .sync div a:last-child {
+  margin-right: 0;
+}
+/* line 101, ../sass/includes/_1_user2.scss */
+.body-user .drag .load {
+  margin: 0 auto;
+  padding: 33px 0 0;
+}
+/* line 109, ../sass/includes/_1_user2.scss */
+.body-user .drag .load .progress {
+  margin-bottom: 0;
+}
+/* line 112, ../sass/includes/_1_user2.scss */
+.body-user .drag .load .progress .progress-bar {
+  font-size: 11px;
+}
+/* line 118, ../sass/includes/_1_user2.scss */
+.body-user .drag .load .btn-link {
+  margin-top: 15px;
+}
+/* line 123, ../sass/includes/_1_user2.scss */
+.body-user .drag .done {
+  padding: 10px 0 0;
+}
+/* line 126, ../sass/includes/_1_user2.scss */
+.body-user .drag .done .glyphicon {
+  font-size: 36px;
+}
+/* line 131, ../sass/includes/_1_user2.scss */
+.body-user .drag .btn-file {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  padding: 10px 12px;
+}
+@media (min-width: 768px) {
+  /* line 131, ../sass/includes/_1_user2.scss */
+  .body-user .drag .btn-file {
+    width: inherit;
+    padding: 6px 12px;
+  }
+}
+/* line 142, ../sass/includes/_1_user2.scss */
+.body-user .drag .btn-file input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  outline: none;
+  background: white;
+  cursor: inherit;
+  display: block;
+}
+/* line 160, ../sass/includes/_1_user2.scss */
+.body-user .col-tools {
+  margin-bottom: 5px;
+}
+/* line 165, ../sass/includes/_1_user2.scss */
+.body-user .col-tools .tools-path .dropdown-path > a {
+  font-weight: 300;
+  color: #333;
+}
+/* line 173, ../sass/includes/_1_user2.scss */
+.body-user .col-tools .tools-size {
+  text-align: right;
+}
+/* line 184, ../sass/includes/_1_user2.scss */
+.body-user .list > ul > li.item {
+  background: white;
+  margin: 0 0 10px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 0 1px;
+  height: 44px;
+}
+/* line 191, ../sass/includes/_1_user2.scss */
+.body-user .list > ul > li.item > div {
+  height: 100%;
+}
+/* line 193, ../sass/includes/_1_user2.scss */
+.body-user .list > ul > li.item > div > div {
+  height: 100%;
+}
+/* line 198, ../sass/includes/_1_user2.scss */
+.body-user .list > ul > li.item .item-icon {
+  background: #eee;
+  text-align: center;
+  font-size: 18px;
+}
+/* line 203, ../sass/includes/_1_user2.scss */
+.body-user .list > ul > li.item .item-icon span {
+  line-height: 44px;
+  opacity: 0.5;
+}
+/* line 209, ../sass/includes/_1_user2.scss */
+.body-user .list > ul > li.item .item-name {
+  padding: 0;
+}
+/* line 212, ../sass/includes/_1_user2.scss */
+.body-user .list > ul > li.item .item-name > a {
+  display: block;
+  padding: 12px 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* line 219, ../sass/includes/_1_user2.scss */
+.body-user .list > ul > li.item .item-name > a span {
+  float: right;
+  margin-left: 10px;
+  color: #ccc;
+}
+/* line 227, ../sass/includes/_1_user2.scss */
+.body-user .list > ul > li.item .item-opts {
+  padding: 0;
+}
+/* line 230, ../sass/includes/_1_user2.scss */
+.body-user .list > ul > li.item .item-opts > .btn-group {
+  width: 100%;
+  height: 100%;
+}
+/* line 234, ../sass/includes/_1_user2.scss */
+.body-user .list > ul > li.item .item-opts > .btn-group > a {
+  background: #eee;
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  line-height: 46px;
+  font-size: 18px;
+}
+/* line 248, ../sass/includes/_1_user2.scss */
+.body-user .list > ul > li.item:hover span {
+  opacity: 1.0;
+}
+/* line 255, ../sass/includes/_1_user2.scss */
+.body-user .list > ul > li.item.item-load .item-name {
+  background-image: url(./../images/assets/load-item.gif);
+  background-repeat: no-repeat;
+  background-position-y: 17px;
+  background-position-x: 15px;
+}
+/* line 261, ../sass/includes/_1_user2.scss */
+.body-user .list > ul > li.item.item-load .item-name > a {
+  padding-left: 40px;
+}
+/* line 269, ../sass/includes/_1_user2.scss */
+.body-user .list > ul > li.item.item-search .col-button {
+  border-left: 1px solid rgba(0, 0, 0, 0.14);
+}
+/* line 278, ../sass/includes/_1_user2.scss */
+.body-user .list > ul > li.item.item-search .col-button .dropdown-menu .active > a:before {
+  content: "\e013";
+  font-family: "Glyphicons Halflings";
+  line-height: 1;
+  margin: 0 5px 0 -15px;
+  display: inline-block;
+  font-size: 10px;
+}
+/* line 291, ../sass/includes/_1_user2.scss */
+.body-user .list > ul > li.item.item-search .item-name > input {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  height: 44px;
+}
+/* line 302, ../sass/includes/_1_user2.scss */
+.body-user .list > ul > li.item-loading {
+  background-image: url(./../images/assets/load-more.gif);
+  background-repeat: no-repeat;
+  background-position: center 15px;
+  text-align: center;
+  padding: 55px 15px 15px;
+}
+/* line 311, ../sass/includes/_1_user2.scss */
+.body-user .list > ul > li.item-empty {
+  background-image: url(./../images/icons/states_message.png);
+  background-repeat: no-repeat;
+  background-position: center 15px;
+  text-align: center;
+  padding: 150px 15px 15px;
+}
+/* line 320, ../sass/includes/_1_user2.scss */
+.body-user .list > ul > li.item-empty h3 {
+  margin: 0;
+}
+
 /* line 4, ../sass/includes/_2_cards.scss */
 .cards > div {
   margin-bottom: 15px;
@@ -9685,7 +9955,7 @@ label {
   text-align: center;
 }
 
-/* line 28, ../sass/styles.scss */
+/* line 29, ../sass/styles.scss */
 body {
   font-family: "Open Sans", sans-serif;
   text-shadow: rgba(0, 0, 0, 0.01) 0 0 1px;
@@ -9871,7 +10141,7 @@ body.edu footer > div > div > div {
 body.edu footer .tech {
   margin-top: 30px;
 }
-/* line 39, ../sass/styles.scss */
+/* line 40, ../sass/styles.scss */
 body > nav {
   z-index: 1030;
 }

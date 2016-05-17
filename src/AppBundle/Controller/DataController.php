@@ -30,26 +30,27 @@ class DataController extends Controller
      *
      * @return Response
      */
-    public function fileLibraryAction(Request $request)
+    public function libraryAction(Request $request)
     {
         // Logged user
         /** @var User $user */
         $user = $this->getUser();
 
         // List of processes
-        $files = $this->get('app.model.data')->library($user, $request);
+        $processes = $this->get('app.model.data')->library($user, $request);
 
         // If is an Ajax request
         if ($request->isXmlHttpRequest()) {
             return new JsonResponse([
                 'result' => [
                     'success' => true,
-                    'html'    => $this->renderView('data/partials/file-list.html.twig', ['files' => $files])
+                    'html'    => $this->renderView('data/partials/processes-list.html.twig',
+                        ['processes' => $processes, 'user' => $user])
                 ]
             ]);
         } else {
-            $accounts = $this->get('app.master_data')->createAccountType($request->getLocale());
-            $mediaTypes = $this->get('app.master_data')->createMediaType($request->getLocale());
+            $accounts = $this->get('app.master_data')->createAccountTypes($request->getLocale());
+            $processesStatus = $this->get('app.master_data')->createProcessesStatus($request->getLocale());
             $user->setTotalStorage($accounts->getRows()[$user->getType()]->getMaxStorage());
 
             // Fileupload layer
@@ -58,15 +59,16 @@ class DataController extends Controller
             // To format numbers
             $formatter = $this->get('app.locale_format');
 
-            return $this->render('data/file-library.html.twig', [
-                'drag'       => $drag,
-                'mediaTypes' => $mediaTypes->getRows(),
-                'files'      => $files,
-                'freespace'  => $formatter->format(round($user->getStorageLeft() / 1024 / 1024, 2,
+            return $this->render('data/library.html.twig', [
+                'drag'            => $drag,
+                'processesStatus' => $processesStatus->getRows(),
+                'processes'       => $processes,
+                'user'            => $user,
+                'freespace'       => $formatter->format(round($user->getStorageLeft() / 1024 / 1024, 2,
                     PHP_ROUND_HALF_DOWN)),
-                'used'       => $formatter->format(round(($user->getTotalStorage() - $user->getStorageLeft()) / 1024 /
-                                                         1024, 2, PHP_ROUND_HALF_DOWN)),
-                'total'      => $formatter->format(round($user->getTotalStorage() / 1024 / 1024, 2,
+                'used'            => $formatter->format(round(($user->getTotalStorage() - $user->getStorageLeft()) /
+                                                              1024 / 1024, 2, PHP_ROUND_HALF_DOWN)),
+                'total'           => $formatter->format(round($user->getTotalStorage() / 1024 / 1024, 2,
                     PHP_ROUND_HALF_DOWN))
             ]);
         }
@@ -179,7 +181,7 @@ class DataController extends Controller
 
         // User max filesize
         /** @var AccountType $type */
-        $type = $this->get('app.master_data')->createAccountType($request->getLocale())->getRows()[$user->getType()];
+        $type = $this->get('app.master_data')->createAccountTypes($request->getLocale())->getRows()[$user->getType()];
         $user->setTotalStorage($type->getMaxStorage());
 
         return $fullPage

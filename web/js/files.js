@@ -10,8 +10,8 @@ var files = (function() {
         $('body').on('change', 'input[data-checkable]', checkField);
 
         // Library
-        $('body').on('click', '[data-id="fileFilters"] ul li a', chooseFilter);
-        $('body').on('keyup', '[data-id="fileFilters"] input', function(e) {
+        $('body').on('change', '#library-filters select', chooseFilter);
+        $('body').on('keyup', '#library-filters input', function(e) {
             if(e.keyCode == 13) {
                 chooseFilter();
             }
@@ -155,15 +155,15 @@ var files = (function() {
         $.subscribe('listFilters.files', function(event) {
             if($('#fileList').length) {
                 var params = '';
-                $('[data-id="fileFilters"] li.active').each(function() {
-                    if($(this).attr('data-type') != undefined) {
-                        if(params != '') params += '&';
-                        params += $(this).attr('data-type') + '=' + $(this).attr('data-value');
-                    }
-                });
+                var filters = $('#library-filters');
+                var status = filters.find('select').val();
+
+                if (status != '') {
+                    params = 'type=' + status[0] + '&status=' + status[2];
+                }
 
                 // Text
-                var text = $('[data-id="fileFilters"] input[data-type="name"]');
+                var text = filters.find('input[data-type="name"]');
                 if(text.val()) {
                     if(params != '') params += '&';
                     params += 'name=' + text.val();
@@ -352,23 +352,9 @@ var files = (function() {
     /**
      * Choose filters in library
      */
-    var chooseFilter = function(event) {
-        var refresh = false;
-
-        if($(this)[0] == $(window)[0]) {
-            refresh = true;
-        } else {
-            event.preventDefault();
-            if(!$(this).parent().hasClass('active')) {
-                // Active the filter
-                $(this).parents('ul').find('.active').removeClass('active');
-                $(this).parent().addClass('active');
-                refresh = true;
-            }
-        }
-
+    var chooseFilter = function() {
         // Publish the result
-        if(refresh) $.publish('listFilters.files');
+        $.publish('listFilters.files');
     };
 
     /**
@@ -377,17 +363,17 @@ var files = (function() {
     var pagination = function() {
         paginator.init($(window), '/data/library', function(page) {
             var params = 'page=' + page;
-            $('[data-id="fileFilters"] li.active').each(function() {
-                if($(this).attr('data-type') != undefined) {
-                    params += '&' + $(this).attr('data-type') + '=' + $(this).attr('data-value');
-                }
-            });
+            var filters = $('#library-filters');
+            var status = filters.find('select').val();
+
+            if (status != '') {
+                params += '&type=' + status[0] + '&status=' + status[2];
+            }
 
             // Text
-            var text = $('[data-id="fileFilters"] input[data-type="name"]');
+            var text = filters.find('input[data-type="name"]');
             if(text.val()) {
-                if(params != '') params += '&';
-                params += 'name=' + text.val();
+                params += '&name=' + text.val();
             }
 
             return params;

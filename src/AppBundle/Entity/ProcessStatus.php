@@ -6,5 +6,4 @@ use Bindeo\DataModel\ProcessStatusAbstract;
 
 class ProcessStatus extends ProcessStatusAbstract
 {
-
 }

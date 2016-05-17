@@ -1,0 +1,67 @@
+{% extends 'base-log.html.twig' %}
+
+{% block title %}
+    {% trans %}File library{% endtrans %}
+{% endblock %}
+
+{% block body %}
+<section data-type="main" class="section-drag hidden-xs">
+    <div class="container">
+        {{ drag|raw }}
+    </div>
+</section>
+
+<section class="section-user-process">
+    <div class="container">
+        <div class="filter">
+            <div id="library-filters" class="row">
+                <div class="col-xs-8">
+                    <input autocomplete="off" data-type="name" class="form-control" type="text" placeholder="{% trans %}Search by filename{% endtrans %}...">
+                </div>
+                <div class="col-xs-4 padding-left-0">
+                    <select data-type="process-status" class="form-control">
+                        <option value="">{% trans %}Status{% endtrans %} ({% trans %}all{% endtrans %})</option>
+                        <optgroup label="{% trans %}Signatures{% endtrans %}">
+                        {% for status in processesStatus %}
+                            {% if status.type == 'S' %}
+                            <option value="{{ status.type }}_{{ status.idStatus }}">{{ status.name }}</option>
+                            {% endif %}
+                        {% endfor %}
+                        </optgroup>
+                        <optgroup label="{% trans %}Files{% endtrans %}">
+                        {% for status in processesStatus %}
+                            {% if status.type == 'N' %}
+                                <option value="{{ status.type }}_{{ status.idStatus }}">{{ status.name }}</option>
+                            {% endif %}
+                        {% endfor %}
+                        </optgroup>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <ul id="fileList" class="list">
+            {{ include('data/partials/processes-list.html.twig') }}
+        </ul>
+    </div>
+</section>
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('libs/jQuery-File-Upload-9.12.3/css/jquery.fileupload.css') }}">
+    <link rel="stylesheet" href="{{ asset('libs/jQuery-File-Upload-9.12.3/css/jquery.fileupload-ui.css') }}">
+    <link rel="stylesheet" href="{{ asset('libs/intl-tel-input_8.5.2/css/intlTelInput.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+    {# Libraries #}
+    <script src="{{ asset('libs/jQuery-File-Upload-9.12.3/js/cors/jquery.postmessage-transport.js') }}"></script>
+    <script src="{{ asset('libs/jQuery-File-Upload-9.12.3/js//vendor/jquery.ui.widget.js') }}"></script>
+    <script src="{{ asset('libs/jQuery-File-Upload-9.12.3/js/jquery.iframe-transport.js') }}"></script>
+    <script src="{{ asset('libs/jQuery-File-Upload-9.12.3/js/jquery.fileupload.js') }}"></script>
+    <script src="{{ asset('libs/intl-tel-input_8.5.2/js/intlTelInput.min.js') }}"></script>
+    <!--[if (gte IE 8)&(lt IE 10)]>
+    <script src="{{ asset('libs/jQuery-File-Upload-9.12.3/js/cors/jquery.xdr-transport.js') }}"></script>
+    <![endif]-->
+    {# Own js #}
+    <script src="{{ asset('js/files.js') }}"></script>
+{% endblock %}
