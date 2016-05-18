@@ -23,7 +23,7 @@
                 <span class="icon"></span>
                 <div class="type-label">{{ file.name }}</div>
                 <div class="type-value">{{ file.hash }}
-                    <br>{{ file.size|number_format }} bytes, {% transchoice file.pages %}{1} %count% page|]2,Inf]%count% pages{% endtranschoice %}
+                    <br>{{ file.size|number_format }} bytes, {% transchoice file.pages %}%count% page|%count% pages{% endtranschoice %}
                 </div>
             </li>
             {% endfor %}
