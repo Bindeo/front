@@ -1,0 +1,213 @@
+@import '_bootstrap';
+@import 'includes/_0_helper';
+@import 'includes/_0_vars';
+@import 'includes/_0_fonts';
+@import 'includes/_0_basics';
+
+html, body {
+
+}
+
+body {
+    //font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+    font-family: $font-body;
+    text-shadow: rgba(0, 0, 0, .01) 0 0 1px;
+    font-weight: $font-weight;
+    font-size: 13px;
+
+/*
+    background: url('./../pdf/assets/anti-counterfeit-pattern.png');
+    background-repeat: repeat-y;
+*/
+}
+
+section {
+    & > div.container {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+
+    h2 {
+
+    }
+
+    table.table {
+        margin-bottom: 0;
+
+        tr {
+            > th, td {
+                padding: 3px 3px 3px 0;
+                border-top: none;
+                border-bottom: none;
+
+            }
+        }
+
+        &.one-columns {
+
+        }
+
+        &.two-columns {
+            tr {
+                > td:first-child {
+                    width: 250px;
+                }
+            }
+        }
+    }
+
+    div {
+        &.type-label {
+            font-weight: 400;
+        }
+
+        &.type-value {
+            color: #aaa;
+        }
+
+        &.type-codes {
+            font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+        }
+
+        &.type-annex {
+            ul {
+                li {
+                    margin-bottom: 0;
+                    color: #aaa;
+                    font-size: 12px;
+                    line-height: 14px;
+
+                    span {
+                        margin: 0 10px;
+                    }
+                }
+            }
+        }
+    }
+
+    ul {
+        @extend .list-unstyled;
+        margin-bottom: 0;
+
+        & > li {
+            margin-bottom: 10px;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+}
+
+section.newpage {
+    page-break-before: always;
+}
+
+section.header {
+    background-color: black;
+    color: white;
+
+    & > div {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+}
+
+section.footer {
+    background-color: black;
+    color: white;
+
+    & > div {
+        padding-top: 13px;
+        padding-bottom: 15px;
+    }
+
+    .lang {
+        background: white;
+        color: black;
+        padding: 3px 5px;
+        margin-left: 10px;
+    }
+}
+
+section.title {
+    background-color: $color-theme;
+    color: white;
+
+    & > div {
+        padding-top: 40px;
+        padding-bottom: 40px;
+
+        & > div > img {
+            opacity: 0.5;
+            width: 180px;
+            margin-left: -3px;
+        }
+    }
+
+    .about {
+        padding-top: 30px;
+
+        div {
+            &.type-label {
+                text-transform: uppercase;
+                font-size: 11px;
+                color: #ddd;
+            }
+
+            &.type-value {
+                color: white;
+            }
+        }
+    }
+}
+
+section.dataset {
+    margin-bottom: 15px;
+
+    h2 {
+        border: 1px solid #eee;
+        font-size: 14px;
+        text-transform: uppercase;
+        margin: 25px -15px 10px;
+        padding: 15px;
+    }
+
+    ul.list-files {
+        margin-left: 50px;
+
+        li {
+            position: relative;
+
+            span.icon {
+                @extend .glyphicon;
+                @extend .glyphicon-duplicate;
+                position: absolute;
+                top: 6px;
+                left: -47px;
+                font-size: 30px;
+                color: $color-theme;
+            }
+        }
+    }
+
+    ul.list-users {
+        margin-left: 50px;
+
+        li {
+            position: relative;
+
+            span.icon {
+                @extend .glyphicon;
+                @extend .glyphicon-user;
+                position: absolute;
+                top: 3px;
+                left: -33px;
+                font-size: 30px;
+                color: $color-theme;
+            }
+        }
+    }
+}
+

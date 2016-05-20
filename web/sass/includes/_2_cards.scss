@@ -1,0 +1,34 @@
+.cards {
+    @extend .row;
+
+    > div {
+        @extend .col-xs-12;
+        @extend .col-sm-4;
+
+        margin-bottom: 15px;
+
+        > div {
+            padding: 25px;
+            border: 1px solid #ddd;
+            border-radius: $border-radius-base;
+
+            h2 {
+                margin-top: 0;
+                margin-bottom: 15px;
+
+                font-size: 16px;
+                font-weight: normal;
+                text-align: center;
+            }
+
+            p {
+
+            }
+
+            a {
+                margin-top: 15px;
+                width: 100%;
+            }
+        }
+    }
+}

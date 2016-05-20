@@ -1,0 +1,317 @@
+.body-user {
+    //background: #eee;
+    margin-bottom: 15px;
+
+    nav.navbar {
+        //background: $color-theme;
+        background: #222;
+        margin-top: 0;
+        margin-bottom: 15px;
+
+        .navbar-header {
+            .navbar-brand {
+                img {
+                    width: 100px;
+                    margin-top: -3px;
+                }
+            }
+        }
+        .navbar-collapse {
+
+            @media (max-width: 767px) {
+                background: #fff;
+
+                ul.navbar-nav > li.active > a {
+                    background: #eee;
+                }
+            }
+            @media (min-width: 768px) {
+                ul.navbar-nav {
+                    > li {
+                        padding-top: 10px;
+                        padding-bottom: 10px;
+
+                        > a {
+                            padding-top: 5px;
+                            padding-bottom: 5px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .section-drag {
+        background: #eee;
+        margin-top: -15px;
+        margin-bottom: 15px;
+    }
+
+    .drag {
+        position: relative;
+        margin: 0 0 15px;
+        padding: 15px;
+        //border: 1px dotted #ccc;
+        text-align: center;
+        min-height: 172px;
+
+        .file {
+            h1 {
+                font-weight: 300;
+                font-size: 24px;
+            }
+
+            .sync {
+                margin-top: 20px;
+
+                p {
+                    font-size: $font-size-small;
+                    margin-bottom: 5px;
+                }
+
+                div {
+                    a {
+                        box-shadow: $shadow-box;
+                        height: 50px;
+                        width: 50px;
+                        display: inline-block;
+                        margin-right: 5px;
+
+                        &:last-child {
+                            margin-right: 0;
+                        }
+                    }
+                }
+            }
+        }
+
+        .load {
+            margin: 0 auto;
+            padding: 33px 0 0;
+
+            p {
+
+            }
+
+            .progress {
+                margin-bottom: 0;
+
+                .progress-bar {
+                    font-size: 11px;
+
+                }
+            }
+
+            .btn-link {
+                margin-top: 15px;
+            }
+        }
+
+        .done {
+            padding: 10px 0 0;
+
+            .glyphicon {
+                font-size: 36px;
+            }
+        }
+
+        .btn-file {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            padding: 10px 12px;
+
+            @media (min-width: 768px) {
+                width: inherit;
+                padding: 6px 12px;
+            }
+
+            input[type=file] {
+                position: absolute;
+                top: 0;
+                right: 0;
+                min-width: 100%;
+                min-height: 100%;
+                font-size: 100px;
+                text-align: right;
+                filter: alpha(opacity=0);
+                opacity: 0;
+                outline: none;
+                background: white;
+                cursor: inherit;
+                display: block;
+            }
+        }
+    }
+
+    .col-tools {
+        margin-bottom: 5px;
+
+        .tools-path {
+            .dropdown-path {
+                > a {
+                    font-weight: $font-weight;
+                    color: $font-color;
+                }
+            }
+
+
+        }
+
+        .tools-size {
+            text-align: right;
+        }
+
+    }
+
+    .list {
+        > ul {
+            $list-item-height: 44px;
+
+            > li {
+                &.item {
+                    background: white;
+                    margin: 0 0 10px;
+                    //border: 1px solid #efefef;
+                    box-shadow: $shadow-box;
+                    height: $list-item-height;
+
+                    > div {
+                        height: 100%;
+                        > div {
+                            height: 100%;
+                        }
+                    }
+
+                    .item-icon {
+                        background: #eee;
+                        text-align: center;
+                        font-size: 18px;
+
+                        span {
+                            line-height: $list-item-height;
+                            opacity: 0.5;
+                        }
+                    }
+
+                    .item-name {
+                        padding: 0;
+
+                        > a {
+                            display: block;
+                            padding: 12px 15px;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+
+                            span {
+                                float: right;
+                                margin-left: 10px;
+                                color: #ccc;
+                            }
+                        }
+                    }
+
+                    .item-opts {
+                        padding: 0;
+
+                        > .btn-group {
+                            width: 100%;
+                            height: 100%;
+
+                            > a {
+                                background: #eee;
+                                display: block;
+                                width: 100%;
+                                height: 100%;
+
+                                text-align: center;
+                                line-height: $list-item-height + 2;
+                                font-size: 18px;
+                            }
+                        }
+                    }
+
+                    &:hover {
+                        span {
+                            opacity: 1.0;
+                        }
+                    }
+
+                    &.item-load {
+
+                        .item-name {
+                            background-image: url(#{$path-assets}load-item.gif);
+                            background-repeat: no-repeat;
+                            background-position-y: 17px;
+                            background-position-x: 15px;
+
+                            > a {
+                                padding-left: 40px;
+                            }
+                        }
+
+                    }
+
+                    &.item-search {
+                        .col-button {
+                            border-left: 1px solid rgba(0, 0, 0, .14);
+
+                            .dropdown-menu {
+                                a {
+
+                                }
+
+                                .active > a {
+                                    &:before {
+                                        content: "\e013";
+                                        font-family: "Glyphicons Halflings";
+                                        line-height: 1;
+                                        margin: 0 5px 0 -15px;
+                                        display: inline-block;
+                                        font-size: 10px;
+                                    }
+                                }
+                            }
+                        }
+
+                        .item-name {
+                            > input {
+                                border: none;
+                                border-radius: 0;
+                                box-shadow: none;
+                                height: $list-item-height;
+                            }
+
+                        }
+                    }
+                }
+
+                &.item-loading {
+                    background-image: url(#{$path-assets}load-more.gif);
+                    background-repeat: no-repeat;
+                    background-position: center 15px;
+
+                    text-align: center;
+                    padding: 55px 15px 15px;
+                }
+
+                &.item-empty {
+
+                    background-image: url(#{$path-icons}states_message.png);
+                    background-repeat: no-repeat;
+                    background-position: center 15px;
+
+                    text-align: center;
+                    padding: 150px 15px 15px;
+
+                    h3 {
+                        margin: 0;
+                    }
+                }
+
+            }
+        }
+    }
+
+}

@@ -1,0 +1,42 @@
+.dropdown-menu {
+    margin-bottom: 15px;
+    min-width: 200px;
+
+    li {
+        a {
+            padding: 5px 20px;
+            @media (min-width: 768px) {
+                padding: 3px 20px;
+            }
+        }
+    }
+    .dropdown-header {
+        font-size: 14px;
+        color: #ddd;
+    }
+
+}
+
+
+.dropdown-path {
+    a.dropdown-toggle {
+        background: none;
+        border: none;
+        box-shadow: none;
+        text-align: left;
+        padding: 0px;
+        width: 100%;
+        color: black;
+    }
+
+    ul.dropdown-menu {
+        a {
+            padding-left: 15px;
+
+            span {
+                margin-right: 5px;
+            }
+        }
+    }
+
+}

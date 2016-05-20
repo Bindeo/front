@@ -1,0 +1,116 @@
+.forms {
+    h1 {
+        font-size: 18px;
+        font-weight: 300;
+        text-align: center;
+    }
+
+    h2 {
+        font-size: 16px;
+        font-weight: 300;
+        text-align: center;
+    }
+
+    .form-group > label, .labeled {
+        font-weight: $font-weight;
+        font-size: 13px;
+        margin-bottom: 2px;
+    }
+
+    input[type="text"], input[type="email"], input[type="password"], button, select {
+        height: 44px;
+    }
+
+    .btn-full {
+        width: 100%;
+    }
+
+    .form-intro {
+        @extend .text-small;
+    }
+
+    .form-notice {
+        @extend .text-small;
+        text-align: center;
+    }
+
+    form {
+        .has-feedback {
+            .form-control-feedback {
+                margin-top: 20px;
+                height: 44px;
+                line-height: 44px;
+            }
+        }
+
+        &.labels-no {
+            .form-group > label {
+                display: none;
+            }
+
+            .has-feedback {
+                .form-control-feedback {
+                    top: 0;
+                    margin-top: 0;
+                }
+            }
+        }
+
+        .has-success {
+            .form-control {
+                border-color: $color-success;
+            }
+            .form-control-feedback {
+                color: $color-success;
+            }
+        }
+
+        .has-error {
+            .form-control {
+                border-color: $color-error;
+            }
+            .form-control-feedback, .help-block {
+                color: $color-error;
+            }
+
+            .help-block {
+                @extend .text-mini;
+            }
+        }
+    }
+}
+
+.form-signup {
+    margin-top: 2em;
+
+    .form-box {
+        margin-top: 2em;
+    }
+
+}
+
+.list-actions {
+    margin-top: 25px;
+
+    > a {
+        margin-right: 10px;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+}
+
+.form-inline-size {
+    .size-medium {
+        select {
+            width: 120px;
+        }
+    }
+
+    .size-big {
+        select {
+            width: 200px;
+        }
+    }
+}

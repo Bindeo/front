@@ -1,0 +1,18 @@
+.viewer {
+    box-shadow: $shadow-box;
+    max-height: 520px;
+    overflow-x: auto;
+    overflow-y: auto;
+
+    margin-bottom: 60px;
+
+    & > div {
+        margin-bottom: 10px;
+
+
+    }
+
+    & :last-child {
+        margin-bottom: 0;
+    }
+}

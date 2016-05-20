@@ -1,0 +1,66 @@
+a {
+    color: $color-links;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+p {
+    line-height: 18px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 300;
+}
+
+h1 {
+    font-size: 24px;
+}
+
+h2 {
+    font-size: 20px;
+}
+
+h3 {
+    font-size: 16px;
+}
+
+.text-main {
+    font-size: 14px;
+    line-height: 18px;
+}
+
+.text-small {
+    font-size: 13px;
+    line-height: 15px;
+}
+
+.text-mini {
+    font-size: 12px;
+    line-height: 14px;
+}
+
+
+label {
+    font-weight: $font-weight;
+}
+
+.checkbox, .radio {
+    > label {
+        font-weight: $font-weight;
+        padding-left: 25px;
+
+        > input[type="checkbox"] {
+            margin-left: -25px;
+        }
+    }
+}
+
+.form-control, .dropdown-menu {
+    font-size: $font-size-normal;
+}
+
+.btn-link {
+    color: $color-links;
+}

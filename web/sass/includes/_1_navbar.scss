@@ -1,0 +1,102 @@
+&.navbar {
+    background: transparent;
+    margin-top: 5px;
+    margin-bottom: 0;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+
+    .navbar-header {
+        border: none;
+
+        .navbar-brand {
+            img {
+                width: 120px;
+                opacitys: 0.75;
+                margin-top: -6px;
+
+                @media (max-width: 767px) {
+                    filter: contrast(0%);
+                    -webkit-filter: contrast(0%);
+                }
+            }
+        }
+
+        .navbar-toggle {
+            border: none;
+
+            &:hover {
+                background: none;
+            }
+
+            .icon-bar {
+                background: white;
+            }
+        }
+
+    }
+
+    .navbar-collapse {
+        position: absolute;
+        width: 200px;
+        background: rgba(255, 255, 255, 0.85);
+        border: none;
+        box-shadow: none;
+        z-index: 1099;
+        right: 20px;
+        border-radius: 5px;
+
+        @media (min-width: 768px) {
+            position: inherit;
+            width: 100%;
+            background: none;
+        }
+
+        ul.navbar-nav {
+            > li {
+
+                @media (min-width: 768px) {
+                    padding-top: 7px;
+                    padding-bottom: 7px;
+                }
+
+                > a {
+
+                    &:hover {
+                        background: rgba(0, 0, 0, 0.15);
+                    }
+
+                    @media (min-width: 768px) {
+                        padding-top: 8px;
+                        padding-bottom: 8px;
+                        border-radius: 5px;
+                        color: white;
+                        text-shadow: $shadow-menu;
+                    }
+                }
+
+                &.active {
+                    > a {
+                        background: rgba(255, 255, 255, 0.25);
+
+                        &:hover {
+                            background: rgba(255, 255, 255, 0.50);
+                        }
+                    }
+                }
+
+                &.highlight {
+                    > a {
+                        background: rgba(255, 255, 255, 0.15);
+
+                        &:hover {
+                            background: rgba(255, 255, 255, 0.50);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}
+

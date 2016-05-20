@@ -1,0 +1,49 @@
+@import '_bootstrap';
+@import 'includes/_0_helper';
+@import 'includes/_0_vars';
+@import 'includes/_0_fonts';
+@import 'includes/_0_basics';
+@import 'includes/_1_layout';
+@import 'includes/_1_forms';
+@import 'includes/_1_modals';
+@import 'includes/_1_single';
+@import 'includes/_1_user';
+@import 'includes/_1_user2';
+@import 'includes/_2_cards';
+@import 'includes/_2_drop';
+@import 'includes/_2_dropdown';
+@import 'includes/_2_notifications';
+@import 'includes/_2_shortcut';
+@import 'includes/_2_tooltip';
+@import 'includes/_2_viewer';
+@import 'includes/_2_list';
+@import 'includes/_3_sign';
+
+@import 'includes/_3_section_onboard';
+
+
+html, body {
+
+}
+
+body {
+    font-family: $font-body;
+
+    text-shadow: rgba(0, 0, 0, .01) 0 0 1px;
+    -webkit-font-smoothing: antialiased;
+    font-weight: $font-weight;
+    font-size: $font-size-normal;
+
+    &.edu {
+        @import 'includes/_3_edu';
+    }
+
+    > nav {
+        z-index: 1030;
+        @import 'includes/_1_navbar';
+    }
+
+    footer {
+        @import 'includes/_1_footer';
+    }
+}

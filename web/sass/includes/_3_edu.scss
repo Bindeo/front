@@ -1,0 +1,200 @@
+& {
+    background: #fff;
+    background-image: url('./../images/edu/isdi/bg.png');
+    background-repeat: repeat no-repeat;
+    background-position: center -30px;
+
+    section.header {
+        margin-bottom: 25px;
+
+        .nav {
+            margin: 15px 0 25px;
+            padding: 10px 0;
+            border-bottom: 1px dotted #858585;
+
+            .pull-left {
+
+            }
+
+            .pull-right {
+                text-align: right;
+
+                .more {
+                    display: inline;
+                    margin-right: 15px;
+                }
+
+                .lang {
+                    button {
+                        background: none;
+                        padding: 0;
+                        border: none;
+                        box-shadow: none;
+
+                        @media (min-width: 768px) {
+                            top: -1px;
+                        }
+                    }
+
+                    .dropdown-menu {
+                        min-width: 140px;
+                    }
+                }
+            }
+        }
+
+        .brand {
+            .thumbnail {
+                padding: 10px 0 20px;
+            }
+
+            h1 {
+                text-align: center;
+            }
+        }
+    }
+
+    section.body {
+
+        .hash {
+            margin-top: 25px;
+            margin-bottom: 15px;
+
+            .button {
+                padding-left: 0;
+            }
+
+            .form-group, input, button {
+                width: 100%;
+            }
+        }
+
+        .drag {
+
+            border: 1px dotted #858585;
+            padding: 50px 25px;
+            text-align: center;
+
+            position: relative;
+            overflow: hidden;
+
+            .btn-file {
+                border: none;
+                background: none;
+                box-shadow: none;
+
+                input[type=file] {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    min-width: 100%;
+                    min-height: 100%;
+                    font-size: 100px;
+                    text-align: right;
+                    filter: alpha(opacity=0);
+                    opacity: 0;
+                    outline: none;
+                    background: white;
+                    cursor: inherit;
+                    display: block;
+                }
+            }
+        }
+
+        .result {
+            margin-bottom: 50px;
+            text-align: center;
+
+            h2 {
+                text-align: center;
+            }
+
+            h3 {
+                margin-top: 5px;
+                font-size: 14px;
+            }
+        }
+
+        .details {
+            margin-bottom: 30px;
+
+            ul {
+                li {
+                    padding: 10px 0;
+                    border-bottom: 1px dotted #eee;
+
+                    > div > div:first-child {
+                        font-weight: 400;
+                    }
+
+                    &:last-child {
+                        border-bottom: 0;
+                    }
+                }
+            }
+        }
+
+        .sign {
+            margin-bottom: 30px;
+
+            > div {
+                background: #eee;
+                margin-top: 5px;
+                padding: 20px;
+                border-radius: 5px;
+
+                img {
+                    border-radius: 100%;
+                    box-shadow: $shadow-box;
+                }
+            }
+        }
+
+        .tech {
+            > div {
+                background: #eee;
+                margin-top: 5px;
+                padding: 20px;
+                border-radius: 5px;
+
+                ul {
+                    li {
+                        margin-bottom: 5px;
+
+                        div {
+                            &.name {
+                                color: #ccc;
+                                font-size: 12px;
+                            }
+
+                            &.value {
+                                font-family: $font-code;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    footer {
+        background: #212121;
+
+        margin-top: 50px;
+
+
+        color: #fff;
+
+        > div > div > div {
+            background-image: url('./../images/edu/isdi/footer-seal.png');
+            background-repeat: no-repeat;
+            background-position: right 20px;
+
+            padding: 50px 0 100px;
+        }
+
+        .tech {
+            margin-top: 30px;
+        }
+    }
+}

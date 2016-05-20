@@ -1,0 +1,23 @@
+.shortcut {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+
+    > div {
+        margin: 2px;
+
+        > a {
+            display: block;
+            background-color: $color-theme;
+            border-radius: 100%;
+            padding: 14px 16px 12px 18px;
+            font-size: 18px;
+            text-align: center;
+            box-shadow: $shadow-box;
+
+            > span {
+                color: #fff;
+            }
+        }
+    }
+}

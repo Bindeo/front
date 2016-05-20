@@ -1,0 +1,14 @@
+
+.tooltip.top.tooltip-error {
+    color: #fff;
+    font-weight: $font-weight;
+
+    .tooltip-inner {
+        background: $color-error;
+    }
+
+    .tooltip-arrow {
+        bottom: 1px;
+        border-top-color: $color-error;
+    }
+}
