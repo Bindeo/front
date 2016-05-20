@@ -1,0 +1,117 @@
+.modal {
+    max-height: 100%;
+
+    .modal-dialog {
+
+        @media (max-width: 767px) {
+            margin: 0;
+        }
+
+        .modal-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 0;
+            box-shadow: $shadow-box;
+
+            button.close {
+                margin-top: 14px;
+
+                span {
+                    padding: 6px 14px;
+                }
+            }
+
+            .modal-header {
+                border-bottom: 0;
+
+                h4 {
+                    font-weight: normal;
+                    font-size: 14px;
+                }
+            }
+
+            .modal-body {
+                > div {
+                    margin-bottom: 15px;
+
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+                }
+
+                .form-group {
+                    margin-bottom: 5px;
+
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+                }
+            }
+
+            .modal-footer {
+                border-top: 0;
+
+                .btn {
+                    padding: 6px 24px;
+                }
+            }
+
+            @media (max-width: $screen-xs-max)
+            {
+                padding: 5px;
+            }
+        }
+    }
+
+    @media (max-width: 767px) {
+        top: inherit;
+        &.fade {
+            .modal-dialog {
+                transform: translate(0, 25%);
+            }
+        }
+
+        &.in {
+            .modal-dialog {
+                transform: translate(0, 0);
+            }
+        }
+    }
+
+    /*
+     * Generic
+     */
+    .list-group .list-group-item {
+        padding: 0;
+        & > a {
+            display: block;
+            width: 100%;
+            padding: 10px 15px;
+        }
+    }
+
+    /*
+     * Modals
+     */
+    .modal-recipients-list {
+        > li {
+            margin-bottom: 10px;
+            padding: 0 10px;
+
+            > div {
+                padding: 0 5px;
+            }
+
+            @media (max-width: $screen-xs-max) {
+                > div {
+                    margin-bottom: 10px;
+
+                    input {
+                        height: 40px;
+                    }
+                }
+            }
+        }
+    }
+
+}

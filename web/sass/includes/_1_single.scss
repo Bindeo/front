@@ -1,0 +1,19 @@
+.body-single {
+
+    nav.navbar {
+        //background: $color-theme;
+        background: #222222;
+        margin-top: 0;
+
+        .navbar-header {
+            .navbar-brand {
+                img {
+                    width: 100px;
+                    margin-top: -3px;
+                    filter: contrast(100%);
+                    -webkit-filter: contrast(100%);
+                }
+            }
+        }
+    }
+}

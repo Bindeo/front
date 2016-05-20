@@ -1,0 +1,22 @@
+.section-onboard {
+
+    > div > div > div {
+        @extend .col-xs-12;
+        @extend .col-md-10;
+        @extend .col-md-offset-1;
+        @extend .col-lg-8;
+        @extend .col-lg-offset-2;
+
+    }
+
+    .intro {
+        margin-top: 25px;
+        margin-bottom: 25px;
+
+        h1 {
+            font-size: 18px;
+            text-align: center;
+        }
+    }
+
+}

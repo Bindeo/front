@@ -1,0 +1,52 @@
+& {
+
+    .container-links {
+        background: #212121;
+        padding: 20px 0;
+        color: rgba(255, 255, 255, 0.75);
+
+        p {
+            margin: 0;
+        }
+    }
+
+    .container-strip {
+        background: #212121;
+        padding: 20px 0 50px;
+        color: rgba(255, 255, 255, 0.75);
+
+        @media (max-width: 767px) {
+            padding-bottom: 70px;
+        }
+
+        .right {
+            text-align: right;
+        }
+
+        a {
+            color: #fff;
+
+            span {
+                font-size: 18px;
+                margin-left: 5px;
+                color: rgba(255, 255, 255, 0.50)
+            }
+
+            &:hover {
+                span {
+                    color: rgba(255, 255, 255, 1);
+                }
+            }
+
+            &:first-child span {
+                margin-left: 0;
+            }
+        }
+
+        p {
+            margin: 0;
+        }
+
+    }
+
+}
