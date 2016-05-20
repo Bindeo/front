@@ -74,7 +74,7 @@ class DataController extends Controller
             ];
 
             // If we have any message to show at loading, we take it from session
-            if($request->getSession()->has('message')) {
+            if ($request->getSession()->has('message')) {
                 $data['message'] = $request->getSession()->get('message');
                 $request->getSession()->remove('message');
             }
@@ -486,6 +486,7 @@ class DataController extends Controller
         } else {
             // Generate PDF with the certificate
             $pdf = new Pdf([
+                'zoom'          => '0.85',
                 'margin-left'   => '0px',
                 'margin-right'  => '0px',
                 'margin-top'    => '750px',
@@ -496,7 +497,7 @@ class DataController extends Controller
             $pdf->addPage($this->renderView('data/signature-certificate.html.twig', $res));
 
             // Send file to the browser
-            $pdf->send('signature_certificate.pdf');
+            $pdf->send('Bindeo_signature_' . $res['signature']->getBulk()->getExternalId() . '.pdf');
         }
     }
 
