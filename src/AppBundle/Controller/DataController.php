@@ -59,7 +59,8 @@ class DataController extends Controller
             // To format numbers
             $formatter = $this->get('app.locale_format');
 
-            return $this->render('data/library.html.twig', [
+            // Data to render
+            $data = [
                 'drag'            => $drag,
                 'processesStatus' => $processesStatus->getRows(),
                 'processes'       => $processes,
@@ -70,7 +71,15 @@ class DataController extends Controller
                                                               1024 / 1024, 2, PHP_ROUND_HALF_DOWN)),
                 'total'           => $formatter->format(round($user->getTotalStorage() / 1024 / 1024, 2,
                     PHP_ROUND_HALF_DOWN))
-            ]);
+            ];
+
+            // If we have any message to show at loading, we take it from session
+            if($request->getSession()->has('message')) {
+                $data['message'] = $request->getSession()->get('message');
+                $request->getSession()->remove('message');
+            }
+
+            return $this->render('data/library.html.twig', $data);
         }
     }
 

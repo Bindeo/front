@@ -44,11 +44,20 @@ class UserController extends Controller
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('user/login.html.twig', [
+        // Data to render
+        $data = [
             // last username entered by the user
             'last_username' => $lastUsername,
             'error'         => $error,
-        ]);
+        ];
+
+        // If we have any message to show at loading, we take it from session
+        if($request->getSession()->has('message')) {
+            $data['message'] = $request->getSession()->get('message');
+            $request->getSession()->remove('message');
+        }
+
+        return $this->render('user/login.html.twig', $data);
     }
 
     /**
@@ -477,15 +486,36 @@ class UserController extends Controller
             }
         }
 
-        // Render confirmation
-        return $this->render('user/token.html.twig', ['success' => $success, 'type' => $type]);
+        $trans = $this->get('translator');
+        // Set proper message
+        if ($success) {
+            if ($type == 'V') {
+                $msg = $trans->trans('Account confirmed!');
+            } elseif ($type == 'E') {
+                $msg = $trans->trans('Email changed!');
+            } else {
+                $msg = $trans->trans('Password changed!');
+            }
+        } else {
+            $msg = $trans->trans('Sorry, your token is expired');
+        }
+
+        // Set message in session
+        $request->getSession()->set('message', ['res' => $success, 'value' => $msg]);
+
+        // Redirect to home if user is logged, to singing page if he is not logged
+        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            return new RedirectResponse('/');
+        } else {
+            return new RedirectResponse($this->generateUrl('login'));
+        }
     }
 
     /**
      * @Route("/user/password-reset", name="password_reset")
      * @param Request $request
      *
-     * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function passwordResetAction(Request $request)
     {
@@ -517,7 +547,7 @@ class UserController extends Controller
      *
      * @param Request $request
      *
-     * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function ajaxCheckConfirmedAction(Request $request)
     {
@@ -554,7 +584,7 @@ class UserController extends Controller
      *
      * @param Request $request
      *
-     * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function ajaxResendTokenAction(Request $request)
     {

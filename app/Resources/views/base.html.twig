@@ -31,11 +31,21 @@
 </nav>
 {% endblock %}
 {% block body %}{% endblock %}
-<div class="notifications collapse" id="notifications">
-    <div class="container">
-        <div class="alert" role="alert"></div>
+{% if message is defined %}
+    <div class="notifications" id="notifications">
+        <div class="container">
+            <div class="alert {{ message.res ? 'alert-success' : 'alert-danger' }}" role="alert">
+                {{ message.value }}
+            </div>
+        </div>
     </div>
-</div>
+{% else %}
+    <div class="notifications collapse" id="notifications">
+        <div class="container">
+            <div class="alert" role="alert"></div>
+        </div>
+    </div>
+{% endif %}
 {% block footer %}{% endblock %}
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
