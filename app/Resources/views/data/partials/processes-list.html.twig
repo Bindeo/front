@@ -34,7 +34,7 @@
             <div class="text-success">
                 {% if process.type == 'S' and process.idStatus == 1 %}
                     {% if process.infoUser.signer == 1 and process.infoUser.signed == 0 %}
-                        {% if process.infoPending > 1 %}
+                        {% if process.infoPending > 0 %}
                             {% trans with{'%pending%':process.infoPending} %}Your signature and %pending% more are required{% endtrans %}
                         {% else %}
                             {% trans %}Your signature is required{% endtrans %}

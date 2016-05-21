@@ -34,7 +34,7 @@
         </ul>
     </div>
 
-    <div data-id="to-sign">
+    <div data-id="to-sign" class="collapse">
         <p>{% trans %}Great, who others need to sign?{% endtrans %}</p>
         <ul class="list-unstyled modal-recipients-list" data-prototype="{{ include('data/partials/signer-form.html.twig', {'signer': form.signers.vars.prototype})|e }}">
             {% for signer in form.signers %}
@@ -43,7 +43,7 @@
         </ul>
     </div>
 </div>
-<div data-id="to-sign" class="modal-footer">
+<div data-id="to-sign" class="modal-footer collapse">
     <button type="button" data-action="add-signer" class="btn btn-link padding-left-0 pull-left" href="#">+ {% trans %}Add signer{% endtrans %}</button>
     <button id="submit-button" type="submit" class="btn btn-primary">{% trans %}Send{% endtrans %}</button>
 </div>

@@ -133,7 +133,8 @@ class DataController extends Controller
                     if ($res->getError()['code'] == 409) {
                         $error = $this->get('translator')->trans('You have already uploaded the same file');
                     } else {
-                        $error = $this->get('translator')->trans('There was a problem processing the file');
+                        $error = $this->get('translator')
+                                      ->trans('There was a problem processing the file, please try it later');
                     }
                     $form->addError(new FormError($error));
 
@@ -152,12 +153,14 @@ class DataController extends Controller
                             'result' => [
                                 'success'  => true,
                                 'redirect' => $this->generateUrl('file_signature',
-                                    ['token' => $res->getRows()[0]->getIdBulk()])
+                                    ['token' => 's' . $res->getRows()[0]->getIdBulk()])
                             ]
                         ]);
                     } else {
                         // To format numbers
                         $formatter = $this->get('app.locale_format');
+
+                        $trans = $this->get('translator');
 
                         return new JsonResponse([
                             'result' => [
@@ -167,8 +170,8 @@ class DataController extends Controller
                                 'usedspace' => $formatter->format(round(($user->getTotalStorage() -
                                                                          $user->getStorageLeft()) / 1024 / 1024, 2,
                                     PHP_ROUND_HALF_DOWN)),
-                                'html'      => $this->renderView('data/partials/file-upload-ok.html.twig',
-                                    ['message' => 'fileupload'])
+                                'message'   => $trans->trans('Your file is being notarized') . ', ' .
+                                               $trans->trans('soon you will receive a confirmation email with the certificate attached')
                             ]
                         ]);
                     }
@@ -272,21 +275,27 @@ class DataController extends Controller
      */
     public function uploadFileResultAction(Request $request)
     {
-        if (!$request->getSession()->has('fileupload')) {
-            // Invalid access
-            return new RedirectResponse('/');
-        } elseif ($request->getSession()->get('fileupload') == 'ok') {
+        $trans = $this->get('translator');
+
+        if ($request->getSession()->has('fileupload') and $request->getSession()->get('fileupload') == 'ok') {
             // Correct upload
             $request->getSession()->remove('fileupload');
 
-            return $this->render('data/file-upload-ok.html.twig');
+            // Set proper message in session
+            $request->getSession()->set('message', [
+                'res'   => true,
+                'value' => $trans->trans('Your file is being notarized') . ', ' .
+                           $trans->trans('soon you will receive a confirmation email with the certificate attached')
+            ]);
         } else {
-            // Validate email
-            $request->getSession()->remove('fileupload');
-
-            return $this->render('data/file-upload-preok.html.twig',
-                ['email' => $request->getSession()->get('fileupload')]);
+            // Set proper message in session
+            $request->getSession()->set('message', [
+                'res'   => false,
+                'value' => $trans->trans('There was a problem processing the file, please try it later')
+            ]);
         }
+
+        return new RedirectResponse('/');
     }
 
     /**
@@ -359,13 +368,17 @@ class DataController extends Controller
                         ]
                     ]);
                 } else {
-                    return new JsonResponse([
-                        'result' => [
-                            'success' => true,
-                            'html'    => $this->renderView('data/partials/file-upload-ok.html.twig',
-                                ['message' => 'signature'])
-                        ]
+                    $trans = $this->get('translator');
+
+                    // Set proper message in session
+                    $request->getSession()->set('message', [
+                        'res'   => true,
+                        'value' => $trans->trans('Your signature is completed, please wait until all signers complete their signatures and certificate is generated') .
+                                   ', ' .
+                                   $trans->trans('soon you will receive a confirmation email with the certificate attached')
                     ]);
+
+                    return new JsonResponse(['result' => ['success' => true, 'redirect' => '/']]);
                 }
             } else {
                 return new JsonResponse([

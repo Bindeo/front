@@ -1007,38 +1007,82 @@
         <source>Search by filename</source>
         <target state="translated">Busca por nombre de fichero</target>
       </trans-unit>
-      <trans-unit id="d83d2e0b08ef7e4ae33074d251d3455a" resname="Do you want %a_start%to upload%a_end% a file?" approved="yes">
-        <source>Do you want %a_start%to upload%a_end% a file?</source> <target state="translated">¿Quieres empezar a %a_start%subir%a_end% un fichero?</target> </trans-unit>
-      <trans-unit id="1d24579c45772886867e1338f9a250a2" resname="Smart document" approved="yes">
-        <source>Smart document</source> <target state="translated">Documento inteligente</target> </trans-unit>
-      <trans-unit id="749d6a351114e2f5d4306e3a7f16de0f" resname="To sign: me, %other% and %count% more" approved="yes">
-        <source>To sign: me, %other% and %count% more</source> <target state="translated">Para firmar: yo, %other% y %count% más</target> </trans-unit>
-      <trans-unit id="3ce67394dc29d0bf74f25c5e8f8d3d6e" resname="To sign: me and %other%" approved="yes">
-        <source>To sign: me and %other%</source> <target state="translated">Para firmar: yo y %other%</target> </trans-unit>
-      <trans-unit id="30e8726ba15b2ee775c4c252615e4ecc" resname="To sign: me" approved="yes">
-        <source>To sign: me</source> <target state="translated">Para firmar: yo</target> </trans-unit>
-      <trans-unit id="612faf171cd0a593b316833badde67dd" resname="To sign: %other% and %count% more" approved="yes">
-        <source>To sign: %other% and %count% more</source> <target state="translated">Para firmar: %other% y %count% más</target> </trans-unit>
-      <trans-unit id="1820b47649303ec8a04a2461796d28c4" resname="To sign: %other%" approved="yes">
-        <source>To sign: %other%</source> <target state="translated">Para firmar: %other%</target> </trans-unit>
-      <trans-unit id="3c22e9b1aefbd2479e3822fa94c76991" resname="Your signature and %pending% more are required" approved="yes">
-        <source>Your signature and %pending% more are required</source> <target state="translated">Requiere tu firma y %pending% más</target> </trans-unit>
-      <trans-unit id="193a4bb95d1a21d6ec1444d4aa2de42f" resname="Your signature is required" approved="yes">
-        <source>Your signature is required</source> <target state="translated">Requiere tu firma</target> </trans-unit>
-      <trans-unit id="5afdd2de1bb9e6604596240c6b0e2a88" resname="%pending% of %total% pending signatures" approved="yes">
-        <source>%pending% of %total% pending signatures</source> <target state="translated">%pending% de %total% firmas pendientes</target> </trans-unit>
-      <trans-unit id="a2612f9f2e8d920874422635188d5538" resname="Signed and getting certificate" approved="yes">
-        <source>Signed and getting certificate</source> <target state="translated">Firmado y obteniendo certificado</target> </trans-unit>
-      <trans-unit id="cbfcd026f22a3f94570fc1c04d952e0e" resname="Review document" approved="yes">
-        <source>Review document</source> <target state="translated">Revisa el documento</target> </trans-unit>
-      <trans-unit id="f23fd60e78b0e543bee82ea549b33be9" resname="Download certificate" approved="yes">
-        <source>Download certificate</source> <target state="translated">Descarga el certificado</target> </trans-unit>
-      <trans-unit id="ec53a8c4f07baed5d8825072c89799be" resname="Status" approved="yes">
-        <source>Status</source> <target state="translated">Estado</target> </trans-unit>
-      <trans-unit id="a181a603769c1f98ad927e7367c7aa51" resname="all" approved="yes">
-        <source>all</source> <target state="translated">todo</target> </trans-unit>
-      <trans-unit id="91f3a2c0e4424c87689525da44c4db11" resname="Files" approved="yes">
-        <source>Files</source> <target state="translated">Archivos</target> </trans-unit>
+      <trans-unit id="d83d2e0b08ef7e4ae33074d251d3455a" resname="Do you want %a_start%to upload%a_end% a file?">
+        <source>Do you want %a_start%to upload%a_end% a file?</source>
+        <target state="translated">¿Quieres empezar a %a_start%subir%a_end% un fichero?</target>
+      </trans-unit>
+      <trans-unit id="1d24579c45772886867e1338f9a250a2" resname="Smart document">
+        <source>Smart document</source>
+        <target state="translated">Documento inteligente</target>
+      </trans-unit>
+      <trans-unit id="749d6a351114e2f5d4306e3a7f16de0f" resname="To sign: me, %other% and %count% more">
+        <source>To sign: me, %other% and %count% more</source>
+        <target state="translated">Para firmar: yo, %other% y %count% más</target>
+      </trans-unit>
+      <trans-unit id="3ce67394dc29d0bf74f25c5e8f8d3d6e" resname="To sign: me and %other%">
+        <source>To sign: me and %other%</source>
+        <target state="translated">Para firmar: yo y %other%</target>
+      </trans-unit>
+      <trans-unit id="30e8726ba15b2ee775c4c252615e4ecc" resname="To sign: me">
+        <source>To sign: me</source>
+        <target state="translated">Para firmar: yo</target>
+      </trans-unit>
+      <trans-unit id="612faf171cd0a593b316833badde67dd" resname="To sign: %other% and %count% more">
+        <source>To sign: %other% and %count% more</source>
+        <target state="translated">Para firmar: %other% y %count% más</target>
+      </trans-unit>
+      <trans-unit id="1820b47649303ec8a04a2461796d28c4" resname="To sign: %other%">
+        <source>To sign: %other%</source>
+        <target state="translated">Para firmar: %other%</target>
+      </trans-unit>
+      <trans-unit id="3c22e9b1aefbd2479e3822fa94c76991" resname="Your signature and %pending% more are required">
+        <source>Your signature and %pending% more are required</source>
+        <target state="translated">Requiere tu firma y %pending% más</target>
+      </trans-unit>
+      <trans-unit id="193a4bb95d1a21d6ec1444d4aa2de42f" resname="Your signature is required">
+        <source>Your signature is required</source>
+        <target state="translated">Requiere tu firma</target>
+      </trans-unit>
+      <trans-unit id="5afdd2de1bb9e6604596240c6b0e2a88" resname="%pending% of %total% pending signatures">
+        <source>%pending% of %total% pending signatures</source>
+        <target state="translated">%pending% de %total% firmas pendientes</target>
+      </trans-unit>
+      <trans-unit id="a2612f9f2e8d920874422635188d5538" resname="Signed and getting certificate">
+        <source>Signed and getting certificate</source>
+        <target state="translated">Firmado y obteniendo certificado</target>
+      </trans-unit>
+      <trans-unit id="cbfcd026f22a3f94570fc1c04d952e0e" resname="Review document">
+        <source>Review document</source>
+        <target state="translated">Revisa el documento</target>
+      </trans-unit>
+      <trans-unit id="f23fd60e78b0e543bee82ea549b33be9" resname="Download certificate">
+        <source>Download certificate</source>
+        <target state="translated">Descarga el certificado</target>
+      </trans-unit>
+      <trans-unit id="ec53a8c4f07baed5d8825072c89799be" resname="Status">
+        <source>Status</source>
+        <target state="translated">Estado</target>
+      </trans-unit>
+      <trans-unit id="a181a603769c1f98ad927e7367c7aa51" resname="all">
+        <source>all</source>
+        <target state="translated">todo</target>
+      </trans-unit>
+      <trans-unit id="91f3a2c0e4424c87689525da44c4db11" resname="Files">
+        <source>Files</source>
+        <target state="translated">Archivos</target>
+      </trans-unit>
+      <trans-unit id="b8b5309613cd4f7aebe5c0fb4b079be0" resname="There was a problem processing the file, please try it later" approved="yes">
+        <source>There was a problem processing the file, please try it later</source> <target state="translated">Hubo un problema procesando el fichero, por favor intenta de nuevo más tarde</target> </trans-unit>
+      <trans-unit id="4d70254b3a8e2bc38b6147fa6ee813be" resname="Library" approved="yes">
+        <source>Library</source> <target state="translated">Librería</target> </trans-unit>
+      <trans-unit id="9790b70b0772c3b35108155cf340f315" resname="Emails" approved="yes">
+        <source>Emails</source> <target state="translated">E-mails</target> </trans-unit>
+      <trans-unit id="91412465ea9169dfd901dd5e7c96dd99" resname="Upload" approved="yes">
+        <source>Upload</source> <target state="translated">Subir</target> </trans-unit>
+      <trans-unit id="faf813a3d2075ad9cdd6f3ebeda26e86" resname="Password recover" approved="yes">
+        <source>Password recover</source> <target state="translated">Recuperación de contraseña</target> </trans-unit>
+      <trans-unit id="f3258b2b0f7f7270469df154ad6b6d41" resname="To set a new password, type the email address you use to sign in to Bindeo" approved="yes">
+        <source>To set a new password, type the email address you use to sign in to Bindeo</source> <target state="translated">Para establecer una nueva contraseña, introduce el e-mail que utilizaste para registrarte en Bindeo</target> </trans-unit>
     </body>
   </file>
 </xliff>

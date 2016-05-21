@@ -142,7 +142,12 @@ class EduController extends Controller
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
                 // ISDI client, temporary for this demo version
-                $bulkTransaction->setClientType('C')->setIdClient(5)->setIp($request->getClientIp())->setType('Smart Certificates')->setElementsType('F')->setExternalId('ISDI_'.md5(time()));
+                $bulkTransaction->setClientType('C')
+                                ->setIdClient(5)
+                                ->setIp($request->getClientIp())
+                                ->setType('Smart Certificates')
+                                ->setElementsType('F')
+                                ->setExternalId('ISDI_' . md5(time()));
                 // Send to the api
                 $params = $bulkTransaction->toArray();
                 $params['mode'] = 'create';
@@ -166,11 +171,13 @@ class EduController extends Controller
                         ]
                     ]);
                 } else {
+                    $trans = $this->get('translator');
+
                     return new JsonResponse([
                         'result' => [
                             'success' => true,
-                            'html'    => $this->renderView('data/partials/file-upload-ok.html.twig',
-                                ['message' => 'bulk'])
+                            'message' => $trans->trans('Your collection is being notarized') . ', ' .
+                                         $trans->trans('soon you will receive a confirmation email with the certificate attached')
                         ]
                     ]);
                 }

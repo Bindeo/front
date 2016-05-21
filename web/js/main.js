@@ -36,6 +36,11 @@ var main = (function() {
             var obj = $('#notifications');
             obj.find('.alert').removeClass('alert-success alert-danger').addClass(success ? 'alert-success' : 'alert-danger').html(message);
             obj.show();
+
+            // Start countdown to hide notifications
+            setTimeout(function() {
+                obj.hide();
+            }, 5000);
         });
 
         /**

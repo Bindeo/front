@@ -31,7 +31,7 @@ var files = (function() {
          * Files added
          */
         $.subscribe('add.files', function(event, name, data) {
-            $('.alert').hide();
+            $('[data-name="upload_file"] .alert').hide();
 
             if(name == "upload_file") {
                 $('div[data-name="' + name + '"] .file').hide();
@@ -318,7 +318,9 @@ var files = (function() {
         $('form[name="' + name + '"]').find('input[name="' + name + '[path]"]').val('');
         $('div[data-name="' + name + '"] .file').show();
         $('div[data-name="upload-options"]').show();
-        $('form [data-id="to-sign"]').hide();
+        var form = $('form[name="upload_file"]');
+        form.find('[data-id="to-sign"]').hide();
+        form.find('.alert').hide();
 
         return false;
     };
@@ -342,7 +344,9 @@ var files = (function() {
         // Send modified params string
         main.sendForm($(this), $.param(data)).done(function(response) {
             if(response.result.success) {
-                $(".modal-backdrop:visible").hide();
+                // Clean uploaded file
+                $('[data-action="remove-uploaded-file"]').click();
+                $(".modal").modal('hide');
                 $.publish('listFilters.files');
                 $.publish('space.files', response.result);
             }

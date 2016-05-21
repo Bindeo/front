@@ -16,6 +16,14 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
+        // If we have any message to show at loading, we take it from session
+        if ($request->getSession()->has('message')) {
+            $data = ['message' => $request->getSession()->get('message')];
+            $request->getSession()->remove('message');
+        } else {
+            $data = [];
+        }
+
         // If we are already logged we redirect the user to the logged homepage
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             // If the user is confirmed we can access to private areas
@@ -28,13 +36,12 @@ class DefaultController extends Controller
                 }
 
                 // If user is not confirmed we render a closed index
-                return $this->render('default/no-confirmed.html.twig', ['user' => $this->getUser()]);
+                $data['user'] = $this->getUser();
+                return $this->render('default/no-confirmed.html.twig', $data);
             }
         }
 
-        return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.root_dir') . '/..'),
-        ]);
+        return $this->render('default/index.html.twig', $data);
     }
 
     /**
