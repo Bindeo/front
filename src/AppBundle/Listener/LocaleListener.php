@@ -35,7 +35,7 @@ class LocaleListener implements EventSubscriberInterface
             if ($request->cookies->has('LOCALE')) {
                 $locale = $request->cookies->get('LOCALE');
             } else {
-                $locale = $this->defaultLocale;
+                $locale = $request->getPreferredLanguage(['es', 'en']) == 'es' ? 'es_ES' : 'en_US';
             }
 
             $request->getSession()->set('_locale', $locale);
@@ -47,7 +47,7 @@ class LocaleListener implements EventSubscriberInterface
                 $locale = $request->cookies->get('LOCALE');
                 $request->getSession()->set('_locale', $locale);
             } else {
-                $locale = $this->defaultLocale;
+                $locale = $request->getPreferredLanguage(['es', 'en']) == 'es' ? 'es_ES' : 'en_US';
             }
 
             // If no explicit locale has been set on this request, use one from the session or the cookie
