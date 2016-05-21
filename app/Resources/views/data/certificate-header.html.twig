@@ -2,7 +2,7 @@
 {% block body %}
 {% if authorization %}
 <body>
-{% include 'data/partials/signature-certificate-header.html.twig' %}
+{% include 'data/partials/'~type~'-certificate-header.html.twig' %}
 </body>
 {% endif %}
 {% endblock %}

@@ -1,0 +1,24 @@
+<section class="header">
+    <div class="container">
+        <div>
+            <div class="about">
+                <div class="row">
+                    <div class="col-xs-7">
+                        <div class="type-label">{% trans %}Bindeo unique identifier{% endtrans %}</div>
+                        <div class="type-value">{{ notarization.blockchain.hash }}</div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="type-label">{% trans %}Issue date{% endtrans %}</div>
+                        <div class="type-value">{{ notarization.blockchain.getFormattedCtrlDate('DATE_ATOM') }}</div>
+                    </div>
+                    <div class="col-xs-2">
+                        <div class="type-label">{% trans %}Status{% endtrans %}</div>
+                        <div class="type-value">
+                            {% trans %}Notarized{% endtrans %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

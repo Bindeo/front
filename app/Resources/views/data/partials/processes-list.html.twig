@@ -76,6 +76,21 @@
                 </ul>
             </div>
         </div>
+        {% elseif process.type == 'N' and process.idStatus == 2 %}
+            <div class="col-xs-2 col-sm-1">
+                <div class="btn-group pull-right">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li>
+                            <a href="{{ path('generate_notarization_certificate') }}?t={{ process.idAltElement }}">
+                                {% trans %}Download certificate{% endtrans %}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         {% endif %}
     </div>
 </li>

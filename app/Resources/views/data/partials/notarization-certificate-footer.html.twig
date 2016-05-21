@@ -1,0 +1,19 @@
+<section class="footer">
+    <div class="container">
+        <div>
+            <div class="about">
+                <div class="row">
+                    <div class="col-xs-8">
+                        <div class="type-label">{{ notarization.blockchain.hash }}</div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="type-label pull-right">
+                            {% trans with {'%page%':'<span class="page"></span>', '%topage%':'<span class="topage"></span>'} %}PAGE %page% OF %topage%{% endtrans %}
+                            <span class="lang">{{ lang }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

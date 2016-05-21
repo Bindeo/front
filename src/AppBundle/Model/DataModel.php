@@ -312,6 +312,45 @@ class DataModel
     }
 
     /**
+     * Generate a notarization certificate
+     *
+     * @param string $token
+     * @param int    $idUser
+     * @param string $mode 'body', 'header' or 'footer' mode
+     *
+     * @return array
+     */
+    public function notarizationCertificate($token, $idUser, $mode = 'body')
+    {
+        $res = $this->api->getJson('notarization_certificate', [
+            'token'      => $token,
+            'clientType' => 'U',
+            'idClient'   => $idUser,
+            'mode'       => $mode == 'body' ? 'full' : 'simple'
+        ]);
+
+        // Check authorization
+        if ($res->getError()) {
+            if ($res->getError()['code'] = 403 and $res->getError()['message'] == Exceptions::FEW_PRIVILEGES) {
+                $res = ['authorization' => false, 'error' => 'user'];
+            } else {
+                $res = ['authorization' => false, 'error' => 'token'];
+            }
+        } else {
+            // No errors
+            /** @var DocsSignature $notarization */
+            $notarization = $res->getRows()[0];
+
+            // Convert objects
+            $notarization->convertObjects();
+
+            $res = ['authorization' => true, 'notarization' => $notarization];
+        }
+
+        return $res;
+    }
+
+    /**
      * Validate a field
      *
      * @param string             $type

@@ -45,6 +45,10 @@ file_upload_res:
     path: /data/upload/result
     defaults: { _controller: AppBundle:Data:uploadFileResult }
 
+generate_notarization_certificate:
+    path: /data/document/generate-certificate
+    defaults: { _controller: AppBundle:Data:generateNotarizeCert }
+
 generate_signature_certificate:
     path: /data/signature/generate-certificate
     defaults: { _controller: AppBundle:Data:generateSignCert }

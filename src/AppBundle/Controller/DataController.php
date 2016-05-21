@@ -464,8 +464,49 @@ class DataController extends Controller
     }
 
     /**
+     * Generate a notarization certificate
+     * @Route("/data/document/generate-certificate", name="generate_notarization_certificate")
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function generateNotarizeCertAction(Request $request)
+    {
+        $res = $this->get('app.model.data')->notarizationCertificate($request->get('t'), $this->getUser()->getIdUser());
+
+        $res['lang'] = $request->getLocale() == 'es_ES' ? 'ES' : 'EN';
+        $res['baseUrl'] = $request->getSchemeAndHttpHost();
+        $res['type'] = 'notarization';
+
+        if (!$res['authorization']) {
+            return $this->render('data/certificate.html.twig', $res);
+        }
+
+        // Rendering only body
+        if ($request->get('m') == 'html') {
+            return $this->render('data/certificate-full.html.twig', $res);
+        } else {
+            // Generate PDF with the certificate
+            $pdf = new Pdf([
+                'zoom'          => '0.85',
+                'margin-left'   => '0px',
+                'margin-right'  => '0px',
+                'margin-top'    => '750px',
+                'margin-bottom' => '450px',
+                'header-html'   => $this->renderView('data/certificate-header.html.twig', $res),
+                'footer-html'   => $this->renderView('data/certificate-footer.html.twig', $res)
+            ]);
+            $pdf->addPage($this->renderView('data/certificate.html.twig', $res));
+
+            // Send file to the browser
+            $pdf->send('Bindeo_notarization_' . $res[$res['type']]->getBlockchain()->getHash() . '.pdf');
+        }
+    }
+
+    /**
      * Generate a signature certificate
-     * @Route("/data/signature/generate-certificate", name="file_signature_certificate")
+     * @Route("/data/signature/generate-certificate", name="generate_signature_certificate")
      *
      * @param Request $request
      *
@@ -488,14 +529,15 @@ class DataController extends Controller
 
         $res['lang'] = $request->getLocale() == 'es_ES' ? 'ES' : 'EN';
         $res['baseUrl'] = $request->getSchemeAndHttpHost();
+        $res['type'] = 'signature';
 
         if (!$res['authorization']) {
-            return $this->render('data/signature-certificate.html.twig', $res);
+            return $this->render('data/certificate.html.twig', $res);
         }
 
         // Rendering only body
         if ($request->get('m') == 'html') {
-            return $this->render('data/signature-certificate-full.html.twig', $res);
+            return $this->render('data/certificate-full.html.twig', $res);
         } else {
             // Generate PDF with the certificate
             $pdf = new Pdf([
@@ -504,13 +546,13 @@ class DataController extends Controller
                 'margin-right'  => '0px',
                 'margin-top'    => '750px',
                 'margin-bottom' => '450px',
-                'header-html'   => $this->renderView('data/signature-certificate-header.html.twig', $res),
-                'footer-html'   => $this->renderView('data/signature-certificate-footer.html.twig', $res)
+                'header-html'   => $this->renderView('data/certificate-header.html.twig', $res),
+                'footer-html'   => $this->renderView('data/certificate-footer.html.twig', $res)
             ]);
-            $pdf->addPage($this->renderView('data/signature-certificate.html.twig', $res));
+            $pdf->addPage($this->renderView('data/certificate.html.twig', $res));
 
             // Send file to the browser
-            $pdf->send('Bindeo_signature_' . $res['signature']->getBulk()->getExternalId() . '.pdf');
+            $pdf->send('Bindeo_signature_' . $res[$res['type']]->getBulk()->getExternalId() . '.pdf');
         }
     }
 

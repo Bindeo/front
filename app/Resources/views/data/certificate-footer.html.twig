@@ -6,7 +6,7 @@
             var x = window.location.search.substring(1).split('&');
             for(var i in x) {
                 var z = x[i].split('=', 2);
-                vars[z[0]] = unescape(z[1]);
+                vars[z[0]] = decodeURIComponent(z[1]);
             }
             var x = ['page', 'topage'];
             for(var i in x) {
@@ -19,7 +19,7 @@
 {% block body %}
 {% if authorization %}
 <body onload="subst();">
-{% include 'data/partials/signature-certificate-footer.html.twig' %}
+{% include 'data/partials/'~type~'-certificate-footer.html.twig' %}
 </body>
 {% endif %}
 {% endblock %}

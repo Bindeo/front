@@ -18,6 +18,11 @@ class DocsSignature extends DocsSignatureAbstract
             $this->bulk = new BulkTransaction((array)$this->bulk);
         }
 
+        // Blockchain
+        if ($this->blockchain and !($this->blockchain instanceof BlockChain)) {
+            $this->blockchain = new BlockChain((array)$this->blockchain);
+        }
+
         // Files
         if ($this->files and is_array($this->files)) {
             // Populate each file
