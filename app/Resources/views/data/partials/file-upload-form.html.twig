@@ -10,6 +10,9 @@
     <h4 class="modal-title">{% trans %}Want send to sign this document or just notarize it?{% endtrans %}</h4>
 </div>
 <div class="modal-body">
+    <div class="collapse" id="waiting-upload">
+        {% trans %}Please, wait few seconds until file has been uploaded{% endtrans %}
+    </div>
     <div data-name="upload-options">
         <ul class="list-group">
             <li class="list-group-item"><a name="options" data-mode="N" href="#">{% trans %}No, just notarize it{% endtrans %}</a></li>

@@ -1,4 +1,6 @@
 var files = (function() {
+    var promiseUpload;
+
     var init = function() {
         // Setup the fileupload object
         fileUpload();
@@ -158,7 +160,7 @@ var files = (function() {
                 var filters = $('#library-filters');
                 var status = filters.find('select').val();
 
-                if (status != '') {
+                if(status != '') {
                     params = 'type=' + status[0] + '&status=' + status[2];
                 }
 
@@ -246,10 +248,11 @@ var files = (function() {
             if(!numFiles) numFiles = 1;
 
             // Create the promise
-            var promise = fileUploadDeferred(obj);
+            var deferred = $.Deferred();
+            promiseUpload = deferred.promise();
 
             // Assign events to promise
-            promise.on('fileuploadadd', function(e, data) {
+            fileUploadDeferred(obj).on('fileuploadadd', function(e, data) {
                 // File added
                 $.publish('drop_zone.files', [false]);
 
@@ -288,6 +291,7 @@ var files = (function() {
             }).on('fileuploadalways', function(e, data) {
                 // Finish file upload
                 $.publish('upload.files', [obj.attr('data-name'), data]);
+                deferred.resolve();
             }).on('fileuploadprogress', function(e, data) {
                 // Modify the progress bar
                 var progress = parseInt(data.loaded / data.total * 100, 10);
@@ -331,25 +335,37 @@ var files = (function() {
      */
     var sendFormFile = function(event) {
         event.preventDefault();
+        var form = $(this);
+        var waiting = $('#waiting-upload');
 
-        var data = $(this).serializeArray();
-
-        // Get correct phone numbers
-        for (var i = 0, len = data.length; i < len; i++) {
-            if(data[i].name.match(/\[phone]/)) {
-                data[i].value = $('input[name="'+data[i].name+'"]').intlTelInput("getNumber");
-            }
+        // If we didn't resolve
+        if (promiseUpload.state() != 'resolved') {
+            waiting.show();
+            $('[data-id="to-sign"]').hide();
         }
 
-        // Send modified params string
-        main.sendForm($(this), $.param(data)).done(function(response) {
-            if(response.result.success) {
-                // Clean uploaded file
-                $('[data-action="remove-uploaded-file"]').click();
-                $(".modal").modal('hide');
-                $.publish('listFilters.files');
-                $.publish('space.files', response.result);
+        // When promise is resolved
+        promiseUpload.done(function() {
+            waiting.hide();
+            var data = form.serializeArray();
+
+            // Get correct phone numbers
+            for(var i = 0, len = data.length; i < len; i++) {
+                if(data[i].name.match(/\[phone]/)) {
+                    data[i].value = $('input[name="' + data[i].name + '"]').intlTelInput("getNumber");
+                }
             }
+
+            // Send modified params string
+            main.sendForm(form, $.param(data)).done(function(response) {
+                if(response.result.success) {
+                    // Clean uploaded file
+                    $('[data-action="remove-uploaded-file"]').click();
+                    $(".modal").modal('hide');
+                    $.publish('listFilters.files');
+                    $.publish('space.files', response.result);
+                }
+            });
         });
     };
 
@@ -370,7 +386,7 @@ var files = (function() {
             var filters = $('#library-filters');
             var status = filters.find('select').val();
 
-            if (status != '') {
+            if(status != '') {
                 params += '&type=' + status[0] + '&status=' + status[2];
             }
 

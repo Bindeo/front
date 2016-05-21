@@ -1071,18 +1071,34 @@
         <source>Files</source>
         <target state="translated">Archivos</target>
       </trans-unit>
-      <trans-unit id="b8b5309613cd4f7aebe5c0fb4b079be0" resname="There was a problem processing the file, please try it later" approved="yes">
-        <source>There was a problem processing the file, please try it later</source> <target state="translated">Hubo un problema procesando el fichero, por favor intenta de nuevo más tarde</target> </trans-unit>
-      <trans-unit id="4d70254b3a8e2bc38b6147fa6ee813be" resname="Library" approved="yes">
-        <source>Library</source> <target state="translated">Librería</target> </trans-unit>
-      <trans-unit id="9790b70b0772c3b35108155cf340f315" resname="Emails" approved="yes">
-        <source>Emails</source> <target state="translated">E-mails</target> </trans-unit>
-      <trans-unit id="91412465ea9169dfd901dd5e7c96dd99" resname="Upload" approved="yes">
-        <source>Upload</source> <target state="translated">Subir</target> </trans-unit>
-      <trans-unit id="faf813a3d2075ad9cdd6f3ebeda26e86" resname="Password recover" approved="yes">
-        <source>Password recover</source> <target state="translated">Recuperación de contraseña</target> </trans-unit>
-      <trans-unit id="f3258b2b0f7f7270469df154ad6b6d41" resname="To set a new password, type the email address you use to sign in to Bindeo" approved="yes">
-        <source>To set a new password, type the email address you use to sign in to Bindeo</source> <target state="translated">Para establecer una nueva contraseña, introduce el e-mail que utilizaste para registrarte en Bindeo</target> </trans-unit>
+      <trans-unit id="b8b5309613cd4f7aebe5c0fb4b079be0" resname="There was a problem processing the file, please try it later">
+        <source>There was a problem processing the file, please try it later</source>
+        <target state="translated">Hubo un problema procesando el fichero, por favor intenta de nuevo más tarde</target>
+      </trans-unit>
+      <trans-unit id="4d70254b3a8e2bc38b6147fa6ee813be" resname="Library">
+        <source>Library</source>
+        <target state="translated">Librería</target>
+      </trans-unit>
+      <trans-unit id="9790b70b0772c3b35108155cf340f315" resname="Emails">
+        <source>Emails</source>
+        <target state="translated">E-mails</target>
+      </trans-unit>
+      <trans-unit id="91412465ea9169dfd901dd5e7c96dd99" resname="Upload">
+        <source>Upload</source>
+        <target state="translated">Subir</target>
+      </trans-unit>
+      <trans-unit id="faf813a3d2075ad9cdd6f3ebeda26e86" resname="Password recover">
+        <source>Password recover</source>
+        <target state="translated">Recuperación de contraseña</target>
+      </trans-unit>
+      <trans-unit id="f3258b2b0f7f7270469df154ad6b6d41" resname="To set a new password, type the email address you use to sign in to Bindeo">
+        <source>To set a new password, type the email address you use to sign in to Bindeo</source>
+        <target state="translated">Para establecer una nueva contraseña, introduce el e-mail que utilizaste para registrarte en Bindeo</target>
+      </trans-unit>
+      <trans-unit id="140cfdf87b21ba376b2da5620c3c7d41" resname="Please, wait few seconds until file has been uploaded" approved="yes">
+        <source>Please, wait few seconds until file has been uploaded</source> <target state="translated">Por favor, espera unos segundos hasta que el fichero se ha subido</target> </trans-unit>
+      <trans-unit id="d8fd011113384fc90c11122a2f8cb6f7" resname="Digital notarization certificate" approved="yes">
+        <source>Digital notarization certificate</source> <target state="translated">Certificado digital de notarización</target> </trans-unit>
     </body>
   </file>
 </xliff>
