@@ -276,16 +276,17 @@ class DataModel
      * Generate a signature certificate
      *
      * @param string $token
+     * @param string $userType
      * @param int    $idUser
      * @param string $mode 'body', 'header' or 'footer' mode
      *
      * @return array
      */
-    public function signatureCertificate($token, $idUser, $mode = 'body')
+    public function signatureCertificate($token, $userType, $idUser, $mode = 'body')
     {
         $res = $this->api->getJson('signature_certificate', [
             'token'      => $token,
-            'clientType' => 'U',
+            'clientType' => $userType,
             'idClient'   => $idUser,
             'mode'       => $mode == 'body' ? 'full' : 'simple'
         ]);

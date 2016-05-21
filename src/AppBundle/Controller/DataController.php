@@ -516,15 +516,17 @@ class DataController extends Controller
     {
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             $idUser = $this->getUser()->getIdUser();
-        } elseif ($request->get('u') and $this->getParameter('secret') == $request->get('s')) {
+            $userType = 'U';
+        } elseif ($request->get('u') and $request->get('ut') and $this->getParameter('secret') == $request->get('s')) {
             $idUser = $request->get('u');
+            $userType = $request->get('ut');
         } else {
             $res = ['authorization' => false];
         }
 
         // Get element
         if (!isset($res)) {
-            $res = $this->get('app.model.data')->signatureCertificate($request->get('t'), $idUser);
+            $res = $this->get('app.model.data')->signatureCertificate($request->get('t'), $userType, $idUser);
         }
 
         $res['lang'] = $request->getLocale() == 'es_ES' ? 'ES' : 'EN';

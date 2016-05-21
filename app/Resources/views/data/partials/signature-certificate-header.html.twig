@@ -12,10 +12,10 @@
                         <div class="type-value">{{ signature.bulk.getFormattedDate('DATE_ATOM') }}</div>
                     </div>
                     <div class="col-xs-2">
-                        <div class="type-label">{% trans %}Type{% endtrans %}</div>
+                        <div class="type-label">{% trans %}Status{% endtrans %}</div>
                         <div class="type-value">
                             {% if signature.bulk.closed %}
-                                {% trans %}Signature completed{% endtrans %}
+                                {% trans %}Completed{% endtrans %}
                             {% else %}
                                 {% trans %}Provisional{% endtrans %}
                             {% endif %}

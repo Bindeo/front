@@ -1095,10 +1095,16 @@
         <source>To set a new password, type the email address you use to sign in to Bindeo</source>
         <target state="translated">Para establecer una nueva contraseña, introduce el e-mail que utilizaste para registrarte en Bindeo</target>
       </trans-unit>
-      <trans-unit id="140cfdf87b21ba376b2da5620c3c7d41" resname="Please, wait few seconds until file has been uploaded" approved="yes">
-        <source>Please, wait few seconds until file has been uploaded</source> <target state="translated">Por favor, espera unos segundos hasta que el fichero se ha subido</target> </trans-unit>
-      <trans-unit id="d8fd011113384fc90c11122a2f8cb6f7" resname="Digital notarization certificate" approved="yes">
-        <source>Digital notarization certificate</source> <target state="translated">Certificado digital de notarización</target> </trans-unit>
+      <trans-unit id="140cfdf87b21ba376b2da5620c3c7d41" resname="Please, wait few seconds until file has been uploaded">
+        <source>Please, wait few seconds until file has been uploaded</source>
+        <target state="translated">Por favor, espera unos segundos hasta que el fichero se ha subido</target>
+      </trans-unit>
+      <trans-unit id="d8fd011113384fc90c11122a2f8cb6f7" resname="Digital notarization certificate">
+        <source>Digital notarization certificate</source>
+        <target state="translated">Certificado digital de notarización</target>
+      </trans-unit>
+      <trans-unit id="07ca5050e697392c9ed47e6453f1453f" resname="Completed" approved="yes">
+        <source>Completed</source> <target state="signed-off">Completado</target> </trans-unit>
     </body>
   </file>
 </xliff>
