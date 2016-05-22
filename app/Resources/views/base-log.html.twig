@@ -7,12 +7,14 @@
         <li {% if app.request.get('_route') == 'file_library' %}class="active"{% endif %}>
             <a href="{{ path('file_library') }}">{% trans %}Library{% endtrans %}</a>
         </li>
+        {#
         <li {% if app.request.get('_route') == 'emails' %}class="active"{% endif %}>
             <a href="#">{% trans %}Emails{% endtrans %}</a>
         </li>
         <li {% if app.request.get('_route') == 'file_upload' %}class="active"{% endif %}>
             <a href="{{ path('file_upload') }}">{% trans %}Upload{% endtrans %}</a>
         </li>
+        #}
         <li class="dropdown hidden-xs">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ app.user.name }} <span class="caret"></span></a>
             <ul class="dropdown-menu">
