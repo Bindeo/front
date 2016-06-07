@@ -166,7 +166,7 @@ class User extends UserAbstract implements UserInterface
     public function cacheStoreIdentity()
     {
         // Store in apc
-        apc_store('use_identity_' . $this->idUser, $this->getCurrentIdentity());
+        apcu_store('use_identity_' . $this->idUser, $this->getCurrentIdentity());
 
         return $this;
     }
@@ -177,6 +177,6 @@ class User extends UserAbstract implements UserInterface
      */
     public function cacheFetchIdentity()
     {
-        return apc_fetch('use_identity_' . $this->idUser);
+        return apcu_fetch('use_identity_' . $this->idUser);
     }
 }

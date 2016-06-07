@@ -31,8 +31,8 @@ class MasterDataFactory
             $key = $type . '_' . $locale;
 
             // We look for it in cache
-            if (apc_exists($key)) {
-                $this->masterData[$type][$locale] = apc_fetch($key);
+            if (apcu_exists($key)) {
+                $this->masterData[$type][$locale] = apcu_fetch($key);
             } else {
                 // We need to retrieve data from the API
                 if ($type == 'accountTypes') {
@@ -48,7 +48,7 @@ class MasterDataFactory
                 // Get from the API
                 $this->masterData[$type][$locale] = $this->api->getJson($route, ['locale' => $locale]);
                 // And save it to cache
-                apc_store($key, $this->masterData[$type][$locale]);
+                apcu_store($key, $this->masterData[$type][$locale]);
             }
         }
 
